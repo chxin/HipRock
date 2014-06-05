@@ -35,16 +35,23 @@
     [self quickSort:datas left:0 right:datas.count-1];
     REMTargetEnergyData* t = nil;
     if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
+    
     DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
+    s.color = [REMColor colorByIndex:0];
+    s.target = t.target;
     if (!REMIsNilOrNull(t) && !REMIsNilOrNull(t.target) && !(REMIsNilOrNull(t.target.uomName))) {
         s.coordinateSystemName = t.target.uomName;
     } else {
         s.coordinateSystemName = REMEmptyString;
     }
-    s.type = DCSeriesTypeColumn;
-//    s.yAxis = view.yAxis0;
-    s.color = [REMColor colorByIndex:0];
-    [self customizeSeries:s seriesIndex:index chartStyle:style];
+    s.seriesKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:s.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
+    
+    DCSeriesStatus* state = self.seriesStates[s.seriesKey];
+    if (REMIsNilOrNull(state)) {
+        state = [self getDefaultSeriesState:s seriesIndex:0];
+        [self.seriesStates setObject:state forKey:s.seriesKey];
+    }
+    [state applyToXYSeries:s];
     
     if (self.wrapperConfig.rankingSortOrder == NSOrderedDescending) [self swapeAllDatas:s];
     
@@ -53,17 +60,23 @@
     [view setXLabelFormatter:formatter];
     return s;
 }
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [NSString stringWithFormat:@"%p", series];
+}
+-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = series.seriesKey;
+    state.seriesType = DCSeriesTypeStatusColumn;
+    state.avilableTypes = @[@(state.seriesType)];
+    state.hidden = NO;
+    state.canBeHidden = NO;
+    return state;
+}
 
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.pointHorizentalOffset = 0.5;
     view.graphContext.xLabelHorizentalOffset = 0.5;
 }
-
-//-(NSArray*)createYAxes:(NSArray*)series {
-//    DCAxis* y = [[DCAxis alloc]init];
-//    y.coordinate = DCAxisCoordinateY;
-//    return @[y];
-//}
 
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
     // Nothing to do. cannot hide series in ranking chart.
@@ -148,10 +161,6 @@
     } else {
         [self.view focusAroundX:x];
     }
-}
-
--(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
-    return NO;
 }
 
 -(DCRange*)updatePinchRange:(DCRange*)newRange pinchCentreX:(CGFloat)centreX pinchStopped:(BOOL)stopped {

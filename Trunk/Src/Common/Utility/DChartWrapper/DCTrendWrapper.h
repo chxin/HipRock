@@ -26,14 +26,15 @@
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
 @property (nonatomic, strong, readonly) DCTrendChartDataProcessor* sharedProcessor;
 
--(BOOL)isSpecialType:(REMEnergyTargetType)type; // 一定被绘制成线图的Target类型，默认是REMEnergyTargetBenchmarkValue。Override
-
--(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(DCChartStyle*)style;
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step;
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step;
--(void)customizeView:(DCXYChartView*)view;
--(NSUInteger)getSeriesAmount;
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index;
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index;
 -(void)updateCalendarType:(REMCalendarType)calenderType;
+
+
+-(void)customizeView:(DCXYChartView*)view;
+-(NSUInteger)getSeriesAmount;
+-(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index;
+-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index;
 @end

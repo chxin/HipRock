@@ -23,7 +23,7 @@
     self = [self init];
     if (self) {
         _wrapperConfig = wrapperConfig;
-        _seriesStates = [[NSMutableArray alloc]init];
+        _seriesStates = [[NSMutableDictionary alloc]init];
         _energyViewData = energyViewData;
         _style = style;
         _chartStatus = DChartStatusNormal;
@@ -56,24 +56,24 @@
 -(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
     return [self getVisableSeriesCount] > 1;
 }
--(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex {
-    if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
-        for (DSeriesStatus* state in self.seriesStates) {
-            if ([state.seriesIndex isEqualToNumber:seriesIndex]) return state;
-        }
-    } else {
-        for (DSeriesStatus* state in self.seriesStates) {
-            if (target.type != REMEnergyTargetBenchmarkValue) {
-                if ( ((state.targetId == target.targetId) || [state.targetId isEqualToNumber:target.targetId]) &&
-                    state.type == target.type &&
-                    state.commodityId == target.commodityId)
-                    return state;
-            } else {
-                if (state.type == target.type)
-                    return state;
-            }
-        }
-    }
-    return nil;
-}
+//-(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex {
+//    if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
+//        for (DSeriesStatus* state in self.seriesStates) {
+//            if ([state.seriesIndex isEqualToNumber:seriesIndex]) return state;
+//        }
+//    } else {
+//        for (DSeriesStatus* state in self.seriesStates) {
+//            if (target.type != REMEnergyTargetBenchmarkValue) {
+//                if ( ((state.targetId == target.targetId) || [state.targetId isEqualToNumber:target.targetId]) &&
+//                    state.type == target.type &&
+//                    state.commodityId == target.commodityId)
+//                    return state;
+//            } else {
+//                if (state.type == target.type)
+//                    return state;
+//            }
+//        }
+//    }
+//    return nil;
+//}
 @end

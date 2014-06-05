@@ -723,8 +723,7 @@
 		EFD9470A1839DCBB00E9EC50 /* DCSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F41839DCBB00E9EC50 /* DCSeries.m */; };
 		EFD9470B1839DCBB00E9EC50 /* DCXYSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */; };
 		EFD9470C1839DCBB00E9EC50 /* DCUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD946F91839DCBB00E9EC50 /* DCUtility.m */; };
-		EFDBD2DA190760D80013BAFA /* DSeriesStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDBD2D9190760D80013BAFA /* DSeriesStatus.m */; };
-		EFDBD2DD190760F90013BAFA /* DTrendSeriesStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDBD2DC190760F90013BAFA /* DTrendSeriesStatus.m */; };
+		EFDBD2DA190760D80013BAFA /* DCSeriesStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDBD2D9190760D80013BAFA /* DCSeriesStatus.m */; };
 		EFDCC97E18472AD400955560 /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		EFE3F61118851582009AD4A7 /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
 		EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE8697C185E9FF800DC0007 /* DCLabelingChartView.m */; };
@@ -1563,10 +1562,8 @@
 		EFD946F61839DCBB00E9EC50 /* DCXYSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCXYSeries.m; sourceTree = "<group>"; };
 		EFD946F81839DCBB00E9EC50 /* DCUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCUtility.h; sourceTree = "<group>"; };
 		EFD946F91839DCBB00E9EC50 /* DCUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUtility.m; sourceTree = "<group>"; };
-		EFDBD2D8190760D80013BAFA /* DSeriesStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSeriesStatus.h; path = Common/Utility/DChartWrapper/SeriesStatus/DSeriesStatus.h; sourceTree = "<group>"; };
-		EFDBD2D9190760D80013BAFA /* DSeriesStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSeriesStatus.m; path = Common/Utility/DChartWrapper/SeriesStatus/DSeriesStatus.m; sourceTree = "<group>"; };
-		EFDBD2DB190760F90013BAFA /* DTrendSeriesStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTrendSeriesStatus.h; path = Common/Utility/DChartWrapper/SeriesStatus/DTrendSeriesStatus.h; sourceTree = "<group>"; };
-		EFDBD2DC190760F90013BAFA /* DTrendSeriesStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTrendSeriesStatus.m; path = Common/Utility/DChartWrapper/SeriesStatus/DTrendSeriesStatus.m; sourceTree = "<group>"; };
+		EFDBD2D8190760D80013BAFA /* DCSeriesStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSeriesStatus.h; path = Common/Utility/DChartWrapper/SeriesStatus/DCSeriesStatus.h; sourceTree = "<group>"; };
+		EFDBD2D9190760D80013BAFA /* DCSeriesStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSeriesStatus.m; path = Common/Utility/DChartWrapper/SeriesStatus/DCSeriesStatus.m; sourceTree = "<group>"; };
 		EFDCC97C18472AD400955560 /* DCPieWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPieWrapper.h; path = Common/Utility/DChartWrapper/DCPieWrapper.h; sourceTree = "<group>"; };
 		EFDCC97D18472AD400955560 /* DCPieWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCPieWrapper.m; path = Common/Utility/DChartWrapper/DCPieWrapper.m; sourceTree = "<group>"; };
 		EFE3F60F18851582009AD4A7 /* DWrapperConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DWrapperConfig.h; path = Common/Utility/DChartWrapper/DWrapperConfig.h; sourceTree = "<group>"; };
@@ -3405,10 +3402,8 @@
 		EFDBD2D71907609A0013BAFA /* SeriesStatus */ = {
 			isa = PBXGroup;
 			children = (
-				EFDBD2D8190760D80013BAFA /* DSeriesStatus.h */,
-				EFDBD2D9190760D80013BAFA /* DSeriesStatus.m */,
-				EFDBD2DB190760F90013BAFA /* DTrendSeriesStatus.h */,
-				EFDBD2DC190760F90013BAFA /* DTrendSeriesStatus.m */,
+				EFDBD2D8190760D80013BAFA /* DCSeriesStatus.h */,
+				EFDBD2D9190760D80013BAFA /* DCSeriesStatus.m */,
 			);
 			name = SeriesStatus;
 			sourceTree = "<group>";
@@ -4120,7 +4115,7 @@
 				7A63E21A18B44CBD00A13464 /* REMWidgetDetailViewController.m in Sources */,
 				EFF75151183FC7AA00C8BBE9 /* _DCVerticalBackgroundLayer.m in Sources */,
 				7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */,
-				EFDBD2DA190760D80013BAFA /* DSeriesStatus.m in Sources */,
+				EFDBD2DA190760D80013BAFA /* DCSeriesStatus.m in Sources */,
 				7A63E22418B44CBD00A13464 /* REMBuildingTimeRangeDataModel.m in Sources */,
 				7A0CCD57192A01D800C35C2F /* REMManagedWidgetModel.m in Sources */,
 				EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */,
@@ -4201,7 +4196,6 @@
 				7AF9638318D6C63C005A8D12 /* AFURLRequestSerialization.m in Sources */,
 				7A9EAA9B18D2946300EF1B85 /* URLRequestHelper.m in Sources */,
 				7A63E24F18B44CBD00A13464 /* REMBuildingAverageWrapper.m in Sources */,
-				EFDBD2DD190760F90013BAFA /* DTrendSeriesStatus.m in Sources */,
 				7A63E23B18B44CBD00A13464 /* REMManagedModel.m in Sources */,
 				7A9EAA8D18D2946300EF1B85 /* WeiboSignIn.m in Sources */,
 				7A63E25A18B44CBD00A13464 /* REMLoginTitledCard.m in Sources */,

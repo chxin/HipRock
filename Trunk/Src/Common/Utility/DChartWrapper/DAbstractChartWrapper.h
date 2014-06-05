@@ -13,7 +13,8 @@
 #import "DCChartStyle.h"
 #import "DWrapperConfig.h"
 #import "DCChartWrapperDelegate.h"
-#import "DSeriesStatus.h"
+#import "DCSeriesStatus.h"
+#import "REMSeriesKeyFormattor.h"
 
 @interface DAbstractChartWrapper : NSObject
 
@@ -21,7 +22,7 @@
 @property (nonatomic, readonly, weak) REMEnergyViewData* energyViewData;
 @property (nonatomic, readonly) DCChartStyle* style;
 @property (nonatomic, assign) DChartStatus chartStatus;
-@property (nonatomic,strong) NSMutableArray* seriesStates;
+@property (nonatomic,strong) NSMutableDictionary* seriesStates;
 @property (nonatomic,strong) DWrapperConfig* wrapperConfig;
 
 -(void)cancelToolTipStatus;
@@ -31,7 +32,7 @@
 -(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index;
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden;
 -(NSUInteger)getVisableSeriesCount;
--(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex;
+//-(DCSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex;
 
 -(void)beginAnimationDone;
 @end

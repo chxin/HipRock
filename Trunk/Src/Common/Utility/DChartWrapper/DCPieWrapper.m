@@ -18,13 +18,6 @@
     if (self && energyViewData.targetEnergyData.count != 0) {
         [self createView:frame data:energyViewData style:style];
     }
-    for (NSUInteger index = 0; index < self.view.series.datas.count; index++) {
-        DCPieDataPoint* slice = self.view.series.datas[index];
-        BOOL isMultiTime = self.wrapperConfig.isMultiTimeEnergyAnalysisChart;
-        DSeriesStatus* state = [[DSeriesStatus alloc]initWithTarget:isMultiTime ? nil : slice.target index:isMultiTime ? @(index) : nil];
-        state.hidden = slice.hidden;
-        [self.seriesStates addObject:state];
-    }
     return self;
 }
 
@@ -43,14 +36,18 @@
         }
         p.color = [REMColor colorByIndex:i];
         p.target = seriesData.target;
+        p.pointKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:seriesData.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
         [series0Data addObject:p];
     }
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
     for(NSUInteger i = 0; i < series.datas.count; i++) {
         DCPieDataPoint* slice = series.datas[i];
-        DSeriesStatus* state = [self getSeriesStatusByTarget:slice.target index:@(i)];
-        if (REMIsNilOrNull(state)) continue;
-        slice.hidden = state.hidden;
+        DCSeriesStatus* state = self.seriesStates[slice.pointKey];
+        if (REMIsNilOrNull(state)) {
+            state = [self getDefaultPointState:slice pointIndex:i];
+            [self.seriesStates setObject:state forKey:slice.pointKey];
+        }
+        [state applyToPieSlice:slice];
     }
     _view = [[DCPieChartView alloc]initWithFrame:frame series:series];
     self.view.chartStyle = style;
@@ -58,6 +55,15 @@
     self.view.radius = style.pieRadius;
     self.view.radiusForShadow = style.pieShadowRadius;
     self.focusIndex = INT32_MIN;
+}
+
+-(DCSeriesStatus*)getDefaultPointState:(DCPieDataPoint*)point pointIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = point.pointKey;
+    state.seriesType = DCSeriesTypeStatusPie;
+    state.avilableTypes = @[@(state.seriesType)];
+    state.hidden = NO;
+    return state;
 }
 
 -(void)pieRotated {
@@ -102,11 +108,11 @@
 }
 
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
-    if (seriesIndex >= self.view.series.datas.count) return;
-    DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
-    [self.view setSlice:slice hidden:hidden];
-    if (REMIsNilOrNull(slice.target)) return;
-    [self getSeriesStatusByTarget:slice.target index:@(seriesIndex)].hidden = hidden;
+//    if (seriesIndex >= self.view.series.datas.count) return;
+//    DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
+//    [self.view setSlice:slice hidden:hidden];
+//    if (REMIsNilOrNull(slice.target)) return;
+//    [self getSeriesStatusByTarget:slice.target index:@(seriesIndex)].hidden = hidden;
 }
 
 -(UIView*)getView {

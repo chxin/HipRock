@@ -15,18 +15,12 @@
 @synthesize processors = _processors;
 @synthesize sharedProcessor = _sharedProcessor;
 
--(BOOL)isSpecialType:(REMEnergyTargetType)type {
-    return type != REMEnergyTargetCalcValue;
-}
-
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     NSUInteger seriesAmount = [self getSeriesAmount];
     _processors = [[NSMutableArray alloc]init];
     
-    
     _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
     self.sharedProcessor.step = step;
-    
     
     for (int i = 0; i < seriesAmount; i++) {
         [self.processors addObject:self.sharedProcessor];
@@ -43,13 +37,25 @@
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:36], @"beginRange": [[DCRange alloc]initWithLocation:24 length:12], @"xformatter": formatter};
 }
 
--(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
-    [super customizeSeries:series seriesIndex:index chartStyle:style];
-    
-    if (series.type == DCSeriesTypeColumn) {
-        series.color = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7f];
+-(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
+    return DCLineSymbolTypeRound;
+}
+
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [NSString stringWithFormat:@"%p", series];
+}
+
+-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries *)series seriesIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = series.seriesKey;
+    state.seriesType = series.target.type == REMEnergyTargetCalcValue ? DCSeriesTypeStatusColumn : DCSeriesTypeStatusLine;
+    state.avilableTypes = @[@(state.seriesType)];
+    if (state.seriesType == DCSeriesTypeLine) {
+        state.forcedColor = self.style.benchmarkColor;
     } else {
-        series.symbolType = DCLineSymbolTypeRound;
+        state.forcedColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7f];
     }
+    state.hidden = NO;
+    return state;
 }
 @end

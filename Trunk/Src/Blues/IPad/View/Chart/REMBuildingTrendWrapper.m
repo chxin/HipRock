@@ -74,15 +74,30 @@
     return @{ @"globalRange": range, @"beginRange": range, @"xformatter": formatter};
 }
 
--(void)customizeSeries:(DCXYSeries *)series seriesIndex:(int)index chartStyle:(DCChartStyle *)style {
-    [super customizeSeries:series seriesIndex:index chartStyle:style];
-    series.color = [self getSeriesColorByIndex:index];
-    series.symbolType = DCLineSymbolTypeRound;
-}
-
 -(void)customizeView:(DCXYChartView *)view {
     view.acceptPan = NO;
 }
+
+
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [NSString stringWithFormat:@"%p", series];
+}
+
+-(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
+    return DCLineSymbolTypeRound;
+}
+
+-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = series.seriesKey;
+    state.seriesType = DCSeriesTypeStatusLine;
+    state.avilableTypes = @[@(state.seriesType)];
+    state.forcedColor = [self getSeriesColorByIndex:index];
+    state.hidden = NO;
+    return state;
+}
+
+
 
 -(NSUInteger)getSeriesAmount {
     const int maxSeriesAmount = 10;

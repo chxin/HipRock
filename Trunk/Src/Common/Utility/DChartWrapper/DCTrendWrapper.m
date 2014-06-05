@@ -12,7 +12,7 @@
 #import "DCXYChartBackgroundBand.h"
 #import "DCTrendAnimationManager.h"
 #import "REMWidgetStepCalculationModel.h"
-#import "DTrendSeriesStatus.h"
+#import "DCSeriesStatus.h"
 
 @interface DCTrendWrapper()
 @property (nonatomic, weak) DCContext* graphContext;
@@ -33,23 +33,24 @@
         self.animationManager.delegate = self;
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         _myStableRange = dic[@"beginRange"];
+        
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
         
-        for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
-            DCXYSeries* s = self.view.seriesList[i];
-            DTrendSeriesStatus* status = nil;
-            if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
-                status = [[DTrendSeriesStatus alloc]initWithTarget:nil index:@(i)];
-            } else {
-                status = [[DTrendSeriesStatus alloc]initWithTarget:s.target index:nil];
-            }
-            status.hidden = s.hidden;
-            status.currentType = s.type;
-            status.originalType = s.type;
-            [self.seriesStates addObject:status];
-            
-//            if (s.hidden) [self addHiddenTarget:s.target index:i];
-        }
+//        for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
+//            DCXYSeries* s = self.view.seriesList[i];
+//            DTrendSeriesStatus* status = nil;
+//            if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
+//                status = [[DTrendSeriesStatus alloc]initWithTarget:nil index:@(i)];
+//            } else {
+//                status = [[DTrendSeriesStatus alloc]initWithTarget:s.target index:nil];
+//            }
+//            status.hidden = s.hidden;
+//            status.currentType = s.type;
+//            status.originalType = s.type;
+//            [self.seriesStates addObject:status];
+//            
+////            if (s.hidden) [self addHiddenTarget:s.target index:i];
+//        }
         [self updateCalendar];
     }
     return self;
@@ -119,17 +120,6 @@
     view.graphContext.showIndicatorLineOnFocus = NO;
 }
 
--(void)customizeSeries:(DCXYSeries*)series seriesIndex:(int)index chartStyle:(DCChartStyle*)style {
-    REMChartFromLevel2 chartLevel = self.wrapperConfig.widgetFrom;
-    if ((chartLevel==REMChartFromLevel2Ratio || chartLevel==REMChartFromLevel2Unit) && series.target.type == REMEnergyTargetOrigValue) {
-        series.hidden = YES;
-    }
-    
-    if (chartLevel == REMChartFromLevel2Cost && self.wrapperConfig.storeType == REMDSEnergyCostElectricity) {
-        [series groupSeries:series.target.uomName];
-    }
-}
-
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(DCChartStyle*)style {
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
@@ -148,43 +138,66 @@
         p.value = point.dataValue;
         [datas addObject:p];
     }
+    
+    
     DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
+    s.symbolType = [self getSymbolTypeByIndex:index];
+    s.symbolSize = style.symbolSize;
+    s.color = [REMColor colorByIndex:index];
+    s.target = targetEnergy.target;
+    
     if (REMIsNilOrNull(targetEnergy.target)) {
         s.coordinateSystemName = REMEmptyString;
     } else {
         s.coordinateSystemName = targetEnergy.target.uomName;
     }
     
-    DTrendSeriesStatus* state = (DTrendSeriesStatus*)[self getSeriesStatusByTarget:targetEnergy.target index:@(index)];
-    // Benchmark series is not able to change series type. Its color and style is defined in style.
-    if (!REMIsNilOrNull(targetEnergy.target) &&  [self isSpecialType:targetEnergy.target.type]) {
-        s.color = style.benchmarkColor;
-        s.symbolType = index % 5;
-        s.symbolSize = style.symbolSize;
-    } else {
-        // seriesStates.count equals seriesAmount when redraw. otherwise wrapper is initializing.
-        if (self.seriesStates.count == [self getSeriesAmount] && state != nil) {
-            s.type = state.currentType;
-        } else {
-            s.type = self.defaultSeriesType;
-        }
-        if (s.type == DCSeriesTypeLine) {
-            s.symbolType = index % 5;
-            s.symbolSize = style.symbolSize;
-        }
-        s.color = [REMColor colorByIndex:index];
+    s.seriesKey = [self getKeyOfSeries:s];
+    
+    DCSeriesStatus* state = self.seriesStates[s.seriesKey];
+    if (REMIsNilOrNull(state)) {
+        state = [self getDefaultSeriesState:s seriesIndex:index];
+        [self.seriesStates setObject:state forKey:s.seriesKey];
     }
-    s.target = targetEnergy.target;
-    if (!(REMIsNilOrNull(state))) {
-        s.hidden = state.hidden;
-    }
-    [self customizeSeries:s seriesIndex:index chartStyle:style];
+    [state applyToXYSeries:s];
     return s;
 }
 
+-(NSString*)getKeyOfSeries:(DCXYSeries*)series {
+    return [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:series.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
+}
 
--(BOOL)isSpecialType:(REMEnergyTargetType)type {
-    return type == REMEnergyTargetBenchmarkValue;
+-(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
+    return index % 5;
+}
+
+-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = series.seriesKey;
+    state.seriesType = self.defaultSeriesType==DCSeriesTypeColumn ? DCSeriesTypeStatusColumn : DCSeriesTypeStatusLine;
+    state.hidden = NO;
+    state.avilableTypes = @[@(DCSeriesTypeStatusColumn), @(DCSeriesTypeStatusLine)];
+    
+    /* Jazz各种Widget的特殊处理 Start */
+    REMChartFromLevel2 chartLevel = self.wrapperConfig.widgetFrom;
+    // Ratio和Unit图形内的原始值默认为隐藏，benchmark的序列只能是线图，并且覆盖序列的默认颜色
+    if (chartLevel==REMChartFromLevel2Ratio || chartLevel==REMChartFromLevel2Unit) {
+        if (series.target.type == REMEnergyTargetOrigValue) {
+            state.hidden = YES;
+        } else if (series.target.type == REMEnergyTargetBenchmarkValue) {
+            state.seriesType = DCSeriesTypeLine;
+            state.forcedColor = self.style.benchmarkColor;
+            state.avilableTypes = @[@(state.seriesType)];
+        }
+    }
+    // Cost图形内，如果选择电介质并开启峰谷平，所有的图序列为堆积图
+    if (chartLevel == REMChartFromLevel2Cost && self.wrapperConfig.storeType == REMDSEnergyCostElectricity) {
+        state.seriesType = DCSeriesTypeStatusStackedColumn;
+        state.avilableTypes = @[@(state.seriesType)];
+    }
+    /* Jazz各种Widget的特殊处理 End */
+    
+    return state;
 }
 
 -(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(DCTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
@@ -311,7 +324,7 @@
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
     if (REMIsNilOrNull(series.target)) return;
-    DTrendSeriesStatus* state = (DTrendSeriesStatus*)[self getSeriesStatusByTarget:series.target index:@(seriesIndex)];
+    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
     if (state!=nil) state.hidden = hidden;
 }
 
@@ -341,13 +354,18 @@
 }
 
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
-    if (index >= self.view.seriesList.count || self.wrapperConfig.isTouChart) return NO;
+    if (index >= self.view.seriesList.count) return NO;
     DCXYSeries* series = self.view.seriesList[index];
-    if (!REMIsNilOrNull(series.target) &&  [self isSpecialType:series.target.type]) {
-        return NO;
-    } else {
-        return YES;
-    }
+    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
+    if (REMIsNilOrNull(state)) return NO;
+    
+    NSArray* stateMachine = state.avilableTypes;
+    return stateMachine.count > 1;
+//    if ([stateMachine containsObject:@(state.seriesType)]) {
+//        return stateMachine.count > 1;
+//    } else {
+//        return NO;
+//    }
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {
