@@ -613,10 +613,7 @@
     REMEnergyStep newStep= [self initStepButtonWithRange:newRange WithStep:tempModel.step];
     [self changeStep:newStep];
     
-   
-    
     [self search];
-    
 }
 
 
