@@ -8,6 +8,7 @@
 
 #import "REMEnergyTargetModel.h"
 #import "REMTimeRange.h"
+#import "REMTargetAssociationModel.h"
 
 @implementation REMEnergyTargetModel
 
@@ -30,6 +31,12 @@
     {
         self.globalTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"GlobalTimeSpan"]];
     }
+    
+    self.association = [[REMTargetAssociationModel alloc] init];
+    //TODO: remove
+#ifdef DEBUG
+    self.association.hierarchyId = self.targetId;
+#endif
 }
 
 
