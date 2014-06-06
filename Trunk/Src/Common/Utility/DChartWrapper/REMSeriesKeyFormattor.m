@@ -90,7 +90,9 @@
     else if(storeType == REMDSEnergyTagsTrendUnit || storeType == REMDSEnergyCarbonUnit || storeType == REMDSEnergyCostUnit || storeType == REMDSEnergyRatio){
         if(storeType == REMDSEnergyTagsTrendUnit || storeType == REMDSEnergyRatio){
             targetType = @"0";
-            targetId = [NSString stringWithFormat:@"%llu", [target.targetId longLongValue]];
+            //if target is benchmark, targetid is null
+            
+            targetId = REMIsNilOrNull(target.targetId) ? @"%" : [NSString stringWithFormat:@"%llu", [target.targetId longLongValue]];
         }
         else{ //(storeType == REMDSEnergyCarbonUnit || storeType == REMDSEnergyCostUnit){
             targetType = @"1";
@@ -136,17 +138,16 @@
     //default think target is associated on system, add assert to ensure
     
     NSAssert(hierarchyId!=nil, @"hierarchyid should not be nil");
-    NSAssert(association.systemDimensionId != nil && association.areaDimensionId != nil, @"systemDimensionId and areaDimensionId should not have value in the same time");
     
-    if(association.systemDimensionId == nil && association.areaDimensionId == nil){ //hierarchy
+    if(REMIsNilOrNull(association.systemDimensionId) && REMIsNilOrNull(association.areaDimensionId) && !REMIsNilOrNull(association.hierarchyId)){ //hierarchy
         targetPath = [NSString stringWithFormat:@"0/%llu", [hierarchyId longLongValue]];
     }
     
-    if(association.systemDimensionId != nil){ //system dimension
+    if(!REMIsNilOrNull(association.systemDimensionId)){ //system dimension
         targetPath = [NSString stringWithFormat:@"1/%llu/%llu", [hierarchyId longLongValue], [association.systemDimensionId longLongValue]];
     }
     
-    if(association.areaDimensionId != nil){ //area dimension
+    if(!REMIsNilOrNull(association.areaDimensionId)){ //area dimension
         targetPath = [NSString stringWithFormat:@"2/%llu/%llu", [hierarchyId longLongValue], [association.areaDimensionId longLongValue]];
     }
     
