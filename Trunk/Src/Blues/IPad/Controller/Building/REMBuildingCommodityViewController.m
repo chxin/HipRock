@@ -265,9 +265,10 @@
 - (void)initTotalValue
 {
     NSString *title=REMIPadLocalizedString(@"Building_ThisMonthEnergyUsage");//本月用%@总量
+    NSString *commodityKey = REMCommodities[self.commodityInfo.id];
     REMBuildingTitleLabelView *totalLabel=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(0, 0, 900, kBuildingCommodityTotalHeight)];
     totalLabel.textWidth=1000;
-    totalLabel.title=[NSString stringWithFormat:title,self.commodityInfo.comment];
+    totalLabel.title=[NSString stringWithFormat:title,REMIPadLocalizedString(commodityKey)];
     totalLabel.titleFontSize=kBuildingCommodityTitleFontSize;
     totalLabel.titleMargin=kBuildingTotalInnerMargin;
     totalLabel.leftMargin=0;
@@ -476,7 +477,9 @@
                 title = REMIPadLocalizedString(@"Building_EnergyUsageByCommodity");//用%@趋势图
             }
         }
-        return [NSString stringWithFormat:title,self.commodityInfo.comment];
+//        return [NSString stringWithFormat:title,self.commodityInfo.comment];
+        NSString *commodityKey = REMCommodities[self.commodityInfo.id];
+        return [NSString stringWithFormat:title,REMIPadLocalizedString(commodityKey)];
 
     }
     else{

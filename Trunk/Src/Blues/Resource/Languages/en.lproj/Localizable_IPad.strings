@@ -6,6 +6,22 @@
  
  */
 //Common, prefix: Common_
+"Common_Commodity_Other" = "Other";
+"Common_Commodity_Elec" = "Electricity";
+"Common_Commodity_Water" = "Water";
+"Common_Commodity_Gas" = "Gas";
+"Common_Commodity_SoftWater" = "Soft water";
+"Common_Commodity_Petrol" = "Petrol";
+"Common_Commodity_LowPressureSteam" = "Low pressure steam";
+"Common_Commodity_DieselOil" = "Diesel oil";
+"Common_Commodity_HeatQ" = "HeatQ";
+"Common_Commodity_CoolQ" = "CoolQ";
+"Common_Commodity_Coal" = "Coal";
+"Common_Commodity_CoalOil" = "Coal oil";
+"Common_Commodity_AirQuality" = "Air";
+
+
+
 "Common_ServerError" = "Sorry! Server error! No energy data is available. Please try again later.";
 "Common_Building"="Building";
 "Common_Last7Day"="Previous 7 days";
@@ -118,7 +134,7 @@
 "Setting_DetailOperationDate"="Operation time";
 "Setting_DetailCustomerAdmin"="Clients administrator";
 "Setting_DetailCustomerAdminTwoName"="%@ and %@"; //张三和李四
-"Setting_DetailCustomerAdminThreeName"="%d persons including %@ and %@"; //张三和李四等5人
+"Setting_DetailCustomerAdminThreeName"="including %@ and %@ %d persons"; //张三和李四等5人
 "Setting_About"="About EnergyMost";
 "Setting_BindWeibo"="Binding to Sina weibo";
 "Setting_UserName"="Display name";
@@ -146,6 +162,12 @@
 "Setting_SwitchCustomerNoNetwork"="Client selection failed! No network connection! Please try again later.";
 "Setting_SwitchCustomerNetworkFailed"="Client selection failed! Network failure! Please try again later.";
 "Setting_SwitchCustomerServerError"="Client selection failed! Server failure! Please try again later.";
+
+"Setting_SettingViewTitle" = "设置";
+"Setting_CustomerSelectionViewTitle" = "当前客户";
+"Setting_CustomerDetailViewTitle" = "客户信息";
+"Setting_AboutViewTitle" = "关于云能效";
+"Setting_CustomerAdministratorViewTitle" = "客户管理员";
 
 //Map, prefix: Map_
 "Map_MarkerBubbleSubtitleFormat"="Electricity consumption for this month: %@%@";
@@ -184,6 +206,8 @@
 "Building_WidgetRelationWidgetDeleted"="Addition failed! Widget “%@” has been deleted. Please update the data!"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
 "Building_WidgetRelationPositionDeleted"="Addition failed! Addition position does not exist. Please update the data!";
 
+"Building_WidgetRelationViewTitle" = "定制图表";
+"Building_MonthlyAverageUsageChartAverageSeriesLegend" = "单位面积用%@";
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="Pull down to return to review energy consumption information";
@@ -208,6 +232,11 @@
 "Widget_CalendarHoliday"="Nonworking time";
 "Widget_CalendarStepError"="The current interval does not support display of %@ background color."; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
 "Widget_CalendarCostElectricityStepError"="Peak, valley and normal electricity prices cannot be displayed by hour.";
+
+"Widget_TimePickerViewTitle" = "选择日期";
+"Widget_MonthPickerViewTitle" = "选择日期";
+"Widget_AddToBuildingCoverViewTitle" = "添加至建筑封面";
+"Widget_RelativeTimePickerViewTitle" = "默认日期";
 
 
 

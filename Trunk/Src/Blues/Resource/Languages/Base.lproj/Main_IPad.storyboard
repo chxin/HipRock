@@ -79,7 +79,7 @@
             </objects>
             <point key="canvasLocation" x="-1730" y="-329"/>
         </scene>
-        <!--Building Cover Widget View Controller - 定制图表-->
+        <!--Building Cover Widget View Controller-->
         <scene sceneID="vwu-Yt-Iux">
             <objects>
                 <tableViewController id="pmL-vf-YKl" customClass="REMBuildingCoverWidgetViewController" sceneMemberID="viewController">
@@ -103,18 +103,7 @@
                             <outlet property="delegate" destination="pmL-vf-YKl" id="ZYk-ll-A6Y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="定制图表" id="JU9-UC-XNc">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="uMy-xj-SYI">
-                            <connections>
-                                <action selector="cancelButtonClicked:" destination="pmL-vf-YKl" id="XLV-vu-DUI"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="heT-ct-T8g">
-                            <connections>
-                                <action selector="okButtonClicked:" destination="pmL-vf-YKl" id="PJN-SM-dxb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="JU9-UC-XNc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIH-hF-Vsy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -166,7 +155,7 @@
             </objects>
             <point key="canvasLocation" x="-375" y="-1166"/>
         </scene>
-        <!--Widget Month Picker View Controller - 选择日期-->
+        <!--Widget Month Picker View Controller-->
         <scene sceneID="Vo9-ng-vOg">
             <objects>
                 <viewController storyboardIdentifier="monthPickerController" id="mgs-5e-6Cv" customClass="REMWidgetMonthPickerViewController" sceneMemberID="viewController">
@@ -181,18 +170,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="选择日期" id="EoP-UA-SR0">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="yMK-AO-7YM">
-                            <connections>
-                                <action selector="cancelClicked:" destination="mgs-5e-6Cv" id="sVj-Ur-w2c"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="ler-yj-cX1">
-                            <connections>
-                                <action selector="okClicked:" destination="mgs-5e-6Cv" id="U6q-cY-WMh"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="EoP-UA-SR0"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IW-uy-Qy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -233,7 +211,7 @@
             </objects>
             <point key="canvasLocation" x="1792" y="-1166"/>
         </scene>
-        <!--Date Picker View Controller - 选择日期-->
+        <!--Date Picker View Controller-->
         <scene sceneID="IK4-ou-HLv">
             <objects>
                 <viewController storyboardIdentifier="datePickerViewController" id="OUZ-1Y-oK9" customClass="REMDatePickerViewController" sceneMemberID="viewController">
@@ -263,18 +241,7 @@
                         </prototypes>
                         <sections/>
                     </tableView>
-                    <navigationItem key="navigationItem" title="选择日期" id="RcD-Lh-2d6">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="YAj-gE-G13">
-                            <connections>
-                                <action selector="cancelClicked:" destination="OUZ-1Y-oK9" id="Fdk-YD-QnS"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="con-6d-emQ">
-                            <connections>
-                                <action selector="okClicked:" destination="OUZ-1Y-oK9" id="zLg-LV-v5f"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="RcD-Lh-2d6"/>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                     <connections>
                         <segue destination="4Gb-I0-S90" kind="push" identifier="relativeDateSegue" id="7tZ-E6-tPX"/>
@@ -284,7 +251,7 @@
             </objects>
             <point key="canvasLocation" x="4770" y="-1166"/>
         </scene>
-        <!--Relative Date View Controller - 默认日期-->
+        <!--Relative Date View Controller-->
         <scene sceneID="DIC-c2-Wkg">
             <objects>
                 <tableViewController id="4Gb-I0-S90" customClass="REMRelativeDateViewController" sceneMemberID="viewController">
@@ -317,7 +284,7 @@
                             <outlet property="delegate" destination="4Gb-I0-S90" id="kLp-rS-Vni"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="默认日期" id="Ra1-tx-INm"/>
+                    <navigationItem key="navigationItem" id="Ra1-tx-INm"/>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="500"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQK-x4-bHt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,7 +313,7 @@
             </objects>
             <point key="canvasLocation" x="-4561" y="-250"/>
         </scene>
-        <!--Setting View Controller - 设置-->
+        <!--Setting View Controller-->
         <scene sceneID="MQr-Ii-7F7">
             <objects>
                 <tableViewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="formSheet" id="wRO-Bn-ppJ" customClass="REMSettingViewController" sceneMemberID="viewController">
@@ -380,13 +347,7 @@
                         </prototypes>
                         <sections/>
                     </tableView>
-                    <navigationItem key="navigationItem" title="设置" id="mnH-gw-Zz4">
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="2dd-Hn-SRO">
-                            <connections>
-                                <action selector="backButtonPressed:" destination="wRO-Bn-ppJ" id="Ih8-u1-q9Y"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="mnH-gw-Zz4"/>
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <segue destination="STT-2G-WvG" kind="push" identifier="settingCustomerSelectionSegue" id="lw5-7Y-bc1"/>
@@ -398,7 +359,7 @@
             </objects>
             <point key="canvasLocation" x="-2884" y="-3293"/>
         </scene>
-        <!--Setting Customer Selection View Controller - 当前客户-->
+        <!--Setting Customer Selection View Controller-->
         <scene sceneID="pOc-6K-uE8">
             <objects>
                 <tableViewController id="STT-2G-WvG" customClass="REMSettingCustomerSelectionViewController" sceneMemberID="viewController">
@@ -430,19 +391,13 @@
                             <outlet property="delegate" destination="STT-2G-WvG" id="3Ho-BZ-DgH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="当前客户" id="WYF-lo-uez">
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="97H-FA-fBE">
-                            <connections>
-                                <action selector="switchCustomer:" destination="STT-2G-WvG" id="GXW-aA-tVE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="WYF-lo-uez"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-N8-S8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2064" y="-4358"/>
         </scene>
-        <!--Setting Customer Detail View Controller - 客户信息-->
+        <!--Setting Customer Detail View Controller-->
         <scene sceneID="yWL-Qk-a3K">
             <objects>
                 <tableViewController id="p3k-Mm-Dee" customClass="REMSettingCustomerDetailViewController" sceneMemberID="viewController">
@@ -549,7 +504,7 @@
                             <outlet property="delegate" destination="p3k-Mm-Dee" id="96w-gJ-aYX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="客户信息" id="lT4-Vf-6Yb"/>
+                    <navigationItem key="navigationItem" id="lT4-Vf-6Yb"/>
                     <connections>
                         <segue destination="3SI-B8-pFI" kind="push" identifier="settingCustomerDetailAdminSegue" id="75B-a9-bOP"/>
                         <segue destination="0Gw-Oc-ndZ" kind="push" identifier="settingCustomerDetailLogoSegue" id="Mc4-67-7X4"/>
@@ -578,7 +533,7 @@
             </objects>
             <point key="canvasLocation" x="-1268" y="-3783"/>
         </scene>
-        <!--Setting About View Controller - 关于云能效-->
+        <!--Setting About View Controller-->
         <scene sceneID="zYu-Pw-Onp">
             <objects>
                 <viewController id="axI-8H-Sbv" customClass="REMSettingAboutViewController" sceneMemberID="viewController">
@@ -591,13 +546,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="关于云能效" id="d7R-kF-iPQ"/>
+                    <navigationItem key="navigationItem" id="d7R-kF-iPQ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZ3-GG-tlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2016" y="-2229"/>
         </scene>
-        <!--Setting Customer Detail Admin View Controller - 客户管理员-->
+        <!--Setting Customer Detail Admin View Controller-->
         <scene sceneID="fpM-KK-Sce">
             <objects>
                 <tableViewController id="3SI-B8-pFI" customClass="REMSettingCustomerDetailAdminViewController" sceneMemberID="viewController">
@@ -629,7 +584,7 @@
                             <outlet property="delegate" destination="3SI-B8-pFI" id="qLU-ar-hBu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="客户管理员" id="Gvo-eK-rFC"/>
+                    <navigationItem key="navigationItem" id="Gvo-eK-rFC"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tj7-yR-Vc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -690,7 +645,7 @@
             </objects>
             <point key="canvasLocation" x="3308" y="-1166"/>
         </scene>
-        <!--Widget Building Cover View Controller - 添加至建筑封面-->
+        <!--Widget Building Cover View Controller-->
         <scene sceneID="iIx-hv-aX6">
             <objects>
                 <tableViewController id="0Gt-be-FfQ" customClass="REMWidgetBuildingCoverViewController" sceneMemberID="viewController">
@@ -714,18 +669,7 @@
                             <outlet property="delegate" destination="0Gt-be-FfQ" id="EIX-SV-GkB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="添加至建筑封面" id="lbO-Sc-6OJ">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="Vgg-GN-dhw">
-                            <connections>
-                                <action selector="cancelButtonClicked:" destination="0Gt-be-FfQ" id="ncQ-3e-h7F"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="done" id="wTV-vd-idZ">
-                            <connections>
-                                <action selector="okButtonClicked:" destination="0Gt-be-FfQ" id="3eN-gi-4eR"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="lbO-Sc-6OJ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M7a-4Q-2K9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

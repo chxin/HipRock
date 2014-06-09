@@ -57,7 +57,9 @@
                 REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)parameters;
                 
                 if(commodityParameters.commodityIdArray.count>0 || ((REMDiagramType)[widget.diagramType intValue]) == REMDiagramTypePie){
-                    return REMCommodities[@(target.commodityId)];
+                    //return REMCommodities[@(target.commodityId)];
+                    NSString *commodityKey = REMCommodities[@(target.commodityId)];
+                    return REMIPadLocalizedString(commodityKey);
                 }
                 else{
                     return target.type == REMEnergyTargetCarbon ? REMIPadLocalizedString(@"Chart_CarbonTotal") : REMIPadLocalizedString(@"Chart_CostTotal");
@@ -96,7 +98,9 @@
                 NSString *prefix = nil;
                 
                 if(commodityIdArray.count>0){
-                    prefix = REMCommodities[@(target.commodityId)];
+                    //prefix = REMCommodities[@(target.commodityId)];
+                    NSString *commodityKey=REMCommodities[@(target.commodityId)];
+                    prefix = REMIPadLocalizedString(commodityKey);
                 }
                 else{
                     prefix = REMIPadLocalizedString(@"Chart_CarbonTotal");

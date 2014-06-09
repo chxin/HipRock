@@ -39,6 +39,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.title = REMIPadLocalizedString(@"Widget_AddToBuildingCoverViewTitle");
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okButtonClicked:)];
+    
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"widgetListCell"];
     self.currentSelectedArray = [NSMutableArray array];
     self.selectedPathArray=[NSMutableArray array];

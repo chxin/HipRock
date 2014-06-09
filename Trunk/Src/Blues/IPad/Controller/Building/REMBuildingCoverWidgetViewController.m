@@ -33,6 +33,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.title = REMIPadLocalizedString(@"Building_WidgetRelationViewTitle");
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okButtonClicked:)];
+    
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"widgetCell"];
     if ([self.selectedWidgetId isEqualToNumber:@(-1)]==YES) {
         self.currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:1];
@@ -63,6 +72,11 @@
         self.currentIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
     }
 }
+
+-(void)cancelPressed
+{
+}
+
 
 - (void)viewDidAppear:(BOOL)animated{
     CGFloat height=700;
@@ -98,7 +112,9 @@
         return REMIPadLocalizedString(@"Building_WidgetRelationTitle");
     }
     else if(section == 1){
-        return [NSString stringWithFormat:REMIPadLocalizedString(@"Building_WidgetRelationCommodityTitle"),self.commodityInfo.comment];
+//        return [NSString stringWithFormat:REMIPadLocalizedString(@"Building_WidgetRelationCommodityTitle"),self.commodityInfo.comment];
+        NSString *commodityKey = REMCommodities[self.commodityInfo.id];
+        return [NSString stringWithFormat:REMIPadLocalizedString(@"Building_WidgetRelationCommodityTitle"),REMIPadLocalizedString(commodityKey)];
     }
     else{
         REMManagedDashboardModel *dashboard= self.dashboardArray[section-2];
@@ -169,11 +185,12 @@
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
     if (indexPath.section==1) {
+        NSString *commodityKey = REMCommodities[self.commodityInfo.id];
         if (indexPath.row==0) {
-            cell.textLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),self.commodityInfo.comment];
+            cell.textLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),REMIPadLocalizedString(commodityKey)];
         }
         else{
-            cell.textLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),self.commodityInfo.comment];
+            cell.textLabel.text=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),REMIPadLocalizedString(commodityKey)];
         }
     }
     else{

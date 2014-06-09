@@ -17,7 +17,8 @@
 /**
  *  Jazz supported commodities
  */
-#define REMCommodities @{@(0):@"其他",@(1):@"电",@(2):@"自来水",@(3):@"天然气",@(4):@"软水",@(5):@"汽油",@(6):@"低压蒸汽",@(7):@"柴油",@(8):@"热量",@(9):@"冷量",@(10):@"煤",@(11):@"煤油",@(12):@"空气"}
+
+#define REMCommodities @{@(0):@"Common_Commodity_Other",@(1):@"Common_Commodity_Elec",@(2):@"Common_Commodity_Water",@(3):@"Common_Commodity_Gas",@(4):@"Common_Commodity_SoftWater",@(5):@"Common_Commodity_Petrol",@(6):@"Common_Commodity_LowPressureSteam",@(7):@"Common_Commodity_DieselOil",@(8):@"Common_Commodity_HeatQ",@(9):@"Common_Commodity_CoolQ",@(10):@"Common_Commodity_Coal",@(11):@"Common_Commodity_CoalOil",@(12):@"Common_Commodity_AirQuality"}
 
 /**
  *  Jazz supported uoms

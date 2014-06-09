@@ -49,6 +49,14 @@
     
     //[self.view setBackgroundColor:[UIColor lightGrayColor]];
 	// Do any additional setup after loading the view.
+    
+    self.title = REMIPadLocalizedString(@"Widget_MonthPickerViewTitle");
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelClicked:)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okClicked:)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    
     UIPickerView *datePicker=[[UIPickerView alloc]init];
     [self.view addSubview:datePicker];
     datePicker.showsSelectionIndicator=YES;

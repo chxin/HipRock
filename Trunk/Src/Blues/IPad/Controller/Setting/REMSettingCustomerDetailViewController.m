@@ -34,6 +34,8 @@ static NSString * cellId=@"customerCell";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellId];
+    
+    self.title = REMIPadLocalizedString(@"Setting_CustomerDetailViewTitle");
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

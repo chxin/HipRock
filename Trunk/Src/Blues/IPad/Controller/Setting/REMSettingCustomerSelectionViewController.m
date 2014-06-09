@@ -40,10 +40,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.title = REMIPadLocalizedString(@"Setting_CustomerSelectionViewTitle");
+    
     self.currentRow= NSNotFound;
     NSString *cancel=REMIPadLocalizedString(@"Common_Cancel");
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:cancel style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationController.navigationBar.topItem.backBarButtonItem = backButton;
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonPressed)];
+    
+    self.navigationItem.rightBarButtonItem = doneButton;
+}
+
+-(void)doneButtonPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)switchCustomer:(UIBarButtonItem *)sender

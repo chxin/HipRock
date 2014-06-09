@@ -96,10 +96,13 @@
     int i=0;
     for (;i<self.commodityArray.count;++i) {
         REMManagedBuildingCommodityUsageModel *model = self.commodityArray[i];
+        NSString *commodityKey = REMCommodities[model.id];
+        NSString *commodityName = REMIPadLocalizedString(commodityKey);
         UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(i*(kBuildingCommodityButtonDimension+kBuildingCommodityBottomMargin), 0, kBuildingCommodityButtonDimension, kBuildingCommodityButtonDimension)];
         //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         btn.tag=i;
-        [btn setTitle:model.comment forState:UIControlStateNormal];
+        //[btn setTitle:model.comment forState:UIControlStateNormal];
+        [btn setTitle:commodityKey forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];
@@ -552,7 +555,8 @@
     if (self.currentCommodityIndex<self.buildingInfo.commodities.count) {
         stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
         REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
-        NSString* commodityName = model.comment;
+        NSString *commodityKey = REMCommodities[model.id];
+        NSString* commodityName = REMIPadLocalizedString(commodityKey);//model.comment;
         NSString* uomName = model.totalUom;
         NSString* val = [model.totalValue isEqual:[NSNull null]] ? nil : model.totalValue.stringValue;
         if (val == nil || commodityName == nil || uomName == nil) {

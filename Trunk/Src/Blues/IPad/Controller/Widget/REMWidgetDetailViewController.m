@@ -187,8 +187,10 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     
     for (int i=0; i<commodityArray.count; ++i) {
         REMManagedBuildingCommodityUsageModel *commodity=commodityArray[i];
+        NSString *commodityKey = REMCommodities[commodity.id];
+        NSString *commodityName =REMIPadLocalizedString(commodityKey);
         NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-        dic[@"name"]= commodity.comment;
+        dic[@"name"]= commodityName;//commodity.comment;
         dic[@"Id"]=commodity.id;
         BOOL foundFirst=NO;
         BOOL foundSecond=NO;
@@ -225,11 +227,13 @@ const static CGFloat kWidgetShareTitleFontSize=14;
         
         }
         if (foundFirst==NO) {
-            dic[@"firstName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),commodity.comment];
+//            dic[@"firstName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),commodity.comment];
+            dic[@"firstName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByAreaByMonth"),commodityName];
             dic[@"firstId"]=@(-1);
         }
         if (foundSecond==NO) {
-            dic[@"secondName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),commodity.comment];
+//            dic[@"secondName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),commodity.comment];
+            dic[@"secondName"]=[NSString stringWithFormat:REMIPadLocalizedString(@"Building_EnergyUsageByCommodity"),commodityName];
             dic[@"secondId"]=@(-2);
         }
         [array addObject:dic];

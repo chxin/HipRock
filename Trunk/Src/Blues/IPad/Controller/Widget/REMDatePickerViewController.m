@@ -39,6 +39,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"relativeDateCell"];
+    
+    self.title = REMIPadLocalizedString(@"Widget_TimePickerViewTitle");
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelClicked:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okClicked:)];
+    
     self.cellCount=2;
     [self.tableView setScrollEnabled:NO];
     self.navigationController.navigationBar.backItem.title=REMIPadLocalizedString(@"Common_Cancel"); //@"取消";

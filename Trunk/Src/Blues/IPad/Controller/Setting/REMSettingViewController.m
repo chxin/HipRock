@@ -51,18 +51,22 @@
     //self.navigationController=(UINavigationController *)self.parentViewController;
     self.isLoggingOut=NO;
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:REMIPadLocalizedString(@"Common_Done") forState:UIControlStateNormal];
+    self.title = REMIPadLocalizedString(@"Setting_SettingViewTitle");
     
-//    self.doneButton = self.navigationController.navigationBar.topItem.rightBarButtonItems.lastObject;
-//    self.doneButton.target = self;
-//    self.doneButton.action = @selector(doneButtonPressed);
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] init];
+    [button setTitle:REMIPadLocalizedString(@"Common_Done")];
+    
+    self.navigationController.navigationBar.topItem.rightBarButtonItem = button;
+    self.doneButton = button;
+    self.doneButton.target = self;
+    self.doneButton.action = @selector(doneButtonPressed);
 }
 
-//-(void)doneButtonPressed
-//{
-//    [self.weiboNetworkValidateOperation cancel];
-//}
+-(void)doneButtonPressed
+{
+    [self.weiboNetworkValidateOperation cancel];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning
 {
