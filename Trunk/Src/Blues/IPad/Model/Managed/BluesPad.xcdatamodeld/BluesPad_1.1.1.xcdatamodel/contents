@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="REMManagedAdministratorModel" representedClassName="REMManagedAdministratorModel" syncable="YES">
         <attribute name="realName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -18,6 +18,11 @@
         <relationship name="building" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingModel" inverseName="airQuality" inverseEntity="REMManagedBuildingModel" syncable="YES"/>
     </entity>
     <entity name="REMManagedBuildingCommodityUsageModel" representedClassName="REMManagedBuildingCommodityUsageModel" syncable="YES">
+        <attribute name="annualBaseline" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="annualBaselineUom" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="annualEfficiency" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="annualUsage" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="annualUsageUom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="carbonUom" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="carbonValue" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,7 +52,6 @@
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pathLevel" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="test" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timezoneId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="airQuality" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedBuildingAirQualityModel" inverseName="building" inverseEntity="REMManagedBuildingAirQualityModel" syncable="YES"/>
         <relationship name="commodities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="REMManagedBuildingCommodityUsageModel" inverseName="building" inverseEntity="REMManagedBuildingCommodityUsageModel" syncable="YES"/>
@@ -144,8 +148,8 @@
     <elements>
         <element name="REMManagedAdministratorModel" positionX="0" positionY="0" width="128" height="90"/>
         <element name="REMManagedBuildingAirQualityModel" positionX="0" positionY="0" width="128" height="193"/>
-        <element name="REMManagedBuildingCommodityUsageModel" positionX="0" positionY="0" width="128" height="270"/>
-        <element name="REMManagedBuildingModel" positionX="0" positionY="0" width="128" height="330"/>
+        <element name="REMManagedBuildingCommodityUsageModel" positionX="0" positionY="0" width="128" height="345"/>
+        <element name="REMManagedBuildingModel" positionX="0" positionY="0" width="128" height="315"/>
         <element name="REMManagedBuildingPictureModel" positionX="0" positionY="0" width="128" height="103"/>
         <element name="REMManagedBuildingRankingModel" positionX="0" positionY="0" width="128" height="45"/>
         <element name="REMManagedCustomerModel" positionX="0" positionY="0" width="128" height="268"/>

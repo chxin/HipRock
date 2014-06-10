@@ -85,7 +85,6 @@
 		7A13C1AB17F40D99007E6AA9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1AA17F40D99007E6AA9 /* libz.dylib */; };
 		7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
-		7A1D6C2C18F68A0900AFB038 /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D6C2918F68A0900AFB038 /* BluesPad.xcdatamodeld */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
 		7A217E5718E51FA100383BED /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A217E5618E51FA100383BED /* Reachability.m */; };
@@ -583,7 +582,8 @@
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
-		7AF9635218D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */; };
+		7AF4595A1946F45C00BC73AD /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AF459571946F45C00BC73AD /* BluesPad.xcdatamodeld */; };
+		7AF4595E1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF4595D1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.m */; };
 		7AF9635318D6C5BD005A8D12 /* REMManagedBuildingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634218D6C5BD005A8D12 /* REMManagedBuildingModel.m */; };
 		7AF9635418D6C5BD005A8D12 /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634418D6C5BD005A8D12 /* REMManagedBuildingPictureModel.m */; };
 		7AF9635518D6C5BD005A8D12 /* REMManagedBuildingRankingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9634618D6C5BD005A8D12 /* REMManagedBuildingRankingModel.m */; };
@@ -845,9 +845,6 @@
 		7A1D14281785178800CC2922 /* REMHttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMHttpHelper.m; path = Common/Utility/REMHttpHelper.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
 		7A1D142B1785211000CC2922 /* REMAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAlertHelper.m; path = Common/Utility/REMAlertHelper.m; sourceTree = "<group>"; };
-		7A1D6C2A18F68A0900AFB038 /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
-		7A1D6C2B18F68A0900AFB038 /* BluesPad_1.0.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad_1.0.2.xcdatamodel; sourceTree = "<group>"; };
-		7A1D6C2D18F68D3100AFB038 /* BluesPad_1.1.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad_1.1.0.xcdatamodel; sourceTree = "<group>"; };
 		7A1D7C3817A618140050779D /* REMCommonHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMCommonHeaders.h; path = Common/REMCommonHeaders.h; sourceTree = "<group>"; };
 		7A1D7C4017A637FD0050779D /* REMJSONObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMJSONObject.h; path = Common/Model/REMJSONObject.h; sourceTree = "<group>"; };
 		7A1D7C4117A637FD0050779D /* REMJSONObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMJSONObject.m; path = Common/Model/REMJSONObject.m; sourceTree = "<group>"; };
@@ -1340,8 +1337,11 @@
 		7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoView.h; sourceTree = "<group>"; };
 		7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoView.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
-		7AF9633F18D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
-		7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingCommodityUsageModel.m; sourceTree = "<group>"; };
+		7AF459581946F45C00BC73AD /* BluesPad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad.xcdatamodel; sourceTree = "<group>"; };
+		7AF459591946F45C00BC73AD /* BluesPad_1.0.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad_1.0.2.xcdatamodel; sourceTree = "<group>"; };
+		7AF4595B1946F46A00BC73AD /* BluesPad_1.1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BluesPad_1.1.1.xcdatamodel; sourceTree = "<group>"; };
+		7AF4595C1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
+		7AF4595D1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingCommodityUsageModel.m; sourceTree = "<group>"; };
 		7AF9634118D6C5BD005A8D12 /* REMManagedBuildingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingModel.h; sourceTree = "<group>"; };
 		7AF9634218D6C5BD005A8D12 /* REMManagedBuildingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingModel.m; sourceTree = "<group>"; };
 		7AF9634318D6C5BD005A8D12 /* REMManagedBuildingPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingPictureModel.h; sourceTree = "<group>"; };
@@ -2489,11 +2489,11 @@
 		7A63E15A18B44CBC00A13464 /* Managed */ = {
 			isa = PBXGroup;
 			children = (
-				7A1D6C2918F68A0900AFB038 /* BluesPad.xcdatamodeld */,
+				7AF459571946F45C00BC73AD /* BluesPad.xcdatamodeld */,
+				7AF4595C1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.h */,
+				7AF4595D1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.m */,
 				7A4B465B18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.h */,
 				7A4B465C18EA8B7B00FC238C /* REMManagedBuildingAirQualityModel.m */,
-				7AF9633F18D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.h */,
-				7AF9634018D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m */,
 				7AF9634118D6C5BD005A8D12 /* REMManagedBuildingModel.h */,
 				7AF9634218D6C5BD005A8D12 /* REMManagedBuildingModel.m */,
 				7AF9634318D6C5BD005A8D12 /* REMManagedBuildingPictureModel.h */,
@@ -4105,6 +4105,7 @@
 				EFE8698C185EF3B700DC0007 /* DCLabelingLabel.m in Sources */,
 				7A9EAA9418D2946300EF1B85 /* WeiboAuthentication.m in Sources */,
 				7A63E20818B44CBD00A13464 /* REMGalleryViewController.m in Sources */,
+				7AF4595E1946F50900BC73AD /* REMManagedBuildingCommodityUsageModel.m in Sources */,
 				7A9EAA8E18D2946300EF1B85 /* GeoInfo.m in Sources */,
 				7A63E26918B44CBD00A13464 /* REMRankingTooltipView.m in Sources */,
 				7A63E22818B44CBD00A13464 /* REMCommodityModel.m in Sources */,
@@ -4258,9 +4259,9 @@
 				7A63E25F18B44CBD00A13464 /* REMNumberLabel.m in Sources */,
 				7AF9638E18D6C9A3005A8D12 /* REMDataStore.m in Sources */,
 				7A63E27618B44CBD00A13464 /* REMMapGallerySegue.m in Sources */,
-				7A1D6C2C18F68A0900AFB038 /* BluesPad.xcdatamodeld in Sources */,
 				EFE8697D185E9FF800DC0007 /* DCLabelingChartView.m in Sources */,
 				7A63E24018B44CBD00A13464 /* REMWidgetRankingSearchModel.m in Sources */,
+				7AF4595A1946F45C00BC73AD /* BluesPad.xcdatamodeld in Sources */,
 				EF03DC291841FB45004B9EFD /* DCPieDataPoint.m in Sources */,
 				7A63E23C18B44CBD00A13464 /* REMManagedUserModel.m in Sources */,
 				7A63E23918B44CBD00A13464 /* REMManagedAdministratorModel.m in Sources */,
@@ -4291,7 +4292,6 @@
 				EFE86986185EEF5300DC0007 /* DCLabelingSeries.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
-				7AF9635218D6C5BD005A8D12 /* REMManagedBuildingCommodityUsageModel.m in Sources */,
 				7AF9635918D6C5BD005A8D12 /* REMManagedSharedModel.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,
 				7A63E26218B44CBD00A13464 /* REMStatusBar.m in Sources */,
@@ -4723,14 +4723,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7A1D6C2918F68A0900AFB038 /* BluesPad.xcdatamodeld */ = {
+		7AF459571946F45C00BC73AD /* BluesPad.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				7A1D6C2A18F68A0900AFB038 /* BluesPad.xcdatamodel */,
-				7A1D6C2B18F68A0900AFB038 /* BluesPad_1.0.2.xcdatamodel */,
-				7A1D6C2D18F68D3100AFB038 /* BluesPad_1.1.0.xcdatamodel */,
+				7AF4595B1946F46A00BC73AD /* BluesPad_1.1.1.xcdatamodel */,
+				7AF459581946F45C00BC73AD /* BluesPad.xcdatamodel */,
+				7AF459591946F45C00BC73AD /* BluesPad_1.0.2.xcdatamodel */,
 			);
-			currentVersion = 7A1D6C2B18F68A0900AFB038 /* BluesPad_1.0.2.xcdatamodel */;
+			currentVersion = 7AF4595B1946F46A00BC73AD /* BluesPad_1.1.1.xcdatamodel */;
 			path = BluesPad.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

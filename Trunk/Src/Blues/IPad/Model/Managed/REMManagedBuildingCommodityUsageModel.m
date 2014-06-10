@@ -2,7 +2,7 @@
 //  REMManagedBuildingCommodityUsageModel.m
 //  Blues
 //
-//  Created by tantan on 2/25/14.
+//  Created by 张 锋 on 6/10/14.
 //
 //
 
@@ -13,19 +13,24 @@
 
 @implementation REMManagedBuildingCommodityUsageModel
 
+@dynamic carbonUom;
+@dynamic carbonValue;
 @dynamic code;
-@dynamic name;
+@dynamic comment;
+@dynamic id;
 @dynamic isTargetAchieved;
+@dynamic name;
 @dynamic rankingDenominator;
 @dynamic rankingNumerator;
 @dynamic targetUom;
 @dynamic targetValue;
 @dynamic totalUom;
 @dynamic totalValue;
-@dynamic carbonUom;
-@dynamic carbonValue;
-@dynamic id;
-@dynamic comment;
+@dynamic annualUsage;
+@dynamic annualUsageUom;
+@dynamic annualBaseline;
+@dynamic annualBaselineUom;
+@dynamic annualEfficiency;
 @dynamic building;
 @dynamic pinnedWidgets;
 
