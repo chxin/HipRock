@@ -81,6 +81,12 @@
     else if([self.relativeDate isEqualToString:@"LastYear"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeLastYear;
     }
+    else if([self.relativeDate isEqualToString:@"Last30Day"] == YES){
+        self.relativeDateType = REMRelativeTimeRangeTypeLast30Day;
+    }
+    else if([self.relativeDate isEqualToString:@"Last12Month"] == YES){
+        self.relativeDateType = REMRelativeTimeRangeTypeLast12Month;
+    }
     else{
         self.relativeDateType=REMRelativeTimeRangeTypeNone;
     }

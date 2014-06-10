@@ -53,14 +53,14 @@
 
 - (void)test_relativedate
 {
-    //    REMTimeRange *range=    [REMTimeHelper relativeDateFromString:@"Today"];
-    //
-    //    NSDateFormatter *f = [[NSDateFormatter alloc]init];
-    //    [f setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    //
-    //    NSLog(@"time:%@",[f stringFromDate:range.startTime]);
-    //    NSLog(@"time:%@",[f stringFromDate:range.endTime]);
+    //REMTimeRange *last30days = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeLast30Day];
     
+    
+    
+    REMTimeRange *last12months = [REMTimeHelper relativeDateFromType:REMRelativeTimeRangeTypeLast12Month];
+    
+    NSAssert((([REMTimeHelper getMonth:last12months.endTime] + [REMTimeHelper getYear:last12months.endTime]*12) -
+              ([REMTimeHelper getMonth:last12months.startTime] + [REMTimeHelper getYear:last12months.startTime]*12)) == 13 , @"last12months is wrong");
 }
 
 -(void)test_monthticks

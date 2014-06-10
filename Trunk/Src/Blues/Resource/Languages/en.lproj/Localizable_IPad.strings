@@ -17,6 +17,8 @@
 "Common_LastMonth"="上月";
 "Common_ThisYear"="今年";
 "Common_LastYear"="去年";
+"Common_Last30Days"="之前30天";
+"Common_Last12Months"="之前12月";
 "Common_Hour"="小时";
 "Common_Day"="天";
 "Common_Week"="周";
