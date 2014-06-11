@@ -27,6 +27,10 @@
 @property (nonatomic,weak) REMBuildingTitleLabelView *targetLabel;
 @property (nonatomic,weak) REMBuildingRankingView *rankingLabel;
 
+@property (nonatomic,weak) REMBuildingTitleLabelView *annualAverageUsageLabel;
+@property (nonatomic,weak) REMBuildingTitleLabelView *annualAverageBaselineLabel;
+@property (nonatomic,weak) REMBuildingTitleLabelView *annualAverageEfficiencyLabel;
+
 @property (nonatomic,weak) UILabel *firstChartTitleLabel;
 @property (nonatomic,weak) UILabel *secondChartTitleLabel;
 
@@ -103,10 +107,7 @@
         self.totalLabel.data = nil;
     }
     else{
-        REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc]init];
-        commodityUsage.dataValue = model.totalValue;
-        commodityUsage.uom = [[REMUomModel alloc]init];
-        commodityUsage.uom.code=model.totalUom;
+        REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc] initWithDataValue:model.totalValue andUomCode:model.totalUom];
         self.totalLabel.data=commodityUsage;
     }
     
@@ -114,10 +115,7 @@
         self.carbonLabel.data=nil;
     }
     else{
-        REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc]init];
-        carbonUsage.dataValue = model.carbonValue;
-        carbonUsage.uom = [[REMUomModel alloc]init];
-        carbonUsage.uom.code=model.carbonUom;
+        REMEnergyUsageDataModel *carbonUsage = [[REMEnergyUsageDataModel alloc] initWithDataValue:model.carbonValue andUomCode:model.carbonUom];
         self.carbonLabel.data=carbonUsage;
     }
     
@@ -128,10 +126,7 @@
     self.rankingLabel.data = rankingUsage;
     [self loadedPart];
     
-    if(model.targetValue!=nil &&
-       model.targetValue!=nil &&
-       ![model.targetValue isEqual:[NSNull null]] &&
-       [model.targetValue isGreaterThan:@(0)])
+    if(model.targetValue!=nil && model.targetValue!=nil && ![model.targetValue isEqual:[NSNull null]] && [model.targetValue isGreaterThan:@(0)])
     {
         REMBuildingTitleLabelView *target=[[REMBuildingTitleLabelView alloc]initWithFrame:CGRectMake(kBuildingCommodityDetailWidth*2, self.rankingLabel.frame.origin.y, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
         target.title=REMIPadLocalizedString(@"Building_Target"); //@"目标值";
@@ -156,11 +151,32 @@
         [self.view addSubview:target];
         self.targetLabel=target;
         
-        REMEnergyUsageDataModel *targetUsage = [[REMEnergyUsageDataModel alloc]init];
-        targetUsage.dataValue = model.targetValue;
-        targetUsage.uom = [[REMUomModel alloc]init];
-        targetUsage.uom.code=model.targetUom;
+        REMEnergyUsageDataModel *targetUsage = [[REMEnergyUsageDataModel alloc] initWithDataValue:model.targetValue andUomCode:model.targetUom];
         self.targetLabel.data=targetUsage;
+    }
+    
+    if(REMIsNilOrNull(model.annualUsage)){
+        self.annualAverageUsageLabel.data = nil;
+    }
+    else{
+        REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc] initWithDataValue:model.annualUsage andUomCode:model.annualUsageUom];
+        self.annualAverageUsageLabel.data=commodityUsage;
+    }
+    
+    
+    if(REMIsNilOrNull(model.annualBaseline)){
+        self.annualAverageBaselineLabel.data = nil;
+    }
+    else{
+        REMEnergyUsageDataModel *commodityUsage = [[REMEnergyUsageDataModel alloc] initWithDataValue:model.annualBaseline andUomCode:model.annualBaselineUom];
+        self.annualAverageBaselineLabel.data=commodityUsage;
+    }
+    
+    if(REMIsNilOrNull(model.annualEfficiency)){
+        self.annualAverageEfficiencyLabel.data = nil;
+    }
+    else{
+        self.annualAverageEfficiencyLabel.textLabelText = [[NSString alloc] initWithFormat:@"%2.2f %%",(model.annualEfficiency.doubleValue*100)];
     }
 }
 
@@ -175,30 +191,16 @@
     store.persistenceProcessor = processor;
     
     store.groupName = [NSString stringWithFormat:@"building-data-%@", buildingId];
-    [self.totalLabel showLoading];
-    [self.carbonLabel showLoading];
-    [self.rankingLabel showLoading];
+    
+    [self changeLabelsLoadingStatus:YES];
     [store access:^(REMManagedBuildingCommodityUsageModel *data) {
-//        REMCommodityUsageModel *model=nil;
-//        if([data isEqual:[NSNull null]]==YES){
-//            model=nil;
-//        }
-//        else{
-//            model=[[REMCommodityUsageModel alloc]initWithDictionary:data];
-//            if(model!=nil){
-//                self.commodityUsage=model;
-//            }
-//        }
         self.commodityUsage = data;
         
-        [self.totalLabel hideLoading];
-        [self.carbonLabel hideLoading];
-        [self.rankingLabel hideLoading];
+        [self changeLabelsLoadingStatus:NO];
+        
         [self addDataLabel];
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
-        [self.totalLabel hideLoading];
-        [self.carbonLabel hideLoading];
-        [self.rankingLabel hideLoading];
+        [self changeLabelsLoadingStatus:NO];
         
         if (status == REMDataAccessFailed || status == REMDataAccessErrorMessage) {
             NSString *serverError;
@@ -218,10 +220,37 @@
             [self.totalLabel setEmptyText:serverError];
             [self.carbonLabel setEmptyText:serverErrorSimple];
             [self.rankingLabel setEmptyText:serverErrorSimple];
+            
+            [self.annualAverageUsageLabel setEmptyText:serverErrorSimple];
+            [self.annualAverageBaselineLabel setEmptyText:serverErrorSimple];
+            [self.annualAverageEfficiencyLabel setEmptyText:serverErrorSimple];
+            
             [self addDataLabel];
         }
         
     }];
+}
+
+-(void)changeLabelsLoadingStatus:(BOOL)isLoading
+{
+    if(isLoading){
+        [self.totalLabel showLoading];
+        [self.carbonLabel showLoading];
+        [self.rankingLabel showLoading];
+        
+        [self.annualAverageUsageLabel showLoading];
+        [self.annualAverageBaselineLabel showLoading];
+        [self.annualAverageEfficiencyLabel showLoading];
+    }
+    else{
+        [self.totalLabel hideLoading];
+        [self.carbonLabel hideLoading];
+        [self.rankingLabel hideLoading];
+        
+        [self.annualAverageUsageLabel hideLoading];
+        [self.annualAverageBaselineLabel hideLoading];
+        [self.annualAverageEfficiencyLabel hideLoading];
+    }
 }
 
 - (void)addSplitBar:(UIView *)view
@@ -316,6 +345,56 @@
     self.rankingLabel=ranking;
     [self addSplitBar:ranking];
     
+//    "Building_AnnualAverageUsageLabelTitle"="年平米能耗";
+//    "Building_AnnualAverageBaselineLabelTitle"="行业标准";
+//    "Building_AnnualEfficiencyLabelTitle"="年节能率";
+    REMBuildingTitleLabelView *annualAverageUsageLabel = [[REMBuildingTitleLabelView alloc] initWithFrame:CGRectMake(0, marginTop+kBuildingAnnualUsageTotlaHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+    annualAverageUsageLabel.title = REMIPadLocalizedString(@"Building_AnnualAverageUsageLabelTitle");
+    annualAverageUsageLabel.textWidth = 300;
+    annualAverageUsageLabel.titleFontSize=kBuildingCommodityTitleFontSize;
+    annualAverageUsageLabel.titleMargin=kBuildingDetailInnerMargin;
+    annualAverageUsageLabel.leftMargin=0;
+    annualAverageUsageLabel.valueFontSize=kBuildingCommodityDetailValueFontSize;
+    annualAverageUsageLabel.uomFontSize=kBuildingCommodityDetailUomFontSize;
+    annualAverageUsageLabel.emptyTextFontSize=29;
+    annualAverageUsageLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    annualAverageUsageLabel.emptyTextMargin=28;
+    [annualAverageUsageLabel showTitle];
+    [self.view addSubview:annualAverageUsageLabel];
+    self.annualAverageUsageLabel=annualAverageUsageLabel;
+    
+    
+    REMBuildingTitleLabelView *annualAverageBaselineLabel = [[REMBuildingTitleLabelView alloc] initWithFrame:CGRectMake(kBuildingCommodityDetailWidth, marginTop+kBuildingAnnualUsageTotlaHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+    annualAverageBaselineLabel.title = REMIPadLocalizedString(@"Building_AnnualAverageBaselineLabelTitle");
+    annualAverageBaselineLabel.textWidth = 300;
+    annualAverageBaselineLabel.titleFontSize=kBuildingCommodityTitleFontSize;
+    annualAverageBaselineLabel.titleMargin=kBuildingDetailInnerMargin;
+    annualAverageBaselineLabel.leftMargin=kBuildingCommodityDetailTextMargin;
+    annualAverageBaselineLabel.valueFontSize=kBuildingCommodityDetailValueFontSize;
+    annualAverageBaselineLabel.uomFontSize=kBuildingCommodityDetailUomFontSize;
+    annualAverageBaselineLabel.emptyTextFontSize=29;
+    annualAverageBaselineLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    annualAverageBaselineLabel.emptyTextMargin=28;
+    [annualAverageBaselineLabel showTitle];
+    [self.view addSubview:annualAverageBaselineLabel];
+    self.annualAverageBaselineLabel=annualAverageBaselineLabel;
+    [self addSplitBar:annualAverageBaselineLabel];
+    
+    REMBuildingTitleLabelView *annualAverageEfficiencyLabel = [[REMBuildingTitleLabelView alloc] initWithFrame:CGRectMake(2*kBuildingCommodityDetailWidth, marginTop+kBuildingAnnualUsageTotlaHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
+    annualAverageEfficiencyLabel.title = REMIPadLocalizedString(@"Building_AnnualEfficiencyLabelTitle");
+    annualAverageEfficiencyLabel.textWidth = 300;
+    annualAverageEfficiencyLabel.titleFontSize=kBuildingCommodityTitleFontSize;
+    annualAverageEfficiencyLabel.titleMargin=kBuildingDetailInnerMargin;
+    annualAverageEfficiencyLabel.leftMargin=kBuildingCommodityDetailTextMargin;
+    annualAverageEfficiencyLabel.valueFontSize=kBuildingCommodityDetailValueFontSize;
+    annualAverageEfficiencyLabel.uomFontSize=kBuildingCommodityDetailUomFontSize;
+    annualAverageEfficiencyLabel.emptyTextFontSize=29;
+    annualAverageEfficiencyLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    annualAverageEfficiencyLabel.emptyTextMargin=28;
+    [annualAverageEfficiencyLabel showTitle];
+    [self.view addSubview:annualAverageEfficiencyLabel];
+    self.annualAverageEfficiencyLabel=annualAverageEfficiencyLabel;
+    [self addSplitBar:annualAverageEfficiencyLabel];
 }
 
 - (void)initTitle{
@@ -486,7 +565,7 @@
 
 - (void)initChartContainer
 {
-    int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2;
+    int marginTop=kBuildingCommodityTotalHeight+kBuildingCommodityDetailHeight+kBuildingDetailInnerMargin+kBuildingCommodityBottomMargin*2 + kBuildingAnnualUsageTotlaHeight;
     int chartContainerHeight=kBuildingChartHeight;
     NSString *title1=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
     

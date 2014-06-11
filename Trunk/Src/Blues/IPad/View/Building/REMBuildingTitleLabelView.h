@@ -15,7 +15,7 @@
 @interface REMBuildingTitleLabelView : REMBuildingTitleView
 
 
-
+@property (nonatomic,strong) NSString *textLabelText;
 
 @property (nonatomic,weak) REMEnergyUsageDataModel *data;
 

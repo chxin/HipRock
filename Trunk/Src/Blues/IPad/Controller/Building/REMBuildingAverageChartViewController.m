@@ -25,7 +25,7 @@
 @implementation REMBuildingAverageViewController
 
 
-static NSString *kBenchmarkTitle = @"目标值";
+//static NSString *kBenchmarkTitle = @"目标值";
 static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)purgeMemory{
@@ -36,7 +36,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-     self.requestUrl=REMDSBuildingAverageData;
+     self.requestUrl=REMDSBuildingAverageDataWithBaseline;
 }
 
 //- (REMBuildingChartBaseViewController *)initWithViewFrame:(CGRect)frame
@@ -72,7 +72,7 @@ static NSString *kAverageDataTitle = @"单位面积用%@";
 
 -(NSString*)getLegendText:(DCXYSeries*)series index:(NSUInteger)index {
     if (series.type == DCSeriesTypeLine) {
-        return kBenchmarkTitle;
+        return series.target.name;//kBenchmarkTitle;
     } else {
         REMCommodityModel *commodity = [[REMCommodityModel systemCommodities] objectForKey:[NSNumber numberWithLongLong:self.commodityId]];
         return [NSString stringWithFormat:kAverageDataTitle,commodity.comment];

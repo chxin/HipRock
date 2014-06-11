@@ -83,6 +83,9 @@
 
 
 
+#define kBuildingAnnualUsageLabelTopOffset 30
+#define kBuildingAnnualUsageTotlaHeight (kBuildingAnnualUsageLabelTopOffset+kBuildingCommodityDetailHeight)
+
 
 @interface REMBuildingConstants : NSObject
 

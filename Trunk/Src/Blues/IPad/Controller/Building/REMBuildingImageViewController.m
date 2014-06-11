@@ -13,6 +13,7 @@
 #import "REMBuildingConstants.h"
 #import "REMManagedBuildingPictureModel.h"
 #import "REMCustomerLogoView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -68,9 +69,11 @@
 - (void)setChildControllerFrame{
     REMBuildingDataViewController *coverController=self.childViewControllers[0];
     REMDashboardController *dashboardController=self.childViewControllers[1];
+    
     coverController.buildingInfo=self.buildingInfo;
     coverController.viewFrame=CGRectMake(0, kBuildingTitleHeight, self.view.frame.size.width, self.view.frame.size.height-kBuildingTitleHeight);
     coverController.upViewFrame=CGRectMake(coverController.viewFrame.origin.x, coverController.viewFrame.origin.y-coverController.viewFrame.size.height, coverController.viewFrame.size.width, coverController.viewFrame.size.height);
+    
     dashboardController.buildingInfo=self.buildingInfo;
     dashboardController.viewFrame=CGRectMake(kBuildingLeftMargin, coverController.viewFrame.origin.y+coverController.viewFrame.size.height, self.view.frame.size.width-kBuildingLeftMargin*2, coverController.viewFrame.size.height);
     dashboardController.upViewFrame=CGRectMake(dashboardController.viewFrame.origin.x, coverController.viewFrame.origin.y-20, dashboardController.viewFrame.size.width, dashboardController.viewFrame.size.height);

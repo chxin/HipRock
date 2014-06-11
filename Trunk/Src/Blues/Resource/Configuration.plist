@@ -11,7 +11,7 @@
 		<key>local</key>
 		<dict>
 			<key>url</key>
-			<string>http://10.177.174.207/mobile/</string>
+			<string>http://10.177.175.154/mobile/</string>
 			<key>timeout</key>
 			<string>90</string>
 			<key>debug-logmode</key>
@@ -235,6 +235,17 @@
 			<integer>104010</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingInfoUpdate</string>
+			<key>Type</key>
+			<integer>1</integer>
+			<key>Processor</key>
+			<string></string>
+		</dict>
+		<key>REMDSBuildingAverageDataWithBaseline</key>
+		<dict>
+			<key>ID</key>
+			<integer>104011</integer>
+			<key>Url</key>
+			<string>API/Building.svc/GetBuildingAverageUsageDataWithBaseline</string>
 			<key>Type</key>
 			<integer>1</integer>
 			<key>Processor</key>

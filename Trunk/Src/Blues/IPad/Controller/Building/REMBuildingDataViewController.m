@@ -61,24 +61,19 @@
     REMBuildingDataView *scroll=[[REMBuildingDataView alloc]initWithFrame:self.viewFrame];
     scroll.contentInset = UIEdgeInsetsMake(kBuildingCommodityViewTop, kBuildingLeftMargin, 0, 0);
     scroll.showsVerticalScrollIndicator=NO;
-    [scroll setContentSize:CGSizeMake(0, 1165+85)];
+    [scroll setContentSize:CGSizeMake(0, 1165+85+kBuildingAnnualUsageTotlaHeight)];
     self.view=scroll;
-    //scroll.layer.borderColor=[UIColor yellowColor].CGColor;
-    //scroll.layer.borderWidth=1;
+//    scroll.layer.borderColor=[UIColor yellowColor].CGColor;
+//    scroll.layer.borderWidth=1;
     scroll.delegate=self;
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapthis)];
     [self.view addGestureRecognizer:tap];
-    
-    
-    
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     
     [self initButtons];
     [self initDragLabel];
@@ -119,8 +114,6 @@
         
         [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [array addObject:btn];
-        
-        
     }
     if(self.buildingInfo.airQuality!=nil){
         
@@ -288,7 +281,7 @@
     if(self.childViewControllers.count>0)return;
     int count= self.commodityArray==nil ? 0:self.commodityArray.count;
     
-    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop+80);
+    CGRect frame=CGRectMake(0, kBuildingCommodityBottomMargin+ kBuildingCommodityButtonDimension, self.view.frame.size.width, self.view.frame.size.height+kBuildingCommodityViewTop+80+kBuildingAnnualUsageTotlaHeight);
     int i=0;
 
     for (; i<count; ++i) {

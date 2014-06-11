@@ -180,6 +180,10 @@
 "Building_ShareWeibo"="新浪微博";
 "Building_ShareEmail"="邮件";
 
+"Building_AnnualAverageUsageLabelTitle"="年平米能耗";
+"Building_AnnualAverageBaselineLabelTitle"="行业标准";
+"Building_AnnualEfficiencyLabelTitle"="年节能率";
+
 "Building_WidgetRelationTitle"="选取要替换的图表";
 "Building_WidgetRelationCommodityTitle"="默认图表 - %@";
 "Building_WidgetRelationInfo"="所选图表将会被替换为当前图表，并出现在所属建筑封面中，以便您快速查看该图表。";

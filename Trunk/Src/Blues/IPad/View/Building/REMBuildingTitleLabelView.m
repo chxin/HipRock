@@ -32,6 +32,20 @@
 
 }
 
+-(void)setTextLabelText:(NSString *)text
+{
+    REMNumberLabel *textLabel = [[REMNumberLabel alloc] initWithFrame:CGRectMake(self.leftMargin, self.titleMargin+self.titleFontSize, self.textWidth, self.valueFontSize)];
+    textLabel.clipsToBounds=YES;
+    textLabel.fontSize=@(self.valueFontSize);
+    textLabel.textColor=[UIColor whiteColor];
+    textLabel.backgroundColor=[UIColor clearColor];
+    textLabel.shadowOffset=CGSizeMake(1, 1);
+    textLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+    textLabel.text=text;
+    [self addSubview:textLabel];
+    self.textLabel=textLabel;
+}
+
 
 - (void)setData:(REMEnergyUsageDataModel *)data{
     

@@ -62,6 +62,7 @@ typedef enum _REMDataStoreType : NSUInteger
     REMDSBuildingAirQuality             = 104008,
     REMDSBuildingPinningToCover         = 104009,
     REMDSBuildingInfoUpdate             = 104010,
+    REMDSBuildingAverageDataWithBaseline= 104011,
     
     /*
      * Dashboard stores     105
