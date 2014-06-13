@@ -16,7 +16,6 @@
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"
-#import "REMMarkerBubbleView.h"
 #import "REMImages.h"
 #import "REMBlurredMapView.h"
 #import "REMUpdateAllManager.h"
@@ -168,13 +167,14 @@
     }
     
     [self renderCustomerLogo];
-    //[self updateCamera];
-    [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(showMarkers) userInfo:nil repeats:NO];
+    
+    [self initMarkers];
+    [self updateCamera];
 }
 
 
 
--(void)showMarkers
+-(void)initMarkers
 {
     [self.mapView removeAnnotations:self.mapView.annotations];
     
@@ -191,11 +191,71 @@
         }
     }
     
-    [self.mapView showAnnotations:self.mapView.annotations animated:YES];
-    
     if(self.buildingInfoArray.count>0 && self.isInitialPresenting == YES){
         self.view.userInteractionEnabled = NO;
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(presentBuildingView) userInfo:nil repeats:NO];
+    }
+}
+
+
+-(void)updateCamera
+{
+    // one building, set the building's location
+    if(self.buildingInfoArray.count <= 0){
+        return;
+    }
+    
+    if(self.buildingInfoArray.count == 1){
+        REMManagedBuildingModel *building = self.buildingInfoArray[0];
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([building.latitude doubleValue], [building.longitude doubleValue]);
+        
+        [self.mapView setCenterCoordinate:coordinate animated:YES];
+    }
+    else{// multiple buildings, set the rect
+        
+        //get the max long,lant and min long,lant
+        //(maxlat,minlng)-----------------(maxlat,maxlng)
+        //      |                               |
+        //      |                               |
+        //      |                               |
+        //(minlat,minlng)-----------------(minlat,maxlng)
+//        double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
+//        for(REMAnnotation *annotation in self.mapView.annotations){
+//            maxLongtitude = MAX(maxLongtitude, annotation.longitude);
+//            minLongtitude = MIN(minLongtitude, annotation.longitude);
+//            maxLatitude = MAX(maxLatitude, annotation.latitude);
+//            minLatitude = MIN(minLatitude,  annotation.latitude);
+//        }
+//        BOOL good = maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX;
+//        
+//        if(good){
+//            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(minLatitude+(maxLatitude-minLatitude)/2,minLongtitude+(maxLongtitude-minLongtitude)/2);
+//            CLLocationCoordinate2D northWest = CLLocationCoordinate2DMake(maxLatitude,minLongtitude);
+//            CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(maxLatitude,maxLongtitude);
+//            CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(minLatitude,minLongtitude);
+//            //CLLocationCoordinate2D southEast = CLLocationCoordinate2DMake(minLatitude,maxLongtitude);
+//            
+//            
+//            CLLocationDistance latitudinalMeters = MKMetersBetweenMapPoints(MKMapPointForCoordinate(northWest),MKMapPointForCoordinate(southWest));
+//            CLLocationDistance longitudinalMeters = MKMetersBetweenMapPoints(MKMapPointForCoordinate(northWest),MKMapPointForCoordinate(northEast));
+//            
+//            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center,  latitudinalMeters,  longitudinalMeters);
+//            
+//            CGRect rect = [self.mapView convertRegion:region toRectToView:self.mapView];
+//            MKMapRect mapRect = [self.mapView mapRectThatFits:MKMapRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
+//            
+//            [self.mapView setVisibleMapRect:mapRect animated:YES];
+//        }
+        
+        MKMapRect zoomRect = MKMapRectNull;
+        for (id <MKAnnotation> annotation in self.mapView.annotations)
+        {
+            MKMapPoint annotationPoint = MKMapPointForCoordinate(annotation.coordinate);
+            MKMapRect pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0.1, 0.1);
+            zoomRect = MKMapRectUnion(zoomRect, pointRect);
+        }
+        [self.mapView setVisibleMapRect:zoomRect edgePadding:kDMMap_MapEdgeInsets animated:YES];
     }
 }
 
@@ -246,7 +306,7 @@
 
 -(CGRect)zoomFrameForAnnotation:(REMAnnotation *)annotation
 {
-    return CGRectMake(annotation.point.x, annotation.point.y, 5.12, 3.84);
+    return CGRectMake(annotation.point.x, annotation.point.y-50, 5.12, 3.84);
 }
 
 -(int)buildingIndexFromBuilding:(REMManagedBuildingModel *)building
@@ -264,6 +324,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)switchButtonPressed
+{
+    [self performSegueWithIdentifier:kSegue_MapToGallery sender:self];
 }
 
 #pragma mark - Segue

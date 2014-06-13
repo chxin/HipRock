@@ -9,7 +9,6 @@
 #import "REMAppDelegate.h"
 #import "REMLog.h"
 #import "Weibo.h"
-#import <GoogleMaps/GoogleMaps.h>
 #import "REMCommonHeaders.h"
 #import "UIKit+AFNetworking.h"
 #import "REMVendorMacro.h"
@@ -39,7 +38,7 @@
     [Weibo setWeibo:weibo];
     
     // Google key init
-    [GMSServices provideAPIKey:kGoogleMapsKey];
+    //[GMSServices provideAPIKey:kGoogleMapsKey];
     
     return YES;
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38ED7D1E1785140900219469 /* libsqlite3.dylib */; };
 		6A61A7071839B82000C6A228 /* Coal_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A66B1839B81F00C6A228 /* Coal_normal.png */; };
 		6A61A7081839B82000C6A228 /* Coal_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A66C1839B81F00C6A228 /* Coal_normal@2x.png */; };
 		6A61A7091839B82000C6A228 /* Coal_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A66D1839B81F00C6A228 /* Coal_pressed.png */; };
@@ -70,19 +69,9 @@
 		6A61A7901839B82000C6A228 /* SplashScreenLogo-Common@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6FA1839B82000C6A228 /* SplashScreenLogo-Common@2x.png */; };
 		6A61A7911839B82000C6A228 /* SplashScreenLogo-Flash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6FB1839B82000C6A228 /* SplashScreenLogo-Flash.png */; };
 		6A61A7921839B82000C6A228 /* SplashScreenLogo-Flash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6A61A6FC1839B82000C6A228 /* SplashScreenLogo-Flash@2x.png */; };
-		6ABA68C4180F759700A302BC /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABA68C3180F759700A302BC /* GoogleMaps.framework */; };
 		7A0B65E918B440150052093E /* Main_IPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A0B65E718B440150052093E /* Main_IPhone.storyboard */; };
 		7A0C0F6118D6DBEB00CBB277 /* REMHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0C0F6018D6DBEB00CBB277 /* REMHTTPRequestOperationManager.m */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
-		7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */; };
-		7A13C19D17F40D4F007E6AA9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */; };
-		7A13C19F17F40D59007E6AA9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C19E17F40D59007E6AA9 /* CoreData.framework */; };
-		7A13C1A117F40D61007E6AA9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A017F40D61007E6AA9 /* CoreLocation.framework */; };
-		7A13C1A317F40D70007E6AA9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A217F40D70007E6AA9 /* GLKit.framework */; };
-		7A13C1A517F40D77007E6AA9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A417F40D77007E6AA9 /* ImageIO.framework */; };
-		7A13C1A717F40D83007E6AA9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A617F40D83007E6AA9 /* libc++.dylib */; };
-		7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1A817F40D90007E6AA9 /* libicucore.dylib */; };
-		7A13C1AB17F40D99007E6AA9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13C1AA17F40D99007E6AA9 /* libz.dylib */; };
 		7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -106,8 +95,6 @@
 		7A3290ED18D83CBF00B3AE8A /* REMAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3290EA18D83CBF00B3AE8A /* REMAppConfiguration.m */; };
 		7A3290EE18D83CBF00B3AE8A /* REMApplicationContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3290EC18D83CBF00B3AE8A /* REMApplicationContext.m */; };
 		7A39D5A018B5A3A100CC9D5D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A02CE4118B482DB009D1CF1 /* XCTest.framework */; };
-		7A39D5A118B5A3A100CC9D5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
-		7A39D5A218B5A3A100CC9D5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
 		7A39D5A818B5A3A100CC9D5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A39D5A618B5A3A100CC9D5D /* InfoPlist.strings */; };
 		7A39D5B818B5A42A00CC9D5D /* REMTimeHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39D5B718B5A42A00CC9D5D /* REMTimeHelperTests.m */; };
 		7A39D5BA18B5A43900CC9D5D /* REMLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39D5B918B5A43900CC9D5D /* REMLogTests.m */; };
@@ -267,7 +254,6 @@
 		7A39D68F18B5A83100CC9D5D /* REMGalleryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1D618B44CBD00A13464 /* REMGalleryCollectionCell.m */; };
 		7A39D69018B5A83100CC9D5D /* REMGalleryGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1D818B44CBD00A13464 /* REMGalleryGroupView.m */; };
 		7A39D69118B5A83100CC9D5D /* REMGalleryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1DA18B44CBD00A13464 /* REMGalleryTableView.m */; };
-		7A39D69218B5A83100CC9D5D /* REMMarkerBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1DC18B44CBD00A13464 /* REMMarkerBubbleView.m */; };
 		7A39D69318B5A83100CC9D5D /* REMBuildingEntranceSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1DF18B44CBD00A13464 /* REMBuildingEntranceSegue.m */; };
 		7A39D69418B5A83100CC9D5D /* REMMapGallerySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E118B44CBD00A13464 /* REMMapGallerySegue.m */; };
 		7A39D69518B5A83100CC9D5D /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E318B44CBD00A13464 /* REMMaxWidgetSegue.m */; };
@@ -275,32 +261,10 @@
 		7A39D69718B5A83100CC9D5D /* REMIPhoneControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E28418B44F9B00A13464 /* REMIPhoneControllerBase.m */; };
 		7A39D69818B5A83100CC9D5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2B177B3A8B00C282A8 /* main.m */; };
 		7A39D69918B5A83100CC9D5D /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */; };
-		7A39D69A18B5A90100CC9D5D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2043B4187BDC4300272319 /* CoreText.framework */; };
-		7A39D69B18B5A91000CC9D5D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
-		7A39D69C18B5A91000CC9D5D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
-		7A39D69E18B5A91800CC9D5D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D69D18B5A91800CC9D5D /* MessageUI.framework */; };
-		7A39D69F18B5A92900CC9D5D /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABA68C3180F759700A302BC /* GoogleMaps.framework */; };
 		7A39D6A018B5A92900CC9D5D /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4223D50184EFF44004D39C0 /* GPUImage.framework */; };
-		7A39D6A218B5A93500CC9D5D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6A118B5A93500CC9D5D /* SystemConfiguration.framework */; };
-		7A39D6A418B5A93C00CC9D5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6A318B5A93C00CC9D5D /* QuartzCore.framework */; };
-		7A39D6A618B5A94500CC9D5D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6A518B5A94500CC9D5D /* OpenGLES.framework */; };
-		7A39D6A818B5A94D00CC9D5D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6A718B5A94D00CC9D5D /* libz.dylib */; };
-		7A39D6AA18B5A95600CC9D5D /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6A918B5A95600CC9D5D /* libicucore.dylib */; };
-		7A39D6AC18B5A95E00CC9D5D /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6AB18B5A95E00CC9D5D /* libc++.dylib */; };
-		7A39D6AE18B5A96400CC9D5D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6AD18B5A96400CC9D5D /* ImageIO.framework */; };
-		7A39D6B018B5A96B00CC9D5D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6AF18B5A96B00CC9D5D /* GLKit.framework */; };
-		7A39D6B218B5A97100CC9D5D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6B118B5A97100CC9D5D /* CoreLocation.framework */; };
-		7A39D6B418B5A97800CC9D5D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6B318B5A97800CC9D5D /* CoreData.framework */; };
-		7A39D6B618B5A97F00CC9D5D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6B518B5A97F00CC9D5D /* AVFoundation.framework */; };
-		7A39D6B818B5A98400CC9D5D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6B718B5A98400CC9D5D /* Accelerate.framework */; };
-		7A39D6BA18B5A98B00CC9D5D /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6B918B5A98B00CC9D5D /* CoreImage.framework */; };
-		7A39D6BC18B5A99400CC9D5D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6BB18B5A99400CC9D5D /* libsqlite3.dylib */; };
-		7A39D6BE18B5A99D00CC9D5D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6BD18B5A99D00CC9D5D /* MobileCoreServices.framework */; };
-		7A39D6C018B5A9A700CC9D5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39D6BF18B5A9A700CC9D5D /* CoreGraphics.framework */; };
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */; };
 		7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */; };
-		7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A44E046182398B60080CEBE /* MessageUI.framework */; };
 		7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39818482C1B007EE37B /* JumpLogin.png */; };
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
 		7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39C18482C1B007EE37B /* JumpTrial.png */; };
@@ -456,7 +420,6 @@
 		7A63E27118B44CBD00A13464 /* REMGalleryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1D618B44CBD00A13464 /* REMGalleryCollectionCell.m */; };
 		7A63E27218B44CBD00A13464 /* REMGalleryGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1D818B44CBD00A13464 /* REMGalleryGroupView.m */; };
 		7A63E27318B44CBD00A13464 /* REMGalleryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1DA18B44CBD00A13464 /* REMGalleryTableView.m */; };
-		7A63E27418B44CBD00A13464 /* REMMarkerBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1DC18B44CBD00A13464 /* REMMarkerBubbleView.m */; };
 		7A63E27518B44CBD00A13464 /* REMBuildingEntranceSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1DF18B44CBD00A13464 /* REMBuildingEntranceSegue.m */; };
 		7A63E27618B44CBD00A13464 /* REMMapGallerySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E118B44CBD00A13464 /* REMMapGallerySegue.m */; };
 		7A63E27718B44CBD00A13464 /* REMMaxWidgetSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E1E318B44CBD00A13464 /* REMMaxWidgetSegue.m */; };
@@ -494,9 +457,6 @@
 		7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */; };
 		7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */; };
 		7A7B29951888C8DF00E74D3D /* SplashScreenBackgroud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */; };
-		7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */; };
-		7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E21177B3A8B00C282A8 /* Foundation.framework */; };
-		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
 		7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2B177B3A8B00C282A8 /* main.m */; };
 		7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */; };
 		7A9EAA8A18D2946300EF1B85 /* WeiboAccounts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5B18D2946300EF1B85 /* WeiboAccounts.m */; };
@@ -569,8 +529,6 @@
 		7AAA24B918B5AC9C002069EA /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		7AAA24BA18B5AC9C002069EA /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
 		7AAA24BB18B5AC9C002069EA /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
-		7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4A177D2975003E235E /* MobileCoreServices.framework */; };
-		7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB34E4B177D2975003E235E /* SystemConfiguration.framework */; };
 		7AB71684187F839500EA7544 /* DefaultMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71682187F839500EA7544 /* DefaultMap.png */; };
 		7AB71685187F839500EA7544 /* DefaultMap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71683187F839500EA7544 /* DefaultMap@2x.png */; };
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
@@ -580,9 +538,24 @@
 		7ABA576A194A8CCE007A05AA /* REMMapKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA5769194A8CCE007A05AA /* REMMapKitViewController.m */; };
 		7ABA576C194A9337007A05AA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABA576B194A9337007A05AA /* CoreLocation.framework */; };
 		7ABA576E194A936A007A05AA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABA576D194A936A007A05AA /* MapKit.framework */; };
-		7ABA5771194A9B16007A05AA /* REMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA5770194A9B16007A05AA /* REMMapViewController.m */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
+		7AC3A265194AE9F7007FD428 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A264194AE9F7007FD428 /* AVFoundation.framework */; };
+		7AC3A267194AEA09007FD428 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A266194AEA09007FD428 /* ImageIO.framework */; };
+		7AC3A269194AEA71007FD428 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A268194AEA71007FD428 /* QuartzCore.framework */; };
+		7AC3A26B194AEA79007FD428 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A26A194AEA79007FD428 /* CoreVideo.framework */; };
+		7AC3A26D194AEA80007FD428 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A26C194AEA80007FD428 /* OpenGLES.framework */; };
+		7AC3A26F194AEA9B007FD428 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A26E194AEA9B007FD428 /* CoreMedia.framework */; };
+		7AC3A271194AEB79007FD428 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A270194AEB79007FD428 /* MessageUI.framework */; };
+		7AC3A273194AEB8F007FD428 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A272194AEB8F007FD428 /* CoreText.framework */; };
+		7AC3A275194AEBCC007FD428 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A274194AEBCC007FD428 /* Accelerate.framework */; };
+		7AC3A277194AEC1E007FD428 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A276194AEC1E007FD428 /* SystemConfiguration.framework */; };
+		7AC3A279194AEC31007FD428 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A278194AEC31007FD428 /* CoreData.framework */; };
+		7AC3A27B194AEC45007FD428 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A27A194AEC45007FD428 /* CoreImage.framework */; };
+		7AC3A27D194AEC5F007FD428 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A27C194AEC5F007FD428 /* MobileCoreServices.framework */; };
+		7AC3A27F194AEC6F007FD428 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A27E194AEC6F007FD428 /* UIKit.framework */; };
+		7AC3A281194AEC76007FD428 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A280194AEC76007FD428 /* Foundation.framework */; };
+		7AC3A283194AEC7C007FD428 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AC3A282194AEC7C007FD428 /* CoreGraphics.framework */; };
 		7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
 		7AF4595A1946F45C00BC73AD /* BluesPad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AF459571946F45C00BC73AD /* BluesPad.xcdatamodeld */; };
@@ -630,8 +603,6 @@
 		B4198EAE178410D300B50475 /* REMLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EAD178410D300B50475 /* REMLogManager.m */; };
 		B4198EB21784220300B50475 /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
 		B42FBF6417F574B5004F2F3A /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
-		B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B442701217AF316500762C68 /* OpenGLES.framework */; };
-		B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */; };
 		B445AEA0177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */; };
 		B445AEA2177BEEB8002D2A59 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE93177BEEB7002D2A59 /* DDASLLogger.m */; };
 		B445AEA4177BEEB8002D2A59 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B445AE95177BEEB7002D2A59 /* DDFileLogger.m */; };
@@ -684,15 +655,12 @@
 		B4707D9B18697B2900FBA393 /* Humidity_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */; };
 		B4707D9C18697B2900FBA393 /* Temperature_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */; };
 		B4707D9D18697B2900FBA393 /* Temperature_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */; };
-		B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4777399184F074500F68AED /* CoreMedia.framework */; };
-		B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B477739B184F075300F68AED /* CoreVideo.framework */; };
 		B485EFE5187BA1A800D16583 /* Logo_About.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE3187BA1A800D16583 /* Logo_About.png */; };
 		B485EFE6187BA1A800D16583 /* Logo_About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFE4187BA1A800D16583 /* Logo_About@2x.png */; };
 		B485EFED187BCF2900D16583 /* ChartCustomization.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFEB187BCF2900D16583 /* ChartCustomization.png */; };
 		B485EFEE187BCF2900D16583 /* ChartCustomization@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B485EFEC187BCF2900D16583 /* ChartCustomization@2x.png */; };
 		B48ED3EA178EA1740032CD72 /* REMTimeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */; };
 		B49B6F511781491800BC130A /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
-		B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */; };
 		B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */; };
 		EF0346B0183B4BA600DE186A /* _DCLayerTrashbox.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346AF183B4BA600DE186A /* _DCLayerTrashbox.m */; };
 		EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0346B2183B520100DE186A /* _DCSeriesLayer.m */; };
@@ -711,9 +679,7 @@
 		EF1CD12C18D29EBD008F8F5E /* DCChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1CD12B18D29EBD008F8F5E /* DCChartDataProcessor.m */; };
 		EF1CD12F18D29F3C008F8F5E /* DCTrendChartDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EF1CD12E18D29F3C008F8F5E /* DCTrendChartDataProcessor.m */; };
 		EF2043B3187BD94400272319 /* REMNumberExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2043B2187BD94400272319 /* REMNumberExtension.m */; };
-		EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2043B4187BDC4300272319 /* CoreText.framework */; };
 		EF214CD31918CC2E0039102B /* REMBuildingCoverLegendContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF214CD21918CC2E0039102B /* REMBuildingCoverLegendContainer.m */; };
-		EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D981817AB79AC00E968BF /* CoreImage.framework */; };
 		EF2D981C17AB7A9C00E968BF /* REMImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */; };
 		EF5D1A801867D10E0069C8F5 /* _DCVGridlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5D1A7F1867D10E0069C8F5 /* _DCVGridlineLayer.m */; };
 		EF652B68185867C2007D4049 /* DCTrendAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EF652B67185867C2007D4049 /* DCTrendAnimationManager.m */; };
@@ -764,7 +730,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		38ED7D1E1785140900219469 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
 		6A61A66B1839B81F00C6A228 /* Coal_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coal_normal.png; sourceTree = "<group>"; };
 		6A61A66C1839B81F00C6A228 /* Coal_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Coal_normal@2x.png"; sourceTree = "<group>"; };
 		6A61A66D1839B81F00C6A228 /* Coal_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coal_pressed.png; sourceTree = "<group>"; };
@@ -827,7 +792,6 @@
 		6A61A6FA1839B82000C6A228 /* SplashScreenLogo-Common@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Common@2x.png"; sourceTree = "<group>"; };
 		6A61A6FB1839B82000C6A228 /* SplashScreenLogo-Flash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Flash.png"; sourceTree = "<group>"; };
 		6A61A6FC1839B82000C6A228 /* SplashScreenLogo-Flash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenLogo-Flash@2x.png"; sourceTree = "<group>"; };
-		6ABA68C3180F759700A302BC /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Lib/GoogleMaps.framework; sourceTree = "<group>"; };
 		7A02CE4118B482DB009D1CF1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7A0B65E818B440150052093E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Resource/Languages/Base.lproj/Main_IPhone.storyboard; sourceTree = "<group>"; };
 		7A0C0F5F18D6DBEB00CBB277 /* REMHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -835,15 +799,6 @@
 		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
-		7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = ../Lib/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
-		7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		7A13C19E17F40D59007E6AA9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
-		7A13C1A017F40D61007E6AA9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
-		7A13C1A217F40D70007E6AA9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
-		7A13C1A417F40D77007E6AA9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
-		7A13C1A617F40D83007E6AA9 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
-		7A13C1A817F40D90007E6AA9 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libicucore.dylib; sourceTree = DEVELOPER_DIR; };
-		7A13C1AA17F40D99007E6AA9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		7A1D14271785178800CC2922 /* REMHttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMHttpHelper.h; path = Common/Utility/REMHttpHelper.h; sourceTree = "<group>"; };
 		7A1D14281785178800CC2922 /* REMHttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMHttpHelper.m; path = Common/Utility/REMHttpHelper.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
@@ -897,28 +852,10 @@
 		7A39D5AB18B5A3A100CC9D5D /* BluesTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BluesTests-Prefix.pch"; sourceTree = "<group>"; };
 		7A39D5B718B5A42A00CC9D5D /* REMTimeHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelperTests.m; path = Common/REMTimeHelperTests.m; sourceTree = "<group>"; };
 		7A39D5B918B5A43900CC9D5D /* REMLogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLogTests.m; path = Common/REMLogTests.m; sourceTree = "<group>"; };
-		7A39D69D18B5A91800CC9D5D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6A118B5A93500CC9D5D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6A318B5A93C00CC9D5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6A518B5A94500CC9D5D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6A718B5A94D00CC9D5D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		7A39D6A918B5A95600CC9D5D /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libicucore.dylib; sourceTree = DEVELOPER_DIR; };
-		7A39D6AB18B5A95E00CC9D5D /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
-		7A39D6AD18B5A96400CC9D5D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6AF18B5A96B00CC9D5D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/GLKit.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6B118B5A97100CC9D5D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6B318B5A97800CC9D5D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6B518B5A97F00CC9D5D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6B718B5A98400CC9D5D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6B918B5A98B00CC9D5D /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6BB18B5A99400CC9D5D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libsqlite3.dylib; sourceTree = DEVELOPER_DIR; };
-		7A39D6BD18B5A99D00CC9D5D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		7A39D6BF18B5A9A700CC9D5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		7A3DDCDB1786C195008A1033 /* REMMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMMaskManager.h; path = Common/Utility/REMMaskManager.h; sourceTree = "<group>"; };
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
 		7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed.png"; sourceTree = "<group>"; };
 		7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed@2x.png"; sourceTree = "<group>"; };
-		7A44E046182398B60080CEBE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
 		7A47F39818482C1B007EE37B /* JumpLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpLogin.png; sourceTree = "<group>"; };
 		7A47F39918482C1B007EE37B /* JumpLogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin@2x.png"; sourceTree = "<group>"; };
 		7A47F39C18482C1B007EE37B /* JumpTrial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpTrial.png; sourceTree = "<group>"; };
@@ -1217,8 +1154,6 @@
 		7A63E1D818B44CBD00A13464 /* REMGalleryGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryGroupView.m; sourceTree = "<group>"; };
 		7A63E1D918B44CBD00A13464 /* REMGalleryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryTableView.h; sourceTree = "<group>"; };
 		7A63E1DA18B44CBD00A13464 /* REMGalleryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryTableView.m; sourceTree = "<group>"; };
-		7A63E1DB18B44CBD00A13464 /* REMMarkerBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMarkerBubbleView.h; sourceTree = "<group>"; };
-		7A63E1DC18B44CBD00A13464 /* REMMarkerBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMarkerBubbleView.m; sourceTree = "<group>"; };
 		7A63E1DE18B44CBD00A13464 /* REMBuildingEntranceSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingEntranceSegue.h; sourceTree = "<group>"; };
 		7A63E1DF18B44CBD00A13464 /* REMBuildingEntranceSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingEntranceSegue.m; sourceTree = "<group>"; };
 		7A63E1E018B44CBD00A13464 /* REMMapGallerySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapGallerySegue.h; sourceTree = "<group>"; };
@@ -1269,9 +1204,6 @@
 		7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenBackgroud@2x.png"; sourceTree = "<group>"; };
 		7A8EF18018DAE21200951CD4 /* REMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMConstants.h; path = Common/Application/REMConstants.h; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* Blues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blues.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		7A9B1E21177B3A8B00C282A8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		7A9B1E2B177B3A8B00C282A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REMAppDelegate.h; sourceTree = "<group>"; };
 		7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REMAppDelegate.m; sourceTree = "<group>"; };
@@ -1322,8 +1254,6 @@
 		7A9EAA8918D2946300EF1B85 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		7AA6464818C056050081E96E /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
-		7AB34E4A177D2975003E235E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		7AB34E4B177D2975003E235E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		7AB37B1D18D845B4007D4212 /* REMVendorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMVendorMacro.h; path = Common/Application/REMVendorMacro.h; sourceTree = "<group>"; };
 		7AB37B1E18D845CA007D4212 /* REMUtilityMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMUtilityMacro.h; path = Common/Application/REMUtilityMacro.h; sourceTree = "<group>"; };
 		7AB37B1F18D8460E007D4212 /* REMAppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMAppMacro.h; path = Common/Application/REMAppMacro.h; sourceTree = "<group>"; };
@@ -1339,10 +1269,24 @@
 		7ABA5769194A8CCE007A05AA /* REMMapKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMapKitViewController.m; sourceTree = "<group>"; };
 		7ABA576B194A9337007A05AA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7ABA576D194A936A007A05AA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		7ABA576F194A9B16007A05AA /* REMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapViewController.h; sourceTree = "<group>"; };
-		7ABA5770194A9B16007A05AA /* REMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMapViewController.m; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
 		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
+		7AC3A264194AE9F7007FD428 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7AC3A266194AEA09007FD428 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		7AC3A268194AEA71007FD428 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7AC3A26A194AEA79007FD428 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		7AC3A26C194AEA80007FD428 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		7AC3A26E194AEA9B007FD428 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		7AC3A270194AEB79007FD428 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		7AC3A272194AEB8F007FD428 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		7AC3A274194AEBCC007FD428 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		7AC3A276194AEC1E007FD428 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7AC3A278194AEC31007FD428 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7AC3A27A194AEC45007FD428 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		7AC3A27C194AEC5F007FD428 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		7AC3A27E194AEC6F007FD428 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7AC3A280194AEC76007FD428 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7AC3A282194AEC7C007FD428 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoView.h; sourceTree = "<group>"; };
 		7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoView.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
@@ -1419,8 +1363,6 @@
 		B4223D50184EFF44004D39C0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		B42FBF6217F574B5004F2F3A /* REMEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMEnum.h; path = Common/Model/REMEnum.h; sourceTree = "<group>"; };
 		B42FBF6317F574B5004F2F3A /* REMEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMEnum.m; path = Common/Model/REMEnum.m; sourceTree = "<group>"; };
-		B442701217AF316500762C68 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
-		B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		B445AE90177BEEB7002D2A59 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
 		B445AE91177BEEB7002D2A59 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		B445AE92177BEEB7002D2A59 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
@@ -1438,7 +1380,6 @@
 		B445AE9F177BEEB7002D2A59 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		B445AEB0177BFAE8002D2A59 /* REMLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMLog.h; path = Common/Log/REMLog.h; sourceTree = "<group>"; };
 		B445AEB1177BFAE8002D2A59 /* REMLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMLog.m; path = Common/Log/REMLog.m; sourceTree = "<group>"; };
-		B445AED0177C0052002D2A59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		B44D267F18A9E94C00D7C06D /* PopNote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopNote.png; sourceTree = "<group>"; };
 		B44D268018A9E94C00D7C06D /* PopNote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopNote@2x.png"; sourceTree = "<group>"; };
 		B44D268118A9E94C00D7C06D /* DateView_Chart_iOS6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DateView_Chart_iOS6.png; sourceTree = "<group>"; };
@@ -1483,8 +1424,6 @@
 		B4707D9318697B2900FBA393 /* Humidity_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Humidity_pressed@2x.png"; sourceTree = "<group>"; };
 		B4707D9418697B2900FBA393 /* Temperature_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_normal@2x.png"; sourceTree = "<group>"; };
 		B4707D9518697B2900FBA393 /* Temperature_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Temperature_pressed@2x.png"; sourceTree = "<group>"; };
-		B4777399184F074500F68AED /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
-		B477739B184F075300F68AED /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		B485EFE3187BA1A800D16583 /* Logo_About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo_About.png; sourceTree = "<group>"; };
 		B485EFE4187BA1A800D16583 /* Logo_About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo_About@2x.png"; sourceTree = "<group>"; };
 		B485EFEB187BCF2900D16583 /* ChartCustomization.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChartCustomization.png; sourceTree = "<group>"; };
@@ -1493,7 +1432,6 @@
 		B48ED3E9178EA1740032CD72 /* REMTimeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTimeHelper.m; path = Common/Utility/REMTimeHelper.m; sourceTree = "<group>"; };
 		B49B6F4F1781491800BC130A /* REMColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMColor.h; path = Common/Utility/REMColor.h; sourceTree = "<group>"; };
 		B49B6F501781491800BC130A /* REMColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMColor.m; path = Common/Utility/REMColor.m; sourceTree = "<group>"; };
-		B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		B4D534DF18AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuildingBlur@2x.png"; sourceTree = "<group>"; };
 		B4EDFB1C1806983600873FA1 /* REMDimensionForSplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensionForSplashScreen.h; path = Resource/Dimensions/REMDimensionForSplashScreen.h; sourceTree = "<group>"; };
 		B4EDFB1D1806983600873FA1 /* REMDimensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMDimensions.h; path = Resource/Dimensions/REMDimensions.h; sourceTree = "<group>"; };
@@ -1536,10 +1474,8 @@
 		EF1CD13518D2D3E0008F8F5E /* DCChartTrendWrapperDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCChartTrendWrapperDelegate.h; path = Common/Utility/DChartWrapper/Delegate/DCChartTrendWrapperDelegate.h; sourceTree = "<group>"; };
 		EF2043B1187BD94400272319 /* REMNumberExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMNumberExtension.h; path = Common/Utility/REMNumberExtension.h; sourceTree = "<group>"; };
 		EF2043B2187BD94400272319 /* REMNumberExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMNumberExtension.m; path = Common/Utility/REMNumberExtension.m; sourceTree = "<group>"; };
-		EF2043B4187BDC4300272319 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		EF214CD11918CC2E0039102B /* REMBuildingCoverLegendContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingCoverLegendContainer.h; sourceTree = "<group>"; };
 		EF214CD21918CC2E0039102B /* REMBuildingCoverLegendContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingCoverLegendContainer.m; sourceTree = "<group>"; };
-		EF2D981817AB79AC00E968BF /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
 		EF2D981A17AB7A9C00E968BF /* REMImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMImageHelper.h; path = Common/Utility/REMImageHelper.h; sourceTree = "<group>"; };
 		EF2D981B17AB7A9C00E968BF /* REMImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMImageHelper.m; path = Common/Utility/REMImageHelper.m; sourceTree = "<group>"; };
 		EF5D1A7E1867D10E0069C8F5 /* _DCVGridlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DCVGridlineLayer.h; sourceTree = "<group>"; };
@@ -1626,31 +1562,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A39D6C018B5A9A700CC9D5D /* CoreGraphics.framework in Frameworks */,
-				7A39D6BE18B5A99D00CC9D5D /* MobileCoreServices.framework in Frameworks */,
-				7A39D6BC18B5A99400CC9D5D /* libsqlite3.dylib in Frameworks */,
-				7A39D6BA18B5A98B00CC9D5D /* CoreImage.framework in Frameworks */,
-				7A39D6B818B5A98400CC9D5D /* Accelerate.framework in Frameworks */,
-				7A39D6B618B5A97F00CC9D5D /* AVFoundation.framework in Frameworks */,
-				7A39D6B418B5A97800CC9D5D /* CoreData.framework in Frameworks */,
-				7A39D6B218B5A97100CC9D5D /* CoreLocation.framework in Frameworks */,
-				7A39D6B018B5A96B00CC9D5D /* GLKit.framework in Frameworks */,
-				7A39D6AE18B5A96400CC9D5D /* ImageIO.framework in Frameworks */,
-				7A39D6AC18B5A95E00CC9D5D /* libc++.dylib in Frameworks */,
-				7A39D6AA18B5A95600CC9D5D /* libicucore.dylib in Frameworks */,
-				7A39D6A818B5A94D00CC9D5D /* libz.dylib in Frameworks */,
-				7A39D6A618B5A94500CC9D5D /* OpenGLES.framework in Frameworks */,
-				7A39D6A418B5A93C00CC9D5D /* QuartzCore.framework in Frameworks */,
-				7A39D6A218B5A93500CC9D5D /* SystemConfiguration.framework in Frameworks */,
-				7A39D69F18B5A92900CC9D5D /* GoogleMaps.framework in Frameworks */,
 				7A39D6A018B5A92900CC9D5D /* GPUImage.framework in Frameworks */,
-				7A39D69E18B5A91800CC9D5D /* MessageUI.framework in Frameworks */,
-				7A39D69B18B5A91000CC9D5D /* CoreMedia.framework in Frameworks */,
-				7A39D69C18B5A91000CC9D5D /* CoreVideo.framework in Frameworks */,
-				7A39D69A18B5A90100CC9D5D /* CoreText.framework in Frameworks */,
 				7A39D5A018B5A3A100CC9D5D /* XCTest.framework in Frameworks */,
-				7A39D5A218B5A3A100CC9D5D /* UIKit.framework in Frameworks */,
-				7A39D5A118B5A3A100CC9D5D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1658,34 +1571,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AC3A283194AEC7C007FD428 /* CoreGraphics.framework in Frameworks */,
+				7AC3A281194AEC76007FD428 /* Foundation.framework in Frameworks */,
+				7AC3A27F194AEC6F007FD428 /* UIKit.framework in Frameworks */,
+				7AC3A27D194AEC5F007FD428 /* MobileCoreServices.framework in Frameworks */,
+				7AC3A27B194AEC45007FD428 /* CoreImage.framework in Frameworks */,
+				7AC3A279194AEC31007FD428 /* CoreData.framework in Frameworks */,
+				7AC3A277194AEC1E007FD428 /* SystemConfiguration.framework in Frameworks */,
+				7AC3A275194AEBCC007FD428 /* Accelerate.framework in Frameworks */,
+				7AC3A273194AEB8F007FD428 /* CoreText.framework in Frameworks */,
+				7AC3A271194AEB79007FD428 /* MessageUI.framework in Frameworks */,
+				7AC3A26F194AEA9B007FD428 /* CoreMedia.framework in Frameworks */,
+				7AC3A26D194AEA80007FD428 /* OpenGLES.framework in Frameworks */,
+				7AC3A26B194AEA79007FD428 /* CoreVideo.framework in Frameworks */,
+				7AC3A269194AEA71007FD428 /* QuartzCore.framework in Frameworks */,
+				7AC3A267194AEA09007FD428 /* ImageIO.framework in Frameworks */,
+				7AC3A265194AE9F7007FD428 /* AVFoundation.framework in Frameworks */,
 				7ABA576E194A936A007A05AA /* MapKit.framework in Frameworks */,
 				7ABA576C194A9337007A05AA /* CoreLocation.framework in Frameworks */,
 				7A3290C718D80C0B00B3AE8A /* CFNetwork.framework in Frameworks */,
 				7A3290C518D80BF900B3AE8A /* Security.framework in Frameworks */,
 				7A2D7ECE18D148FA009FB99F /* GPUImage.framework in Frameworks */,
-				EF2043B5187BDC4300272319 /* CoreText.framework in Frameworks */,
-				B477739C184F075300F68AED /* CoreVideo.framework in Frameworks */,
-				B477739A184F074500F68AED /* CoreMedia.framework in Frameworks */,
-				7A44E047182398B60080CEBE /* MessageUI.framework in Frameworks */,
-				6ABA68C4180F759700A302BC /* GoogleMaps.framework in Frameworks */,
-				7AB34E4D177D2975003E235E /* SystemConfiguration.framework in Frameworks */,
-				B445AE7D177BE8B5002D2A59 /* QuartzCore.framework in Frameworks */,
-				B442701317AF316500762C68 /* OpenGLES.framework in Frameworks */,
-				7A13C1AB17F40D99007E6AA9 /* libz.dylib in Frameworks */,
-				7A13C1A917F40D90007E6AA9 /* libicucore.dylib in Frameworks */,
-				7A13C1A717F40D83007E6AA9 /* libc++.dylib in Frameworks */,
-				7A13C1A517F40D77007E6AA9 /* ImageIO.framework in Frameworks */,
-				7A13C1A317F40D70007E6AA9 /* GLKit.framework in Frameworks */,
-				7A13C1A117F40D61007E6AA9 /* CoreLocation.framework in Frameworks */,
-				7A13C19F17F40D59007E6AA9 /* CoreData.framework in Frameworks */,
-				7A13C19D17F40D4F007E6AA9 /* AVFoundation.framework in Frameworks */,
-				B4C1674F17B1D48C002A8DD6 /* Accelerate.framework in Frameworks */,
-				EF2D981917AB79AC00E968BF /* CoreImage.framework in Frameworks */,
-				38ED7D1F1785140900219469 /* libsqlite3.dylib in Frameworks */,
-				7AB34E4C177D2975003E235E /* MobileCoreServices.framework in Frameworks */,
-				7A9B1E20177B3A8B00C282A8 /* UIKit.framework in Frameworks */,
-				7A9B1E22177B3A8B00C282A8 /* Foundation.framework in Frameworks */,
-				7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2330,8 +2236,6 @@
 		7A63E0EB18B44CBB00A13464 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				7ABA576F194A9B16007A05AA /* REMMapViewController.h */,
-				7ABA5770194A9B16007A05AA /* REMMapViewController.m */,
 				7A63E0EC18B44CBB00A13464 /* REMGalleryCollectionViewController.h */,
 				7A63E0ED18B44CBB00A13464 /* REMGalleryCollectionViewController.m */,
 				7A63E0EE18B44CBB00A13464 /* REMGalleryViewController.h */,
@@ -2726,8 +2630,6 @@
 				7A63E1D818B44CBD00A13464 /* REMGalleryGroupView.m */,
 				7A63E1D918B44CBD00A13464 /* REMGalleryTableView.h */,
 				7A63E1DA18B44CBD00A13464 /* REMGalleryTableView.m */,
-				7A63E1DB18B44CBD00A13464 /* REMMarkerBubbleView.h */,
-				7A63E1DC18B44CBD00A13464 /* REMMarkerBubbleView.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2869,60 +2771,34 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7AC3A282194AEC7C007FD428 /* CoreGraphics.framework */,
+				7AC3A280194AEC76007FD428 /* Foundation.framework */,
+				7AC3A27E194AEC6F007FD428 /* UIKit.framework */,
+				7AC3A27C194AEC5F007FD428 /* MobileCoreServices.framework */,
+				7AC3A27A194AEC45007FD428 /* CoreImage.framework */,
+				7AC3A278194AEC31007FD428 /* CoreData.framework */,
+				7AC3A276194AEC1E007FD428 /* SystemConfiguration.framework */,
+				7AC3A274194AEBCC007FD428 /* Accelerate.framework */,
+				7AC3A272194AEB8F007FD428 /* CoreText.framework */,
+				7AC3A270194AEB79007FD428 /* MessageUI.framework */,
+				7AC3A26E194AEA9B007FD428 /* CoreMedia.framework */,
+				7AC3A26C194AEA80007FD428 /* OpenGLES.framework */,
+				7AC3A26A194AEA79007FD428 /* CoreVideo.framework */,
+				7AC3A268194AEA71007FD428 /* QuartzCore.framework */,
+				7AC3A266194AEA09007FD428 /* ImageIO.framework */,
+				7AC3A264194AE9F7007FD428 /* AVFoundation.framework */,
 				7ABA576D194A936A007A05AA /* MapKit.framework */,
 				7ABA576B194A9337007A05AA /* CoreLocation.framework */,
-				7A217E5418E51FA100383BED /* Reachability */,
 				7A3290C618D80C0B00B3AE8A /* CFNetwork.framework */,
 				7A3290C418D80BF900B3AE8A /* Security.framework */,
-				7A9EAA5818D2946300EF1B85 /* WeiboSDK */,
-				7A39D6BF18B5A9A700CC9D5D /* CoreGraphics.framework */,
-				7A39D6BD18B5A99D00CC9D5D /* MobileCoreServices.framework */,
-				7A39D6BB18B5A99400CC9D5D /* libsqlite3.dylib */,
-				7A39D6B918B5A98B00CC9D5D /* CoreImage.framework */,
-				7A39D6B718B5A98400CC9D5D /* Accelerate.framework */,
-				7A39D6B518B5A97F00CC9D5D /* AVFoundation.framework */,
-				7A39D6B318B5A97800CC9D5D /* CoreData.framework */,
-				7A39D6B118B5A97100CC9D5D /* CoreLocation.framework */,
-				7A39D6AF18B5A96B00CC9D5D /* GLKit.framework */,
-				7A39D6AD18B5A96400CC9D5D /* ImageIO.framework */,
-				7A39D6AB18B5A95E00CC9D5D /* libc++.dylib */,
-				7A39D6A918B5A95600CC9D5D /* libicucore.dylib */,
-				7A39D6A718B5A94D00CC9D5D /* libz.dylib */,
-				7A39D6A518B5A94500CC9D5D /* OpenGLES.framework */,
-				7A3290CD18D823EF00B3AE8A /* UIKit+AFNetworking */,
-				7A39D6A318B5A93C00CC9D5D /* QuartzCore.framework */,
-				7A39D6A118B5A93500CC9D5D /* SystemConfiguration.framework */,
-				7A39D69D18B5A91800CC9D5D /* MessageUI.framework */,
-				EF2043B4187BDC4300272319 /* CoreText.framework */,
-				B477739B184F075300F68AED /* CoreVideo.framework */,
-				B4777399184F074500F68AED /* CoreMedia.framework */,
 				B4223D50184EFF44004D39C0 /* GPUImage.framework */,
-				7A44E046182398B60080CEBE /* MessageUI.framework */,
-				6ABA68C3180F759700A302BC /* GoogleMaps.framework */,
-				7A13C1AA17F40D99007E6AA9 /* libz.dylib */,
-				7A13C1A817F40D90007E6AA9 /* libicucore.dylib */,
-				7A13C1A617F40D83007E6AA9 /* libc++.dylib */,
-				7A13C1A417F40D77007E6AA9 /* ImageIO.framework */,
-				7A13C1A217F40D70007E6AA9 /* GLKit.framework */,
-				7A13C1A017F40D61007E6AA9 /* CoreLocation.framework */,
-				7A13C19E17F40D59007E6AA9 /* CoreData.framework */,
-				7A13C19C17F40D4E007E6AA9 /* AVFoundation.framework */,
-				7A13C19A17F40D31007E6AA9 /* GoogleMaps.bundle */,
-				B4C1674E17B1D48C002A8DD6 /* Accelerate.framework */,
-				B442701217AF316500762C68 /* OpenGLES.framework */,
-				EF2D981817AB79AC00E968BF /* CoreImage.framework */,
-				B445AED0177C0052002D2A59 /* CoreGraphics.framework */,
-				B445AE7C177BE8B4002D2A59 /* QuartzCore.framework */,
-				7AB34E4A177D2975003E235E /* MobileCoreServices.framework */,
-				7AB34E4B177D2975003E235E /* SystemConfiguration.framework */,
 				7A9B1E43177B3A8B00C282A8 /* SenTestingKit.framework */,
-				7A9B1E1F177B3A8B00C282A8 /* UIKit.framework */,
-				7A9B1E21177B3A8B00C282A8 /* Foundation.framework */,
-				7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */,
+				7A02CE4118B482DB009D1CF1 /* XCTest.framework */,
+				7A217E5418E51FA100383BED /* Reachability */,
+				7A9EAA5818D2946300EF1B85 /* WeiboSDK */,
+				7A3290CD18D823EF00B3AE8A /* UIKit+AFNetworking */,
 				7A399E82177D238F00F0EB9F /* AFNetworking */,
 				B445AE8F177BEEB7002D2A59 /* Lumberjack */,
-				38ED7D1E1785140900219469 /* libsqlite3.dylib */,
-				7A02CE4118B482DB009D1CF1 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3748,7 +3624,6 @@
 				7A63E2B318B4788D00A13464 /* Default-Landscape.png in Resources */,
 				B44D26A718A9E94C00D7C06D /* Descend.png in Resources */,
 				7A63E2A218B45B1100A13464 /* EMOP_Spotlight_7@2x.png in Resources */,
-				7A13C19B17F40D31007E6AA9 /* GoogleMaps.bundle in Resources */,
 				7A63E2A718B45DB300A13464 /* EMOP_App_Phone_6@2x.png in Resources */,
 				B44D26B218A9E9F100D7C06D /* DateView_Chart_iOS6_Normal.png in Resources */,
 				6A61A77A1839B82000C6A228 /* SlidePageBackground@2x.png in Resources */,
@@ -3951,7 +3826,6 @@
 				7A39D68F18B5A83100CC9D5D /* REMGalleryCollectionCell.m in Sources */,
 				7A39D69018B5A83100CC9D5D /* REMGalleryGroupView.m in Sources */,
 				7A39D69118B5A83100CC9D5D /* REMGalleryTableView.m in Sources */,
-				7A39D69218B5A83100CC9D5D /* REMMarkerBubbleView.m in Sources */,
 				7A39D69318B5A83100CC9D5D /* REMBuildingEntranceSegue.m in Sources */,
 				7A39D69418B5A83100CC9D5D /* REMMapGallerySegue.m in Sources */,
 				7A39D69518B5A83100CC9D5D /* REMMaxWidgetSegue.m in Sources */,
@@ -4039,7 +3913,6 @@
 			files = (
 				7A63E24D18B44CBD00A13464 /* REMBuildingWeiboView.m in Sources */,
 				7A63E20D18B44CBD00A13464 /* REMSettingCustomerDetailAdminViewController.m in Sources */,
-				7ABA5771194A9B16007A05AA /* REMMapViewController.m in Sources */,
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				7A62E33618DC1DB10029E908 /* REMEnergyDataPersistenceProcessor.m in Sources */,
 				7AF9638218D6C63C005A8D12 /* AFURLConnectionOperation.m in Sources */,
@@ -4099,7 +3972,6 @@
 				7A63E27318B44CBD00A13464 /* REMGalleryTableView.m in Sources */,
 				7A63E23E18B44CBD00A13464 /* REMWidgetLabellingSearchModel.m in Sources */,
 				7A63E23318B44CBD00A13464 /* REMEnergyError.m in Sources */,
-				7A63E27418B44CBD00A13464 /* REMMarkerBubbleView.m in Sources */,
 				7AA6464A18C056050081E96E /* REMSettingViewController.m in Sources */,
 				7A63E25D18B44CBD00A13464 /* REMInsetsTextField.m in Sources */,
 				7A63E23518B44CBD00A13464 /* REMEnergyTargetModel.m in Sources */,
