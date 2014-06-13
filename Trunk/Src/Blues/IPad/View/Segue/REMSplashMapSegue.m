@@ -8,7 +8,7 @@
 
 #import "REMSplashMapSegue.h"
 #import "REMSplashScreenController.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMCommonHeaders.h"
 
 @implementation REMSplashMapSegue
@@ -25,7 +25,7 @@
 - (void)perform
 {
     REMSplashScreenController *splashController = self.sourceViewController;
-    REMMapViewController *mapController = self.destinationViewController;
+    REMMapKitViewController *mapController = self.destinationViewController;
     
     [splashController.navigationController pushViewController:mapController animated:YES];
     

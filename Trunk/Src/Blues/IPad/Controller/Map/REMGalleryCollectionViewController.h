@@ -9,14 +9,14 @@
 
 #import <UIKit/UIKit.h>
 #import <UIKit/UIKit.h>
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 @class REMGalleryCollectionCell;
 
 @interface REMGalleryCollectionViewController : UICollectionViewController<UICollectionViewDataSource>
 
 @property (nonatomic,strong) NSString *collectionKey;
 @property (nonatomic,strong) NSArray *buildingInfoArray;
-@property (nonatomic,weak) REMMapViewController *mapViewController;
+@property (nonatomic,weak) REMMapKitViewController *mapViewController;
 
 
 - (void)galleryCellTapped:(REMGalleryCollectionCell *)cell;

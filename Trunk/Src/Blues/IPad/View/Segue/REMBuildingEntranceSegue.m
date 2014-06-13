@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import "REMBuildingEntranceSegue.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMGalleryViewController.h"
 #import "REMBuildingViewController.h"
 #import "REMDimensions.h"
@@ -32,7 +32,7 @@
 {
     self.parameter = parameter;
     
-    self.segueTime = [self.sourceViewController isKindOfClass:[REMMapViewController class]] == YES && ((REMMapViewController *)self.sourceViewController).isInitialPresenting == YES ? kFirstSugueTime : kSequeTime;
+    self.segueTime = [self.sourceViewController isKindOfClass:[REMMapKitViewController class]] == YES && ((REMMapKitViewController *)self.sourceViewController).isInitialPresenting == YES ? kFirstSugueTime : kSequeTime;
 }
 
 - (void)perform

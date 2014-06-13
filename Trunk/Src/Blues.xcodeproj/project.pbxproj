@@ -200,7 +200,6 @@
 		7A39D64B18B5A83100CC9D5D /* REMWidgetCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0DF18B44CBB00A13464 /* REMWidgetCollectionViewController.m */; };
 		7A39D64C18B5A83100CC9D5D /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0ED18B44CBB00A13464 /* REMGalleryCollectionViewController.m */; };
 		7A39D64D18B5A83100CC9D5D /* REMGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0EF18B44CBB00A13464 /* REMGalleryViewController.m */; };
-		7A39D64E18B5A83100CC9D5D /* REMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0F118B44CBB00A13464 /* REMMapViewController.m */; };
 		7A39D64F18B5A83100CC9D5D /* REMEnergyCalendarData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E14A18B44CBC00A13464 /* REMEnergyCalendarData.m */; };
 		7A39D65018B5A83100CC9D5D /* REMEnergyData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E14C18B44CBC00A13464 /* REMEnergyData.m */; };
 		7A39D65118B5A83100CC9D5D /* REMEnergyError.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E14E18B44CBC00A13464 /* REMEnergyError.m */; };
@@ -359,7 +358,6 @@
 		7A63E20618B44CBD00A13464 /* REMTrialCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0EA18B44CBB00A13464 /* REMTrialCardController.m */; };
 		7A63E20718B44CBD00A13464 /* REMGalleryCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0ED18B44CBB00A13464 /* REMGalleryCollectionViewController.m */; };
 		7A63E20818B44CBD00A13464 /* REMGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0EF18B44CBB00A13464 /* REMGalleryViewController.m */; };
-		7A63E20918B44CBD00A13464 /* REMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0F118B44CBB00A13464 /* REMMapViewController.m */; };
 		7A63E20A18B44CBD00A13464 /* REMControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0F318B44CBB00A13464 /* REMControllerBase.m */; };
 		7A63E20B18B44CBD00A13464 /* REMMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0F518B44CBB00A13464 /* REMMainNavigationController.m */; };
 		7A63E20C18B44CBD00A13464 /* REMSettingAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63E0F818B44CBB00A13464 /* REMSettingAboutViewController.m */; };
@@ -578,6 +576,11 @@
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
 		7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71687187F859B00EA7544 /* MapBlur@2x.png */; };
 		7ABA161118DAB255001624F8 /* REMDataStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA161018DAB255001624F8 /* REMDataStoreTests.m */; };
+		7ABA5767194A8AB2007A05AA /* REMAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA5766194A8AB2007A05AA /* REMAnnotation.m */; };
+		7ABA576A194A8CCE007A05AA /* REMMapKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA5769194A8CCE007A05AA /* REMMapKitViewController.m */; };
+		7ABA576C194A9337007A05AA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABA576B194A9337007A05AA /* CoreLocation.framework */; };
+		7ABA576E194A936A007A05AA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ABA576D194A936A007A05AA /* MapKit.framework */; };
+		7ABA5771194A9B16007A05AA /* REMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA5770194A9B16007A05AA /* REMMapViewController.m */; };
 		7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */; };
 		7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */; };
 		7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */; };
@@ -1018,8 +1021,6 @@
 		7A63E0ED18B44CBB00A13464 /* REMGalleryCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryCollectionViewController.m; sourceTree = "<group>"; };
 		7A63E0EE18B44CBB00A13464 /* REMGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryViewController.h; sourceTree = "<group>"; };
 		7A63E0EF18B44CBB00A13464 /* REMGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryViewController.m; sourceTree = "<group>"; };
-		7A63E0F018B44CBB00A13464 /* REMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapViewController.h; sourceTree = "<group>"; };
-		7A63E0F118B44CBB00A13464 /* REMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMapViewController.m; sourceTree = "<group>"; };
 		7A63E0F218B44CBB00A13464 /* REMControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMControllerBase.h; sourceTree = "<group>"; };
 		7A63E0F318B44CBB00A13464 /* REMControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMControllerBase.m; sourceTree = "<group>"; };
 		7A63E0F418B44CBB00A13464 /* REMMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMainNavigationController.h; sourceTree = "<group>"; };
@@ -1332,6 +1333,14 @@
 		7AB71687187F859B00EA7544 /* MapBlur@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MapBlur@2x.png"; sourceTree = "<group>"; };
 		7ABA160F18DAB23C001624F8 /* REMDataStore-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "REMDataStore-Private.h"; path = "Common/DataStore/REMDataStore-Private.h"; sourceTree = "<group>"; };
 		7ABA161018DAB255001624F8 /* REMDataStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMDataStoreTests.m; path = Common/DataStore/REMDataStoreTests.m; sourceTree = "<group>"; };
+		7ABA5765194A8AB2007A05AA /* REMAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAnnotation.h; sourceTree = "<group>"; };
+		7ABA5766194A8AB2007A05AA /* REMAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMAnnotation.m; sourceTree = "<group>"; };
+		7ABA5768194A8CCE007A05AA /* REMMapKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapKitViewController.h; sourceTree = "<group>"; };
+		7ABA5769194A8CCE007A05AA /* REMMapKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMapKitViewController.m; sourceTree = "<group>"; };
+		7ABA576B194A9337007A05AA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7ABA576D194A936A007A05AA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7ABA576F194A9B16007A05AA /* REMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapViewController.h; sourceTree = "<group>"; };
+		7ABA5770194A9B16007A05AA /* REMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMapViewController.m; sourceTree = "<group>"; };
 		7ABFDDF118483119004DD4E7 /* JumpLogin-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed.png"; sourceTree = "<group>"; };
 		7ABFDDF218483119004DD4E7 /* JumpLogin-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpLogin-Pressed@2x.png"; sourceTree = "<group>"; };
 		7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoView.h; sourceTree = "<group>"; };
@@ -1649,6 +1658,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ABA576E194A936A007A05AA /* MapKit.framework in Frameworks */,
+				7ABA576C194A9337007A05AA /* CoreLocation.framework in Frameworks */,
 				7A3290C718D80C0B00B3AE8A /* CFNetwork.framework in Frameworks */,
 				7A3290C518D80BF900B3AE8A /* Security.framework in Frameworks */,
 				7A2D7ECE18D148FA009FB99F /* GPUImage.framework in Frameworks */,
@@ -2319,12 +2330,14 @@
 		7A63E0EB18B44CBB00A13464 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				7ABA576F194A9B16007A05AA /* REMMapViewController.h */,
+				7ABA5770194A9B16007A05AA /* REMMapViewController.m */,
 				7A63E0EC18B44CBB00A13464 /* REMGalleryCollectionViewController.h */,
 				7A63E0ED18B44CBB00A13464 /* REMGalleryCollectionViewController.m */,
 				7A63E0EE18B44CBB00A13464 /* REMGalleryViewController.h */,
 				7A63E0EF18B44CBB00A13464 /* REMGalleryViewController.m */,
-				7A63E0F018B44CBB00A13464 /* REMMapViewController.h */,
-				7A63E0F118B44CBB00A13464 /* REMMapViewController.m */,
+				7ABA5768194A8CCE007A05AA /* REMMapKitViewController.h */,
+				7ABA5769194A8CCE007A05AA /* REMMapKitViewController.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -2399,6 +2412,7 @@
 		7A63E11E18B44CBB00A13464 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7ABA5764194A8A8B007A05AA /* Map */,
 				7A63E11F18B44CBB00A13464 /* Building */,
 				7A63E13418B44CBB00A13464 /* Common */,
 				7A63E13D18B44CBC00A13464 /* Dashboard */,
@@ -2855,6 +2869,8 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7ABA576D194A936A007A05AA /* MapKit.framework */,
+				7ABA576B194A9337007A05AA /* CoreLocation.framework */,
 				7A217E5418E51FA100383BED /* Reachability */,
 				7A3290C618D80C0B00B3AE8A /* CFNetwork.framework */,
 				7A3290C418D80BF900B3AE8A /* Security.framework */,
@@ -3025,6 +3041,15 @@
 				7ABA161018DAB255001624F8 /* REMDataStoreTests.m */,
 			);
 			name = DataStore;
+			sourceTree = "<group>";
+		};
+		7ABA5764194A8A8B007A05AA /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7ABA5765194A8AB2007A05AA /* REMAnnotation.h */,
+				7ABA5766194A8AB2007A05AA /* REMAnnotation.m */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		7AE8EEA21835C9B4007D0020 /* Pictures */ = {
@@ -3859,7 +3884,6 @@
 				7A39D64B18B5A83100CC9D5D /* REMWidgetCollectionViewController.m in Sources */,
 				7A39D64C18B5A83100CC9D5D /* REMGalleryCollectionViewController.m in Sources */,
 				7A39D64D18B5A83100CC9D5D /* REMGalleryViewController.m in Sources */,
-				7A39D64E18B5A83100CC9D5D /* REMMapViewController.m in Sources */,
 				7A39D64F18B5A83100CC9D5D /* REMEnergyCalendarData.m in Sources */,
 				7A39D65018B5A83100CC9D5D /* REMEnergyData.m in Sources */,
 				7A39D65118B5A83100CC9D5D /* REMEnergyError.m in Sources */,
@@ -4015,11 +4039,11 @@
 			files = (
 				7A63E24D18B44CBD00A13464 /* REMBuildingWeiboView.m in Sources */,
 				7A63E20D18B44CBD00A13464 /* REMSettingCustomerDetailAdminViewController.m in Sources */,
+				7ABA5771194A9B16007A05AA /* REMMapViewController.m in Sources */,
 				EFD947051839DCBB00E9EC50 /* DCRange.m in Sources */,
 				7A62E33618DC1DB10029E908 /* REMEnergyDataPersistenceProcessor.m in Sources */,
 				7AF9638218D6C63C005A8D12 /* AFURLConnectionOperation.m in Sources */,
 				7A63E28518B44F9B00A13464 /* REMIPhoneControllerBase.m in Sources */,
-				7A63E20918B44CBD00A13464 /* REMMapViewController.m in Sources */,
 				7A3290E518D823EF00B3AE8A /* UIRefreshControl+AFNetworking.m in Sources */,
 				7A24E04D18E02877002F15E1 /* REMBuildingInfoUpdateModel.m in Sources */,
 				7A63E21218B44CBD00A13464 /* REMWidgetBizDelegatorBase.m in Sources */,
@@ -4229,6 +4253,7 @@
 				EFEA7EDF1843424500CF4C3E /* _DCRankingXLabelFormatter.m in Sources */,
 				7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */,
 				EFD947091839DCBB00E9EC50 /* DCLineSeries.m in Sources */,
+				7ABA5767194A8AB2007A05AA /* REMAnnotation.m in Sources */,
 				EF0BFEA71844B7090026C47D /* DCPieChartAnimationFrame.m in Sources */,
 				7A9EAA9C18D2946300EF1B85 /* WeiboDialogClosePNG.m in Sources */,
 				7A63E25318B44CBD00A13464 /* REMChartLegendItem.m in Sources */,
@@ -4285,6 +4310,7 @@
 				7A63E21918B44CBD00A13464 /* REMWidgetBuildingCoverViewController.m in Sources */,
 				7A63E21518B44CBD00A13464 /* REMWidgetMultiTimespanDelegator.m in Sources */,
 				7A63E23D18B44CBD00A13464 /* REMWidgetCommoditySearchModel.m in Sources */,
+				7ABA576A194A8CCE007A05AA /* REMMapKitViewController.m in Sources */,
 				7A63E21418B44CBD00A13464 /* REMWidgetLabelingDelegator.m in Sources */,
 				7A9EAA9A18D2946300EF1B85 /* Resources.m in Sources */,
 				7A63E21C18B44CBD00A13464 /* REMWidgetMaxViewController.m in Sources */,
@@ -4526,6 +4552,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s armv7";
 			};
 			name = Debug;
@@ -4535,6 +4562,7 @@
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s armv7";
 			};
 			name = Release;
@@ -4639,6 +4667,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DailyBuild;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7s armv7";
 			};
 			name = DailyBuild;

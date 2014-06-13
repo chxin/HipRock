@@ -11,7 +11,7 @@
 #import "Weibo.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingWeiboView.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMBuildingEntranceSegue.h"
 #import "REMCommonHeaders.h"
 #import "REMStoryboardDefinitions.h"
@@ -399,8 +399,8 @@ const static CGFloat buildingGap=20;
             
             cell.alpha = 1.0;
         }
-        if([self.fromController isKindOfClass:[REMMapViewController class]]){
-            REMMapViewController *mapController = (REMMapViewController *)self.fromController;
+        if([self.fromController isKindOfClass:[REMMapKitViewController class]]){
+            REMMapKitViewController *mapController = (REMMapKitViewController *)self.fromController;
             [mapController highlightMarker:self.currentBuildingIndex];
             [mapController takeSnapshot];
         }
@@ -547,8 +547,8 @@ const static CGFloat buildingGap=20;
         
         cell.alpha = 1.0;
     }
-    if([self.fromController isKindOfClass:[REMMapViewController class]]){
-        REMMapViewController *mapController = (REMMapViewController *)self.fromController;
+    if([self.fromController isKindOfClass:[REMMapKitViewController class]]){
+        REMMapKitViewController *mapController = (REMMapKitViewController *)self.fromController;
         [mapController highlightMarker:self.currentBuildingIndex];
         [mapController takeSnapshot];
     }
