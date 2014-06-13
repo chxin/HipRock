@@ -52,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return 11;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,6 +113,15 @@
     {
         name=REMIPadLocalizedString(@"Common_LastYear"); //@"去年";
     }
+    else if (indexPath.row ==9)
+    {
+        name=REMIPadLocalizedString(@"Common_Last30Days");
+    }
+    else if (indexPath.row ==10)
+    {
+        name=REMIPadLocalizedString(@"Common_Last12Months");
+    }
+
     
     
     cell.textLabel.text=name;
