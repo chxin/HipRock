@@ -220,33 +220,6 @@
         //      |                               |
         //      |                               |
         //(minlat,minlng)-----------------(minlat,maxlng)
-//        double maxLongtitude = INT64_MIN, minLongtitude=INT64_MAX, maxLatitude=INT64_MIN, minLatitude=INT64_MAX;
-//        for(REMAnnotation *annotation in self.mapView.annotations){
-//            maxLongtitude = MAX(maxLongtitude, annotation.longitude);
-//            minLongtitude = MIN(minLongtitude, annotation.longitude);
-//            maxLatitude = MAX(maxLatitude, annotation.latitude);
-//            minLatitude = MIN(minLatitude,  annotation.latitude);
-//        }
-//        BOOL good = maxLongtitude != INT64_MIN && minLongtitude!=INT64_MAX && maxLatitude!=INT64_MIN && minLatitude!=INT64_MAX;
-//        
-//        if(good){
-//            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(minLatitude+(maxLatitude-minLatitude)/2,minLongtitude+(maxLongtitude-minLongtitude)/2);
-//            CLLocationCoordinate2D northWest = CLLocationCoordinate2DMake(maxLatitude,minLongtitude);
-//            CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(maxLatitude,maxLongtitude);
-//            CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(minLatitude,minLongtitude);
-//            //CLLocationCoordinate2D southEast = CLLocationCoordinate2DMake(minLatitude,maxLongtitude);
-//            
-//            
-//            CLLocationDistance latitudinalMeters = MKMetersBetweenMapPoints(MKMapPointForCoordinate(northWest),MKMapPointForCoordinate(southWest));
-//            CLLocationDistance longitudinalMeters = MKMetersBetweenMapPoints(MKMapPointForCoordinate(northWest),MKMapPointForCoordinate(northEast));
-//            
-//            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center,  latitudinalMeters,  longitudinalMeters);
-//            
-//            CGRect rect = [self.mapView convertRegion:region toRectToView:self.mapView];
-//            MKMapRect mapRect = [self.mapView mapRectThatFits:MKMapRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height)];
-//            
-//            [self.mapView setVisibleMapRect:mapRect animated:YES];
-//        }
         
         MKMapRect zoomRect = MKMapRectNull;
         for (id <MKAnnotation> annotation in self.mapView.annotations)
@@ -306,7 +279,7 @@
 
 -(CGRect)zoomFrameForAnnotation:(REMAnnotation *)annotation
 {
-    return CGRectMake(annotation.point.x, annotation.point.y-50, 5.12, 3.84);
+    return CGRectMake(annotation.point.x, annotation.point.y-35, 1, 1);
 }
 
 -(int)buildingIndexFromBuilding:(REMManagedBuildingModel *)building

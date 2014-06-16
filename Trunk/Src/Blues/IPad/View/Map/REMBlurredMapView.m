@@ -33,7 +33,7 @@
 
 -(void)hide:(void (^)(void))complete
 {
-    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.6 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.alpha = 0.0;
     } completion:^(BOOL finished) {
         [self.logo stop];
