@@ -7,6 +7,8 @@
 --------------------------------------------------------------------------*/
 #import "REMAnnotation.h"
 #import <MapKit/MapKit.h>
+#import "REMManagedBuildingCommodityUsageModel.h"
+#import "REMNumberHelper.h"
 
 @implementation REMAnnotation
 
@@ -21,6 +23,7 @@
     annotation.coordinate = CLLocationCoordinate2DMake([building.latitude doubleValue], [building.longitude doubleValue]);
     
     annotation.title = building.name;
+    annotation.subtitle = REMIsNilOrNull(building.electricityUsageThisMonth.totalValue) ? nil : [NSString stringWithFormat:REMIPadLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  [REMNumberHelper formatDataValueWithCarry:building.electricityUsageThisMonth.totalValue], building.electricityUsageThisMonth.totalUom];
     
     annotation.building = building;
     

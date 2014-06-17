@@ -22,6 +22,7 @@
 #import "REMManagedBuildingModel.h"
 #import "REMCustomerLogoView.h"
 #import "REMAnnotation.h"
+#import "REMManagedBuildingCommodityUsageModel.h"
 
 @interface REMMapKitViewController ()
 
@@ -348,8 +349,8 @@
     marker.image = ((REMAnnotation *)annotation).icon;
     marker.canShowCallout = YES;
     marker.calloutOffset = CGPointMake(0, -1);
-    marker.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeInfoLight];
     marker.centerOffset = CGPointMake(0, -55);
+    marker.rightCalloutAccessoryView = [UIButton buttonWithType: UIButtonTypeInfoLight];
     
     return marker;
 }

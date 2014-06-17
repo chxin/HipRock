@@ -253,7 +253,7 @@
 {
     NSDate *start,*end;
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
-    NSCalendar *calendarWithZone=[NSCalendar currentCalendar];
+    //NSCalendar *calendarWithZone=[NSCalendar currentCalendar];
     
     if (relativeDateType == REMRelativeTimeRangeTypeLast7Days) {
         NSDate *last7day = [REMTimeHelper getDate:[NSDate date] daysAhead:-7];
@@ -263,9 +263,8 @@
         [last7dayEndComps setHour:0];
         [last7dayEndComps setSecond:0];
         
-        NSDateComponents *todayComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
+        NSDateComponents *todayComps = [calendar components:(NSHourCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[REMTimeHelper convertGMTDateToLocal:[NSDate date]]];
         [todayComps setMinute:0];
-        [todayComps setHour:0];
         [todayComps setSecond:0];
 
         end = [calendar dateFromComponents:todayComps];
@@ -274,7 +273,7 @@
     else if(relativeDateType == REMRelativeTimeRangeTypeToday)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayEndComps = [calendarWithZone components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayEndComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayEndComps setMinute:0];
         [todayEndComps setSecond:0];
         [todayEndComps setYear:todayEndComps.year];
@@ -330,7 +329,7 @@
     else if(relativeDateType == REMRelativeTimeRangeTypeThisWeek)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayEndComps = [calendarWithZone components:( NSWeekdayCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayEndComps = [calendar components:( NSWeekdayCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayEndComps setMinute:0];
         [todayEndComps setSecond:0];
         [todayEndComps setYear:todayEndComps.year];
@@ -365,7 +364,7 @@
     else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayEndComps = [calendarWithZone components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayEndComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayEndComps setYear:todayEndComps.year];
         [todayEndComps setMonth:todayEndComps.month];
         [todayEndComps setDay:todayEndComps.day];
@@ -383,7 +382,7 @@
     else if(relativeDateType == REMRelativeTimeRangeTypeThisYear)
     {
         NSDate *today = [NSDate date];
-        NSDateComponents *todayComps = [calendarWithZone components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
+        NSDateComponents *todayComps = [calendar components:( NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
         [todayComps setMinute:0];
         [todayComps setSecond:0];
         [todayComps setDay:todayComps.day];
@@ -422,38 +421,31 @@
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLast30Day){
         
-        NSDate *last31days = [REMTimeHelper getDate:[NSDate date] daysAhead:-31];
+        NSDate *last30days = [REMTimeHelper getDate:[NSDate date] daysAhead:-30];
         
-        NSDateComponents *last31dayEndComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:last31days];
-        [last31dayEndComps setMinute:0];
-        [last31dayEndComps setHour:0];
-        [last31dayEndComps setSecond:0];
+        NSDateComponents *last30dayEndComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:last30days];
+        [last30dayEndComps setMinute:0];
+        [last30dayEndComps setHour:0];
+        [last30dayEndComps setSecond:0];
         
-        NSDateComponents *todayComps = [calendar components:(NSMinuteCalendarUnit | NSHourCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
-//        [todayComps setHour:0];
-//        [todayComps setMinute:0];
-//        [todayComps setSecond:0];
+        NSDateComponents *todayComps = [calendar components:(NSHourCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[REMTimeHelper convertGMTDateToLocal:[NSDate date]]];
         
         end = [calendar dateFromComponents:todayComps];
-        start = [calendar dateFromComponents:last31dayEndComps];
+        start = [calendar dateFromComponents:last30dayEndComps];
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLast12Month){
-        NSDate *last13months = [REMTimeHelper getDate:[NSDate date] monthsAhead:-13];
+        NSDate *last12months = [REMTimeHelper getDate:[NSDate date] monthsAhead:-12];
         
-        NSDateComponents *last13monthEndComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:last13months];
-        [last13monthEndComps setDay:1];
-        [last13monthEndComps setHour:0];
-        [last13monthEndComps setMinute:0];
-        [last13monthEndComps setSecond:0];
+        NSDateComponents *last12monthEndComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:last12months];
+        [last12monthEndComps setDay:1];
+        [last12monthEndComps setHour:0];
+        [last12monthEndComps setMinute:0];
+        [last12monthEndComps setSecond:0];
         
-        NSDateComponents *todayComps = [calendar components:(NSMinuteCalendarUnit | NSHourCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
-//        [todayComps setDay:1];
-//        [todayComps setHour:0];
-//        [todayComps setMinute:0];
-//        [todayComps setSecond:0];
+        NSDateComponents *todayComps = [calendar components:(NSHourCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[REMTimeHelper convertGMTDateToLocal:[NSDate date]]];
         
         end = [calendar dateFromComponents:todayComps];
-        start = [calendar dateFromComponents:last13monthEndComps];
+        start = [calendar dateFromComponents:last12monthEndComps];
     }
     
     

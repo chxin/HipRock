@@ -182,7 +182,7 @@
     GPUImageGaussianBlurFilter *filter=[[GPUImageGaussianBlurFilter alloc]init];
     //[filter forceProcessingAtSize:CGSizeMake(1024, 768)];
     
-    filter.blurRadiusInPixels=15;
+    filter.blurRadiusInPixels=25;
     [pic addTarget:filter];
     //[filter addTarget:primaryView];
     [pic processImage];
