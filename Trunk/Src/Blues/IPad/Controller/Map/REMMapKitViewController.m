@@ -150,7 +150,7 @@
             callback = ^{ [self.switchButton setEnabled:NO]; };
         }
         
-        //[mask hide:callback];
+        [mask hide:callback];
     }];
 }
 
