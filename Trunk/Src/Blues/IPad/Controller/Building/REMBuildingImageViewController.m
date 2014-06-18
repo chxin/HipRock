@@ -221,7 +221,7 @@
     UIView *glassView= [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height)];
     glassView.alpha=0;
     glassView.contentMode=UIViewContentModeScaleToFill;
-    glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.65];
+    glassView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     [self.view addSubview:glassView];
     self.glassView=glassView;
     //glassView.layer.borderColor=[UIColor redColor].CGColor;

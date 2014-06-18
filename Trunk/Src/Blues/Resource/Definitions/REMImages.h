@@ -95,7 +95,6 @@
 //images in /Map:
 #define REMIMG_CommonPin_Focus REMLoadImageNamed(@"CommonPin_Focus")
 #define REMIMG_CommonPin_Normal REMLoadImageNamed(@"CommonPin_Normal")
-#define REMIMG_DefaultMap REMLoadImageNamed(@"DefaultMap")
 #define REMIMG_Gallery REMLoadImageNamed(@"Gallery")
 #define REMIMG_Map REMLoadImageNamed(@"Map")
 #define REMIMG_MapBlur REMLoadImageNamed(@"MapBlur")

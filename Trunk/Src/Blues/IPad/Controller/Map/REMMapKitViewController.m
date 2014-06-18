@@ -37,7 +37,7 @@
 @implementation REMMapKitViewController
 
 #define REMMapInitialLocation CLLocationCoordinate2DMake(38.0, 104.0)
-#define REMMapInitialAltitude 14000000
+#define REMMapInitialAltitude 12000000
 
 
 
@@ -150,7 +150,7 @@
             callback = ^{ [self.switchButton setEnabled:NO]; };
         }
         
-        [mask hide:callback];
+        //[mask hide:callback];
     }];
 }
 
