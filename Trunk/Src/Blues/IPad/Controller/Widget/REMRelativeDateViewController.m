@@ -11,10 +11,43 @@
 @interface REMRelativeDateViewController ()
 
 @property (nonatomic) NSUInteger currentRow;
+@property (nonatomic,strong) NSArray *dataKeys;
+@property (nonatomic,strong) NSArray *dataValues;
 
 @end
 
 @implementation REMRelativeDateViewController
+
+-(NSArray *)dataKeys
+{
+    return @[REMIPadLocalizedString(@"Common_Last7Day"),
+             REMIPadLocalizedString(@"Common_Last30Days"),
+             REMIPadLocalizedString(@"Common_Last12Months"),
+             REMIPadLocalizedString(@"Common_Today"),
+             REMIPadLocalizedString(@"Common_Yesterday"),
+             REMIPadLocalizedString(@"Common_ThisWeek"),
+             REMIPadLocalizedString(@"Common_LastWeek"),
+             REMIPadLocalizedString(@"Common_ThisMonth"),
+             REMIPadLocalizedString(@"Common_LastMonth"),
+             REMIPadLocalizedString(@"Common_ThisYear"),
+             REMIPadLocalizedString(@"Common_LastYear")
+             ];
+}
+-(NSArray *)dataValues
+{
+    return @[@(REMRelativeTimeRangeTypeLast7Days),
+             @(REMRelativeTimeRangeTypeLast30Day),
+             @(REMRelativeTimeRangeTypeLast12Month),
+             @(REMRelativeTimeRangeTypeToday),
+             @(REMRelativeTimeRangeTypeYesterday),
+             @(REMRelativeTimeRangeTypeThisWeek),
+             @(REMRelativeTimeRangeTypeLastWeek),
+             @(REMRelativeTimeRangeTypeThisMonth),
+             @(REMRelativeTimeRangeTypeLastMonth),
+             @(REMRelativeTimeRangeTypeThisYear),
+             @(REMRelativeTimeRangeTypeLastYear)
+             ];
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -52,7 +85,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 11;
+    return [self.dataKeys count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,9 +93,8 @@
     static NSString *CellIdentifier = @"relativeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSString *name;
-    NSUInteger num=(NSUInteger)self.relativeDate;
-    if(indexPath.row == (num-1) && self.currentRow == NSNotFound){
+    
+    if([self.dataValues[indexPath.row] shortValue] == (short)self.relativeDate && self.currentRow == NSNotFound){
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         self.currentRow=indexPath.row;
     }
@@ -77,54 +109,10 @@
             }
         }
     }
-    cell.tag=indexPath.row+1;
-    if(indexPath.row == 0){
-        name=REMIPadLocalizedString(@"Common_Last7Day"); //@"之前七天";
-    }
-    else if (indexPath.row ==1)
-    {
-        name=REMIPadLocalizedString(@"Common_Today"); //@"今天";
-    }
-    else if (indexPath.row ==2)
-    {
-        name=REMIPadLocalizedString(@"Common_Yesterday"); //@"昨天";
-    }
-    else if (indexPath.row ==3)
-    {
-        name=REMIPadLocalizedString(@"Common_ThisWeek"); //@"本周";
-    }
-    else if (indexPath.row ==4)
-    {
-        name=REMIPadLocalizedString(@"Common_LastWeek"); //@"上周";
-    }
-    else if (indexPath.row ==5)
-    {
-        name=REMIPadLocalizedString(@"Common_ThisMonth"); //@"本月";
-    }
-    else if (indexPath.row ==6)
-    {
-        name=REMIPadLocalizedString(@"Common_LastMonth"); //@"上月";
-    }
-    else if (indexPath.row ==7)
-    {
-        name=REMIPadLocalizedString(@"Common_ThisYear"); //@"今年";
-    }
-    else if (indexPath.row ==8)
-    {
-        name=REMIPadLocalizedString(@"Common_LastYear"); //@"去年";
-    }
-    else if (indexPath.row ==9)
-    {
-        name=REMIPadLocalizedString(@"Common_Last30Days");
-    }
-    else if (indexPath.row ==10)
-    {
-        name=REMIPadLocalizedString(@"Common_Last12Months");
-    }
-
     
+    cell.textLabel.text = self.dataKeys[indexPath.row];
+    cell.tag = [self.dataValues[indexPath.row] shortValue];
     
-    cell.textLabel.text=name;
     return cell;
 }
 
@@ -148,7 +136,6 @@
     self.currentRow=indexPath.row;
     
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 
