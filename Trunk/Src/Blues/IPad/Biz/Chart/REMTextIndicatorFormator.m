@@ -12,6 +12,7 @@
 #import "REMWidgetMultiTimespanSearchModel.h"
 #import "REMEnergyViewData.h"
 #import "REMTargetEnergyData.h"
+#import "REMWidgetContentSyntax.h"
 
 @implementation REMTextIndicatorFormator
 
@@ -86,13 +87,19 @@
                     format = REMIPadLocalizedString(@"Chart_TargetOrigValue");
                     break;
                 case REMEnergyTargetTargetValue:
-//                    REMIPadLocalizedString(@"Chart_TargetTargetValue");
-//                    break;
-                    return target.name;
+                    if([[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType == REMDSEnergyTagsTrendUnit){
+                        return target.name;
+                    }
+                    
+                    format = REMIPadLocalizedString(@"Chart_TargetTargetValue");
+                    break;
                 case REMEnergyTargetBaseValue:
-//                    REMIPadLocalizedString(@"Chart_TargetBaseValue");
-//                    break;
-                    return target.name;
+                    if([[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType == REMDSEnergyTagsTrendUnit){
+                        return target.name;
+                    }
+                    
+                    format = REMIPadLocalizedString(@"Chart_TargetBaseValue");
+                    break;
                     
                 default:
                     format = nil;
