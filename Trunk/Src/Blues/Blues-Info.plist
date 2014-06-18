@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
@@ -38,11 +36,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>282</string>
+	<string>285</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<true />
 	<key>UIApplicationExitsOnSuspend</key>
-	<false/>
+	<false />
 	<key>UILaunchImages~ipad</key>
 	<array>
 		<dict>
@@ -61,7 +59,7 @@
 	<key>UIMainStoryboardFile~ipad</key>
 	<string>Main_IPad</string>
 	<key>UIPrerenderedIcon</key>
-	<true/>
+	<true />
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -79,6 +77,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
+	<true />
 </dict>
 </plist>
