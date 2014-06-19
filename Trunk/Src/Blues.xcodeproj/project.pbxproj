@@ -500,6 +500,10 @@
 		7A9B1E24177B3A8B00C282A8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9B1E23177B3A8B00C282A8 /* CoreGraphics.framework */; };
 		7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2B177B3A8B00C282A8 /* main.m */; };
 		7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */; };
+		7A9BBF741952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A9BBF721952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf */; };
+		7A9BBF751952DF6F000A45F5 /* MyriadSetPro-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A9BBF731952DF6F000A45F5 /* MyriadSetPro-Thin.ttf */; };
+		7A9BBF781952DF7C000A45F5 /* Localizable_Style.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */; };
+		7A9BBF921952E0E0000A45F5 /* REMFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9BBF911952E0E0000A45F5 /* REMFont.m */; };
 		7A9EAA8A18D2946300EF1B85 /* WeiboAccounts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5B18D2946300EF1B85 /* WeiboAccounts.m */; };
 		7A9EAA8B18D2946300EF1B85 /* WeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5D18D2946300EF1B85 /* WeiboRequest.m */; };
 		7A9EAA8C18D2946300EF1B85 /* WeiboRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5F18D2946300EF1B85 /* WeiboRequestOperation.m */; };
@@ -1280,6 +1284,12 @@
 		7A9B1E2E177B3A8B00C282A8 /* REMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = REMAppDelegate.h; sourceTree = "<group>"; };
 		7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = REMAppDelegate.m; sourceTree = "<group>"; };
 		7A9B1E43177B3A8B00C282A8 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		7A9BBF721952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hiragino-Sans-GB-W3.ttf"; sourceTree = "<group>"; };
+		7A9BBF731952DF6F000A45F5 /* MyriadSetPro-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadSetPro-Thin.ttf"; sourceTree = "<group>"; };
+		7A9BBF771952DF7C000A45F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Resource/Languages/en.lproj/Localizable_Style.strings; sourceTree = "<group>"; };
+		7A9BBF8F1952DF92000A45F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resource/Languages/zh-Hans.lproj/Localizable_Style.strings"; sourceTree = "<group>"; };
+		7A9BBF901952E0E0000A45F5 /* REMFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMFont.h; path = Common/Utility/REMFont.h; sourceTree = "<group>"; };
+		7A9BBF911952E0E0000A45F5 /* REMFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMFont.m; path = Common/Utility/REMFont.m; sourceTree = "<group>"; };
 		7A9EAA5A18D2946300EF1B85 /* WeiboAccounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboAccounts.h; sourceTree = "<group>"; };
 		7A9EAA5B18D2946300EF1B85 /* WeiboAccounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboAccounts.m; sourceTree = "<group>"; };
 		7A9EAA5C18D2946300EF1B85 /* WeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboRequest.h; sourceTree = "<group>"; };
@@ -1957,6 +1967,7 @@
 		7A3290CC18D80CD200B3AE8A /* Languages */ = {
 			isa = PBXGroup;
 			children = (
+				7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */,
 				7A3290C818D80CC300B3AE8A /* InfoPlist.strings */,
 				7A63E28918B454BA00A13464 /* Localizable_Common.strings */,
 				7A63E09518B442A600A13464 /* Localizable_IPhone.strings */,
@@ -2119,6 +2130,8 @@
 				B4577EBE184C1886003C00CF /* REMNumberHelper.m */,
 				EF2043B1187BD94400272319 /* REMNumberExtension.h */,
 				EF2043B2187BD94400272319 /* REMNumberExtension.m */,
+				7A9BBF901952E0E0000A45F5 /* REMFont.h */,
+				7A9BBF911952E0E0000A45F5 /* REMFont.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -2126,6 +2139,7 @@
 		7A5E2D85177B41A4000F77F9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				7A9BBF711952DF6F000A45F5 /* Fonts */,
 				6A61A65D1839B81F00C6A228 /* Images */,
 				7A2849581803998900DC481B /* Dimensions */,
 				7A284954180398B600DC481B /* Definitions */,
@@ -2933,6 +2947,16 @@
 			path = Blues;
 			sourceTree = "<group>";
 		};
+		7A9BBF711952DF6F000A45F5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7A9BBF721952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf */,
+				7A9BBF731952DF6F000A45F5 /* MyriadSetPro-Thin.ttf */,
+			);
+			name = Fonts;
+			path = Resource/Fonts;
+			sourceTree = "<group>";
+		};
 		7A9EAA5818D2946300EF1B85 /* WeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -3623,6 +3647,7 @@
 				B417510E188CC8220020AE8E /* Back@2x.png in Resources */,
 				6A61A7681839B82000C6A228 /* Nodata@2x.png in Resources */,
 				6A61A7771839B82000C6A228 /* LoginTextField.png in Resources */,
+				7A9BBF741952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf in Resources */,
 				7A63E09718B442A600A13464 /* Localizable_IPhone.strings in Resources */,
 				B44D269A18A9E94C00D7C06D /* DateView_Chart_iOS6@2x.png in Resources */,
 				B4175114188CC83E0020AE8E /* Gallery@2x.png in Resources */,
@@ -3702,6 +3727,7 @@
 				6A61A72B1839B82000C6A228 /* share-weibo.png in Resources */,
 				6A61A7181839B82000C6A228 /* PM2.5_normal@2x.png in Resources */,
 				B4707D8A18697B1C00FBA393 /* Humidity_normal.png in Resources */,
+				7A9BBF751952DF6F000A45F5 /* MyriadSetPro-Thin.ttf in Resources */,
 				B445AEAE177BEEB8002D2A59 /* README.txt in Resources */,
 				B44D26A718A9E94C00D7C06D /* Descend.png in Resources */,
 				7A63E2A218B45B1100A13464 /* EMOP_Spotlight_7@2x.png in Resources */,
@@ -3755,6 +3781,7 @@
 				7A9EAA9518D2946300EF1B85 /* WeiboDialogClose.png in Resources */,
 				7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */,
 				B44D269918A9E94C00D7C06D /* DateView_Chart_iOS6.png in Resources */,
+				7A9BBF781952DF7C000A45F5 /* Localizable_Style.strings in Resources */,
 				B44D26A318A9E94C00D7C06D /* DatePicker_Chart.png in Resources */,
 				6A61A7091839B82000C6A228 /* Coal_pressed.png in Resources */,
 				6A61A7721839B82000C6A228 /* Login-Normal@2x.png in Resources */,
@@ -4197,6 +4224,7 @@
 				7A63E21118B44CBD00A13464 /* REMSplashScreenController.m in Sources */,
 				7A63E25218B44CBD00A13464 /* REMChartLegendBase.m in Sources */,
 				EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */,
+				7A9BBF921952E0E0000A45F5 /* REMFont.m in Sources */,
 				7A63E1FC18B44CBD00A13464 /* REMWidgetCellDelegator.m in Sources */,
 				7A63E25C18B44CBD00A13464 /* REMIndicatorButton.m in Sources */,
 				7A9EAA9F18D2946300EF1B85 /* Weibo.m in Sources */,
@@ -4344,6 +4372,15 @@
 				7A63E28C18B454C500A13464 /* zh-Hans */,
 			);
 			name = Localizable_Common.strings;
+			sourceTree = "<group>";
+		};
+		7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7A9BBF771952DF7C000A45F5 /* en */,
+				7A9BBF8F1952DF92000A45F5 /* zh-Hans */,
+			);
+			name = Localizable_Style.strings;
 			sourceTree = "<group>";
 		};
 		7AD415DA19518666001FCD20 /* Default-Landscape-IOS7.png */ = {

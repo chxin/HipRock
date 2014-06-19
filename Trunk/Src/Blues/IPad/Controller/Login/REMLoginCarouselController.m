@@ -80,7 +80,7 @@ static const int kTrialCardIndex = kCardCount - 2;
     UIButton *skipToTrialButton = [UIButton buttonWithType:UIButtonTypeCustom];
     skipToTrialButton.frame = CGRectMake((kDMScreenWidth-2*kDMLogin_SkipToLoginButtonWidth - kDMLogin_SkipToLoginButtonLeftOffset)/2, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
     skipToTrialButton.alpha = 0;
-    skipToTrialButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToTrialButtonFontSize];
+    skipToTrialButton.titleLabel.font = [REMFont defaultFontOfSize:kDMLogin_SkipToTrialButtonFontSize];
     
     [skipToTrialButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToTrialButtonFontColor] forState:UIControlStateNormal];
     [skipToTrialButton setTitle:REMIPadLocalizedString(@"Login_SkipToTrialButtonText") forState:UIControlStateNormal];
@@ -93,7 +93,7 @@ static const int kTrialCardIndex = kCardCount - 2;
     UIButton *skipToLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     skipToLoginButton.frame = CGRectMake(skipToTrialButton.frame.origin.x + kDMLogin_SkipToLoginButtonWidth + kDMLogin_SkipToLoginButtonLeftOffset, kDMLogin_SkipToLoginButtonTopOffset, kDMLogin_SkipToLoginButtonWidth, kDMLogin_SkipToLoginButtonHeight);
     skipToLoginButton.alpha = 0;
-    skipToLoginButton.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
+    skipToLoginButton.titleLabel.font = [REMFont defaultFontOfSize:kDMLogin_SkipToLoginButtonFontSize];
     
     [skipToLoginButton setTitleColor:[REMColor colorByHexString:kDMLogin_SkipToLoginButtonFontColor] forState:UIControlStateNormal];
     [skipToLoginButton setTitle:REMIPadLocalizedString(@"Login_SkipToLoginButtonText") forState:UIControlStateNormal];

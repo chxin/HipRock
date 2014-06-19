@@ -44,7 +44,7 @@
     titleBackground.backgroundColor = [REMColor colorByHexString:kDMLogin_CardTitleBackgroundSeperatorColor];
     
     NSString *titleText = title;//REMLocalizedString(@"Login_TrialCardTitle");
-    UIFont *titleFont = [UIFont systemFontOfSize:24];
+    UIFont *titleFont = [REMFont defaultFontOfSize:24];
     CGSize titleLabelSize = [titleText sizeWithFont:titleFont];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((kDMLogin_CardContentWidth-titleLabelSize.width)/2, (kDMLogin_CardTitleBackgroundHeight-titleLabelSize.height)/2, titleLabelSize.width, titleLabelSize.height)];
     titleLabel.text = titleText;

@@ -55,7 +55,7 @@
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kDMLogin_CardContentWidth, kDMLogin_CardContentHeight-kDMLogin_CardTitleViewHeight)];
     
     NSString *welcomeText = REMIPadLocalizedString(@"Login_TrialWelcomeText");
-    UIFont *welcomeFont = [UIFont systemFontOfSize:kDMLogin_TrialCardWelcomeTextFontSize];
+    UIFont *welcomeFont = [REMFont defaultFontOfSize:kDMLogin_TrialCardWelcomeTextFontSize];
     CGSize welcomeLabelSize = [welcomeText sizeWithFont:welcomeFont];
     UILabel *welcomeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kDMLogin_TrialCardWelcomeTextTopOffset, kDMLogin_CardContentWidth, welcomeLabelSize.height)];
     welcomeLabel.textAlignment = NSTextAlignmentCenter;
@@ -88,7 +88,7 @@
                                 };
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:buttonFrame andStatusTexts:statusTexts];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
-    button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
+    button.titleLabel.font = [REMFont defaultFontOfSize:kDMLogin_LoginButtonFontSize];
     [button addTarget:self action:@selector(trialButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     

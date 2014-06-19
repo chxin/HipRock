@@ -278,15 +278,18 @@
 #pragma mark - render
 -(UILabel *)renderPromptLabel
 {
+    UIFont *promptLabelFont = [REMFont defaultFontOfSize:kDMLogin_LoginCardPromptLabelFontSize];
+    
     //text label
     NSString *promptLabelText = REMIPadLocalizedString(@"Login_LoginPrompt");
-    UIFont *promptLabelFont = [UIFont systemFontOfSize:kDMLogin_LoginCardPromptLabelFontSize];
+    //UIFont *promptLabelFont = [UIFont systemFontOfSize:kDMLogin_LoginCardPromptLabelFontSize];
     CGSize promptLabelSize = [promptLabelText sizeWithFont:promptLabelFont];
     UILabel *promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDMLogin_LoginCardPromptLabelLeftOffset, kDMLogin_LoginCardPromptLabelTopOffset, kDMLogin_LoginCardPromptLabelWidth, promptLabelSize.height)];
     promptLabel.text = promptLabelText;
     promptLabel.backgroundColor = [UIColor clearColor];
     promptLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginCardPromptLabelFontColor];
     promptLabel.textAlignment = NSTextAlignmentLeft;
+    promptLabel.font = promptLabelFont;
     
     return promptLabel;
 }
@@ -299,7 +302,7 @@
     userNameTextBox.placeholder = REMIPadLocalizedString(@"Login_LoginUsernamePlaceHolder");
     userNameTextBox.delegate = self;
     userNameTextBox.returnKeyType = UIReturnKeyNext;
-    userNameTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
+    userNameTextBox.font = [REMFont defaultFontOfSize:kDMLogin_TextBoxFontSize];
     userNameTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
     userNameTextBox.autocorrectionType = UITextAutocorrectionTypeNo;
     userNameTextBox.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -314,7 +317,7 @@
 {
     //username error label
     UILabel *userNameErrorLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDMLogin_UserNameErrorLabelLeftOffset, kDMLogin_UserNameErrorLabelTopOffset, kDMLogin_ErrorLabelWidth, kDMLogin_ErrorLabelFontSize)];
-    userNameErrorLabel.font = [UIFont systemFontOfSize:kDMLogin_ErrorLabelFontSize];
+    userNameErrorLabel.font = [REMFont defaultFontOfSize:kDMLogin_ErrorLabelFontSize];
     userNameErrorLabel.backgroundColor = [UIColor clearColor];
     userNameErrorLabel.textAlignment = NSTextAlignmentLeft;
     userNameErrorLabel.textColor = [REMColor colorByHexString:kDMLogin_ErrorLabelFontColor];
@@ -330,7 +333,7 @@
     passwordTextBox.delegate = self;
     passwordTextBox.secureTextEntry = YES;
     passwordTextBox.returnKeyType = UIReturnKeyGo;
-    passwordTextBox.font = [UIFont systemFontOfSize:kDMLogin_TextBoxFontSize];
+    passwordTextBox.font = [REMFont defaultFontOfSize:kDMLogin_TextBoxFontSize];
     passwordTextBox.textColor = [REMColor colorByHexString:kDMLogin_TextBoxFontColor];
     [passwordTextBox addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self setTextField:passwordTextBox backgroundImage:REMIMG_LoginTextField];
@@ -342,7 +345,7 @@
 {
     //password error label
     UILabel *passwordErrorLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDMLogin_PasswordErrorLabelLeftOffset, kDMLogin_PasswordErrorLabelTopOffset, kDMLogin_ErrorLabelWidth, kDMLogin_ErrorLabelFontSize)];
-    passwordErrorLabel.font = [UIFont systemFontOfSize:kDMLogin_ErrorLabelFontSize];
+    passwordErrorLabel.font = [REMFont defaultFontOfSize:kDMLogin_ErrorLabelFontSize];
     passwordErrorLabel.backgroundColor = [UIColor clearColor];
     passwordErrorLabel.textAlignment = NSTextAlignmentLeft;
     passwordErrorLabel.textColor = [REMColor colorByHexString:kDMLogin_ErrorLabelFontColor];
@@ -363,7 +366,7 @@
     REMLoginButton *button = [[REMLoginButton alloc] initWithFrame:frame andStatusTexts:statusText];
     [button addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.textColor = [REMColor colorByHexString:kDMLogin_LoginButtonFontColor];
-    button.titleLabel.font = [UIFont systemFontOfSize:kDMLogin_LoginButtonFontSize];
+    button.titleLabel.font = [REMFont defaultFontOfSize:kDMLogin_LoginButtonFontSize];
     button.enabled = NO;
     
     return button;
