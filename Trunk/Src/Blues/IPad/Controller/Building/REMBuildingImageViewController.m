@@ -776,7 +776,14 @@
     callback(img, text);
 }
 
-
+//-(void)centerChangedFrom:(CGPoint)oldCenter to:(CGPoint)newCenter
+//{
+//    CGFloat diff = newCenter.x - oldCenter.x;
+//    
+//    CGPoint imageCenter = self.imageView.center;
+//    
+//    self.imageView.center = CGPointMake(imageCenter.x-diff/3, imageCenter.y);
+//}
 
 
 @end

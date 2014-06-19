@@ -220,7 +220,7 @@ const static CGFloat buildingGap=20;
         
         for (int i=0;i<self.childViewControllers.count;++i)
         {
-            UIViewController *controller=self.childViewControllers[i];
+            REMBuildingImageViewController *controller=self.childViewControllers[i];
             CGFloat x;
             if(self.currentBuildingIndex == 0 && self.cumulateX>0){
                 x=trans.x/4;
@@ -232,7 +232,12 @@ const static CGFloat buildingGap=20;
                 x=trans.x;
             }
             
-            [controller.view setCenter:CGPointMake(controller.view.center.x+x, controller.view.center.y)];
+            //CGPoint old = controller.view.center;
+            CGPoint new = CGPointMake(controller.view.center.x+x, controller.view.center.y);
+            
+            //[controller centerChangedFrom:old to:new];
+            
+            [controller.view setCenter:new];
         }
         
         self.cumulateX+=trans.x;
