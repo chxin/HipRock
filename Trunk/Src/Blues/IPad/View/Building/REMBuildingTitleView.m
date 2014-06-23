@@ -9,6 +9,7 @@
 #import "REMBuildingTitleView.h"
 #import "REMMaskManager.h"
 #import "REMNumberHelper.h"
+#import "REMCommonHeaders.h"
 
 
 @interface REMBuildingTitleView()
@@ -60,7 +61,7 @@
     [self addSubview:icon];
     CGFloat textMarginTop=marginTop+icon.frame.size.height-fs;
     UILabel *emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin+icon.frame.size.width+8, textMarginTop, 1000, fs)];
-    emptyLabel.font=[UIFont fontWithName:self.emptyTextFont size:fs];
+    emptyLabel.font=[REMFont fontWithKey:self.emptyTextFont size:fs];
     emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
     if(self.emptyText ==nil){
         self.emptyText=REMIPadLocalizedString(@"Building_LabelNoData");
@@ -103,7 +104,8 @@
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:size];
+    titleLabel.font = [REMFont fontWithKey:@kBuildingFontKeyTitle size:size];
+    
     //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
     titleLabel.textColor=[UIColor whiteColor];
     //NSLog(@"font:%@",[UIFont fontWithName:@(kBuildingFontSC) size:size]);

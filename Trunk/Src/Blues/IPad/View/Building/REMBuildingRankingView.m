@@ -58,12 +58,12 @@
     self.textLabel=rankingLabel;
     //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
     
-    CGSize expectedLabelSize = [rankingLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:kBuildingCommodityDetailValueFontSize]];
+    CGSize expectedLabelSize = [rankingLabel.text sizeWithFont:[REMFont fontWithKey:@(kBuildingFontKeyLight) size:kBuildingCommodityDetailValueFontSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
     self.totalLabel = [[UILabel alloc]initWithFrame:CGRectMake(expectedLabelSize.width+leftMargin, marginTop+expectedLabelSize.height-kBuildingCommodityDetailValueFontSize, 200, kBuildingCommodityDetailValueFontSize)];
     //self.totalLabel.fontSize=@(kBuildingCommodityDetailUomFontSize);
-    self.totalLabel.font=[UIFont fontWithName:@(kBuildingFontLight) size:kBuildingCommodityDetailUomFontSize];
+    self.totalLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyLight) size:kBuildingCommodityDetailUomFontSize];
     //self.totalLabel.font=[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:kBuildingCommodityTotalUomFontSize];
     self.totalLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;

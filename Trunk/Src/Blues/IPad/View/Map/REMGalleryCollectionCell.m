@@ -52,7 +52,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:kDMGallery_GalleryCellTitleFrame];
         label.textColor = [UIColor whiteColor];
         label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont systemFontOfSize:kDMGallery_GalleryCellTitleFontSize];
+        label.font = [REMFont defaultFontOfSize:kDMGallery_GalleryCellTitleFontSize];
         
         [self.backgroundButton addSubview:label];
         self.titleLabel = label;

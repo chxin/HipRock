@@ -217,7 +217,7 @@
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
     //totalLabel.emptyText=REMIPadLocalizedString(@"BuildingChart_NoData", @"");//@"请持续关注能耗变化";
     totalLabel.emptyTextFontSize=29;
-    totalLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    totalLabel.emptyTextFont=@(kBuildingFontKeyRegular);
     totalLabel.emptyTextMargin=28;
     [totalLabel showTitle];
     [self.view addSubview:totalLabel];
@@ -238,7 +238,7 @@
     outdoor.valueFontSize=kBuildingCommodityDetailValueFontSize;
     outdoor.uomFontSize=kBuildingCommodityDetailUomFontSize;
     outdoor.emptyTextFontSize=29;
-    outdoor.emptyTextFont=@(kBuildingFontSCRegular);
+    outdoor.emptyTextFont=@(kBuildingFontKeyRegular);
     outdoor.emptyTextMargin=28;
     [outdoor showTitle];
     
@@ -254,7 +254,7 @@
     honeywell.valueFontSize=kBuildingCommodityDetailValueFontSize;
     honeywell.emptyTextFontSize=29;
     honeywell.uomFontSize=kBuildingCommodityDetailUomFontSize;
-    honeywell.emptyTextFont=@(kBuildingFontSCRegular);
+    honeywell.emptyTextFont=@(kBuildingFontKeyRegular);
     honeywell.emptyTextMargin=28;
     [honeywell showTitle];
     [self.view addSubview:honeywell];
@@ -272,7 +272,7 @@
     mayair.valueFontSize=kBuildingCommodityDetailValueFontSize;
     mayair.uomFontSize=kBuildingCommodityDetailUomFontSize;
     mayair.emptyTextFontSize=29;
-    mayair.emptyTextFont=@(kBuildingFontSCRegular);
+    mayair.emptyTextFont=@(kBuildingFontKeyRegular);
     mayair.emptyTextMargin=28;
     [mayair showTitle];
     [self addSplitBar:mayair];
@@ -296,7 +296,7 @@
     titleLabel1.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel1.backgroundColor=[UIColor clearColor];
-    titleLabel1.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel1.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kBuildingCommodityTitleFontSize];
     titleLabel1.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel1];
     

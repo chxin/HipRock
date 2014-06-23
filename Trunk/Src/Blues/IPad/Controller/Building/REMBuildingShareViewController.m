@@ -37,7 +37,7 @@
     [weiboButton setBackgroundImage:REMIMG_share_weibo forState:UIControlStateNormal];
     weiboButton.adjustsImageWhenHighlighted=YES;
     [weiboButton setTitle:REMIPadLocalizedString(@"Building_ShareWeibo") forState:UIControlStateNormal];
-    weiboButton.titleLabel.font=[UIFont systemFontOfSize:12];
+    weiboButton.titleLabel.font=[REMFont defaultFontOfSize:12];
     [weiboButton setTitleEdgeInsets:UIEdgeInsetsMake(48+30, 0, 0, 0)];
     [weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:weiboButton];

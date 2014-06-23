@@ -6,22 +6,6 @@
  
  */
 //Common, prefix: Common_
-"Common_Commodity_Other" = "Other";
-"Common_Commodity_Elec" = "Electricity";
-"Common_Commodity_Water" = "Water";
-"Common_Commodity_Gas" = "Gas";
-"Common_Commodity_SoftWater" = "Soft water";
-"Common_Commodity_Petrol" = "Petrol";
-"Common_Commodity_LowPressureSteam" = "Low pressure steam";
-"Common_Commodity_DieselOil" = "Diesel oil";
-"Common_Commodity_HeatQ" = "HeatQ";
-"Common_Commodity_CoolQ" = "CoolQ";
-"Common_Commodity_Coal" = "Coal";
-"Common_Commodity_CoalOil" = "Coal oil";
-"Common_Commodity_AirQuality" = "Air";
-
-
-
 "Common_ServerError" = "Sorry! Server error! No energy data is available. Please try again later.";
 "Common_Building"="Building";
 "Common_Last7Day"="Previous 7 days";
@@ -60,46 +44,6 @@
 
 "Common_ApplicationDidBecomeUnsupported"="Current version is not supported any longer! Please go to AppStore for update!";
 "Common_ApplicationNewVersionAvaliable"="New version detected! Please go to AppStore for update!";
-"Common_ServerError" = "抱歉!服务器错误，无法获取最新的能源数据。请稍候再试。";
-"Common_Building"="楼宇";
-"Common_Last7Day"="之前七天";
-"Common_Today"="今天";
-"Common_Yesterday"="昨天";
-"Common_ThisWeek"="本周";
-"Common_LastWeek"="上周";
-"Common_ThisMonth"="本月";
-"Common_LastMonth"="上月";
-"Common_ThisYear"="今年";
-"Common_LastYear"="去年";
-"Common_Last30Days"="之前30天";
-"Common_Last12Months"="之前12月";
-"Common_Hour"="小时";
-"Common_Day"="天";
-"Common_Week"="周";
-"Common_Month"="月";
-"Common_Year"="年";
-"Common_CustomTime"="自定义";
-"Common_Cancel"="取消";
-"Common_Giveup"="放弃";
-"Common_OK"="好";
-"Common_Quit"="退出";
-"Common_WholeYear"="全年"; //1月，2月...12月，全年
-"Common_YearMonthFormat"="yyyy年MM月";
-"Common_WholeYearFormat"="yyyy年全年";
-"Common_UpdateData"="更新数据";
-"Common_Done"="完成了";
-
-"Common_NetNoConnection"="无网络连接，请稍候再试。";
-"Common_NetConnectionFailed"="网络故障，请稍候再试。";
-"Common_NetServerError"="服务器故障，请稍候再试。";
-"Common_NetNoConnectionLoadLocal"="无网络连接,应用将读取本地数据。";
-"Common_ServerTimeout"="数据获取失败，网络故障。";
-"Common_ServerError"="数据获取失败，服务器故障。";
-"Common_ServerTimeoutSimple"="网络故障。";
-"Common_ServerErrorSimple"="服务器故障。";
-
-"Common_ApplicationDidBecomeUnsupported"="目前的版本太旧，已无法正常使用。请前往App Store更新。";
-"Common_ApplicationNewVersionAvaliable"="有新版本，请前往AppStore更新。";
 
 //Admin,prefix: Admin_
 "Admin_UserTitleEEConsultant"="Energy engineering consultant";
@@ -174,7 +118,7 @@
 "Setting_DetailOperationDate"="Operation time";
 "Setting_DetailCustomerAdmin"="Clients administrator";
 "Setting_DetailCustomerAdminTwoName"="%@ and %@"; //张三和李四
-"Setting_DetailCustomerAdminThreeName"="including %@ and %@ %d persons"; //张三和李四等5人
+"Setting_DetailCustomerAdminThreeName"="%d persons including %@ and %@"; //张三和李四等5人
 "Setting_About"="About EnergyMost";
 "Setting_BindWeibo"="Binding to Sina weibo";
 "Setting_UserName"="Display name";
@@ -202,12 +146,6 @@
 "Setting_SwitchCustomerNoNetwork"="Client selection failed! No network connection! Please try again later.";
 "Setting_SwitchCustomerNetworkFailed"="Client selection failed! Network failure! Please try again later.";
 "Setting_SwitchCustomerServerError"="Client selection failed! Server failure! Please try again later.";
-
-"Setting_SettingViewTitle" = "设置";
-"Setting_CustomerSelectionViewTitle" = "当前客户";
-"Setting_CustomerDetailViewTitle" = "客户信息";
-"Setting_AboutViewTitle" = "关于云能效";
-"Setting_CustomerAdministratorViewTitle" = "客户管理员";
 
 //Map, prefix: Map_
 "Map_MarkerBubbleSubtitleFormat"="Electricity consumption for this month: %@%@";
@@ -246,40 +184,6 @@
 "Building_WidgetRelationWidgetDeleted"="Addition failed! Widget “%@” has been deleted. Please update the data!"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
 "Building_WidgetRelationPositionDeleted"="Addition failed! Addition position does not exist. Please update the data!";
 
-"Building_WidgetRelationViewTitle" = "定制图表";
-"Building_MonthlyAverageUsageChartAverageSeriesLegend" = "单位面积用%@";
-"BuildingChart_NoData"="暂无数据，请持续关注能耗变化";
-"BuildingChart_DataError"="数据错误，请联系管理员。";
-"Building_LabelNoData"="无数据";
-"Building_LargeLabelNoData"="暂无本月数据，请持续关注能耗变化";
-"Building_PullUpMoreInfo"="上拉查看更多能耗信息";
-"Building_ReleaseSwitchView"="松开以显示";
-"Building_Target"="目标值";
-"Building_ThisMonthEnergyUsage"="本月用%@总量"; //本月用电总量，本月用水总量等
-"Building_CarbonUsage"="二氧化碳当量";
-"Building_CorporationRanking"="集团排名";
-"Building_EnergyUsageByAreaByMonth"="单位面积逐月用%@"; //单位面积逐月用电，单位面积逐月用水
-"Building_EnergyUsageByCommodity"="用%@趋势图"; //用电趋势图，用水趋势图
-"Building_AirQualityIndoor"="室内PM2.5";
-"Building_AirQualityOutdoor"="室外PM2.5";
-"Building_AirQualityHoneywell"="室内新风PM2.5(霍尼)";
-"Building_AirQualityMayair"="室内新风PM2.5(美埃)";
-"Building_AirQualityDailyChart"="室内外PM2.5逐日含量";
-"Building_AirQualityAmericanStandard"="%d %@(PM2.5美国标准)";
-"Building_AirQualityChinaStandard"="%d %@(PM2.5中国标准)";
-"Building_ShareWeibo"="新浪微博";
-"Building_ShareEmail"="邮件";
-
-"Building_AnnualAverageUsageLabelTitle"="年平米能耗";
-"Building_AnnualAverageBaselineLabelTitle"="行业标准";
-"Building_AnnualEfficiencyLabelTitle"="年节能率";
-
-"Building_WidgetRelationTitle"="选取要替换的图表";
-"Building_WidgetRelationCommodityTitle"="默认图表 - %@";
-"Building_WidgetRelationInfo"="所选图表将会被替换为当前图表，并出现在所属建筑封面中，以便您快速查看该图表。";
-"Building_WidgetRelationWidgetDeleted"="添加失败。小组件“%@”已被删除，请更新数据"; //添加失败。小组件“最近七天能效查看”已被删除，请更新数据
-"Building_WidgetRelationPositionDeleted"="添加失败。添加位置不存在，请更新数据";
-
 
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="Pull down to return to review energy consumption information";
@@ -304,11 +208,6 @@
 "Widget_CalendarHoliday"="Nonworking time";
 "Widget_CalendarStepError"="The current interval does not support display of %@ background color."; //当前步长不支持显示冷暖季背景色，当前步长不支持显示非工作时间背景色
 "Widget_CalendarCostElectricityStepError"="Peak, valley and normal electricity prices cannot be displayed by hour.";
-
-"Widget_TimePickerViewTitle" = "选择日期";
-"Widget_MonthPickerViewTitle" = "选择日期";
-"Widget_AddToBuildingCoverViewTitle" = "添加至建筑封面";
-"Widget_RelativeTimePickerViewTitle" = "默认日期";
 
 
 

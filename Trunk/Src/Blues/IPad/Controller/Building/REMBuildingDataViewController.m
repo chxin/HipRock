@@ -102,7 +102,7 @@
         [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];
         
-        [btn.titleLabel setFont:[UIFont fontWithName:@(kBuildingFontSCRegular) size:12]];
+        [btn.titleLabel setFont:[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:12]];
         NSString *str = [self retrieveCommodityImageName:model];
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         //btn.showsTouchWhenHighlighted=YES;
@@ -154,7 +154,7 @@
         label.shadowOffset=CGSizeMake(1, 1);
         
         label.backgroundColor=[UIColor clearColor];
-        label.font = [UIFont fontWithName:@(kBuildingFontSC) size:25];
+        label.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:25];
         label.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
         
         [self.view addSubview:label];
@@ -327,7 +327,7 @@
     //label.layer.borderColor=[UIColor redColor].CGColor;
     //label.layer.borderWidth=1;
     label.textAlignment=NSTextAlignmentLeft;
-    label.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:frame.size.height];
+    label.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:frame.size.height];
     
     label.text=REMIPadLocalizedString(@"Building_PullUpMoreInfo");//  @"￼上拉查看更多能耗信息";
     //label.text=@"asd上拉查看更多能耗信息";

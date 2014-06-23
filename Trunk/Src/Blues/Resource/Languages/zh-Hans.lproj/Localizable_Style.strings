@@ -6,3 +6,9 @@
 
  */
 "Font_DefaultFontName"="Hiragino Sans GB";
+
+
+"Font_BuildingNumberLabelUltraLight"="HelveticaNeue-UltraLight";
+"Font_BuildingNumberLabelLight"="HelveticaNeue-Light";
+"Font_BuildingNumberLabelTitle"="STHeitiSC-Medium";
+"Font_BuildingNumberLabelRegular"="kBuildingFontSCRegular";

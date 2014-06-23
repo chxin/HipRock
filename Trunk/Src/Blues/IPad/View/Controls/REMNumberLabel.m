@@ -7,6 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import "REMNumberLabel.h"
+#import "REMCommonHeaders.h"
 
 @implementation REMNumberLabel
 
@@ -42,7 +43,7 @@
         }
     }
     
-    UIFont *customFont = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:fontSize];
+    UIFont *customFont = [REMFont fontWithKey:@(kBuildingFontKeyUltraLight) size:fontSize];
     self.font = customFont;
     
     [super drawRect:rect];

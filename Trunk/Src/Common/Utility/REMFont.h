@@ -9,4 +9,6 @@
 
 @interface REMFont : NSObject
 +(UIFont *)defaultFontOfSize:(CGFloat)size;
++(UIFont *)defaultFontSize;
++(UIFont *)fontWithKey:(NSString *)key size:(CGFloat)size;
 @end

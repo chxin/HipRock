@@ -161,7 +161,7 @@
     UILabel *timeLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
     timeLabel.text = text == nil ? @" " : text;
     timeLabel.textColor = [REMColor colorByHexString:kDMChart_TooltipTimeViewFontColor];
-    timeLabel.font = [UIFont systemFontOfSize:kDMChart_TooltipTimeViewFontSize];
+    timeLabel.font = [REMFont defaultFontOfSize:kDMChart_TooltipTimeViewFontSize];
     timeLabel.backgroundColor = [UIColor clearColor];
     
     return timeLabel;

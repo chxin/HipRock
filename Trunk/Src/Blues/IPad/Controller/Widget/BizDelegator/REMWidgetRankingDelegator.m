@@ -56,7 +56,7 @@ const static CGFloat kRankingTimePickerWidth=250;
     timePickerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];
     [timePickerButton setImageEdgeInsets:UIEdgeInsetsMake(0, -4, 0, 0)];
-    timePickerButton.titleLabel.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kWidgetDatePickerTitleSize];
+    timePickerButton.titleLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kWidgetDatePickerTitleSize];
 
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     

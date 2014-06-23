@@ -66,7 +66,7 @@
     
     UILabel *title=[[UILabel alloc]initWithFrame:CGRectMake(kDashboardWidgetPadding, kDashboardWidgetTitleTopMargin, self.view.frame.size.width, kDashboardWidgetTitleSize)];
     title.backgroundColor=[UIColor clearColor];
-    title.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetTitleSize];
+    title.font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kDashboardWidgetTitleSize];
     title.textColor=[UIColor blackColor];
     NSString *textTitle=self.widgetInfo.name;
     if (textTitle.length>=10) {
@@ -94,7 +94,7 @@
             userName = [[userName substringToIndex:3] stringByAppendingString:@"..."];
         }
         share.text= [NSString stringWithFormat: REMIPadLocalizedString(@"Dashboard_ShareUserName") , userName];
-        share.font = [UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardWidgetShareSize];
+        share.font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kDashboardWidgetShareSize];
         [self.view addSubview:share];
     }
     UILabel *time=self.bizDelegator.timeLabel;
@@ -213,7 +213,7 @@
 }
 
 - (void)generateServerErrorLabel:(NSString *)msg{
-    UIFont *font = [UIFont systemFontOfSize:kDashboardWidgetTitleSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDashboardWidgetTitleSize];
     
     CGSize size = [msg sizeWithFont:font];
     

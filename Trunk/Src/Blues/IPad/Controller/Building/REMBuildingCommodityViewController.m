@@ -305,7 +305,7 @@
     totalLabel.uomFontSize=kBuildingCommodityTotalUomFontSize;
     totalLabel.emptyText=REMIPadLocalizedString(@"Building_LargeLabelNoData");//@"暂无本月数据，请持续关注能耗变化";
     totalLabel.emptyTextFontSize=29;
-    totalLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    totalLabel.emptyTextFont=@(kBuildingFontKeyRegular);
     totalLabel.emptyTextMargin=28;
     [totalLabel showTitle];
     [self.view addSubview:totalLabel];
@@ -326,7 +326,7 @@
     carbon.valueFontSize=kBuildingCommodityDetailValueFontSize;
     carbon.uomFontSize=kBuildingCommodityDetailUomFontSize;
     carbon.emptyTextFontSize=29;
-    carbon.emptyTextFont=@(kBuildingFontSCRegular);
+    carbon.emptyTextFont=@(kBuildingFontKeyRegular);
     carbon.emptyTextMargin=28;
     [carbon showTitle];
     
@@ -340,7 +340,7 @@
     ranking.titleMargin=kBuildingDetailInnerMargin;
     ranking.leftMargin=kBuildingCommodityDetailTextMargin;
     ranking.emptyTextFontSize=29;
-    ranking.emptyTextFont=@(kBuildingFontSCRegular);
+    ranking.emptyTextFont=@(kBuildingFontKeyRegular);
     ranking.emptyTextMargin=28;
     [ranking showTitle];
     [self.view addSubview:ranking];
@@ -359,7 +359,7 @@
     annualAverageUsageLabel.valueFontSize=kBuildingCommodityDetailValueFontSize;
     annualAverageUsageLabel.uomFontSize=kBuildingCommodityDetailUomFontSize;
     annualAverageUsageLabel.emptyTextFontSize=29;
-    annualAverageUsageLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    annualAverageUsageLabel.emptyTextFont=@(kBuildingFontKeyRegular);
     annualAverageUsageLabel.emptyTextMargin=28;
     [annualAverageUsageLabel showTitle];
     [self.view addSubview:annualAverageUsageLabel];
@@ -375,7 +375,7 @@
     annualAverageBaselineLabel.valueFontSize=kBuildingCommodityDetailValueFontSize;
     annualAverageBaselineLabel.uomFontSize=kBuildingCommodityDetailUomFontSize;
     annualAverageBaselineLabel.emptyTextFontSize=29;
-    annualAverageBaselineLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    annualAverageBaselineLabel.emptyTextFont=@(kBuildingFontKeyRegular);
     annualAverageBaselineLabel.emptyTextMargin=28;
     [annualAverageBaselineLabel showTitle];
     [self.view addSubview:annualAverageBaselineLabel];
@@ -391,7 +391,7 @@
     annualAverageEfficiencyLabel.valueFontSize=kBuildingCommodityDetailValueFontSize;
     annualAverageEfficiencyLabel.uomFontSize=kBuildingCommodityDetailUomFontSize;
     annualAverageEfficiencyLabel.emptyTextFontSize=29;
-    annualAverageEfficiencyLabel.emptyTextFont=@(kBuildingFontSCRegular);
+    annualAverageEfficiencyLabel.emptyTextFont=@(kBuildingFontKeyRegular);
     annualAverageEfficiencyLabel.emptyTextMargin=28;
     [annualAverageEfficiencyLabel showTitle];
     [self.view addSubview:annualAverageEfficiencyLabel];
@@ -407,7 +407,7 @@
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kBuildingCommodityTitleFontSize];
     titleLabel.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel];
     
@@ -579,7 +579,7 @@
     titleLabel1.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel1.backgroundColor=[UIColor clearColor];
-    titleLabel1.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel1.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kBuildingCommodityTitleFontSize];
     titleLabel1.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel1];
     self.firstChartTitleLabel=titleLabel1;
@@ -617,7 +617,7 @@
     titleLabel2.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel2.backgroundColor=[UIColor clearColor];
-    titleLabel2.font = [UIFont fontWithName:@(kBuildingFontSC) size:kBuildingCommodityTitleFontSize];
+    titleLabel2.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kBuildingCommodityTitleFontSize];
     titleLabel2.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel2];
     self.secondChartTitleLabel=titleLabel2;

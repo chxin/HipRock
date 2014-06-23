@@ -9,6 +9,7 @@
 #import "REMGalleryGroupView.h"
 #import "REMDimensions.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMCommonHeaders.h"
 
 @interface REMGalleryGroupView()
 
@@ -56,7 +57,7 @@
 //    }
     
     if(self.titleLabel == nil){
-        UIFont *font = [UIFont systemFontOfSize:kDMGallery_GalleryGroupTitleFontSize];
+        UIFont *font = [REMFont defaultFontOfSize:kDMGallery_GalleryGroupTitleFontSize];
         CGSize titleSize = [title sizeWithFont:font];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDMGallery_GalleryGroupViewWidth, titleSize.height)];
         label.backgroundColor = [UIColor clearColor];

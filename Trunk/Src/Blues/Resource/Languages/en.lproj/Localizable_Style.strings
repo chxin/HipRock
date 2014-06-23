@@ -6,3 +6,9 @@
 
  */
 "Font_DefaultFontName"="MyriadSetPro-Thin";
+
+
+"Font_BuildingNumberLabelUltraLight"="MyriadSetPro-Thin";
+"Font_BuildingNumberLabelLight"="MyriadSetPro-Thin";
+"Font_BuildingNumberLabelTitle"="MyriadSetPro-Thin";
+"Font_BuildingNumberLabelRegular"="MyriadSetPro-Thin";

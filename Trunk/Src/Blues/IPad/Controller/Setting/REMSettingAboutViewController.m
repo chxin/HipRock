@@ -31,12 +31,12 @@
     productNamelabel.translatesAutoresizingMaskIntoConstraints=NO;
     productNamelabel.backgroundColor=[UIColor clearColor];
     productNamelabel.text=REMIPadLocalizedString(@"Setting_AboutProductName");//施耐德电气“云能效”管理平台
-    productNamelabel.font=[UIFont systemFontOfSize:22];
+    productNamelabel.font=[REMFont defaultFontOfSize:22];
     productNamelabel.textColor=[REMColor colorByHexString:@"#2f2f2f"];
     [self.view addSubview:productNamelabel];
     UILabel *versionLabel=[[UILabel alloc]init];
     versionLabel.translatesAutoresizingMaskIntoConstraints=NO;
-    versionLabel.font=[UIFont systemFontOfSize:14];
+    versionLabel.font=[REMFont defaultFontOfSize:14];
     versionLabel.textColor=[REMColor colorByHexString:@"#6e6e6e"];
     versionLabel.backgroundColor=[UIColor clearColor];
     NSString *version=REMIPadLocalizedString(@"Setting_AboutVersion");//iPad版V%@
@@ -52,7 +52,7 @@
     UILabel *copyrightChineseLabel=[[UILabel alloc]init];
     copyrightChineseLabel.translatesAutoresizingMaskIntoConstraints=NO;
     copyrightChineseLabel.textColor=[REMColor colorByHexString:@"#959595"];
-    copyrightChineseLabel.font=[UIFont systemFontOfSize:12];
+    copyrightChineseLabel.font=[REMFont defaultFontOfSize:12];
     copyrightChineseLabel.backgroundColor=[UIColor clearColor];
     copyrightChineseLabel.text=REMIPadLocalizedString(@"Setting_AboutCopyrightChinese");//施耐德电气 版权所有
     [self.view addSubview:copyrightChineseLabel];
@@ -62,7 +62,7 @@
     copyrightEnglishLabel.translatesAutoresizingMaskIntoConstraints=NO;
     copyrightEnglishLabel.backgroundColor=[UIColor clearColor];
     copyrightEnglishLabel.textColor=[REMColor colorByHexString:@"#959595"];
-    copyrightEnglishLabel.font=[UIFont systemFontOfSize:12];
+    copyrightEnglishLabel.font=[REMFont defaultFontOfSize:12];
     NSUInteger year = [REMTimeHelper getYear:[NSDate date] withCalendar:[NSCalendar currentCalendar]];
     
     copyrightEnglishLabel.text = [NSString stringWithFormat:REMIPadLocalizedString(@"Setting_AboutCopyrightEnglish%d"),year];

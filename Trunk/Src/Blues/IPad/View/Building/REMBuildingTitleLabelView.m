@@ -83,14 +83,13 @@
     }
     textLabel.text=[REMNumberHelper formatStringWithThousandSep:data.dataValue withRoundDigit:digit withIsRound:YES];
     [self addSubview:textLabel];
-    self.textLabel=textLabel;
-    //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
+    self.textLabel=textLabel;    //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
     
-    CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[UIFont fontWithName:@(kBuildingFontLight) size:valueSize]];
+    CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[REMFont fontWithKey:@(kBuildingFontKeyLight) size:valueSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
     self.uomLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin+expectedLabelSize.width, marginTop+expectedLabelSize.height-valueSize, 200, valueSize)];
-    self.uomLabel.font=[UIFont fontWithName:@(kBuildingFontLight) size:uomSize];
+    self.uomLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyLight) size:uomSize];
     self.uomLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;
     self.uomLabel.textColor=[UIColor whiteColor];
@@ -121,7 +120,7 @@
             scriptType=@"-1";
         }
         
-        UIFont *smallFont = [UIFont systemFontOfSize:size];
+        UIFont *smallFont = [REMFont defaultFontOfSize:size];
         
         [attString beginEditing];
         [attString addAttribute:NSFontAttributeName value:(smallFont) range:NSMakeRange(string.length - 1, 1)];

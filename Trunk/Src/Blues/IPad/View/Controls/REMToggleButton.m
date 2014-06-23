@@ -10,13 +10,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "REMBuildingConstants.h"
 #import "REMColor.h"
+#import "REMCommonHeaders.h"
+
 @implementation REMToggleButton 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.backgroundColor = [UIColor clearColor].CGColor;
-        self.titleLabel.font = [UIFont fontWithName:@(kBuildingFontUltra) size:15];
+        self.titleLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyUltraLight) size:15];
 //        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 //        [self.layer setMasksToBounds:YES];
 //        [self.layer setCornerRadius:3.0];

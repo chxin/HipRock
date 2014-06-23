@@ -57,10 +57,10 @@
 #define kBuildingCommodityDetailHeight 88
 
 
-#define kBuildingFontUltra "HelveticaNeue-UltraLight"
-#define kBuildingFontLight "HelveticaNeue-Light"
-#define kBuildingFontSC "STHeitiSC-Medium"
-#define kBuildingFontSCRegular "STHeitiSC-Light"
+#define kBuildingFontKeyUltraLight "Font_BuildingNumberLabelUltraLight"
+#define kBuildingFontKeyLight "Font_BuildingNumberLabelLight"
+#define kBuildingFontKeyTitle "Font_BuildingNumberLabelTitle"
+#define kBuildingFontKeyRegular "Font_BuildingNumberLabelEmptyText"//"STHeitiSC-Light"
 
 
 #define kScrollVelocityMax 1000

@@ -35,7 +35,6 @@
 
 + (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
 
-+ (UIImage *) drawText:(NSString*) text inImage:(UIImage*)image inRect:(CGRect)rect;
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor;
 

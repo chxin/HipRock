@@ -9,11 +9,24 @@
 
 @implementation REMFont
 
-#define kDefaultFontName NSLocalizedStringFromTable(@"Font_DefaultFontName", @"Localizable_Style", REMEmptyStrng)
+#define REMLocalizedStyleString(a) NSLocalizedStringFromTable((a), @"Localizable_Style", REMEmptyString)
+#define kDefaultFontNameKey @"Font_DefaultFontName"
+#define kDefaultFontSize 14
+
 
 +(UIFont *)defaultFontOfSize:(CGFloat)size
 {
-    UIFont *font = [UIFont fontWithName:kDefaultFontName size:size];
+    return [REMFont fontWithKey:kDefaultFontNameKey size:size];
+}
++(UIFont *)defaultFontSize
+{
+    return [REMFont defaultFontOfSize:kDefaultFontSize];
+}
++(UIFont *)fontWithKey:(NSString *)key size:(CGFloat)size
+{
+    NSString *fontName = REMLocalizedStyleString(key);
+    
+    UIFont *font = [UIFont fontWithName:fontName size:size];
     
     return font;
 }

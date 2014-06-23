@@ -462,17 +462,6 @@
     imageData = nil;
 }
 
-+ (UIImage *) drawText:(NSString*) text inImage:(UIImage*)image inRect:(CGRect)rect
-{
-    UIFont *font = [UIFont systemFontOfSize:24.0];
-    UIGraphicsBeginImageContext(image.size);
-    [image drawInRect:CGRectMake(0,0,image.size.width,image.size.height)];
-
-    [text drawInRect:CGRectIntegral(rect) withFont:font];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor
 {

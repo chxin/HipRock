@@ -143,7 +143,7 @@
         if (self.standardLabels[standard.standardName] == nil) {
             UILabel* label = [[UILabel alloc]init];
             label.backgroundColor = [UIColor clearColor];
-            label.font = [UIFont systemFontOfSize:11];
+            label.font = [REMFont defaultFontOfSize:11];
             label.textColor = b.color;
             label.text = [NSString stringWithFormat:labelText, standard.standardValue.integerValue, standard.uom];
             [self.view addSubview:label];
