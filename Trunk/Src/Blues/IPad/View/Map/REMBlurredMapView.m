@@ -11,7 +11,7 @@
 
 @property (nonatomic,weak) UIImageView *background;
 @property (nonatomic,weak) REMBreathLogoView *logo;
-@property (nonatomic,weak) UILabel *label;
+@property (nonatomic,weak) UIImageView *loadingView;
 
 @end
 
@@ -24,7 +24,7 @@
     if(self){
         [self renderBackground];
         [self renderLogo];
-        [self renderText];
+        [self renderLoading];
     }
     
     return self;
@@ -33,7 +33,7 @@
 
 -(void)hide:(void (^)(void))complete
 {
-    [UIView animateWithDuration:0.4 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.6 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         self.alpha = 0.0;
     } completion:^(BOOL finished) {
         [self.logo stop];
@@ -58,27 +58,36 @@
 //    UIImageView *logo = [[UIImageView alloc] initWithImage:REMIMG_SplashScreenLogo_Common];
 //    logo.frame = CGRectMake((kDMScreenWidth-logo.frame.size.width)/2, kDMSplash_LogoViewTopOffset, logo.frame.size.width, logo.frame.size.height);
     REMBreathLogoView *logo = [[REMBreathLogoView alloc] init];
-    logo.frame = CGRectMake((kDMScreenWidth-logo.frame.size.width)/2, kDMSplash_LogoViewTopOffset, logo.frame.size.width, logo.frame.size.height);
+    //logo.frame = CGRectMake((kDMScreenWidth-logo.frame.size.width)/2, kDMSplash_LogoViewTopOffset, logo.frame.size.width, logo.frame.size.height);
+    logo.frame = CGRectMake((kDMScreenWidth-logo.frame.size.width)/2, 238, logo.frame.size.width, logo.frame.size.height);
     
     [self addSubview:logo];
     self.logo = logo;
 }
 
--(void)renderText
+-(void)renderLoading
 {
-    NSString *text = @"正在加载...";
-    UIFont *font = [UIFont systemFontOfSize:24];
-    CGSize labelSize = [text sizeWithFont:font];
-    CGRect logoFrame = self.logo.frame;
-    CGRect labelFrame = CGRectMake((kDMScreenWidth-labelSize.width)/2, logoFrame.origin.y+logoFrame.size.height+43, labelSize.width, labelSize.height);
-    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
-    label.text = text;
-    label.font = font;
-    label.textColor = [UIColor whiteColor];
-    label.backgroundColor = [UIColor clearColor];
+    UIImage *loadingImage = REMLoadImageNamed(@"Loading");
+    UIImageView *loadingView = [[UIImageView alloc] initWithImage:loadingImage];
+    loadingView.frame = CGRectMake((kDMScreenWidth-loadingImage.size.width)/2, self.logo.frame.origin.y + self.logo.frame.size.height, loadingImage.size.width, loadingImage.size.height);
     
-    [self addSubview:label];
-    self.label = label;
+    [self addSubview:loadingView];
+    self.loadingView = loadingView;
+    
+    
+//    NSString *text = @"正在加载...";
+//    UIFont *font = [UIFont systemFontOfSize:24];
+//    CGSize labelSize = [text sizeWithFont:font];
+//    CGRect logoFrame = self.logo.frame;
+//    CGRect labelFrame = CGRectMake((kDMScreenWidth-labelSize.width)/2, logoFrame.origin.y+logoFrame.size.height+43, labelSize.width, labelSize.height);
+//    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+//    label.text = text;
+//    label.font = font;
+//    label.textColor = [UIColor whiteColor];
+//    label.backgroundColor = [UIColor clearColor];
+//    
+//    [self addSubview:label];
+//    self.label = label;
 }
 
 @end

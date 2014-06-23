@@ -7,7 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMControllerBase.h"
 #import "REMGalleryCollectionCell.h"
 

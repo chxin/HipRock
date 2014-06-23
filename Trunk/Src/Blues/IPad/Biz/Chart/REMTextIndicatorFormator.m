@@ -12,6 +12,7 @@
 #import "REMWidgetMultiTimespanSearchModel.h"
 #import "REMEnergyViewData.h"
 #import "REMTargetEnergyData.h"
+#import "REMWidgetContentSyntax.h"
 
 @implementation REMTextIndicatorFormator
 
@@ -80,11 +81,32 @@
         case REMEnergyTargetBaseValue:
         {
             NSString *format = nil;
-            if(target.type == REMEnergyTargetCalcValue){ format = REMIPadLocalizedString(@"Chart_TargetCalcValue"); }
-            else if(target.type == REMEnergyTargetOrigValue){ format = REMIPadLocalizedString(@"Chart_TargetOrigValue"); }
-            else if(target.type == REMEnergyTargetTargetValue){ format = REMIPadLocalizedString(@"Chart_TargetTargetValue"); }
-            else if(target.type == REMEnergyTargetBaseValue){ format = REMIPadLocalizedString(@"Chart_TargetBaseValue"); }
-            else{format = nil;}
+            switch (target.type) {
+                case REMEnergyTargetCalcValue:
+                    format = REMIPadLocalizedString(@"Chart_TargetCalcValue");
+                    break;
+                case REMEnergyTargetOrigValue:
+                    format = REMIPadLocalizedString(@"Chart_TargetOrigValue");
+                    break;
+                case REMEnergyTargetTargetValue:
+                    if([[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType == REMDSEnergyTagsTrendUnit){
+                        return target.name;
+                    }
+                    
+                    format = REMIPadLocalizedString(@"Chart_TargetTargetValue");
+                    break;
+                case REMEnergyTargetBaseValue:
+                    if([[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType == REMDSEnergyTagsTrendUnit){
+                        return target.name;
+                    }
+                    
+                    format = REMIPadLocalizedString(@"Chart_TargetBaseValue");
+                    break;
+                    
+                default:
+                    format = nil;
+                    break;
+            }
             
             if(format == nil)
                 return nil;

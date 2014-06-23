@@ -9,7 +9,7 @@
 
 #import "REMGalleryCollectionViewController.h"
 #import "REMGalleryViewController.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMGalleryCollectionCell.h"
 #import "REMCommonHeaders.h"
 #import "REMDimensions.h"

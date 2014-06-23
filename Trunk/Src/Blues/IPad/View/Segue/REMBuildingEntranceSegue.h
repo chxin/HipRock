@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "REMGalleryViewController.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 
 struct REMBuildingSegueZoomParamter {
     BOOL isNoAnimation;

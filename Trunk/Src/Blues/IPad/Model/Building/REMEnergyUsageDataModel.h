@@ -11,6 +11,7 @@
 #import "REMUomModel.h"
 #import "REMCommonHeaders.h"
 
+
 @interface REMEnergyUsageDataModel : REMJSONObject
 
 @property (nonatomic,strong) NSNumber *dataValue;
@@ -18,5 +19,7 @@
 @property (nonatomic) REMEnergyDataQuality dataQuality;
 
 @property (nonatomic,strong) REMUomModel *uom;
+
+-(instancetype)initWithDataValue:(NSNumber *)value andUomCode:(NSString *)uomCode;
 
 @end

@@ -26,6 +26,11 @@
 @dynamic targetValue;
 @dynamic totalUom;
 @dynamic totalValue;
+@dynamic annualUsage;
+@dynamic annualUsageUom;
+@dynamic annualBaseline;
+@dynamic annualBaselineUom;
+@dynamic annualEfficiency;
 @dynamic building;
 @dynamic pinnedWidgets;
 

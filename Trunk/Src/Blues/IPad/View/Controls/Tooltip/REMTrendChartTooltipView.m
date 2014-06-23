@@ -131,7 +131,8 @@
         if([point.series isKindOfClass:[DCXYSeries class]] && ((DCXYSeries *)point.series).hidden == NO){
             REMChartTooltipItemModel *model = [[REMChartTooltipItemModel alloc] init];
             
-            model.title = [self formatTargetName:point];
+            NSString *targetName = [self formatTargetName:point];
+            model.title = [targetName isEqual:[NSNull null]] ? nil : targetName;
             model.value = REMIsNilOrNull(point) ? nil : point.value;
             model.color = point.series.color;
             model.index = index;

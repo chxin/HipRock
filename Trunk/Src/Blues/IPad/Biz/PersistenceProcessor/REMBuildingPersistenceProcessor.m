@@ -295,6 +295,9 @@
         
         commodity.carbonValue = nil;
         commodity.totalValue = nil;
+        commodity.annualUsage = nil;
+        commodity.annualBaseline = nil;
+        commodity.annualEfficiency = nil;
         
 //        [building addCommoditiesObject:commodity];
         [commodity setBuilding:building];

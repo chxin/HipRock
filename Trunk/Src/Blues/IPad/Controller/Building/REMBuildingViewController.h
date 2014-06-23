@@ -10,7 +10,7 @@
 #import "REMSplashScreenController.h"
 #import "REMBuildingConstants.h"
 #import "REMSettingViewController.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMDashboardController.h"
 #import "REMBuildingImageViewController.h"
 

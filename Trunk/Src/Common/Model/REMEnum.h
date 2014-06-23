@@ -115,6 +115,8 @@ typedef enum _REMRelativeTimeRangeType : NSInteger
     REMRelativeTimeRangeTypeLastMonth = 7,
     REMRelativeTimeRangeTypeThisYear = 8,
     REMRelativeTimeRangeTypeLastYear = 9,
+    REMRelativeTimeRangeTypeLast30Day = 10,
+    REMRelativeTimeRangeTypeLast12Month = 11,
 } REMRelativeTimeRangeType;
 
 typedef enum _REMRankingRange : NSInteger

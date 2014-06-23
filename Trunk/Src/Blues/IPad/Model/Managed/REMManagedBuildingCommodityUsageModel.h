@@ -26,6 +26,11 @@
 @property (nonatomic, retain) NSNumber * targetValue;
 @property (nonatomic, retain) NSString * totalUom;
 @property (nonatomic, retain) NSNumber * totalValue;
+@property (nonatomic, retain) NSNumber * annualUsage;
+@property (nonatomic, retain) NSString * annualUsageUom;
+@property (nonatomic, retain) NSNumber * annualBaseline;
+@property (nonatomic, retain) NSString * annualBaselineUom;
+@property (nonatomic, retain) NSNumber * annualEfficiency;
 @property (nonatomic, retain) REMManagedBuildingModel *building;
 @property (nonatomic, retain) NSOrderedSet *pinnedWidgets;
 @end

@@ -10,7 +10,7 @@
 #import "REMLoginCarouselController.h"
 #import "REMCommonHeaders.h"
 #import "REMBuildingViewController.h"
-#import "REMMapViewController.h"
+#import "REMMapKitViewController.h"
 #import "REMStoryboardDefinitions.h"
 #import "REMDimensions.h"
 #import "DCTrendWrapper.h"
@@ -158,7 +158,7 @@
         loginCarouselController.splashScreenController = self;
     }
     if([segue.identifier isEqualToString:kSegue_SplashToMap]){
-        REMMapViewController *mapController = segue.destinationViewController;
+        REMMapKitViewController *mapController = segue.destinationViewController;
         mapController.isInitialPresenting = YES;
     }
 }

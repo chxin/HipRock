@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-4561" y="-1166"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map Kit View Controller-->
         <scene sceneID="xH7-5D-ZJn">
             <objects>
-                <viewController id="8sm-Rk-4h3" customClass="REMMapViewController" sceneMemberID="viewController">
+                <viewController id="8sm-Rk-4h3" customClass="REMMapKitViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fyi-Jd-Zlp"/>
                         <viewControllerLayoutGuide type="bottom" id="Rlw-rI-tvp"/>

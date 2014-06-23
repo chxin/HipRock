@@ -15,6 +15,7 @@
 #import "REMColor.h"
 #import "REMApplicationContext.h"
 #import "REMLoginCarouselController.h"
+#import "REMMapKitViewController.h"
 
 @interface REMMainNavigationController ()
 
@@ -117,7 +118,7 @@
 
 -(void)presentInitialView
 {
-    REMMapViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapViewController class]];
+    REMMapKitViewController *mapController = [self getChildControllerInstanceOfClass:[REMMapKitViewController class]];
     mapController.isInitialPresenting = true;
     
     if(mapController.snapshot != nil){
