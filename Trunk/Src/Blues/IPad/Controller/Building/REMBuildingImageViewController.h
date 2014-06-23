@@ -40,6 +40,4 @@ typedef enum _REMBuildingCoverStatus{
 - (void)releaseContentView;
 - (void)releaseAllDataView;
 
--(void)centerChangedFrom:(CGPoint)oldCenter to:(CGPoint)newCenter;
-
 @end
