@@ -6,6 +6,20 @@
  
  */
 //Common, prefix: Common_
+"Common_Commodity_Other" = "Other";
+"Common_Commodity_Elec" = "Electricity";
+"Common_Commodity_Water" = "Water";
+"Common_Commodity_Gas" = "Gas";
+"Common_Commodity_SoftWater" = "Soft water";
+"Common_Commodity_Petrol" = "Petrol";
+"Common_Commodity_LowPressureSteam" = "Low pressure steam";
+"Common_Commodity_DieselOil" = "Diesel oil";
+"Common_Commodity_HeatQ" = "HeatQ";
+"Common_Commodity_CoolQ" = "CoolQ";
+"Common_Commodity_Coal" = "Coal";
+"Common_Commodity_CoalOil" = "Coal oil";
+"Common_Commodity_AirQuality" = "Air";
+
 "Common_ServerError" = "Sorry! Server error! No energy data is available. Please try again later.";
 "Common_Building"="Building";
 "Common_Last7Day"="Previous 7 days";

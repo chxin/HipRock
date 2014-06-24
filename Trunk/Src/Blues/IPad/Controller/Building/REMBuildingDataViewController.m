@@ -97,7 +97,7 @@
         //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
         btn.tag=i;
         //[btn setTitle:model.comment forState:UIControlStateNormal];
-        [btn setTitle:commodityKey forState:UIControlStateNormal];
+        [btn setTitle:commodityName forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];

@@ -1869,11 +1869,11 @@
 		7A3290CC18D80CD200B3AE8A /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */,
 				7A3290C818D80CC300B3AE8A /* InfoPlist.strings */,
 				7A63E28918B454BA00A13464 /* Localizable_Common.strings */,
 				7A63E09518B442A600A13464 /* Localizable_IPhone.strings */,
 				7A63E09118B4427B00A13464 /* Localizable_IPad.strings */,
+				7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */,
 			);
 			name = Languages;
 			sourceTree = "<group>";

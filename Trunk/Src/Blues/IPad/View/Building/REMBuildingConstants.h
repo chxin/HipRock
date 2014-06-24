@@ -60,7 +60,7 @@
 #define kBuildingFontKeyUltraLight "Font_BuildingNumberLabelUltraLight"
 #define kBuildingFontKeyLight "Font_BuildingNumberLabelLight"
 #define kBuildingFontKeyTitle "Font_BuildingNumberLabelTitle"
-#define kBuildingFontKeyRegular "Font_BuildingNumberLabelEmptyText"//"STHeitiSC-Light"
+#define kBuildingFontKeyRegular "Font_BuildingNumberLabelRegular"//"STHeitiSC-Light"
 
 
 #define kScrollVelocityMax 1000
