@@ -265,7 +265,7 @@
     [bands addObject:b];
     [lineWidget.view setBackgoundBands:bands];
     [self.view addSubview:lineWidget.view];
-    self.carouselController = lineWidget;
+    //self.carouselController = lineWidget;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
     //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];

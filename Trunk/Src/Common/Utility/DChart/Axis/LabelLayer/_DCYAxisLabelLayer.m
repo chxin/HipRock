@@ -47,6 +47,7 @@
         for (NSUInteger i = 0; i <= self.graphContext.hGridlineAmount; i++) {
             double yVal = i * self.interval;
             NSString* label = [self stringForObjectValue:yVal];
+            
             [self.textFrames[i] getValue:&theLastLabelRect];
             [label drawInRect:theLastLabelRect withFont:self.view.chartStyle.yTextFont lineBreakMode:NSLineBreakByClipping alignment:self.axis.coordinateSystem.isMajor ? NSTextAlignmentRight : NSTextAlignmentLeft];
         }

@@ -87,7 +87,6 @@
 		7A0CCD72192A01D900C35C2F /* REMManagedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD71192A01D900C35C2F /* REMManagedUserModel.m */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
 		7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */; };
-		7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
 		7A1D7C4517A63E8B0050779D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
@@ -119,7 +118,6 @@
 		7A39D5C618B5A69C00CC9D5D /* REMEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = B42FBF6317F574B5004F2F3A /* REMEnum.m */; };
 		7A39D5D318B5A69C00CC9D5D /* REMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B49B6F501781491800BC130A /* REMColor.m */; };
 		7A39D5D418B5A69C00CC9D5D /* REMJSONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4198EB11784220300B50475 /* REMJSONHelper.m */; };
-		7A39D5D518B5A69C00CC9D5D /* REMHttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D14281785178800CC2922 /* REMHttpHelper.m */; };
 		7A39D5D618B5A69C00CC9D5D /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A39D5D718B5A69C00CC9D5D /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A39D5D818B5A69C00CC9D5D /* REMEncryptHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4417A63E8B0050779D /* REMEncryptHelper.m */; };
@@ -814,8 +812,6 @@
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
 		7A1AE2C819371AE900A8BA48 /* REMSeriesKeyFormattor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSeriesKeyFormattor.h; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.h; sourceTree = "<group>"; };
 		7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSeriesKeyFormattor.m; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.m; sourceTree = "<group>"; };
-		7A1D14271785178800CC2922 /* REMHttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMHttpHelper.h; path = Common/Utility/REMHttpHelper.h; sourceTree = "<group>"; };
-		7A1D14281785178800CC2922 /* REMHttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMHttpHelper.m; path = Common/Utility/REMHttpHelper.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
 		7A1D142B1785211000CC2922 /* REMAlertHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMAlertHelper.m; path = Common/Utility/REMAlertHelper.m; sourceTree = "<group>"; };
 		7A1D7C3817A618140050779D /* REMCommonHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMCommonHeaders.h; path = Common/REMCommonHeaders.h; sourceTree = "<group>"; };
@@ -2054,8 +2050,6 @@
 				B49B6F501781491800BC130A /* REMColor.m */,
 				B4198EB01784220300B50475 /* REMJSONHelper.h */,
 				B4198EB11784220300B50475 /* REMJSONHelper.m */,
-				7A1D14271785178800CC2922 /* REMHttpHelper.h */,
-				7A1D14281785178800CC2922 /* REMHttpHelper.m */,
 				7A1D142A1785211000CC2922 /* REMAlertHelper.h */,
 				7A1D142B1785211000CC2922 /* REMAlertHelper.m */,
 				7A3DDCDB1786C195008A1033 /* REMMaskManager.h */,
@@ -3859,7 +3853,6 @@
 				7A39D5C618B5A69C00CC9D5D /* REMEnum.m in Sources */,
 				7A39D5D318B5A69C00CC9D5D /* REMColor.m in Sources */,
 				7A39D5D418B5A69C00CC9D5D /* REMJSONHelper.m in Sources */,
-				7A39D5D518B5A69C00CC9D5D /* REMHttpHelper.m in Sources */,
 				7A39D5D618B5A69C00CC9D5D /* REMAlertHelper.m in Sources */,
 				7A39D5D718B5A69C00CC9D5D /* REMMaskManager.m in Sources */,
 				7A39D5D818B5A69C00CC9D5D /* REMEncryptHelper.m in Sources */,
@@ -3993,7 +3986,6 @@
 				EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */,
 				7AF9638018D6C63C005A8D12 /* AFNetworkReachabilityManager.m in Sources */,
 				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
-				7A1D14291785178800CC2922 /* REMHttpHelper.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
 				7A63E26018B44CBD00A13464 /* REMPopNote.m in Sources */,
 				7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */,
