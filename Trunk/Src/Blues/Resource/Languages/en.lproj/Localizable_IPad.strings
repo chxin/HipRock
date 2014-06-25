@@ -199,6 +199,10 @@
 "Building_WidgetRelationPositionDeleted"="Addition failed! Addition position does not exist. Please update the data!";
 
 
+"Building_AnnualAverageUsageLabelTitle"="Annual energy usage per square meter";
+"Building_AnnualAverageBaselineLabelTitle"="Industry standard";
+"Building_AnnualEfficiencyLabelTitle"="Annual energy saving rate";
+
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="Pull down to return to review energy consumption information";
 "Dashboard_TimeRange"="%@ to %@";

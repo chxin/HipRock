@@ -8,7 +8,6 @@
 
 #import "REMBuildingWeiboView.h"
 #import "REMColor.h"
-#import "REMHttpHelper.h"
 #import "AFNetworking.h"
 #import "REMCommonHeaders.h"
 

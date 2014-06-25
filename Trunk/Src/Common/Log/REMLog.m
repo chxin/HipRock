@@ -7,6 +7,9 @@
  --------------------------------------------------------------------------*///
 
 #import "REMLog.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+#import "DDFileLogger.h"
 
 
 void uncaughtExceptionHandler(NSException *exception)

@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "DDLog.h"
-#import "DDTTYLogger.h"
-#import "DDFileLogger.h"
 #import "REMLogManager.h"
 
 

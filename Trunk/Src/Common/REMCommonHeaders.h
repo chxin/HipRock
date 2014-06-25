@@ -34,7 +34,6 @@
 #import "REMAlertHelper.h"
 #import "REMColor.h"
 #import "REMEncryptHelper.h"
-#import "REMHttpHelper.h"
 #import "REMImageHelper.h"
 #import "REMJSONHelper.h"
 #import "REMMaskManager.h"
