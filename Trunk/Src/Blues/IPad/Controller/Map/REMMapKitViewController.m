@@ -248,19 +248,25 @@
         self.isInitialPresenting = NO;
 }
 
+
 -(void)highlightMarker:(int)buildingIndex
 {
+    //if current building was not changed, just return
+    if(buildingIndex == self.currentBuildingIndex){
+        return;
+    }
+    
+    //else, find the destination annotation
     REMAnnotation *destinationAnnotation = nil;
     for(REMAnnotation *annotation in self.mapView.annotations){
         if([annotation.building isEqual:self.buildingInfoArray[buildingIndex]]){
             destinationAnnotation = annotation;
+            break;
         }
     }
     
-    if(destinationAnnotation.visiable == YES){
-        [destinationAnnotation select];
-        self.mapView.camera.centerCoordinate = CLLocationCoordinate2DMake(destinationAnnotation.latitude,destinationAnnotation.longitude);
-    }
+    //highlight the destination annotation
+    [destinationAnnotation select];
 }
 
 -(void)takeSnapshot

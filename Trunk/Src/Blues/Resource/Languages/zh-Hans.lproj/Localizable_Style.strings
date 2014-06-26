@@ -7,13 +7,13 @@
  */
 "Font_DefaultFontName"="Hiragino Sans GB";
 
-"Font_BuildingNumberLabelUltraLight"="Hiragino Sans GB";
-"Font_BuildingNumberLabelLight"="Hiragino Sans GB";
-"Font_BuildingNumberLabelTitle"="Hiragino Sans GB";
-"Font_BuildingNumberLabelRegular"="Hiragino Sans GB";
+//"Font_BuildingNumberLabelUltraLight"="Hiragino Sans GB";
+//"Font_BuildingNumberLabelLight"="Hiragino Sans GB";
+//"Font_BuildingNumberLabelTitle"="Hiragino Sans GB";
+//"Font_BuildingNumberLabelRegular"="Hiragino Sans GB";
 
 
-//"Font_BuildingNumberLabelUltraLight"="HelveticaNeue-UltraLight";
-//"Font_BuildingNumberLabelLight"="HelveticaNeue-Light";
-//"Font_BuildingNumberLabelTitle"="STHeitiSC-Medium";
-//"Font_BuildingNumberLabelRegular"="kBuildingFontSCRegular";
+"Font_BuildingNumberLabelUltraLight"="HelveticaNeue-UltraLight";
+"Font_BuildingNumberLabelLight"="HelveticaNeue-Light";
+"Font_BuildingNumberLabelTitle"="STHeitiSC-Medium";
+"Font_BuildingNumberLabelRegular"="STHeitiSC-Light";
