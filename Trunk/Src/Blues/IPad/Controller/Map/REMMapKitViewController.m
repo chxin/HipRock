@@ -60,11 +60,17 @@
 {
     MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     mapView.zoomEnabled = YES;
-    mapView.rotateEnabled = NO;
     mapView.scrollEnabled = YES;
     mapView.mapType = MKMapTypeStandard;
     mapView.delegate = self;
-    mapView.camera = [MKMapCamera cameraLookingAtCenterCoordinate:REMMapInitialLocation fromEyeCoordinate:REMMapInitialLocation  eyeAltitude:REMMapInitialAltitude];
+    
+    if(REMISIOS7){
+        mapView.rotateEnabled = NO;
+        mapView.camera = [MKMapCamera cameraLookingAtCenterCoordinate:REMMapInitialLocation fromEyeCoordinate:REMMapInitialLocation  eyeAltitude:REMMapInitialAltitude];
+    }
+    else{
+        mapView.centerCoordinate = REMMapInitialLocation;
+    }
     
     [self.view addSubview:mapView];
     
