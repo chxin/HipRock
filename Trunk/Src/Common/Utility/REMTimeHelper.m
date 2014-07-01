@@ -210,7 +210,7 @@
     if(relativeDateType == REMRelativeTimeRangeTypeNone ){
         return REMIPadLocalizedString(@"Common_CustomTime"); //@"自定义";
     }
-    else if(relativeDateType == REMRelativeTimeRangeTypeLast7Days){
+    else if(relativeDateType == REMRelativeTimeRangeTypeLast7Day){
         return REMIPadLocalizedString(@"Common_Last7Day"); //@"之前七天";
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeToday){
@@ -255,7 +255,7 @@
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
     NSCalendar *calendarWithZone=[NSCalendar currentCalendar];
     
-    if (relativeDateType == REMRelativeTimeRangeTypeLast7Days) {
+    if (relativeDateType == REMRelativeTimeRangeTypeLast7Day) {
         NSDate *last7day = [REMTimeHelper getDate:[NSDate date] daysAhead:-7];
         
         NSDateComponents *last7dayEndComps = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:last7day];
@@ -796,6 +796,59 @@ static NSCalendar *_currentCalendar;
     REMTimeRange *range = [[REMTimeRange alloc] initWithStartTime:start EndTime:end];
     
     return range;
+}
+
++(REMRelativeTimeRangeType)relativeTimeTypeByName:(NSString *)relativeTimeTypeName
+{
+    
+//    REMRelativeTimeRangeTypeNone=0,
+//    REMRelativeTimeRangeTypeLast7Days = 1,
+//    REMRelativeTimeRangeTypeToday = 2,
+//    REMRelativeTimeRangeTypeYesterday = 3,
+//    REMRelativeTimeRangeTypeThisWeek = 4,
+//    REMRelativeTimeRangeTypeLastWeek = 5,
+//    REMRelativeTimeRangeTypeThisMonth = 6,
+//    REMRelativeTimeRangeTypeLastMonth = 7,
+//    REMRelativeTimeRangeTypeThisYear = 8,
+//    REMRelativeTimeRangeTypeLastYear = 9,
+//    REMRelativeTimeRangeTypeLast30Day = 10,
+//    REMRelativeTimeRangeTypeLast12Month = 11,
+    if([relativeTimeTypeName isEqualToString:@"Last7Day"]){
+        return REMRelativeTimeRangeTypeLast7Day;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"Last30Day"]){
+        return REMRelativeTimeRangeTypeLast30Day;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"Last12Month"]){
+        return REMRelativeTimeRangeTypeLast12Month;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"Today"]){
+        return REMRelativeTimeRangeTypeToday;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"Yesterday"]){
+        return REMRelativeTimeRangeTypeYesterday;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"ThisWeek"]){
+        return REMRelativeTimeRangeTypeThisWeek;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"LastWeek"]){
+        return REMRelativeTimeRangeTypeLastWeek;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"ThisMonth"]){
+        return REMRelativeTimeRangeTypeThisMonth;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"LastMonth"]){
+        return REMRelativeTimeRangeTypeLastMonth;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"ThisYear"]){
+        return REMRelativeTimeRangeTypeThisYear;
+    }
+    else if([relativeTimeTypeName isEqualToString:@"LastYear"]){
+        return REMRelativeTimeRangeTypeLastYear;
+    }
+    else{
+        return REMRelativeTimeRangeTypeNone;
+    }
 }
 
 @end

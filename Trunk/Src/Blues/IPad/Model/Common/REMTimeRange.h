@@ -15,20 +15,18 @@
 
 @interface REMTimeRange : REMJSONObject<NSCoding,NSCopying>
 
-- (id)initWithArray:(NSArray *)array;
 
 @property (nonatomic,strong) NSDate *startTime;
-
-@property (nonatomic) long long longStartTime;
-@property (nonatomic) long long longEndTime;
-
 @property (nonatomic,strong) NSDate *endTime;
 
-@property (nonatomic) REMRelativeTimeRangeType timeType;
+@property (nonatomic) REMRelativeTimeRangeType relativeTimeType;
 @property (nonatomic) long long baseTime;
 @property (nonatomic) long long offset;
 
-- (id) initWithStartTime:(NSDate *)start EndTime:(NSDate *)end;
+
+- (id)initWithArray:(NSArray *)array;
+
+- (id)initWithStartTime:(NSDate *)start EndTime:(NSDate *)end;
 
 - (NSDictionary *)toJsonDictionary;
 

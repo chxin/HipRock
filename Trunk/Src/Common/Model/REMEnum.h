@@ -106,7 +106,7 @@ typedef enum _REMEnergyStep:NSUInteger
 typedef enum _REMRelativeTimeRangeType : NSInteger
 {
     REMRelativeTimeRangeTypeNone=0,
-    REMRelativeTimeRangeTypeLast7Days = 1,
+    REMRelativeTimeRangeTypeLast7Day = 1,
     REMRelativeTimeRangeTypeToday = 2,
     REMRelativeTimeRangeTypeYesterday = 3,
     REMRelativeTimeRangeTypeThisWeek = 4,

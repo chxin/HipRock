@@ -94,4 +94,6 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 +(REMTimeRange *)getREMSystemTimeRangeLimit;
 
++(REMRelativeTimeRangeType)relativeTimeTypeByName:(NSString *)relativeTimeTypeName;
+
 @end

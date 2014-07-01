@@ -67,7 +67,7 @@
             offset=@"0";
         }
         else{
-            timeType = [NSString stringWithFormat:@"%d", timeRange.timeType];
+            timeType = [NSString stringWithFormat:@"%d", timeRange.relativeTimeType];
             offset = [NSString stringWithFormat:@"%llu", timeRange.offset];
         }
     }

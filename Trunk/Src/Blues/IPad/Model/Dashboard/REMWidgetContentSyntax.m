@@ -7,6 +7,7 @@
  --------------------------------------------------------------------------*///
 
 #import "REMWidgetContentSyntax.h"
+#import "REMSeriesStateModel.h"
 
 @implementation REMWidgetContentSyntax
 
@@ -55,7 +56,7 @@
         self.relativeDateType=REMRelativeTimeRangeTypeNone;
     }
     else if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
-        self.relativeDateType = REMRelativeTimeRangeTypeLast7Days;
+        self.relativeDateType = REMRelativeTimeRangeTypeLast7Day;
     }
     else if([self.relativeDate isEqualToString:@"Today"]==YES){
         self.relativeDateType=REMRelativeTimeRangeTypeToday;
@@ -179,6 +180,18 @@
         else{
             self.dataStoreType = REMDSEnergyRankingCost;
         }
+    }
+    
+    NSArray *seriesStates = p[@"seriesStates"];
+    if(!REMIsNilOrNull(seriesStates)){
+        NSMutableArray *seriesModels = [[NSMutableArray alloc] init];
+        for(NSDictionary *seriesStateItem in seriesStates){
+            REMSeriesStateModel *stateModel = [[REMSeriesStateModel alloc] initWithDictionary:seriesStateItem];
+            
+            [seriesModels addObject:stateModel];
+        }
+        
+        self.seriesStates = seriesModels;
     }
 
 }

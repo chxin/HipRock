@@ -35,7 +35,7 @@
 }
 -(NSArray *)dataValues
 {
-    return @[@(REMRelativeTimeRangeTypeLast7Days),
+    return @[@(REMRelativeTimeRangeTypeLast7Day),
              @(REMRelativeTimeRangeTypeLast30Day),
              @(REMRelativeTimeRangeTypeLast12Month),
              @(REMRelativeTimeRangeTypeToday),

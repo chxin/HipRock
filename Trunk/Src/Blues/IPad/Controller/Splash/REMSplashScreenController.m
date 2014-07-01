@@ -47,6 +47,16 @@
     UIImageView *background = [[UIImageView alloc] initWithImage:backgroundImage];
     background.frame = REMISIOS7 ? CGRectMake(0, 0, kDMScreenWidth, kDMScreenHeight) : CGRectMake(0, -20, kDMScreenWidth, kDMScreenHeight);
     
+    UIFont *font = [REMFont defaultFontOfSize:11]; //[UIFont systemFontOfSize:12];
+    NSString *text = REMIPadLocalizedString(@"Splash_Copyright");
+    CGSize size = [text sizeWithFont:font];
+    UILabel *copyright = [[UILabel alloc] initWithFrame:CGRectMake((kDMScreenWidth - size.width)/2, REMDMCOMPATIOS7(kDMScreenHeight - 60), size.width, size.height)];
+    copyright.text = text;
+    copyright.textColor = [UIColor whiteColor];
+    copyright.font = font;
+    
+    [background addSubview:copyright];
+    
     [self.view addSubview:background];
 }
 

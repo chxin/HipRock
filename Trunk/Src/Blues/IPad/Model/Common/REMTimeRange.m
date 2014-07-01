@@ -7,8 +7,21 @@
  --------------------------------------------------------------------------*///
 
 #import "REMTimeRange.h"
+#import "REMCommonHeaders.h"
+
+@interface REMTimeRange()
+
+@property (nonatomic) long long longStartTime;
+@property (nonatomic) long long longEndTime;
+
+@end
 
 @implementation REMTimeRange
+
+#pragma mark - Properties
+
+
+#pragma mark - Methods
 
 - (NSDictionary *)toJsonDictionary
 {
@@ -30,6 +43,7 @@
         
         self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:self.longStartTime];
         self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime];
+        
     }
     
     return self;
@@ -37,13 +51,22 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-    NSString *startTime=dictionary[@"StartTime"];
-    NSString *endTime=dictionary[@"EndTime"];
-    self.longStartTime=[REMTimeHelper longLongFromJSONString:startTime];
-    self.longEndTime=[REMTimeHelper longLongFromJSONString:endTime];
+    self.relativeTimeType = REMIsNilOrNull(dictionary[@"relativeDate"]) ? REMRelativeTimeRangeTypeNone : [REMTimeHelper relativeTimeTypeByName: dictionary[@"relativeDate"]];
     
-    self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:self.longStartTime/1000];
-    self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime/1000];
+    if(self.relativeTimeType == REMRelativeTimeRangeTypeNone){
+        NSString *startTime=dictionary[@"StartTime"];
+        NSString *endTime=dictionary[@"EndTime"];
+        self.longStartTime=[REMTimeHelper longLongFromJSONString:startTime];
+        self.longEndTime=[REMTimeHelper longLongFromJSONString:endTime];
+        
+        self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:self.longStartTime/1000];
+        self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime/1000];
+    }
+    else{
+        REMTimeRange *temp = [REMTimeHelper relativeDateFromType:self.relativeTimeType];
+        self.startTime = temp.startTime;
+        self.endTime=temp.endTime;
+    }
 }
 
 - (id)initWithStartTime:(NSDate *)start EndTime:(NSDate *)end
@@ -54,6 +77,7 @@
         self.longStartTime= [start timeIntervalSince1970]*1000;
         self.longEndTime = [end timeIntervalSince1970]*1000;
     
+        
     }
     return self;
 }
@@ -72,8 +96,7 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone{
-    return [NSKeyedUnarchiver unarchiveObjectWithData:
-     [NSKeyedArchiver archivedDataWithRootObject:self]];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self]];
 }
 
 -(NSString *)description

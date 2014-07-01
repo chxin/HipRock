@@ -572,6 +572,7 @@
 		7AF9638D18D6C9A3005A8D12 /* REMDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9638818D6C9A3005A8D12 /* REMDataPersistenceProcessor.m */; };
 		7AF9638E18D6C9A3005A8D12 /* REMDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9638A18D6C9A3005A8D12 /* REMDataStore.m */; };
 		7AF9638F18D6C9A3005A8D12 /* REMRemoteServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9638C18D6C9A3005A8D12 /* REMRemoteServiceRequest.m */; };
+		7AFF40E719628B19003C4B60 /* REMSeriesStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFF40E619628B19003C4B60 /* REMSeriesStateModel.m */; };
 		B4019B241890A16800973FAA /* DefaultBuilding.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B221890A16800973FAA /* DefaultBuilding.png */; };
 		B4019B251890A16800973FAA /* DefaultBuilding@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B231890A16800973FAA /* DefaultBuilding@2x.png */; };
 		B4019B271890A33900973FAA /* DefaultBuildingBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = B4019B261890A33900973FAA /* DefaultBuildingBlur.png */; };
@@ -1360,6 +1361,8 @@
 		7AF9638A18D6C9A3005A8D12 /* REMDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMDataStore.m; sourceTree = "<group>"; };
 		7AF9638B18D6C9A3005A8D12 /* REMRemoteServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMRemoteServiceRequest.h; sourceTree = "<group>"; };
 		7AF9638C18D6C9A3005A8D12 /* REMRemoteServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMRemoteServiceRequest.m; sourceTree = "<group>"; };
+		7AFF40E519628B19003C4B60 /* REMSeriesStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSeriesStateModel.h; sourceTree = "<group>"; };
+		7AFF40E619628B19003C4B60 /* REMSeriesStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSeriesStateModel.m; sourceTree = "<group>"; };
 		B4019B221890A16800973FAA /* DefaultBuilding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuilding.png; sourceTree = "<group>"; };
 		B4019B231890A16800973FAA /* DefaultBuilding@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DefaultBuilding@2x.png"; sourceTree = "<group>"; };
 		B4019B261890A33900973FAA /* DefaultBuildingBlur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBuildingBlur.png; sourceTree = "<group>"; };
@@ -2407,6 +2410,8 @@
 			children = (
 				7A63E14418B44CBC00A13464 /* REMWidgetContentSyntax.h */,
 				7A63E14518B44CBC00A13464 /* REMWidgetContentSyntax.m */,
+				7AFF40E519628B19003C4B60 /* REMSeriesStateModel.h */,
+				7AFF40E619628B19003C4B60 /* REMSeriesStateModel.m */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -3924,6 +3929,7 @@
 				7A0CCD69192A01D800C35C2F /* REMManagedImageModel.m in Sources */,
 				7A63E1FE18B44CBD00A13464 /* REMWidgetRankingCellDelegator.m in Sources */,
 				7A63E22718B44CBD00A13464 /* REMRankingDataModel.m in Sources */,
+				7AFF40E719628B19003C4B60 /* REMSeriesStateModel.m in Sources */,
 				7A63E20C18B44CBD00A13464 /* REMSettingAboutViewController.m in Sources */,
 				7A4B466018EA98C700FC238C /* REMBuildingAirQualityPersistenceProcessor.m in Sources */,
 				7A0CCD63192A01D800C35C2F /* REMManagedBuildingModel.m in Sources */,
