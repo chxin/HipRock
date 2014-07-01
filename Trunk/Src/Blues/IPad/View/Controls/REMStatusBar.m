@@ -7,9 +7,10 @@
  --------------------------------------------------------------------------*///
 
 #import "REMStatusBar.h"
+#import "REMCommonHeaders.h"
 
 
-#define kFontSC "STHeitiSC-Medium"
+//#define kFontSC "STHeitiSC-Medium"
 
 @implementation REMStatusBar {
     CGRect topRect;
@@ -55,7 +56,7 @@
         [labels addObject:[[UILabel alloc]initWithFrame:bottomRect]];
         for (int i = 0; i < 2; i++) {
             UILabel* l = labels[i];
-            l.font = [UIFont fontWithName:@(kFontSC) size:15];
+            l.font = [REMFont defaultFontOfSize:15];  // [UIFont fontWithName:@(kFontSC) size:15];
             [l setTextColor:[UIColor whiteColor]];
             [l setBackgroundColor:[UIColor clearColor]];
             l.textAlignment = NSTextAlignmentCenter;

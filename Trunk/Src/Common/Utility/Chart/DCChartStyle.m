@@ -7,6 +7,7 @@
 //
 
 #import "DCChartStyle.h"
+#import "REMCommonHeaders.h"
 
 @implementation DCChartStyle
 
@@ -74,7 +75,7 @@
     style.yAxisTitleToTopLabel = 10;
     style.yAxisTitleFontSize = 13;
     style.yTextColor = style.xTextColor = [REMColor colorByHexString:@"#969696"];
-    style.yTextFont = style.xTextFont = [UIFont fontWithName:@kBuildingFontKeyRegular size:15.0];
+    style.yTextFont = style.xTextFont = [REMFont fontWithKey:@kBuildingFontKeyRegular size:15.0];
     
     style.indicatorColor = [REMColor colorByHexString:@"#f4f4f4"];
     style.focusSymbolLineStyle = DCLineTypeDefault;
@@ -84,7 +85,7 @@
     style.piePercentageTextHidden = NO;
     style.piePercentageTextRadius = 144;
     style.piePercentageTextColor = [UIColor whiteColor];
-    style.piePercentageTextFont = [UIFont fontWithName:@kBuildingFontKeyRegular size:15.0];
+    style.piePercentageTextFont = [REMFont fontWithKey:@kBuildingFontKeyRegular size:15.0];
     
     style.pieRadius = 180;
     style.pieShadowRadius = 188;
@@ -97,7 +98,7 @@
     style.benchmarkColor = [REMColor colorByHexString:kDMChart_BenchmarkColor];
     
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
-    style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontKeyRegular) size:12];
+    style.backgroundBandFont = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:12];
     
     style.playBeginAnimation = YES;
     
@@ -171,7 +172,7 @@
     style.xGridlineWidth = 0.0;
     style.xGridlineStyle = DCLineTypeDefault;
     style.yTextColor = style.xTextColor = [REMColor colorByHexString:@"#969696"];
-    style.yTextFont = style.xTextFont = [UIFont fontWithName:@kBuildingFontKeyRegular size:10.0];
+    style.yTextFont = style.xTextFont = [REMFont fontWithKey:@kBuildingFontKeyRegular size:10.0];
     style.horizentalGridLineAmount = 4;
     style.symbolSize = 4;
     style.xLabelToLine = 4;
@@ -196,7 +197,7 @@
     style.benchmarkColor = [REMColor colorByHexString:kDMChart_BenchmarkColor];
     
     style.backgroundBandFontColor = [REMColor colorByHexString:@"#3b3b3b"];
-    style.backgroundBandFont = [UIFont fontWithName:@(kBuildingFontKeyRegular) size:8];
+    style.backgroundBandFont = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:8];
     
     style.playBeginAnimation = YES;
     
