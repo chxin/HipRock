@@ -44,7 +44,7 @@
     } else {
         s.coordinateSystemName = REMEmptyString;
     }
-    s.seriesKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:s.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
+    s.seriesKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:s.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig.contentSyntax];
     
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {

@@ -36,7 +36,7 @@
         }
         p.color = [REMColor colorByIndex:i];
         p.target = seriesData.target;
-        p.pointKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:seriesData.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig];
+        p.pointKey = [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:seriesData.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig.contentSyntax];
         [series0Data addObject:p];
     }
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];

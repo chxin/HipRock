@@ -26,6 +26,9 @@
         _relativeDateType = contentSyntax.relativeDateType;
         _storeType = contentSyntax.dataStoreType;
         _timeRanges = [contentSyntax.timeRanges copy];
+        _seriesStates = contentSyntax.seriesStates;
+        
+        self.contentSyntax = contentSyntax;
     }
     return self;
 }

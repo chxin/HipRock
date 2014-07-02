@@ -32,11 +32,21 @@
         self.globalTimeRange = [[REMTimeRange alloc] initWithDictionary:(NSDictionary *)dictionary[@"GlobalTimeSpan"]];
     }
     
-    self.association = [[REMTargetAssociationModel alloc] init];
-    //TODO: remove
-#ifdef DEBUG
-    self.association.hierarchyId = self.targetId;
-#endif
+    if(!REMIsNilOrNull(dictionary[@"Association"])){
+        self.association = [[REMTargetAssociationModel alloc] init];
+        
+        NSDictionary *association = dictionary[@"Association"];
+        NSArray *keys = @[@"HierarchyId",@"SystemDimensionTemplateItemId",@"AreaDimensionId"];
+        if(!REMIsNilOrNull(association[keys[0]])){
+            self.association.hierarchyId = association[keys[0]];
+        }
+        if(!REMIsNilOrNull(association[keys[1]])){
+            self.association.systemDimensionId = association[keys[1]];
+        }
+        if(!REMIsNilOrNull(association[keys[2]])){
+            self.association.areaDimensionId = association[keys[2]];
+        }
+    }
 }
 
 

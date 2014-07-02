@@ -14,6 +14,6 @@
 
 @interface REMSeriesKeyFormattor : NSObject
 
-+(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(DWrapperConfig *)syntax;
++(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(REMWidgetContentSyntax *)syntax;
 
 @end

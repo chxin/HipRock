@@ -11,46 +11,25 @@
 
 @implementation REMSeriesKeyFormattor
 
-+(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(DWrapperConfig *)syntax
++(NSString *)seriesKeyWithEnergyTarget:(REMEnergyTargetModel *)target energyData:(REMEnergyViewData *)energyData andWidgetContentSyntax:(REMWidgetContentSyntax *)syntax
 {
-    REMDataStoreType storeType = syntax.storeType;
+    REMDataStoreType storeType = syntax.dataStoreType;
     
     NSString *targetType=@"%", *targetId=@"%", *sourceType=@"%", *seriesType=@"%", *timeType=@"%", *offset=@"%";
-    NSString *targetPath = [REMSeriesKeyFormattor getTargetPath:target];
-    
-    //    REMDSEnergyTagsTrend                = 106001,
-    //    REMDSEnergyTagsDistribute           = 106003,
-    
-    //    REMDSEnergyMultiTimeTrend           = 106004,
-    //    REMDSEnergyMultiTimeDistribute      = 106005,
-    
-    //    REMDSEnergyCarbon                   = 106006,
-    //    REMDSEnergyCarbonDistribute         = 106008,
-    //    REMDSEnergyCost                     = 106009,
-    //    REMDSEnergyCostDistribute           = 106011,
-    //    REMDSEnergyCostElectricity          = 106012,
-    
-    //    REMDSEnergyTagsTrendUnit            = 106002,
-    //    REMDSEnergyCarbonUnit               = 106007,
-    //    REMDSEnergyCostUnit                 = 106010,
-    //    REMDSEnergyRatio                    = 106013,
-    
-    
-//    REMDSEnergyRankingEnergy            = 106014,
-//    REMDSEnergyRankingCost              = 106015,
-//    REMDSEnergyRankingCarbon            = 106016,
-//    REMDSEnergyLabeling                 = 106017,
+    NSString *targetPath = [REMSeriesKeyFormattor getTargetPath:target withSyntax:syntax];
     
     if(storeType == REMDSEnergyTagsTrend || storeType == REMDSEnergyTagsDistribute){
         targetType = @"0";
         targetId = [NSString stringWithFormat:@"%llu", [target.targetId longLongValue]];
-        sourceType = @"%";
+        sourceType = @"0";
         seriesType = @"%";
+        timeType = @"0";
+        offset = @"0";
     }
     else if(storeType == REMDSEnergyMultiTimeTrend || storeType == REMDSEnergyMultiTimeDistribute){
         targetType = @"0";
         targetId = [NSString stringWithFormat:@"%llu", [target.targetId longLongValue]];
-        sourceType = @"%";
+        sourceType = @"0";
         seriesType = @"%";
         
         int targetIndex = 0;
@@ -61,6 +40,8 @@
             }
         }
         
+        timeType = @"0";
+        offset = @"0";
         REMTimeRange *timeRange = syntax.timeRanges[targetIndex];
         if(REMIsNilOrNull(timeRange)){
             timeType=@"0";
@@ -74,7 +55,9 @@
     else if(storeType == REMDSEnergyCarbon || storeType == REMDSEnergyCarbonDistribute || storeType == REMDSEnergyCost || storeType == REMDSEnergyCostDistribute || storeType == REMDSEnergyCostElectricity){
         targetType = @"1";
         targetId = [NSString stringWithFormat:@"%llu", target.commodityId];
-        sourceType = @"%";
+        sourceType = @"0";
+        timeType=@"0";
+        offset=@"0";
         
         if(target.type == REMEnergyTargetPlain){
             seriesType = @"2";
@@ -120,36 +103,50 @@
         }
         
         seriesType = @"%";
+        timeType=@"0";
+        offset=@"0";
     }
 
-    NSString *key = [NSString stringWithFormat:@"%@-%@-%@-%@-%@-%@-%@", targetType, targetId, targetPath, sourceType, seriesType, timeType, offset];
+    NSString *key = [NSString stringWithFormat:@"%@_%@_%@_%@_%@_%@_%@", targetType, targetId, targetPath, sourceType, seriesType, timeType, offset];
     
     return key;
 }
 
-+(NSString *)getTargetPath:(REMEnergyTargetModel *)target
++(NSString *)getTargetPath:(REMEnergyTargetModel *)target withSyntax:(REMWidgetContentSyntax *)syntax
 {
     REMTargetAssociationModel *association = target.association;
     
+    NSNumber *hierarchyId = nil;
     NSString *targetPath = @"%";
-    NSNumber *hierarchyId = association.hierarchyId;
     
-    //what if both systemDimensionId and areaDimensionId are not nil?
-    //default think target is associated on system, add assert to ensure
-    
-    NSAssert(hierarchyId!=nil, @"hierarchyid should not be nil");
-    
-    if(REMIsNilOrNull(association.systemDimensionId) && REMIsNilOrNull(association.areaDimensionId) && !REMIsNilOrNull(association.hierarchyId)){ //hierarchy
+    if(association == nil){
+        if(syntax.dataStoreType == REMDSEnergyTagsTrend || syntax.dataStoreType == REMDSEnergyTagsDistribute ||syntax.dataStoreType == REMDSEnergyMultiTimeTrend || syntax.dataStoreType == REMDSEnergyMultiTimeDistribute){
+            if(!REMIsNilOrNull(syntax.params[@"options"]) && !REMIsNilOrNull(syntax.params[@"options"][0]) && !REMIsNilOrNull(syntax.params[@"options"][0][@"HierId"]))
+                hierarchyId = syntax.params[@"options"][0][@"HierId"];
+        }
+        else{
+            hierarchyId = @(-999);
+        }
+        
         targetPath = [NSString stringWithFormat:@"0/%llu", [hierarchyId longLongValue]];
     }
-    
-    if(!REMIsNilOrNull(association.systemDimensionId)){ //system dimension
-        targetPath = [NSString stringWithFormat:@"1/%llu/%llu", [hierarchyId longLongValue], [association.systemDimensionId longLongValue]];
+    else{
+        hierarchyId = association.hierarchyId;
+        
+        if(REMIsNilOrNull(association.systemDimensionId) && REMIsNilOrNull(association.areaDimensionId) && !REMIsNilOrNull(association.hierarchyId)){ //hierarchy
+            targetPath = [NSString stringWithFormat:@"0/%llu", [hierarchyId longLongValue]];
+        }
+        
+        if(!REMIsNilOrNull(association.systemDimensionId)){ //system dimension
+            targetPath = [NSString stringWithFormat:@"1/%llu/%llu", [hierarchyId longLongValue], [association.systemDimensionId longLongValue]];
+        }
+        
+        if(!REMIsNilOrNull(association.areaDimensionId)){ //area dimension
+            targetPath = [NSString stringWithFormat:@"2/%llu/%llu", [hierarchyId longLongValue], [association.areaDimensionId longLongValue]];
+        }
     }
     
-    if(!REMIsNilOrNull(association.areaDimensionId)){ //area dimension
-        targetPath = [NSString stringWithFormat:@"2/%llu/%llu", [hierarchyId longLongValue], [association.areaDimensionId longLongValue]];
-    }
+    NSAssert(hierarchyId!=nil, @"hierarchyid should not be nil");
     
     return targetPath;
 }

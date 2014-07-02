@@ -40,9 +40,13 @@ typedef enum _REMChartFromLevel2 {
 
 @property (nonatomic, strong) NSArray* timeRanges; // 从Syntax复制的TimeRange
 
+@property (nonatomic, strong) NSArray *seriesStates;
+
 //@property (nonatomic, strong) NSArray* multiTimeSpans;  // 多时间段比较的每个序列的总体时间区间
 
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType;
+
+@property (nonatomic,weak) REMWidgetContentSyntax *contentSyntax;
 
 -(id)initWith:(REMWidgetContentSyntax*)contentSyntax;
 @end

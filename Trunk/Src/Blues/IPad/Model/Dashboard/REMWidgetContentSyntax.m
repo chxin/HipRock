@@ -7,7 +7,6 @@
  --------------------------------------------------------------------------*///
 
 #import "REMWidgetContentSyntax.h"
-#import "REMSeriesStateModel.h"
 
 @implementation REMWidgetContentSyntax
 
@@ -184,14 +183,15 @@
     
     NSArray *seriesStates = p[@"seriesStates"];
     if(!REMIsNilOrNull(seriesStates)){
-        NSMutableArray *seriesModels = [[NSMutableArray alloc] init];
-        for(NSDictionary *seriesStateItem in seriesStates){
-            REMSeriesStateModel *stateModel = [[REMSeriesStateModel alloc] initWithDictionary:seriesStateItem];
-            
-            [seriesModels addObject:stateModel];
-        }
-        
-        self.seriesStates = seriesModels;
+        self.seriesStates = seriesStates;
+//        NSMutableArray *seriesModels = [[NSMutableArray alloc] init];
+//        for(NSDictionary *seriesStateItem in seriesStates){
+//            REMSeriesStateModel *stateModel = [[REMSeriesStateModel alloc] initWithDictionary:seriesStateItem];
+//            
+//            [seriesModels addObject:stateModel];
+//        }
+//        
+//        self.seriesStates = seriesModels;
     }
 
 }
