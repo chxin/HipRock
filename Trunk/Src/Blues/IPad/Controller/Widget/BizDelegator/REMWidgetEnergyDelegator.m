@@ -708,7 +708,6 @@
     alert.message= [NSString stringWithFormat: REMIPadLocalizedString(@"Widget_StepError"),str];
     
     [alert show];
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -726,10 +725,6 @@
 - (void)changeTimeRange:(REMTimeRange *)newRange{
    [self.tempModel setTimeRangeItem:newRange AtIndex:0];
 }
-
-
-
-
 
 - (void)setStepControlStatusByStepNoSearch:(REMEnergyStep)step{
     NSUInteger pressedIndex=NSNotFound;

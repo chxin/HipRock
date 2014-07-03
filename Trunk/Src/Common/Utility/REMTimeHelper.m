@@ -800,19 +800,6 @@ static NSCalendar *_currentCalendar;
 
 +(REMRelativeTimeRangeType)relativeTimeTypeByName:(NSString *)relativeTimeTypeName
 {
-    
-//    REMRelativeTimeRangeTypeNone=0,
-//    REMRelativeTimeRangeTypeLast7Days = 1,
-//    REMRelativeTimeRangeTypeToday = 2,
-//    REMRelativeTimeRangeTypeYesterday = 3,
-//    REMRelativeTimeRangeTypeThisWeek = 4,
-//    REMRelativeTimeRangeTypeLastWeek = 5,
-//    REMRelativeTimeRangeTypeThisMonth = 6,
-//    REMRelativeTimeRangeTypeLastMonth = 7,
-//    REMRelativeTimeRangeTypeThisYear = 8,
-//    REMRelativeTimeRangeTypeLastYear = 9,
-//    REMRelativeTimeRangeTypeLast30Day = 10,
-//    REMRelativeTimeRangeTypeLast12Month = 11,
     if([relativeTimeTypeName isEqualToString:@"Last7Day"]){
         return REMRelativeTimeRangeTypeLast7Day;
     }

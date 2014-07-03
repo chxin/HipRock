@@ -214,6 +214,7 @@
 "Widget_TimePickerStart"="Starting time";
 "Widget_TimePickerEnd"="Ending time";
 "Widget_TimePickerError"="Starting date should be earlier than ending date.";
+"Widget_StepRaw" = "Raw";
 "Widget_StepErrorHour"="By hour";
 "Widget_StepErrorDay"="By day";
 "Widget_StepErrorWeek"="By week";
