@@ -281,6 +281,15 @@
 "Chart_Labeling_LowEnergyUse" = "Low energy consumption";
 "Chart_Labeling_HighEnergyUse" = "High energy consumption";
 
+"Chart_Tooltip_YMDH" = "yyyy-MM-dd HH";
+"Chart_Tooltip_YMD" = "yyyy-MM-dd";
+"Chart_Tooltip_YM" = "yyyy-MM";
+"Chart_Tooltip_Y" = "yyyy";
+"Chart_Tooltip_MD" = "MM-dd";
+"Chart_Tooltip_D" = "dd";
+"Chart_Tooltip_H" = "HH";
+"Chart_Tooltip_24_OClock" = "24";
+
 
 //Energy, prefix:Energy_
 "Energy_02601"="Drawing cannot be created for the part lacking of circadian calendar! Please try again after setting.";

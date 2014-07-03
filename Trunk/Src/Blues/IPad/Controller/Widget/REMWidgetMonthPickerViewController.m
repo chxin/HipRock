@@ -109,7 +109,7 @@
             [attrString setAttributes:@{NSForegroundColorAttributeName:[UIColor blueColor]} range:range];
         }
         if (row == 0) {
-            NSString *wholeYear=REMIPadLocalizedString(@"Common_WholeYear");//全年
+            NSString *wholeYear=REMIPadLocalizedString(@"Common_WholeYear");
             return [[NSAttributedString alloc]initWithString:wholeYear];
         }
         return attrString;

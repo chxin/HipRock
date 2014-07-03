@@ -208,34 +208,34 @@
 
 + (NSString *)relativeDateComponentFromType:(REMRelativeTimeRangeType)relativeDateType{
     if(relativeDateType == REMRelativeTimeRangeTypeNone ){
-        return REMIPadLocalizedString(@"Common_CustomTime"); //@"自定义";
+        return REMIPadLocalizedString(@"Common_CustomTime");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLast7Day){
-        return REMIPadLocalizedString(@"Common_Last7Day"); //@"之前七天";
+        return REMIPadLocalizedString(@"Common_Last7Day");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeToday){
-        return REMIPadLocalizedString(@"Common_Today"); //@"今天";
+        return REMIPadLocalizedString(@"Common_Today");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeYesterday){
-        return REMIPadLocalizedString(@"Common_Yesterday"); //@"昨天";
+        return REMIPadLocalizedString(@"Common_Yesterday");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeThisMonth){
-        return REMIPadLocalizedString(@"Common_ThisMonth"); //@"本月";
+        return REMIPadLocalizedString(@"Common_ThisMonth");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLastMonth){
-        return REMIPadLocalizedString(@"Common_LastMonth"); //@"上月";
+        return REMIPadLocalizedString(@"Common_LastMonth");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeThisWeek){
-        return REMIPadLocalizedString(@"Common_ThisWeek"); //@"本周";
+        return REMIPadLocalizedString(@"Common_ThisWeek");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLastWeek){
-        return REMIPadLocalizedString(@"Common_LastWeek"); //@"上周";
+        return REMIPadLocalizedString(@"Common_LastWeek");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeThisYear){
-        return REMIPadLocalizedString(@"Common_ThisYear"); //@"今年";
+        return REMIPadLocalizedString(@"Common_ThisYear");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLastYear){
-        return REMIPadLocalizedString(@"Common_LastYear"); //@"去年";
+        return REMIPadLocalizedString(@"Common_LastYear");
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLast30Day){
         return REMIPadLocalizedString(@"Common_Last30Days");
@@ -244,7 +244,7 @@
         return REMIPadLocalizedString(@"Common_Last12Months");
     }
     else{
-        return REMIPadLocalizedString(@"Common_CustomTime"); //@"自定义";
+        return REMIPadLocalizedString(@"Common_CustomTime");
     }
 
 }
@@ -713,36 +713,36 @@ static NSCalendar *_currentCalendar;
     
     switch (step) {
         case REMEnergyStepHour:{
-            [f setDateFormat:@"yyyy年MM月dd日HH点"];
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YMDH")/* @"yyyy年MM月dd日HH点"*/];
             NSString *s1 = [f stringFromDate:time];
             
             NSDate *newDate = [time dateByAddingTimeInterval:60*60];
-            NSString *s2 = @"";
+            NSString *s2 = REMEmptyString;
             
             if([REMTimeHelper getHour:newDate] < [REMTimeHelper getHour:time]){
-                s2 = @"24点";
+                s2 = REMIPadLocalizedString(@"Chart_Tooltip_24_OClock")/*@"24点"*/;
             }
             else{
-                [f setDateFormat:@"HH点"];
+                [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_H")/*@"HH点"*/];
                 s2 = [f stringFromDate:newDate];
             }
             
             return [NSString stringWithFormat:@"%@-%@",s1,s2];
         }
         case REMEnergyStepDay:{
-            [f setDateFormat:@"yyyy年MM月dd日"];
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YMD")/*@"yyyy年MM月dd日"*/];
             return [f stringFromDate:time];
         }
         case REMEnergyStepMonth:{
-            [f setDateFormat:@"yyyy年MM月"];
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YM")/*@"yyyy年MM月"*/];
             return [f stringFromDate:time];
         }
         case REMEnergyStepYear:{
-            [f setDateFormat:@"yyyy年"];
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_Y")/*@"yyyy年"*/];
             return [f stringFromDate:time];
         }
         case REMEnergyStepWeek:{//week 2010年10月3日-10日,2010年10月29日-11月5日,2010年12月29日-2011年1月5日{}
-            [f setDateFormat:@"yyyy年MM月dd日"];
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YMD")/*@"yyyy年MM月dd日"*/];
             
             int weekDay = [REMTimeHelper getWeekDay:time];
             NSDate *date = [REMTimeHelper add:(0-weekDay+2) onPart:REMDateTimePartDay ofDate:time]; //[time dateByAddingTimeInterval:(0-weekDay+1) * 60 * 60];
@@ -758,13 +758,13 @@ static NSCalendar *_currentCalendar;
             else if ([REMTimeHelper getMonth:newDate] > [REMTimeHelper getMonth:date]) {
                 //2010年10月29日-11月5日
                 //str += '-' + eft(newDate, ft.MonthDate);
-                [f setDateFormat:@"MM月dd日"];
+                [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_MD")/*@"MM月dd日"*/];
                 s2 = [f stringFromDate:newDate];
             }
             else {
                 //2010年10月3日-10日
                 //str += '-' + eft(newDate, ft.Day);
-                [f setDateFormat:@"dd日"];
+                [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_D")/*@"dd日"*/];
                 s2 = [f stringFromDate:newDate];
             }
             

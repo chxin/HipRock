@@ -347,9 +347,6 @@
     self.rankingLabel=ranking;
     [self addSplitBar:ranking];
     
-//    "Building_AnnualAverageUsageLabelTitle"="年平米能耗";
-//    "Building_AnnualAverageBaselineLabelTitle"="行业标准";
-//    "Building_AnnualEfficiencyLabelTitle"="年节能率";
     REMBuildingTitleLabelView *annualAverageUsageLabel = [[REMBuildingTitleLabelView alloc] initWithFrame:CGRectMake(0, marginTop+kBuildingAnnualUsageTotlaHeight, kBuildingCommodityDetailWidth, kBuildingCommodityDetailHeight)];
     annualAverageUsageLabel.title = REMIPadLocalizedString(@"Building_AnnualAverageUsageLabelTitle");
     annualAverageUsageLabel.textWidth = 300;
