@@ -49,54 +49,92 @@
     int defaultStepIndex=0;
     switch (i) {
         case 0:
-            [list addObject:[NSNumber numberWithInt:1]];
+            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepHour)];
+            
+            [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
             [titleList addObject: REMIPadLocalizedString(@"Common_Hour")];
             defaultStepIndex=0;
             break;
         case 1:
-            [list addObject:[NSNumber numberWithInt:1]];
-            [list addObject:[NSNumber numberWithInt:2]];
+            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepHour)];
+            [list addObject:@(REMEnergyStepDay)];
+//            [list addObject:[NSNumber numberWithInt:1]];
+//            [list addObject:[NSNumber numberWithInt:2]];
+            [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Hour")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
             defaultStepIndex=1;
             break;
         case 2:
-            [list addObject:[NSNumber numberWithInt:2]];
-            [list addObject:[NSNumber numberWithInt:5]];
+            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepHour)];
+            [list addObject:@(REMEnergyStepDay)];
+            [list addObject:@(REMEnergyStepWeek)];
+//            [list addObject:[NSNumber numberWithInt:2]];
+//            [list addObject:[NSNumber numberWithInt:5]];
+            [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Hour")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Week")];
             defaultStepIndex=0;
             break;
         case 3:
-            [list addObject:[NSNumber numberWithInt:2]];
-            [list addObject:[NSNumber numberWithInt:5]];
-            [list addObject:[NSNumber numberWithInt:3]];
+            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepHour)];
+            [list addObject:@(REMEnergyStepDay)];
+            [list addObject:@(REMEnergyStepWeek)];
+            [list addObject:@(REMEnergyStepMonth)];
+//            [list addObject:[NSNumber numberWithInt:2]];
+//            [list addObject:[NSNumber numberWithInt:5]];
+//            [list addObject:[NSNumber numberWithInt:3]];
+            [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Hour")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Week")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Month")];
             defaultStepIndex=2;
             break;
         case 4:
-            [list addObject:[NSNumber numberWithInt:3]];
+            [list addObject:@(REMEnergyStepHour)];
+            [list addObject:@(REMEnergyStepDay)];
+            [list addObject:@(REMEnergyStepWeek)];
+            [list addObject:@(REMEnergyStepMonth)];
+//            [list addObject:[NSNumber numberWithInt:3]];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Hour")];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Week")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Month")];
             defaultStepIndex=0;
             break;
         case 5:
-            [list addObject:[NSNumber numberWithInt:3]];
-            [list addObject:[NSNumber numberWithInt:4]];
-            [titleList addObject:REMIPadLocalizedString(@"Common_Month")];
-            [titleList addObject:REMIPadLocalizedString(@"Common_Year")];
-            defaultStepIndex=0;
-            break;
         case 6:
-            [list addObject:[NSNumber numberWithInt:3]];
-            [list addObject:[NSNumber numberWithInt:4]];
+            [list addObject:@(REMEnergyStepDay)];
+            [list addObject:@(REMEnergyStepWeek)];
+            [list addObject:@(REMEnergyStepMonth)];
+            [list addObject:@(REMEnergyStepYear)];
+//            [list addObject:[NSNumber numberWithInt:3]];
+//            [list addObject:[NSNumber numberWithInt:4]];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
+            [titleList addObject:REMIPadLocalizedString(@"Common_Week")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Month")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Year")];
             defaultStepIndex=0;
             break;
+//        case 6:
+//            [list addObject:@(REMEnergyStepDay)];
+//            [list addObject:@(REMEnergyStepWeek)];
+//            [list addObject:@(REMEnergyStepMonth)];
+//            [list addObject:@(REMEnergyStepYear)];
+////            [list addObject:[NSNumber numberWithInt:3]];
+////            [list addObject:[NSNumber numberWithInt:4]];
+//            [titleList addObject:REMIPadLocalizedString(@"Common_Month")];
+//            [titleList addObject:REMIPadLocalizedString(@"Common_Year")];
+//            defaultStepIndex=0;
+//            break;
         case 7:
-            [list addObject:[NSNumber numberWithInt:4]];
+            [list addObject:@(REMEnergyStepYear)];
             [titleList addObject:REMIPadLocalizedString(@"Common_Year")];
             defaultStepIndex=0;
             break;

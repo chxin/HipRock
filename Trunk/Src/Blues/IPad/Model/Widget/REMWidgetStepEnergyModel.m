@@ -54,27 +54,27 @@
     return REMEnergyStepNone;
 }
 
-- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType{
-    NSNumber *step;
-    if(stepType == REMEnergyStepHour){
-        step=@(1);
-    }
-    else if(stepType== REMEnergyStepDay){
-        step=@(2);
-    }
-    else if(stepType == REMEnergyStepWeek){
-        step=@(5);
-    }
-    else if(stepType == REMEnergyStepMonth){
-        step=@(3);
-    }
-    else if(stepType == REMEnergyStepYear){
-        step=@(4);
-    }
-    
-    return step;
-    
-}
+//- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType{
+//    NSNumber *step;
+//    if(stepType == REMEnergyStepHour){
+//        step=@(1);
+//    }
+//    else if(stepType== REMEnergyStepDay){
+//        step=@(2);
+//    }
+//    else if(stepType == REMEnergyStepWeek){
+//        step=@(5);
+//    }
+//    else if(stepType == REMEnergyStepMonth){
+//        step=@(3);
+//    }
+//    else if(stepType == REMEnergyStepYear){
+//        step=@(4);
+//    }
+//    
+//    return step;
+//    
+//}
 
 - (id)copyWithZone:(NSZone *)zone{
     REMWidgetStepEnergyModel *base=[super copyWithZone:zone];

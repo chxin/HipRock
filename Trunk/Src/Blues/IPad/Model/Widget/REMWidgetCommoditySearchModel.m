@@ -17,7 +17,7 @@
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:3];
     dic[@"commodityIds"]=self.commodityIdArray;
-    NSNumber *step=[self stepNumberByStep:self.step];
+    NSNumber *step=@(self.step);//[self stepNumberByStep:self.step];
     NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
     if(self.industryId!=nil || self.zoneId!=nil || self.customizedId!=nil){
         NSMutableDictionary*benchmarkOption = [[NSMutableDictionary alloc] initWithCapacity:3];

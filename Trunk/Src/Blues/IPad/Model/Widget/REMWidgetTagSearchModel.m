@@ -17,7 +17,7 @@
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:3];
     dic[@"tagIds"]=self.tagIdArray;
-    NSNumber *step=[self stepNumberByStep:self.step];
+    NSNumber *step=@(self.step);//[self stepNumberByStep:self.step];
     
     NSArray *newTimeRangeArray=[self timeRangeToDictionaryArray];
     

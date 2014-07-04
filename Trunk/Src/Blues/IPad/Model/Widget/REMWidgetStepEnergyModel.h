@@ -12,7 +12,7 @@
 @interface REMWidgetStepEnergyModel : REMWidgetSearchModelBase
 
 
-- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType;
+//- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType;
 
 - (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber;
 
