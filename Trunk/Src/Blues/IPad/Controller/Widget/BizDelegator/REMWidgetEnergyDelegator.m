@@ -321,9 +321,9 @@
             [self search];
         }
         else{
-            NSString *code = self.ownerController.serverError.code;
-            if([[code substringFromIndex:code.length-5 ] isEqualToString:@"02004"]==YES){
-            //if([self.ownerController.serverError.code isEqualToString:@"990001202004"]==YES){ //step error
+            //NSString *code = self.ownerController.serverError.code;
+            //if([[code substringFromIndex:code.length-5 ] isEqualToString:@"02004"]==YES){
+            if([self.ownerController.serverError.code isEqualToString:@"990001202004"]==YES){ //step error
                 [self processStepErrorWithAvailableStep:self.ownerController.serverError.messages[0]];
             }
         }
@@ -764,8 +764,8 @@
 {
     [super rollbackWithError:error];
     
-    if([[error.code substringFromIndex:error.code.length-5 ] isEqualToString:@"02004"]==YES){
-    //if([error.code isEqualToString:@"990001202004"]==YES){ //step error
+    //if([[error.code substringFromIndex:error.code.length-5 ] isEqualToString:@"02004"]==YES){
+    if([error.code isEqualToString:@"990001202004"]==YES){ //step error
         [self processStepErrorWithAvailableStep:error.messages[0]];
     }
     else{

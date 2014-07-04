@@ -19,10 +19,10 @@
 #define kDMLogin_CardContentHeight 350
 #define kDMLogin_CardContentTopOffset 7 //5
 #define kDMLogin_CardContentLeftOffset 14
-#define kDMLogin_PageControlTopOffset kDMLogin_CardTopOffset + kDMLogin_CardHeight + 122 //142
+#define kDMLogin_PageControlTopOffset (kDMLogin_CardTopOffset + kDMLogin_CardHeight + 81)//122 //142
 #define kDMLogin_PageControlHeight 8
 #define kDMLogin_PageControlTintColor @"#88c274"
-#define kDMLogin_SkipToLoginButtonTopOffset kDMLogin_PageControlTopOffset + kDMLogin_PageControlHeight + 26
+#define kDMLogin_SkipToLoginButtonTopOffset (kDMLogin_PageControlTopOffset + kDMLogin_PageControlHeight + 26)
 #define kDMLogin_SkipToLoginButtonWidth 191 //232
 #define kDMLogin_SkipToLoginButtonHeight 62
 #define kDMLogin_SkipToLoginButtonFontSize 24

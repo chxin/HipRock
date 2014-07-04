@@ -23,7 +23,7 @@
 @property (nonatomic) CGFloat currentOffsetY;
 
 - (void)loadingDataComplete:(NSUInteger)index;
-- (NSDictionary *)realExport;
+- (NSDictionary *)realExport:(BOOL)isMail;
 
 
 @end

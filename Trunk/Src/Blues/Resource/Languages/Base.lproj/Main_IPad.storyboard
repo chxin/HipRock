@@ -353,11 +353,95 @@
                         <segue destination="STT-2G-WvG" kind="push" identifier="settingCustomerSelectionSegue" id="lw5-7Y-bc1"/>
                         <segue destination="p3k-Mm-Dee" kind="push" identifier="settingCustomerDetailSegue" id="ADF-a5-YSn"/>
                         <segue destination="axI-8H-Sbv" kind="push" identifier="settingAboutSegue" id="biJ-1Q-bjS"/>
+                        <segue destination="hgf-zJ-X4Q" kind="push" identifier="settingQuickResponseCodeSegue" id="WA5-hL-Nab"/>
+                        <segue destination="uXz-UA-VIK" kind="push" identifier="settingContactSegue" id="JAY-ZY-vzj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7e-H1-kOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2884" y="-3293"/>
+        </scene>
+        <!--SettingQR Code Contoller-->
+        <scene sceneID="ORN-VO-MKJ">
+            <objects>
+                <viewController id="hgf-zJ-X4Q" customClass="REMSettingQRCodeContoller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j0M-Wl-XB6"/>
+                        <viewControllerLayoutGuide type="bottom" id="FWx-FF-gLL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oLN-jr-VIm">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="59c-VR-i97"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghN-YB-Nzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2024" y="-5518"/>
+        </scene>
+        <!--Setting Contact View Controller-->
+        <scene sceneID="dI2-nX-cto">
+            <objects>
+                <tableViewController id="uXz-UA-VIK" customClass="REMSettingContactViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="syu-p6-7xP">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4Yd-3i-wDI">
+                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Yd-3i-wDI" id="cy2-TD-9gq">
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="uXz-UA-VIK" id="eUz-jk-ean"/>
+                            <outlet property="delegate" destination="uXz-UA-VIK" id="Haa-lE-OVd"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="FbZ-pm-L3H"/>
+                    <connections>
+                        <segue destination="Gib-C3-6HA" kind="push" identifier="settingContactMailSegue" id="E52-OA-8LT"/>
+                        <segue destination="ONf-bd-dHS" kind="push" identifier="settingContactPhoneSegue" id="wuE-7f-HAe"/>
+                        <segue destination="EwS-g4-bgn" kind="push" identifier="settingContactWeSiteSegue" id="Zvq-2d-YCi"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YVR-Lo-68x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2024" y="-4777"/>
+        </scene>
+        <!--Setting Contact Send Mail Controller-->
+        <scene sceneID="Gli-Ai-SXy">
+            <objects>
+                <tableViewController id="Gib-C3-6HA" customClass="REMSettingContactSendMailController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ahw-iw-rUp">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bJi-f5-prg">
+                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bJi-f5-prg" id="cKV-mQ-PkI">
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Gib-C3-6HA" id="EUA-Mn-NAu"/>
+                            <outlet property="delegate" destination="Gib-C3-6HA" id="MRf-Zq-cSR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Hd4-vN-hlx"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nAd-cc-xKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1268" y="-5952"/>
         </scene>
         <!--Setting Customer Selection View Controller-->
         <scene sceneID="pOc-6K-uE8">
@@ -395,7 +479,26 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-N8-S8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2064" y="-4358"/>
+            <point key="canvasLocation" x="-2024" y="-4030"/>
+        </scene>
+        <!--Setting Contact We Site View Controller-->
+        <scene sceneID="Fnv-JA-vnY">
+            <objects>
+                <viewController id="EwS-g4-bgn" customClass="REMSettingContactWeSiteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wUI-9G-u0C"/>
+                        <viewControllerLayoutGuide type="bottom" id="0if-7Q-DAl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vZm-ex-vKq">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cWt-0H-N5j"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ehF-Y4-5Qx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1268" y="-4505"/>
         </scene>
         <!--Setting Customer Detail View Controller-->
         <scene sceneID="yWL-Qk-a3K">
@@ -514,6 +617,35 @@
             </objects>
             <point key="canvasLocation" x="-2024" y="-3293"/>
         </scene>
+        <!--Setting Contact Phone View Controller-->
+        <scene sceneID="NHA-mR-cjT">
+            <objects>
+                <tableViewController id="ONf-bd-dHS" customClass="REMSettingContactPhoneViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="f63-r0-IL7">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EBz-um-EkV">
+                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EBz-um-EkV" id="XHQ-C6-53y">
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ONf-bd-dHS" id="vfq-Ns-Y8p"/>
+                            <outlet property="delegate" destination="ONf-bd-dHS" id="KSc-fi-BfB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="w8p-dU-daZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NjW-1R-7LZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1268" y="-5225"/>
+        </scene>
         <!--Setting Customer Detail Logo View Controller - Logo-->
         <scene sceneID="aVh-Se-nuy">
             <objects>
@@ -550,7 +682,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZ3-GG-tlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2016" y="-2229"/>
+            <point key="canvasLocation" x="-2024" y="-2561"/>
         </scene>
         <!--Setting Customer Detail Admin View Controller-->
         <scene sceneID="fpM-KK-Sce">

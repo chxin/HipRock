@@ -569,13 +569,11 @@ const static CGFloat buildingGap=20;
 
 
 
-- (void)exportImage:(void (^)(UIImage *, NSString*))callback
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback :(BOOL)isMail
 {
     REMBuildingImageViewController *viewController=self.childViewControllers[self.currentBuildingIndex];
     
-    
-    
-    [viewController exportImage:callback];
+    [viewController exportImage:callback :isMail];
 }
 
 

@@ -720,13 +720,13 @@
     
 }
 
-- (void)exportImage:(void (^)(UIImage *, NSString*))callback
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback :(BOOL)isMail
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
     
     
     
-    NSDictionary *outputDic=[dataViewController realExport];
+    NSDictionary *outputDic=[dataViewController realExport:isMail];
     UIImage* dataImage = [outputDic objectForKey:@"image"];
     float dataImageHeight = dataImage.size.height;
     

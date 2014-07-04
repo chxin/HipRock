@@ -22,10 +22,13 @@
 #import "REMUserValidationModel.h"
 #import "DCChartEnum.h"
 #import "DCXYChartBackgroundBand.h"
+#import "REMEnlargedButton.h"
+#import "REMSettingQRCodeController.h"
+#import "REMSettingContactViewController.h"
 
 @interface REMSplashScreenController ()
 
-
+@property (nonatomic,weak) UILabel *copyrightLabel;
 
 @end
 
@@ -50,14 +53,16 @@
     UIFont *font = [REMFont defaultFontOfSize:11]; //[UIFont systemFontOfSize:12];
     NSString *text = REMIPadLocalizedString(@"Splash_Copyright");
     CGSize size = [text sizeWithFont:font];
-    UILabel *copyright = [[UILabel alloc] initWithFrame:CGRectMake((kDMScreenWidth - size.width)/2, REMDMCOMPATIOS7(kDMScreenHeight - 60), size.width, size.height)];
+    UILabel *copyright = [[UILabel alloc] initWithFrame:CGRectMake((kDMScreenWidth - size.width)/2, REMDMCOMPATIOS7(kDMScreenHeight - 48), size.width, size.height)];
     copyright.text = text;
     copyright.textColor = [UIColor whiteColor];
     copyright.font = font;
     
     [background addSubview:copyright];
+    self.copyrightLabel = copyright;
     
     [self.view addSubview:background];
+    
 }
 
 - (void)viewDidLoad
@@ -73,6 +78,8 @@
         //play login carousel
         [self showLoginView:YES];
     }
+    
+    [self loadContactView];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -171,6 +178,82 @@
         REMMapKitViewController *mapController = segue.destinationViewController;
         mapController.isInitialPresenting = YES;
     }
+}
+
+-(void)loadContactView
+{
+    //contact buttons
+    CGFloat accessablityHeight = 44;
+    
+    UIColor *pressedColor = [REMColor colorByHexString:@"#896700"];
+    
+    NSString *qrCodeText = REMIPadLocalizedString(@"Splash_QRCode");
+    NSString *contactUsText = REMIPadLocalizedString(@"Splash_ContactUs");
+    NSString *seperatorText = @"|";
+    UIFont *buttonFont = [REMFont defaultFontOfSize:17];
+    CGSize button1Size = [qrCodeText sizeWithFont:buttonFont];
+    CGSize button2Size = [contactUsText sizeWithFont:buttonFont];
+    CGSize seperatorSize = [seperatorText sizeWithFont:buttonFont];
+    
+    REMEnlargedButton *quickResponseCodeButton = [REMEnlargedButton buttonWithType:UIButtonTypeCustom];
+    quickResponseCodeButton.titleLabel.font = buttonFont;
+    quickResponseCodeButton.frame = CGRectMake(0, 0/*(button1Size.height-accessablityHeight)/2*/, button1Size.width, accessablityHeight);
+    [quickResponseCodeButton setTitle:qrCodeText forState:UIControlStateNormal];
+    [quickResponseCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [quickResponseCodeButton setTitleColor:pressedColor forState:UIControlStateHighlighted];
+//    quickResponseCodeButton.layer.borderWidth = 1.0;
+//    quickResponseCodeButton.layer.borderColor = [UIColor redColor].CGColor;
+    [quickResponseCodeButton addTarget:self action:@selector(quickResponseButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(button1Size.width+18, 0, seperatorSize.width, accessablityHeight)];
+    seperatorLabel.text = seperatorText;
+    seperatorLabel.font = buttonFont;
+    seperatorLabel.textColor = [UIColor whiteColor];
+    
+    REMEnlargedButton *contactUsButton = [REMEnlargedButton buttonWithType:UIButtonTypeCustom];
+    contactUsButton.titleLabel.font = buttonFont;
+    contactUsButton.frame = CGRectMake(seperatorLabel.frame.origin.x + seperatorSize.width + 18, 0/*(button2Size.height-accessablityHeight)/2*/, button2Size.width, accessablityHeight);
+    [contactUsButton setTitle:contactUsText forState:UIControlStateNormal];
+    [contactUsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [contactUsButton setTitleColor:pressedColor forState:UIControlStateHighlighted];
+//    contactUsButton.layer.borderWidth = 1.0;
+//    contactUsButton.layer.borderColor = [UIColor redColor].CGColor;
+    [contactUsButton addTarget:self action:@selector(contactButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
+    CGFloat contactViewWidth = button1Size.width + button2Size.width + seperatorSize.width + 18*2;
+    CGFloat contactViewY = self.copyrightLabel.frame.origin.y-27-button1Size.height;
+    UIView *contactView = [[UIView alloc] initWithFrame:CGRectMake((kDMScreenWidth - contactViewWidth)/2, contactViewY+(button1Size.height-accessablityHeight)/2, contactViewWidth, accessablityHeight)];
+    [contactView addSubview:quickResponseCodeButton];
+    [contactView addSubview:seperatorLabel];
+    [contactView addSubview:contactUsButton];
+//    contactView.layer.borderColor = [UIColor orangeColor].CGColor;
+//    contactView.layer.borderWidth = 1.0;
+    
+    [self.view addSubview:contactView];
+}
+
+-(void)quickResponseButtonPressed:(UIButton *)target
+{
+    REMSettingQRCodeController *controller = [[REMSettingQRCodeController alloc] init];
+    
+    [self modalPresentController:controller];
+}
+
+-(void)contactButtonPressed:(UIButton *)target
+{
+    REMSettingContactViewController *controller = [[REMSettingContactViewController alloc] init];
+    
+    [self modalPresentController:controller];
+}
+
+-(void)modalPresentController:(UIViewController *)controller
+{
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    navigationController.modalInPopover = YES;
+    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 

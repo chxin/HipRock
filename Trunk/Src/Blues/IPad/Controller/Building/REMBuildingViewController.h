@@ -45,7 +45,7 @@ typedef enum _BuildingSourceType{
 
 - (IBAction)exitMaxWidget:(UIStoryboardSegue *)sender;
 
-- (void)exportImage:(void (^)(UIImage *, NSString*))callback;
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback :(BOOL)isMail;
 
 @property (nonatomic,weak) REMDashboardController *maxDashbaordController;
 

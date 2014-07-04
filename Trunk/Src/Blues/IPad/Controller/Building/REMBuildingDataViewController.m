@@ -502,7 +502,7 @@
 
 
 
-- (NSDictionary *)realExport{
+- (NSDictionary *)realExport:(BOOL)isMail {
     REMBuildingCommodityViewController *controller=self.childViewControllers[self.currentCommodityIndex];
     UIView* chartView = controller.view;
     UIScrollView *scrollView=(UIScrollView *)self.view;
@@ -545,46 +545,74 @@
     UIGraphicsEndImageContext();
     
     NSString* stringFormat = nil;
-    if (self.currentCommodityIndex<self.buildingInfo.commodities.count) {
-        stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
-        REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
-        NSString *commodityKey = REMCommodities[model.id];
-        NSString* commodityName = REMIPadLocalizedString(commodityKey);//model.comment;
-        NSString* uomName = model.totalUom;
-        NSString* val = [model.totalValue isEqual:[NSNull null]] ? nil : model.totalValue.stringValue;
-        if (val == nil || commodityName == nil || uomName == nil) {
-            stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
-        } else {
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+    BOOL isCommodity = self.currentCommodityIndex<self.buildingInfo.commodities.count;
+    if(isMail) {
+        if(isCommodity){ //mail, commodity
+            NSString *table = @"<table cellspacing=\"0\" border=\"1\">\
+                <tbody>\
+                    <tr>\
+                        <td rowspan=\"4\">##BuildingName##</td>\
+                        <td>a</td>\
+                        <td>a</td>\
+                    </tr>\
+                    <tr>\
+                        <td>a</td>\
+                        <td>a</td>\
+                    </tr>\
+                    <tr>\
+                        <td>a</td>\
+                        <td>a</td>\
+                    </tr>\
+                    <tr>\
+                        <td>a</td>\
+                        <td>a</td>\
+                    </tr>\
+                </tbody>\
+            </table>";
         }
-    } else {
-        stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfPM25");
-        REMManagedBuildingAirQualityModel *model = self.buildingInfo.airQuality;
-        NSString* commodityName = model.commodityName;
-        NSString* outdoorVal = model.outdoorValue == nil ? nil : model.outdoorValue.stringValue;
-        NSString* outdoorUom = model.outdoorUom;
-        NSString* honeywellVal = model.honeywellValue == nil ? nil : model.honeywellValue.stringValue;
-        NSString* honeywellUom = model.honeywellUom;
-        NSString* mayairVal = model.mayairValue == nil ? nil : model.mayairValue.stringValue;
-        NSString* mayairUom = model.mayairUom;
-        if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
-            stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
-        } else {
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
-            stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+        else{ //mail, pm2.5
         }
     }
-    //    NSArray* myPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    //    NSString* myDocPath = myPaths[0];
-    //    NSString* fileName = [myDocPath stringByAppendingFormat:@"/cachefiles/weibo2.png"];
-    //    [UIImagePNGRepresentation(img) writeToFile:fileName atomically:NO];
+    else {
+        if(isCommodity){ //weibo, commodity
+            stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
+            REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
+            NSString *commodityKey = REMCommodities[model.id];
+            NSString* commodityName = REMIPadLocalizedString(commodityKey);//model.comment;
+            NSString* uomName = model.totalUom;
+            NSString* val = [model.totalValue isEqual:[NSNull null]] ? nil : model.totalValue.stringValue;
+            if (val == nil || commodityName == nil || uomName == nil) {
+                stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
+            } else {
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+            }
+        }
+        else{ //weibo, pm2.5
+            stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfPM25");
+            REMManagedBuildingAirQualityModel *model = self.buildingInfo.airQuality;
+            NSString* commodityName = model.commodityName;
+            NSString* outdoorVal = model.outdoorValue == nil ? nil : model.outdoorValue.stringValue;
+            NSString* outdoorUom = model.outdoorUom;
+            NSString* honeywellVal = model.honeywellValue == nil ? nil : model.honeywellValue.stringValue;
+            NSString* honeywellUom = model.honeywellUom;
+            NSString* mayairVal = model.mayairValue == nil ? nil : model.mayairValue.stringValue;
+            NSString* mayairUom = model.mayairUom;
+            if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
+                stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
+            } else {
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+            }
+        }
+    }
+    
     return @{
              @"image": img,
              @"text": stringFormat

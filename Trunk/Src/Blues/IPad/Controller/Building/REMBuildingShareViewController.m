@@ -94,7 +94,7 @@
         
         [weiboView show:YES];
         
-    }];
+    } :NO];
 }
 
 
@@ -136,7 +136,7 @@
         
         // Present the mail composition interface.
         [self.buildingController presentViewController:picker animated:YES completion:nil];
-    }];
+    } :YES];
 }
 
 

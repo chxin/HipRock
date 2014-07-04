@@ -559,6 +559,12 @@
 		7AE891A0195A6393004F4E2E /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89194195A6393004F4E2E /* DDDispatchQueueLogFormatter.m */; };
 		7AE891A1195A6393004F4E2E /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89196195A6393004F4E2E /* DDMultiFormatter.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
+		7AEFD8681966864B00316D76 /* REMEnlargedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD8671966864B00316D76 /* REMEnlargedButton.m */; };
+		7AEFD86B19668F7000316D76 /* REMSettingQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD86A19668F7000316D76 /* REMSettingQRCodeController.m */; };
+		7AEFD86E19668FA400316D76 /* REMSettingContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD86D19668FA400316D76 /* REMSettingContactViewController.m */; };
+		7AEFD87119668FC800316D76 /* REMSettingContactSendMailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD87019668FC800316D76 /* REMSettingContactSendMailController.m */; };
+		7AEFD87419668FE100316D76 /* REMSettingContactPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD87319668FE100316D76 /* REMSettingContactPhoneViewController.m */; };
+		7AEFD87719668FF500316D76 /* REMSettingContactWeSiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD87619668FF500316D76 /* REMSettingContactWeSiteViewController.m */; };
 		7AF9637D18D6C63C005A8D12 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9636B18D6C63C005A8D12 /* AFHTTPRequestOperation.m */; };
 		7AF9637E18D6C63C005A8D12 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9636D18D6C63C005A8D12 /* AFHTTPRequestOperationManager.m */; };
 		7AF9637F18D6C63C005A8D12 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9636F18D6C63C005A8D12 /* AFHTTPSessionManager.m */; };
@@ -1327,6 +1333,18 @@
 		7AE89195195A6393004F4E2E /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
 		7AE89196195A6393004F4E2E /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
+		7AEFD8661966864B00316D76 /* REMEnlargedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnlargedButton.h; sourceTree = "<group>"; };
+		7AEFD8671966864B00316D76 /* REMEnlargedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnlargedButton.m; sourceTree = "<group>"; };
+		7AEFD86919668F7000316D76 /* REMSettingQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingQRCodeController.h; sourceTree = "<group>"; };
+		7AEFD86A19668F7000316D76 /* REMSettingQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingQRCodeController.m; sourceTree = "<group>"; };
+		7AEFD86C19668FA400316D76 /* REMSettingContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactViewController.h; sourceTree = "<group>"; };
+		7AEFD86D19668FA400316D76 /* REMSettingContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactViewController.m; sourceTree = "<group>"; };
+		7AEFD86F19668FC800316D76 /* REMSettingContactSendMailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactSendMailController.h; sourceTree = "<group>"; };
+		7AEFD87019668FC800316D76 /* REMSettingContactSendMailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactSendMailController.m; sourceTree = "<group>"; };
+		7AEFD87219668FE100316D76 /* REMSettingContactPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactPhoneViewController.h; sourceTree = "<group>"; };
+		7AEFD87319668FE100316D76 /* REMSettingContactPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactPhoneViewController.m; sourceTree = "<group>"; };
+		7AEFD87519668FF500316D76 /* REMSettingContactWeSiteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactWeSiteViewController.h; sourceTree = "<group>"; };
+		7AEFD87619668FF500316D76 /* REMSettingContactWeSiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactWeSiteViewController.m; sourceTree = "<group>"; };
 		7AF9636A18D6C63C005A8D12 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = ../../Lib/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		7AF9636B18D6C63C005A8D12 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = ../../Lib/AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		7AF9636C18D6C63C005A8D12 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = ../../Lib/AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -2280,16 +2298,26 @@
 			children = (
 				7AA6464818C056050081E96E /* REMSettingViewController.h */,
 				7AA6464918C056050081E96E /* REMSettingViewController.m */,
-				7A63E0F718B44CBB00A13464 /* REMSettingAboutViewController.h */,
 				7A63E0F818B44CBB00A13464 /* REMSettingAboutViewController.m */,
 				7A63E0F918B44CBB00A13464 /* REMSettingCustomerDetailAdminViewController.h */,
 				7A63E0FA18B44CBB00A13464 /* REMSettingCustomerDetailAdminViewController.m */,
 				7A63E0FB18B44CBB00A13464 /* REMSettingCustomerDetailLogoViewController.h */,
 				7A63E0FC18B44CBB00A13464 /* REMSettingCustomerDetailLogoViewController.m */,
+				7A63E0F718B44CBB00A13464 /* REMSettingAboutViewController.h */,
 				7A63E0FD18B44CBB00A13464 /* REMSettingCustomerDetailViewController.h */,
 				7A63E0FE18B44CBB00A13464 /* REMSettingCustomerDetailViewController.m */,
 				7A63E0FF18B44CBB00A13464 /* REMSettingCustomerSelectionViewController.h */,
 				7A63E10018B44CBB00A13464 /* REMSettingCustomerSelectionViewController.m */,
+				7AEFD86919668F7000316D76 /* REMSettingQRCodeController.h */,
+				7AEFD86A19668F7000316D76 /* REMSettingQRCodeController.m */,
+				7AEFD86C19668FA400316D76 /* REMSettingContactViewController.h */,
+				7AEFD86D19668FA400316D76 /* REMSettingContactViewController.m */,
+				7AEFD86F19668FC800316D76 /* REMSettingContactSendMailController.h */,
+				7AEFD87019668FC800316D76 /* REMSettingContactSendMailController.m */,
+				7AEFD87219668FE100316D76 /* REMSettingContactPhoneViewController.h */,
+				7AEFD87319668FE100316D76 /* REMSettingContactPhoneViewController.m */,
+				7AEFD87519668FF500316D76 /* REMSettingContactWeSiteViewController.h */,
+				7AEFD87619668FF500316D76 /* REMSettingContactWeSiteViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2555,6 +2583,7 @@
 			children = (
 				7A63E19218B44CBC00A13464 /* Legend */,
 				7A63E19F18B44CBC00A13464 /* Login */,
+				7A63E1BA18B44CBD00A13464 /* Tooltip */,
 				7A63E1A618B44CBC00A13464 /* REMBuildingChartSeriesIndicator.h */,
 				7A63E1A718B44CBC00A13464 /* REMBuildingChartSeriesIndicator.m */,
 				7A63E1A818B44CBC00A13464 /* REMIndicatorButton.h */,
@@ -2575,9 +2604,10 @@
 				7A63E1B718B44CBD00A13464 /* REMToggleButton.m */,
 				7A63E1B818B44CBD00A13464 /* REMToggleButtonGroup.h */,
 				7A63E1B918B44CBD00A13464 /* REMToggleButtonGroup.m */,
-				7A63E1BA18B44CBD00A13464 /* Tooltip */,
 				7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */,
 				7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */,
+				7AEFD8661966864B00316D76 /* REMEnlargedButton.h */,
+				7AEFD8671966864B00316D76 /* REMEnlargedButton.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -3912,6 +3942,7 @@
 				7A63E1EF18B44CBD00A13464 /* REMBuildingAirQualityViewController.m in Sources */,
 				7A63E25718B44CBD00A13464 /* REMTrendChartLegendView.m in Sources */,
 				7A0CCD69192A01D800C35C2F /* REMManagedImageModel.m in Sources */,
+				7AEFD87419668FE100316D76 /* REMSettingContactPhoneViewController.m in Sources */,
 				7A63E1FE18B44CBD00A13464 /* REMWidgetRankingCellDelegator.m in Sources */,
 				7A63E22718B44CBD00A13464 /* REMRankingDataModel.m in Sources */,
 				7A63E20C18B44CBD00A13464 /* REMSettingAboutViewController.m in Sources */,
@@ -3967,6 +3998,7 @@
 				7A0CCD4E192A01D800C35C2F /* REMManagedAdministratorModel.m in Sources */,
 				7A9EAA9418D2946300EF1B85 /* WeiboAuthentication.m in Sources */,
 				7A63E20818B44CBD00A13464 /* REMGalleryViewController.m in Sources */,
+				7AEFD87719668FF500316D76 /* REMSettingContactWeSiteViewController.m in Sources */,
 				7A0CCD5D192A01D800C35C2F /* REMManagedBuildingCommodityUsageModel.m in Sources */,
 				7AE8919A195A6393004F4E2E /* DDASLLogCapture.m in Sources */,
 				7A9EAA8E18D2946300EF1B85 /* GeoInfo.m in Sources */,
@@ -4100,7 +4132,9 @@
 				7A0CCD66192A01D800C35C2F /* REMManagedEnergyDataModel.m in Sources */,
 				7A63E25318B44CBD00A13464 /* REMChartLegendItem.m in Sources */,
 				7A63E25E18B44CBD00A13464 /* REMModalView.m in Sources */,
+				7AEFD86B19668F7000316D76 /* REMSettingQRCodeController.m in Sources */,
 				7A63E21318B44CBD00A13464 /* REMWidgetEnergyDelegator.m in Sources */,
+				7AEFD8681966864B00316D76 /* REMEnlargedButton.m in Sources */,
 				7A63E24718B44CBD00A13464 /* REMBuildingCommodityView.m in Sources */,
 				7AF9638318D6C63C005A8D12 /* AFURLRequestSerialization.m in Sources */,
 				7AE891A1195A6393004F4E2E /* DDMultiFormatter.m in Sources */,
@@ -4147,6 +4181,7 @@
 				EF1CD12C18D29EBD008F8F5E /* DCChartDataProcessor.m in Sources */,
 				7A63E21918B44CBD00A13464 /* REMWidgetBuildingCoverViewController.m in Sources */,
 				7A63E21518B44CBD00A13464 /* REMWidgetMultiTimespanDelegator.m in Sources */,
+				7AEFD86E19668FA400316D76 /* REMSettingContactViewController.m in Sources */,
 				7A63E23D18B44CBD00A13464 /* REMWidgetCommoditySearchModel.m in Sources */,
 				7A63E21418B44CBD00A13464 /* REMWidgetLabelingDelegator.m in Sources */,
 				7A9EAA9A18D2946300EF1B85 /* Resources.m in Sources */,
@@ -4156,6 +4191,7 @@
 				7A0CCD54192A01D800C35C2F /* REMManagedDashboardModel.m in Sources */,
 				7A2BA41E17D874C3003B18E1 /* REMBusinessErrorInfo.m in Sources */,
 				7A0CCD5A192A01D800C35C2F /* REMManagedBuildingPictureModel.m in Sources */,
+				7AEFD87119668FC800316D76 /* REMSettingContactSendMailController.m in Sources */,
 				7A0CCD6F192A01D800C35C2F /* REMManagedSharedModel.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,

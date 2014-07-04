@@ -34,7 +34,7 @@ typedef enum _REMBuildingCoverStatus{
 - (void)setBlurLevel:(CGFloat)offsetY;
 
 - (void)loadContentView;
-- (void)exportImage:(void (^)(UIImage *, NSString*))callback;
+- (void)exportImage:(void (^)(UIImage *, NSString*))callback :(BOOL)isMail;
 
 
 - (void)releaseContentView;
