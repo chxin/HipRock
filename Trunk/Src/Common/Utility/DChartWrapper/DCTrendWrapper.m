@@ -34,7 +34,7 @@
         NSMutableDictionary *seriesStates = [[NSMutableDictionary alloc] init];
         for(NSDictionary *item in self.wrapperConfig.seriesStates){
             DCSeriesStatus *status = [[DCSeriesStatus alloc] init];
-            status.seriesType = (DCSeriesTypeStatus)[item[@"type"] shortValue];
+            status.seriesType = REMIsNilOrNull(item[@"type"])?DCSeriesTypeStatusLine:(DCSeriesTypeStatus)[item[@"type"] shortValue];
             status.seriesKey = item[@"seriesKey"];
             status.canBeHidden = [item[@"suppressible"] boolValue];
             status.hidden = ![item[@"visible"] boolValue];
