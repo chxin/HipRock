@@ -36,17 +36,17 @@
 
 - (void)test_timerange
 {
-    NSDictionary *dic=@{
-                        @"StartTime":@"/Date(1356998400000)/",
-                        @"EndTime":@"/Date(1356998400000)/"
-                        };
-    REMTimeRange *range = [[REMTimeRange alloc]initWithDictionary:dic];
-    
-    NSAssert(1356998400000L==range.longStartTime,@"ok");
-    NSAssert(1356998400000L==range.longEndTime,@"ok");
-    
-    NSAssert(1356998400==range.startTime.timeIntervalSince1970,@"ok");
-    NSAssert(1356998400==range.endTime.timeIntervalSince1970,@"ok");
+//    NSDictionary *dic=@{
+//                        @"StartTime":@"/Date(1356998400000)/",
+//                        @"EndTime":@"/Date(1356998400000)/"
+//                        };
+//    REMTimeRange *range = [[REMTimeRange alloc]initWithDictionary:dic];
+//    
+//    NSAssert(1356998400000L==range.longStartTime,@"ok");
+//    NSAssert(1356998400000L==range.longEndTime,@"ok");
+//    
+//    NSAssert(1356998400==range.startTime.timeIntervalSince1970,@"ok");
+//    NSAssert(1356998400==range.endTime.timeIntervalSince1970,@"ok");
     
     
 }

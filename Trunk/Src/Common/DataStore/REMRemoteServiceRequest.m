@@ -35,7 +35,7 @@
     NSURLRequest *request = [manager.requestSerializer requestBySerializingRequest:[self buildRequest] withParameters:self.dataStore.parameter error:nil] ;
     
 #ifdef DEBUG
-    NSLog(@"Outgoing request: %@", request.URL.absoluteString);
+    [self logRequest:request];
     NSDate *start = [NSDate date];
 #endif
     
@@ -144,6 +144,9 @@
 
 -(void)logRequest:(NSURLRequest *)request
 {
+    if(REMAppConfig.requestLogMode != nil && [REMAppConfig.requestLogMode integerValue] > 0) {
+        NSLog(@"Outgoing request: %@", request.URL.absoluteString);
+    }
 }
 
 -(void)logOperation:(AFHTTPRequestOperation *)operation startedOn:(NSDate *)date withError:(NSError *)error

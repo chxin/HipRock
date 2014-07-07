@@ -56,7 +56,7 @@
     self.timeRangeArray= [self timeRangeToModelArray: viewOption[@"TimeRanges"]];
     self.searchTimeRangeArray=[self.timeRangeArray copy];
     self.tagIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:tagIds]];
-    self.step=[self stepTypeByNumber:step];
+    self.step=(REMEnergyStep)[step shortValue];//[self stepTypeByNumber:step];
     
     NSDictionary *bench=param[@"benchmarkOption"];
     if(bench!=nil && [bench isEqual:[NSNull null]]==NO){

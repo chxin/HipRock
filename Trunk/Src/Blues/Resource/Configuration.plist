@@ -15,7 +15,7 @@
 			<key>timeout</key>
 			<string>90</string>
 			<key>debug-logmode</key>
-			<integer>2</integer>
+			<integer>0</integer>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>

@@ -184,7 +184,9 @@ const static CGFloat buildingGap=20;
         subController.defaultImage=self.defaultImage;
         subController.defaultBlurImage=self.defaultBlurImage;
         
-        subController.viewFrame=CGRectMake(i*(self.view.frame.size.width+buildingGap), self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
+        CGRect frame = CGRectMake(i*(self.view.frame.size.width+buildingGap), self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height);
+        
+        subController.viewFrame=frame;
         
         
         [self addChildViewController:subController];
@@ -192,8 +194,10 @@ const static CGFloat buildingGap=20;
         [self.view addSubview:subController.view];
         
         NSInteger gap=i-self.currentBuildingIndex;
-        [subController.view setCenter:CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, self.view.center.y)];
-        //NSLog(@"center:%@",NSStringFromCGPoint(subController.view.center));
+        CGPoint center = CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, self.view.center.y);
+        [subController.view setCenter:center];
+        
+        //[subController centerChangedFrom:CGPointMake(512, self.view.frame.origin.y) to:center];
     }
     
     [self stopCoverPage:nil];
@@ -235,7 +239,9 @@ const static CGFloat buildingGap=20;
             //CGPoint old = controller.view.center;
             CGPoint new = CGPointMake(controller.view.center.x+x, controller.view.center.y);
             
-            //[controller centerChangedFrom:old to:new];
+//            if(self.currentBuildingIndex == i){
+//                [controller centerChangedFrom:old to:new];
+//            }
             
             [controller.view setCenter:new];
         }
@@ -323,9 +329,14 @@ const static CGFloat buildingGap=20;
 
 - (void) moveAllViews{
     for (int i=0; i<self.childViewControllers.count; ++i) {
-        UIViewController *vc = self.childViewControllers[i];
+        REMBuildingImageViewController *vc = self.childViewControllers[i];
         NSInteger gap=i-self.currentBuildingIndex;
-        [vc.view setCenter:CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, vc.view.center.y)];
+        
+        //CGPoint oldCenter = vc.view.center;
+        CGPoint newCenter = CGPointMake(gap*(self.view.frame.size.width+buildingGap)+self.view.frame.size.width/2, vc.view.center.y);
+        [vc.view setCenter:newCenter];
+        
+        //[vc centerChangedFrom:oldCenter to:newCenter];
     }
 }
 

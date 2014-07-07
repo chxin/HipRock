@@ -60,10 +60,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.clipsToBounds = YES;
+    
     self.loadingImageKey=[NSString stringWithFormat:@(kBuildingImageLoadingKeyPrefix),self.buildingInfo.id];
     [self.view setFrame:self.viewFrame];
     [self setChildControllerFrame];
     [self loadSmallImageView];
+    
+//    self.imageView.center = CGPointMake(512-1024/3, 384);
+//    self.blurImageView.center = CGPointMake(512-1024/3, 284);
 }
 
 - (void)setChildControllerFrame{
@@ -779,14 +785,16 @@
     callback(img, text);
 }
 
-//-(void)centerChangedFrom:(CGPoint)oldCenter to:(CGPoint)newCenter
-//{
-//    CGFloat diff = newCenter.x - oldCenter.x;
-//    
-//    CGPoint imageCenter = self.imageView.center;
-//    
-//    self.imageView.center = CGPointMake(imageCenter.x-diff/3, imageCenter.y);
-//}
+-(void)centerChangedFrom:(CGPoint)oldCenter to:(CGPoint)newCenter
+{
+    CGFloat diff = newCenter.x - oldCenter.x;
+    
+    CGPoint imageCenter = CGPointMake(self.imageView.center.x-diff/3, self.imageView.center.y);
+    
+    
+    self.imageView.center = imageCenter;
+    self.blurImageView.center = imageCenter;
+}
 
 
 @end

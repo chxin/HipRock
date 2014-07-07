@@ -14,7 +14,7 @@
 
 //- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType;
 
-- (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber;
+//- (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber;
 
 - (void)resetStepByTimeRange:(REMTimeRange *)range;
 

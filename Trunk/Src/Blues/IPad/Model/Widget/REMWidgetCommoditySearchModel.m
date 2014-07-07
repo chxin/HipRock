@@ -71,7 +71,7 @@
     self.searchTimeRangeArray=[self.timeRangeArray copy];
     self.commodityIdArray= [NSKeyedUnarchiver unarchiveObjectWithData:
                             [NSKeyedArchiver archivedDataWithRootObject:commodityIds]];
-    self.step=[self stepTypeByNumber:step];
+    self.step=(REMEnergyStep)[step shortValue];//[self stepTypeByNumber:step];
     
 
     

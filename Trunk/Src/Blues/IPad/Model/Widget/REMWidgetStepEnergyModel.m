@@ -33,26 +33,26 @@
 
 }
 
-- (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber
-{
-    if ([stepNumber isEqualToNumber:@(1)]== YES) {
-        return REMEnergyStepHour;
-    }
-    else if([stepNumber isEqualToNumber:@(2)]==YES){
-        return REMEnergyStepDay;
-    }
-    else if([stepNumber isEqualToNumber:@(3)]==YES){
-        return REMEnergyStepMonth;
-    }
-    else if([stepNumber isEqualToNumber:@(4)]==YES){
-        return REMEnergyStepYear;
-    }
-    else if([stepNumber isEqualToNumber:@(5)]==YES){
-        return REMEnergyStepWeek;
-    }
-    
-    return REMEnergyStepNone;
-}
+//- (REMEnergyStep)stepTypeByNumber:(NSNumber *)stepNumber
+//{
+//    if ([stepNumber isEqualToNumber:@(1)]== YES) {
+//        return REMEnergyStepHour;
+//    }
+//    else if([stepNumber isEqualToNumber:@(2)]==YES){
+//        return REMEnergyStepDay;
+//    }
+//    else if([stepNumber isEqualToNumber:@(3)]==YES){
+//        return REMEnergyStepMonth;
+//    }
+//    else if([stepNumber isEqualToNumber:@(4)]==YES){
+//        return REMEnergyStepYear;
+//    }
+//    else if([stepNumber isEqualToNumber:@(5)]==YES){
+//        return REMEnergyStepWeek;
+//    }
+//    
+//    return REMEnergyStepNone;
+//}
 
 //- (NSNumber *)stepNumberByStep:(REMEnergyStep)stepType{
 //    NSNumber *step;
