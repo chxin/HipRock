@@ -9,9 +9,13 @@
 
 @interface REMSettingContactViewController ()
 
+@property (nonatomic,strong) NSArray *items;
+@property (nonatomic,strong) NSArray *segues;
+
 @end
 
 @implementation REMSettingContactViewController
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,11 +36,20 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.title = REMIPadLocalizedString(@"Setting_ContactUsViewTitle");
+    self.items = @[REMIPadLocalizedString(@"Setting_ContactItemSendMail"),REMIPadLocalizedString(@"Setting_ContactItemContactPhone"),REMIPadLocalizedString(@"Setting_ContactItemWeSite")];
+    self.segues = @[@"settingContactMailSegue",@"settingContactPhoneSegue",@"settingContactWeSiteSegue",];
+    
+//    self.items = @[REMIPadLocalizedString(@"Setting_ContactItemContactInformation"),REMIPadLocalizedString(@"Setting_ContactItemWeSite")];
+//    self.segues = @[@"settingContactInformationSegue",@"settingContactWeSiteSegue"];
+    
+    
+    self.title = REMIPadLocalizedString(@"Setting_ContactUs");
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okButtonClicked:)];
     
     self.navigationItem.rightBarButtonItem = doneButton;
+    
+    
 }
 
 - (IBAction)okButtonClicked:(id)sender {
@@ -53,16 +66,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -70,49 +81,28 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
+    NSString *text = self.items[indexPath.row];
+    cell.textLabel.text = text;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // Configure the cell...
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    NSString *segue = self.segues[indexPath.row];
+    [self performSegueWithIdentifier:segue sender:self];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    if (section == 0) {
+        return REMIPadLocalizedString(@"Setting_ContactHeader");
+    }
+    return @"";
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

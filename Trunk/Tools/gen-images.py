@@ -3,8 +3,8 @@ import os
 mark = '#pragma mark - Definitions'
 
 def generateCommonHeaders():
-	root = os.path.abspath('../Src/BluesPad/Resource/Images')
-	filename = os.path.abspath('../Src/BluesPad/Resource/Definitions/REMImages.h')
+	root = os.path.abspath('../Src/Blues/Resource/Images')
+	filename = os.path.abspath('../Src/Blues/Resource/Definitions/REMImages.h')
 
 	headers = fileheader(filename)
 	#print headers

@@ -361,10 +361,10 @@
             </objects>
             <point key="canvasLocation" x="-2884" y="-3293"/>
         </scene>
-        <!--SettingQR Code Contoller-->
+        <!--SettingQR Code Controller-->
         <scene sceneID="ORN-VO-MKJ">
             <objects>
-                <viewController id="hgf-zJ-X4Q" customClass="REMSettingQRCodeContoller" sceneMemberID="viewController">
+                <viewController id="hgf-zJ-X4Q" customClass="REMSettingQRCodeController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j0M-Wl-XB6"/>
                         <viewControllerLayoutGuide type="bottom" id="FWx-FF-gLL"/>
@@ -384,13 +384,13 @@
         <scene sceneID="dI2-nX-cto">
             <objects>
                 <tableViewController id="uXz-UA-VIK" customClass="REMSettingContactViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="syu-p6-7xP">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="syu-p6-7xP">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4Yd-3i-wDI">
-                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="4Yd-3i-wDI">
+                                <rect key="frame" x="0.0" y="119" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Yd-3i-wDI" id="cy2-TD-9gq">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -408,6 +408,7 @@
                         <segue destination="Gib-C3-6HA" kind="push" identifier="settingContactMailSegue" id="E52-OA-8LT"/>
                         <segue destination="ONf-bd-dHS" kind="push" identifier="settingContactPhoneSegue" id="wuE-7f-HAe"/>
                         <segue destination="EwS-g4-bgn" kind="push" identifier="settingContactWeSiteSegue" id="Zvq-2d-YCi"/>
+                        <segue destination="lDu-mF-Kbc" kind="push" identifier="settingContactInformationSegue" id="KwR-fX-uKV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YVR-Lo-68x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -418,13 +419,13 @@
         <scene sceneID="Gli-Ai-SXy">
             <objects>
                 <tableViewController id="Gib-C3-6HA" customClass="REMSettingContactSendMailController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ahw-iw-rUp">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ahw-iw-rUp">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="bJi-f5-prg">
-                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="bJi-f5-prg">
+                                <rect key="frame" x="0.0" y="119" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bJi-f5-prg" id="cKV-mQ-PkI">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -621,13 +622,13 @@
         <scene sceneID="NHA-mR-cjT">
             <objects>
                 <tableViewController id="ONf-bd-dHS" customClass="REMSettingContactPhoneViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="f63-r0-IL7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="f63-r0-IL7">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EBz-um-EkV">
-                                <rect key="frame" x="0.0" y="86" width="540" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="EBz-um-EkV">
+                                <rect key="frame" x="0.0" y="119" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EBz-um-EkV" id="XHQ-C6-53y">
                                     <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
@@ -645,6 +646,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NjW-1R-7LZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1268" y="-5225"/>
+        </scene>
+        <!--Setting Contact Information View Controller-->
+        <scene sceneID="aHf-ld-LbS">
+            <objects>
+                <viewController id="lDu-mF-Kbc" customClass="REMSettingContactInformationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YiH-Pv-nVH"/>
+                        <viewControllerLayoutGuide type="bottom" id="ITT-g0-hat"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YCU-eb-BWH">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KFA-OJ-DET"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-oK-Qfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-550" y="-5277"/>
         </scene>
         <!--Setting Customer Detail Logo View Controller - Logo-->
         <scene sceneID="aVh-Se-nuy">

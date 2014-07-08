@@ -38,6 +38,8 @@
 @property (nonatomic,strong) REMUpdateAllManager *sharedUpdateManager;
 @property (nonatomic,strong) REMHTTPRequestOperationManager *sharedRequestOperationManager;
 
+@property (nonatomic,weak) REMMainNavigationController *mainNavigationController;
+
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic,strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;

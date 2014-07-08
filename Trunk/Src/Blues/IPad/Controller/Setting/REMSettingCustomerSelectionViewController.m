@@ -55,7 +55,9 @@
 
 -(void)doneButtonPressed
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self switchCustomer:nil];
 }
 
 - (void)switchCustomer:(UIBarButtonItem *)sender
@@ -83,11 +85,13 @@
             self.updateManager=manager;
             [manager updateAllBuildingInfoWithAction:^(REMCustomerUserConcurrencyStatus status, NSArray *buildingInfoArray, REMDataAccessStatus errorStatus) {
                 if (status == REMCustomerUserConcurrencyStatusSuccess) {
-                    [self.settingController.navigationController popToRootViewControllerAnimated:YES];
-                    REMMainNavigationController *mainController=(REMMainNavigationController *)self.settingController.presentingViewController;
-                    [mainController dismissViewControllerAnimated:NO completion:^{
-                        [mainController presentInitialView];
-                    }];
+//                    [self.settingController.navigationController popToRootViewControllerAnimated:YES];
+//                    REMMainNavigationController *mainController=(REMMainNavigationController *)self.settingController.presentingViewController;
+//                    [mainController dismissViewControllerAnimated:NO completion:^{
+//                        [mainController presentInitialView];
+//                    }];
+                    
+                    [REMAppContext.mainNavigationController presentInitialView];
                     
                 }
             }];

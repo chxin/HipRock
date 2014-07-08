@@ -9,6 +9,8 @@
 
 @interface REMSettingContactSendMailController ()
 
+@property (nonatomic,strong) NSArray *items;
+
 @end
 
 @implementation REMSettingContactSendMailController
@@ -31,6 +33,17 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = REMIPadLocalizedString(@"Setting_ContactItemSendMail");
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(submitButtonClicked:)];
+    
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    self.items = @[REMIPadLocalizedString(@"Setting_MailFieldName"), REMIPadLocalizedString(@"Setting_MailFieldPhone"), REMIPadLocalizedString(@"Setting_MailFieldCompany"), REMIPadLocalizedString(@"Setting_MailFieldTitle"), REMIPadLocalizedString(@"Setting_MailFieldDescription")];
+}
+
+- (IBAction)submitButtonClicked:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,16 +56,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,6 +72,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    UITextField *field = [[UITextField alloc] init];
+    field.placeholder = self.items[indexPath.row];
+//    field.borderStyle = UITextBorderStyleRoundedRect;
+    field.frame = CGRectMake(20, 5, 200, 32);
+    
+    [cell addSubview:field];
     
     return cell;
 }

@@ -45,6 +45,9 @@
         [[UIBarButtonItem appearance] setTintColor:[REMColor colorByHexString:@"#37ab3c"]];
         [[UINavigationBar appearance] setTintColor:[REMColor colorByHexString:@"#37ab3c"]];
     }
+    
+    //register main navigation controller
+    REMAppContext.mainNavigationController = self;
 }
 
 - (void)didReceiveMemoryWarning

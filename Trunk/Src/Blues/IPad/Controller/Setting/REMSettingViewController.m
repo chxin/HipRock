@@ -19,6 +19,7 @@
 @property (nonatomic,strong) AFHTTPRequestOperation *weiboNetworkValidateOperation;
 @property (nonatomic,weak) UIBarButtonItem *doneButton;
 
+
 @end
 
 @implementation REMSettingViewController
@@ -91,7 +92,7 @@
     // Return the number of rows in the section.
     if (section == 0) return 4;
     if (section == 1) return 1;
-    if (section == 2) return 1;
+    if (section == 2) return 3;
     if (section == 3) return 1;
     if (section == 4) return 1;
     return 0;
@@ -146,9 +147,22 @@
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-    else if (indexPath.section==2 && indexPath.row==0){
-        [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_About")];//关于云能效
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    else if (indexPath.section==2){
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        if(indexPath.row==0){
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_QRCode")];//QR code
+            //cell.accessoryView = [[UIImageView alloc] initWithImage:REMIMG_QDCode_EMOP];
+            
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else if(indexPath.row==1){
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_ContactUs")];//cotact
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
+        else{
+            [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_About")];//关于云能效
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
     }
     else if(indexPath.section==4 && indexPath.row==0 ){
         UITableViewCell *cell1 = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell1"];
@@ -185,7 +199,7 @@
     if(indexPath.section==0 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingCustomerDetailSegue" sender:self];
     }
-    else if(indexPath.section==2 && indexPath.row==0){
+    else if(indexPath.section==2 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
 }
@@ -293,7 +307,13 @@
     else if(indexPath.section == 0 && indexPath.row==2){
         [self performSegueWithIdentifier:@"settingCustomerSelectionSegue" sender:self];
     }
-    else if(indexPath.section==2 && indexPath.row==0){
+    else if(indexPath.section==2 && indexPath.row==0){ //qr code
+        [self performSegueWithIdentifier:@"settingQuickResponseCodeSegue" sender:self];
+    }
+    else if(indexPath.section==2 && indexPath.row==1){ //contact
+        [self performSegueWithIdentifier:@"settingContactSegue" sender:self];
+    }
+    else if(indexPath.section==2 && indexPath.row==2){ //about
         [self performSegueWithIdentifier:@"settingAboutSegue" sender:self];
     }
     else if(indexPath.section==3 && indexPath.row==0){

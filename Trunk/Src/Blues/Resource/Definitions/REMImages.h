@@ -17,12 +17,17 @@
 #pragma mark - Definitions
 
 //images in /:
-#define REMIMG_Logo_About REMLoadImageNamed(@"Logo_About")
-#define REMIMG_Setting REMLoadImageNamed(@"Setting")
 
-//images in /AppIcon:
+//images in /AppLogo:
+#define REMIMG_EMOP_App_6 REMLoadImageNamed(@"EMOP_App_6")
+#define REMIMG_EMOP_APP_7 REMLoadImageNamed(@"EMOP_APP_7")
+#define REMIMG_EMOP_App_Phone_6 REMLoadImageNamed(@"EMOP_App_Phone_6")
+#define REMIMG_EMOP_App_Phone_7 REMLoadImageNamed(@"EMOP_App_Phone_7")
+#define REMIMG_EMOP_Setting REMLoadImageNamed(@"EMOP_Setting")
+#define REMIMG_EMOP_Spotlight_6 REMLoadImageNamed(@"EMOP_Spotlight_6")
+#define REMIMG_EMOP_Spotlight_7 REMLoadImageNamed(@"EMOP_Spotlight_7")
 
-//images in /building:
+//images in /Building:
 #define REMIMG_ChartCustomization REMLoadImageNamed(@"ChartCustomization")
 #define REMIMG_ChartCustomization_Widget REMLoadImageNamed(@"ChartCustomization_Widget")
 #define REMIMG_DefaultBuilding_Small REMLoadImageNamed(@"DefaultBuilding-Small")
@@ -36,7 +41,7 @@
 #define REMIMG_share_weixin REMLoadImageNamed(@"share-weixin")
 #define REMIMG_Share_normal REMLoadImageNamed(@"Share_normal")
 
-//images in /building/commodity:
+//images in /Building/commodity:
 #define REMIMG_Coal_normal REMLoadImageNamed(@"Coal_normal")
 #define REMIMG_Coal_pressed REMLoadImageNamed(@"Coal_pressed")
 #define REMIMG_Cooling_normal REMLoadImageNamed(@"Cooling_normal")
@@ -78,7 +83,15 @@
 #define REMIMG_Nodata REMLoadImageNamed(@"Nodata")
 #define REMIMG_Up REMLoadImageNamed(@"Up")
 
-//images in /Launch:
+//images in /LaunchImage:
+
+//images in /LaunchImage/en.lproj:
+#define REMIMG_Default_Landscape_IOS7 REMLoadImageNamed(@"Default-Landscape-IOS7")
+#define REMIMG_Default_Landscape REMLoadImageNamed(@"Default-Landscape")
+
+//images in /LaunchImage/zh-Hans.lproj:
+#define REMIMG_Default_Landscape_IOS7 REMLoadImageNamed(@"Default-Landscape-IOS7")
+#define REMIMG_Default_Landscape REMLoadImageNamed(@"Default-Landscape")
 
 //images in /Login:
 #define REMIMG_JumpLogin_Pressed REMLoadImageNamed(@"JumpLogin-Pressed")
@@ -102,10 +115,21 @@
 #define REMIMG_MapPopover_Rectangle REMLoadImageNamed(@"MapPopover_Rectangle")
 #define REMIMG_QualifiedPin_Focus REMLoadImageNamed(@"QualifiedPin_Focus")
 #define REMIMG_QualifiedPin_Normal REMLoadImageNamed(@"QualifiedPin_Normal")
+#define REMIMG_raspberry_152 REMLoadImageNamed(@"raspberry-152")
 #define REMIMG_UnqualifiedPin_Focus REMLoadImageNamed(@"UnqualifiedPin_Focus")
 #define REMIMG_UnqualifiedPin_Normal REMLoadImageNamed(@"UnqualifiedPin_Normal")
 
+//images in /Map/en.lproj:
+#define REMIMG_Loading REMLoadImageNamed(@"Loading")
+
+//images in /Map/zh-Hans.lproj:
+#define REMIMG_Loading REMLoadImageNamed(@"Loading")
+
 //images in /Setting:
+#define REMIMG_Logo_About REMLoadImageNamed(@"Logo_About")
+#define REMIMG_QDCode_EMOP REMLoadImageNamed(@"QDCode_EMOP")
+#define REMIMG_QDCode_EMOPWeChat REMLoadImageNamed(@"QDCode_EMOPWeChat 2")
+#define REMIMG_Setting REMLoadImageNamed(@"Setting")
 
 //images in /Splash:
 #define REMIMG_SplashScreenBackgroud REMLoadImageNamed(@"SplashScreenBackgroud")
