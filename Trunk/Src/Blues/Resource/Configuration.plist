@@ -15,7 +15,7 @@
 			<key>timeout</key>
 			<string>90</string>
 			<key>debug-logmode</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>debug-user</key>
 			<string>SchneiderElectricChina|P@ssw0rdChina</string>
 		</dict>
@@ -98,9 +98,20 @@
 		<key>REMDSUserGetCurrent</key>
 		<dict>
 			<key>ID</key>
-			<integer>102001</integer>
+			<real>102001</real>
 			<key>Url</key>
 			<string>API/User.svc/GetCurrentUser</string>
+			<key>Type</key>
+			<integer>1</integer>
+			<key>Processor</key>
+			<string></string>
+		</dict>
+		<key>REMDSUserSendContactMail</key>
+		<dict>
+			<key>ID</key>
+			<real>102002</real>
+			<key>Url</key>
+			<string>API/User.svc/SendContactUsMail</string>
 			<key>Type</key>
 			<integer>1</integer>
 			<key>Processor</key>

@@ -203,7 +203,8 @@ static REMCacheStoreHolder *cacheStoreHolder;
             newData = [self.persistenceProcessor persist:data];
         }
         
-        success(newData);
+        if(success)
+            success(newData);
     } failure:^(NSError *error, REMDataAccessStatus status, id response) {
         if(status == REMDataAccessUnsupported){
             [REMAppContext applicationDidBecomeUnsupported];

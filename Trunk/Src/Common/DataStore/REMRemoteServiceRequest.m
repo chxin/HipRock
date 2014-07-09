@@ -59,7 +59,7 @@
             failure(error, REMDataAccessErrorMessage, businessError);
         }
         else{ //if ok, enter SUCCESS status
-            id result = self.dataStore.responseType == REMServiceResponseJson ? responseObject[[responseObject allKeys][0]] : responseObject;
+            id result = self.dataStore.responseType == REMServiceResponseJson ? ([responseObject allKeys].count > 0 ? responseObject[[responseObject allKeys][0]] : nil) : responseObject;
             success(result);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

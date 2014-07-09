@@ -91,6 +91,7 @@
 		7A12C2F2196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F0196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png */; };
 		7A12C2F5196D1BEA00272609 /* QRCodeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */; };
 		7A12C2F6196D1BEA00272609 /* QRCodeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */; };
+		7A12C2F8196D31B100272609 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A12C2F7196D31B100272609 /* AudioToolbox.framework */; };
 		7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -824,6 +825,7 @@
 		7A12C2F0196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QDCode_EMOPWeChat@2x.png"; path = "Setting/QDCode_EMOPWeChat@2x.png"; sourceTree = "<group>"; };
 		7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QRCodeIcon.png; path = Setting/QRCodeIcon.png; sourceTree = "<group>"; };
 		7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QRCodeIcon@2x.png"; path = "Setting/QRCodeIcon@2x.png"; sourceTree = "<group>"; };
+		7A12C2F7196D31B100272609 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7A1AE2C819371AE900A8BA48 /* REMSeriesKeyFormattor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSeriesKeyFormattor.h; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.h; sourceTree = "<group>"; };
 		7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSeriesKeyFormattor.m; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
@@ -1595,6 +1597,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A12C2F8196D31B100272609 /* AudioToolbox.framework in Frameworks */,
 				7A50EC681957F382007A945A /* GPUImage.framework in Frameworks */,
 				7A50EC511957F377007A945A /* Accelerate.framework in Frameworks */,
 				7A50EC521957F377007A945A /* AVFoundation.framework in Frameworks */,
@@ -2822,6 +2825,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A12C2F7196D31B100272609 /* AudioToolbox.framework */,
 				7A50EC671957F382007A945A /* GPUImage.framework */,
 				7A50EC3B1957F377007A945A /* Accelerate.framework */,
 				7A50EC3C1957F377007A945A /* AVFoundation.framework */,

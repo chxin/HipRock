@@ -7,6 +7,7 @@
 --------------------------------------------------------------------------*/
 #import "REMSettingContactSendMailController.h"
 #import "REMCommonHeaders.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface REMSettingContactSendMailController ()
 
@@ -65,8 +66,25 @@
 }
 
 - (IBAction)submitButtonClicked:(id)sender {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     //嗖
+    NSURL *fileURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/mail-sent.caf"];
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)fileURL,&soundID);
+    AudioServicesPlaySystemSound(soundID);
+    
+    NSString *name = REMStringTrim(self.nameField.text);
+    NSString *phone = REMStringTrim(self.phoneField.text);
+    NSString *company = REMStringTrim(self.companyField.text);
+    NSString *title = REMStringTrim(self.titleField.text);
+    NSString *description = REMStringTrim(self.descriptionField.text);
+    
+    NSDictionary *parameter = @{@"dto":@{@"Name":name,@"Telephone":phone,@"CustomerName":company,@"Title":title,@"Comment":description,}};
+    REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserSendContactMail parameter:parameter accessCache:NO andMessageMap:nil];
+    store.isDisableAlert = YES;
+    
+    [store access:nil];
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

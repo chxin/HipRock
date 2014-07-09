@@ -127,6 +127,6 @@
  */
 #define REMNetworkMessageMap REMDataAccessMessageMake(@"Common_NetNoConnection",@"Common_NetConnectionFailed",@"Common_NetServerError",@"")
 
-
+#define REMStringTrim(a) [(a) stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
 
 #endif

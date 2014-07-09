@@ -42,6 +42,7 @@ typedef enum _REMDataStoreType : NSUInteger
      * User                 102
      */
     REMDSUserGetCurrent                 = 102001,
+    REMDSUserSendContactMail            = 102002,
     
     /**
      * Customer             103
