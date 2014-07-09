@@ -6,10 +6,19 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMSettingContactSendMailController.h"
+#import "REMCommonHeaders.h"
 
 @interface REMSettingContactSendMailController ()
 
 @property (nonatomic,strong) NSArray *items;
+
+@property (nonatomic,weak) UITextField *nameField;
+@property (nonatomic,weak) UITextField *phoneField;
+@property (nonatomic,weak) UITextField *companyField;
+@property (nonatomic,weak) UITextField *titleField;
+@property (nonatomic,weak) UITextField *descriptionField;
+
+@property (nonatomic,weak) UIBarButtonItem *submitButton;
 
 @end
 
@@ -35,15 +44,29 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = REMIPadLocalizedString(@"Setting_ContactItemSendMail");
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(submitButtonClicked:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    UIBarButtonItem *submitButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Submit") style:UIBarButtonItemStylePlain target:self action:@selector(submitButtonClicked:)];
+    submitButton.enabled = NO;
     
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = submitButton;
+    
+    self.submitButton = submitButton;
     
     self.items = @[REMIPadLocalizedString(@"Setting_MailFieldName"), REMIPadLocalizedString(@"Setting_MailFieldPhone"), REMIPadLocalizedString(@"Setting_MailFieldCompany"), REMIPadLocalizedString(@"Setting_MailFieldTitle"), REMIPadLocalizedString(@"Setting_MailFieldDescription")];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.delegate = self;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+}
+
+- (IBAction)cancelButtonClicked:(id)sender {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)submitButtonClicked:(id)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    //嗖
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,16 +93,58 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     // Configure the cell...
     UITextField *field = [[UITextField alloc] init];
     field.placeholder = self.items[indexPath.row];
-//    field.borderStyle = UITextBorderStyleRoundedRect;
-    field.frame = CGRectMake(20, 5, 200, 32);
+    field.frame = CGRectMake(15, 5, cell.bounds.size.width - 30, cell.bounds.size.height - 10);
+    [field addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
     [cell addSubview:field];
     
+    if(indexPath.row == 0){
+        [field becomeFirstResponder];
+    }
+    
+    switch (indexPath.row) {
+        case 0:
+            self.nameField = field;
+            break;
+        case 1:
+            self.phoneField = field;
+            break;
+        case 2:
+            self.companyField = field;
+            break;
+        case 3:
+            self.titleField = field;
+            break;
+        case 4:
+            self.descriptionField = field;
+            break;
+            
+        default:
+            break;
+    }
+    
     return cell;
+}
+
+-(void)textFieldChanged:(UITextField *)sender
+{
+    NSString *name = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *phone = [self.phoneField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *company = [self.companyField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSTextCheckingResult *phoneRegMatch = [[NSRegularExpression regularExpressionWithPattern:REMREGEX_Telephone options:NSRegularExpressionCaseInsensitive error:NULL] firstMatchInString:phone options:0 range:NSMakeRange(0, phone.length)];
+    
+    if(REMStringNilOrEmpty(name) || REMStringNilOrEmpty(phone) || REMStringNilOrEmpty(company) || phoneRegMatch == nil){
+        self.submitButton.enabled = NO;
+    }
+    else{
+        self.submitButton.enabled = YES;
+    }
 }
 
 /*

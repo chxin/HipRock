@@ -1,22 +1,20 @@
 /*------------------------------Summary-------------------------------------
  * Product Name : EMOP iOS Application Software
- * File Name	: REMContactViewController.m
- * Date Created : 张 锋 on 7/4/14.
+ * File Name	: REMSplashContactViewController.m
+ * Date Created : 张 锋 on 7/9/14.
  * Description  : IOS Application software based on Energy Management Open Platform
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
-#import "REMSettingContactViewController.h"
-#import "REMSettingContactSendMailController.h"
+#import "REMSplashContactViewController.h"
 
-@interface REMSettingContactViewController ()
+@interface REMSplashContactViewController ()
 
 @property (nonatomic,strong) NSArray *items;
 @property (nonatomic,strong) NSArray *segues;
 
 @end
 
-@implementation REMSettingContactViewController
-
+@implementation REMSplashContactViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,20 +34,22 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    self.items = @[REMIPadLocalizedString(@"Setting_ContactItemSendMail"),REMIPadLocalizedString(@"Setting_ContactItemContactPhone"),REMIPadLocalizedString(@"Setting_ContactItemWeSite")];
-    self.segues = @[@"settingContactMailSegue",@"settingContactPhoneSegue",@"settingContactWeSiteSegue",];
-    
+    self.items = @[REMIPadLocalizedString(@"Setting_ContactItemContactInformation"),REMIPadLocalizedString(@"Setting_ContactItemWeSite")];
+    self.segues = @[@"splashContactInformationSegue",@"splashContactWeSiteSegue"];
     
     self.title = REMIPadLocalizedString(@"Setting_ContactUs");
     
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    tableView.delegate = self;
+    
+    
+    self.tableView = tableView;
+    
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okButtonClicked:)];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     
     self.navigationItem.rightBarButtonItem = doneButton;
-    
-    
 }
 
 - (IBAction)okButtonClicked:(id)sender {
@@ -78,23 +78,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [[UITableViewCell alloc] init];//[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSString *text = self.items[indexPath.row];
     cell.textLabel.text = text;
-    
-    if(indexPath.row !=0){
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    
-    if(indexPath.row == 2){
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    // Configure the cell...
+    if(indexPath.row == 1){
         UIImageView *codeIcon = [[UIImageView alloc] initWithImage:REMIMG_QRCodeIcon];
         codeIcon.frame = CGRectMake(0, 0, 32, 32);
         codeIcon.translatesAutoresizingMaskIntoConstraints = NO;
         
         [cell.contentView addSubview:codeIcon];
-        [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:codeIcon attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+        [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:codeIcon attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:-5]];
         [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:codeIcon attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     }
     
@@ -103,30 +100,48 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0){
-        REMSettingContactSendMailController *mailController = [[REMSettingContactSendMailController alloc] init];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mailController];
-        navigationController.modalInPopover = YES;
-        navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-        navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        
-        [self presentViewController:navigationController animated:YES completion:nil];
-        
-        return;
-    }
-    
     NSString *segue = self.segues[indexPath.row];
     [self performSegueWithIdentifier:segue sender:self];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (section == 0) {
-        return REMIPadLocalizedString(@"Setting_ContactHeader");
-    }
-    return @"";
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
 }
+*/
 
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
 
 /*
 #pragma mark - Navigation

@@ -11,7 +11,12 @@
 
 #import "REMDimensions.h"
 
+
+
 //prefix: kDMLogin
+
+#define kDMLogin_ScrollViewFrame (REMISIOS7 ? CGRectMake(0,0,kDMScreenWidth,(kDMScreenHeight-100)) : CGRectMake(0,0,kDMScreenWidth,(kDMScreenHeight-kDMStatusBarHeight-100)))
+
 #define kDMLogin_CardTopOffset REMDMCOMPATIOS7(88)
 #define kDMLogin_CardWidth 528
 #define kDMLogin_CardHeight 380

@@ -35,10 +35,11 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 - (void)loadView
 {
-    //[super loadView];
-    self.view = [[UIView alloc] initWithFrame: kDMDefaultViewFrame];
+    [super loadView];
     
     if(self){
+        self.view.frame = kDMLogin_ScrollViewFrame;
+        
         //load scroll view
         [self loadScrollView];
         
@@ -49,7 +50,7 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 -(void)loadScrollView
 {
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:kDMDefaultViewFrame];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:kDMLogin_ScrollViewFrame];
     scrollView.contentSize = CGSizeMake(kCardCount * kDMScreenWidth, scrollView.frame.size.height);
     scrollView.pagingEnabled = YES;
     scrollView.bounces = NO;

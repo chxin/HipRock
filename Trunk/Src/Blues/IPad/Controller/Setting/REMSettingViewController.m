@@ -151,6 +151,14 @@
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if(indexPath.row==0){
             [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_QRCode")];//QR code
+            UIImageView *codeIcon = [[UIImageView alloc] initWithImage:REMIMG_QRCodeIcon];
+            codeIcon.frame = CGRectMake(0, 0, 32, 32);
+            codeIcon.translatesAutoresizingMaskIntoConstraints = NO;
+            
+            [cell.contentView addSubview:codeIcon];
+            [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:codeIcon attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+            [cell.contentView addConstraint:[NSLayoutConstraint constraintWithItem:codeIcon attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:cell.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+            
             //cell.accessoryView = [[UIImageView alloc] initWithImage:REMIMG_QDCode_EMOP];
             
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;

@@ -60,7 +60,6 @@ static NSString *cellId=@"dashboardcell";
 {
     [super viewDidLoad];
     
-    
     [self.tableView registerClass:[REMDashboardCellViewCell class] forCellReuseIdentifier:cellId];
     self.tableView.sectionFooterHeight=34;
     self.tableView.sectionHeaderHeight=0;

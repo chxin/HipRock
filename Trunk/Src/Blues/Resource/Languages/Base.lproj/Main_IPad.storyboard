@@ -5,6 +5,59 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Splash Contact View Controller-->
+        <scene sceneID="3rt-e5-m7h">
+            <objects>
+                <tableViewController id="VxF-81-gdh" customClass="REMSplashContactViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xuQ-dm-bjJ">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="jFS-FO-ovP">
+                                <rect key="frame" x="0.0" y="119" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jFS-FO-ovP" id="3MS-Mj-5sm">
+                                    <rect key="frame" x="0.0" y="0.0" width="540" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VxF-81-gdh" id="dzQ-oH-dJH"/>
+                            <outlet property="delegate" destination="VxF-81-gdh" id="T41-IY-8M8"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="jRS-0d-ogL"/>
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <segue destination="lDu-mF-Kbc" kind="push" identifier="splashContactInformationSegue" id="qeb-sT-rny"/>
+                        <segue destination="auF-xY-Fpf" kind="push" identifier="splashContactWeSiteSegue" id="3g0-jo-I4p"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CVF-85-UDU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5052" y="-3245"/>
+        </scene>
+        <!--Setting Contact We Site View Controller-->
+        <scene sceneID="ubO-jO-tTH">
+            <objects>
+                <viewController id="auF-xY-Fpf" customClass="REMSettingContactWeSiteViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wNF-LX-KE6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jvd-wC-jfY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1zJ-17-1WI">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yp5-qk-MWq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVI-mz-xoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4302" y="-2749"/>
+        </scene>
         <!--Splash Screen Controller-->
         <scene sceneID="ykm-u5-8ai">
             <objects>
@@ -107,7 +160,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIH-hF-Vsy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2122" y="-2381"/>
+            <point key="canvasLocation" x="3096" y="-2381"/>
         </scene>
         <!--Building View Controller-->
         <scene sceneID="XIG-df-ONL">
@@ -175,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0IW-uy-Qy4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5822" y="-2371"/>
+            <point key="canvasLocation" x="6796" y="-2371"/>
         </scene>
         <!--Widget Max View Controller-->
         <scene sceneID="kih-fe-Pxz">
@@ -359,7 +412,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7e-H1-kOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2884" y="-3293"/>
+            <point key="canvasLocation" x="-936" y="-3293"/>
         </scene>
         <!--SettingQR Code Controller-->
         <scene sceneID="ORN-VO-MKJ">
@@ -378,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghN-YB-Nzg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2024" y="-5518"/>
+            <point key="canvasLocation" x="-1050" y="-5582"/>
         </scene>
         <!--Setting Contact View Controller-->
         <scene sceneID="dI2-nX-cto">
@@ -408,12 +461,11 @@
                         <segue destination="Gib-C3-6HA" kind="push" identifier="settingContactMailSegue" id="E52-OA-8LT"/>
                         <segue destination="ONf-bd-dHS" kind="push" identifier="settingContactPhoneSegue" id="wuE-7f-HAe"/>
                         <segue destination="EwS-g4-bgn" kind="push" identifier="settingContactWeSiteSegue" id="Zvq-2d-YCi"/>
-                        <segue destination="lDu-mF-Kbc" kind="push" identifier="settingContactInformationSegue" id="KwR-fX-uKV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YVR-Lo-68x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2024" y="-4777"/>
+            <point key="canvasLocation" x="-1050" y="-4841"/>
         </scene>
         <!--Setting Contact Send Mail Controller-->
         <scene sceneID="Gli-Ai-SXy">
@@ -442,7 +494,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nAd-cc-xKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1268" y="-5952"/>
+            <point key="canvasLocation" x="-294" y="-6016"/>
         </scene>
         <!--Setting Customer Selection View Controller-->
         <scene sceneID="pOc-6K-uE8">
@@ -480,7 +532,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfe-N8-S8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2024" y="-4030"/>
+            <point key="canvasLocation" x="-1050" y="-4030"/>
         </scene>
         <!--Setting Contact We Site View Controller-->
         <scene sceneID="Fnv-JA-vnY">
@@ -499,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehF-Y4-5Qx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1268" y="-4505"/>
+            <point key="canvasLocation" x="-294" y="-4569"/>
         </scene>
         <!--Setting Customer Detail View Controller-->
         <scene sceneID="yWL-Qk-a3K">
@@ -616,7 +668,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dag-9k-JiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2024" y="-3293"/>
+            <point key="canvasLocation" x="-76" y="-3293"/>
         </scene>
         <!--Setting Contact Phone View Controller-->
         <scene sceneID="NHA-mR-cjT">
@@ -645,11 +697,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NjW-1R-7LZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1268" y="-5225"/>
+            <point key="canvasLocation" x="-294" y="-5289"/>
         </scene>
         <!--Setting Contact Information View Controller-->
         <scene sceneID="aHf-ld-LbS">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-oK-Qfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lDu-mF-Kbc" customClass="REMSettingContactInformationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YiH-Pv-nVH"/>
@@ -662,9 +715,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="KFA-OJ-DET"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-oK-Qfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-550" y="-5277"/>
+            <point key="canvasLocation" x="-4311" y="-3806"/>
         </scene>
         <!--Setting Customer Detail Logo View Controller - Logo-->
         <scene sceneID="aVh-Se-nuy">
@@ -683,7 +735,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAE-lT-cZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1268" y="-3783"/>
+            <point key="canvasLocation" x="680" y="-3783"/>
         </scene>
         <!--Setting About View Controller-->
         <scene sceneID="zYu-Pw-Onp">
@@ -702,7 +754,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZ3-GG-tlV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2024" y="-2561"/>
+            <point key="canvasLocation" x="-76" y="-2561"/>
         </scene>
         <!--Setting Customer Detail Admin View Controller-->
         <scene sceneID="fpM-KK-Sce">
@@ -740,7 +792,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tj7-yR-Vc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1268" y="-2825"/>
+            <point key="canvasLocation" x="680" y="-2825"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="KV1-Ck-0FS">
@@ -776,7 +828,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWz-8E-Fzy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3976" y="-3490"/>
+            <point key="canvasLocation" x="-2028" y="-3490"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2L1-wj-4e8">
@@ -843,7 +895,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0M-3e-OqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4592" y="-2371"/>
+            <point key="canvasLocation" x="5566" y="-2371"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xnA-0H-Vsw">
@@ -861,7 +913,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1D-Kq-BJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892" y="-2381"/>
+            <point key="canvasLocation" x="1866" y="-2381"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ebq-Mn-wr1">
@@ -880,6 +932,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wcq-ij-6pa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3308" y="-57"/>
+        </scene>
+        <!--Splash Contact Navigation Controller - splashContactPage-->
+        <scene sceneID="Fex-DY-MPS">
+            <objects>
+                <navigationController restorationIdentifier="splashContactPage" storyboardIdentifier="splashContactPage" title="splashContactPage" automaticallyAdjustsScrollViewInsets="NO" id="x1V-Sn-1Lk" customClass="REMSplashContactNavigationController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R40-a1-ldE">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VxF-81-gdh" kind="relationship" relationship="rootViewController" id="kWW-MH-EDc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S75-kw-mNH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6226" y="-3447"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

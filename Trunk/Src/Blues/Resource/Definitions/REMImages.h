@@ -128,7 +128,8 @@
 //images in /Setting:
 #define REMIMG_Logo_About REMLoadImageNamed(@"Logo_About")
 #define REMIMG_QDCode_EMOP REMLoadImageNamed(@"QDCode_EMOP")
-#define REMIMG_QDCode_EMOPWeChat REMLoadImageNamed(@"QDCode_EMOPWeChat 2")
+#define REMIMG_QDCode_EMOPWeChat REMLoadImageNamed(@"QDCode_EMOPWeChat")
+#define REMIMG_QRCodeIcon REMLoadImageNamed(@"QRCodeIcon")
 #define REMIMG_Setting REMLoadImageNamed(@"Setting")
 
 //images in /Splash:

@@ -86,6 +86,11 @@
 		7A0CCD6F192A01D800C35C2F /* REMManagedSharedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD6E192A01D800C35C2F /* REMManagedSharedModel.m */; };
 		7A0CCD72192A01D900C35C2F /* REMManagedUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD71192A01D900C35C2F /* REMManagedUserModel.m */; };
 		7A12280C18116DBF004DE778 /* REMViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12280B18116DBF004DE778 /* REMViewHelper.m */; };
+		7A12C2EB196CE69A00272609 /* REMSplashContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A12C2EA196CE69A00272609 /* REMSplashContactViewController.m */; };
+		7A12C2F1196CEDDC00272609 /* QDCode_EMOPWeChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2EF196CEDDC00272609 /* QDCode_EMOPWeChat.png */; };
+		7A12C2F2196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F0196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png */; };
+		7A12C2F5196D1BEA00272609 /* QRCodeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */; };
+		7A12C2F6196D1BEA00272609 /* QRCodeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */; };
 		7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -551,12 +556,9 @@
 		7AC4024B196BBD9F0028B3CA /* Logo_About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40243196BBD9F0028B3CA /* Logo_About@2x.png */; };
 		7AC4024C196BBD9F0028B3CA /* QDCode_EMOP.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40244196BBD9F0028B3CA /* QDCode_EMOP.png */; };
 		7AC4024D196BBD9F0028B3CA /* QDCode_EMOP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40245196BBD9F0028B3CA /* QDCode_EMOP@2x.png */; };
-		7AC4024E196BBD9F0028B3CA /* QDCode_EMOPWeChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40246196BBD9F0028B3CA /* QDCode_EMOPWeChat.png */; };
-		7AC4024F196BBD9F0028B3CA /* QDCode_EMOPWeChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40247196BBD9F0028B3CA /* QDCode_EMOPWeChat@2x.png */; };
 		7AC40250196BBD9F0028B3CA /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40248196BBD9F0028B3CA /* Setting.png */; };
 		7AC40251196BBD9F0028B3CA /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40249196BBD9F0028B3CA /* Setting@2x.png */; };
 		7AC40254196BDF780028B3CA /* REMSettingContactInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */; };
-		7AC40258196BF0F60028B3CA /* REMTextFiledCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC40257196BF0F60028B3CA /* REMTextFiledCell.m */; };
 		7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */; };
 		7AE89198195A6393004F4E2E /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89182195A6393004F4E2E /* CLIColor.m */; };
 		7AE89199195A6393004F4E2E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89184195A6393004F4E2E /* DDAbstractDatabaseLogger.m */; };
@@ -816,6 +818,12 @@
 		7A0F7C5018277BAC009E898A /* REMImages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMImages.h; path = Resource/Definitions/REMImages.h; sourceTree = "<group>"; };
 		7A12280A18116DBF004DE778 /* REMViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMViewHelper.h; path = Common/Utility/REMViewHelper.h; sourceTree = "<group>"; };
 		7A12280B18116DBF004DE778 /* REMViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMViewHelper.m; path = Common/Utility/REMViewHelper.m; sourceTree = "<group>"; };
+		7A12C2E9196CE69A00272609 /* REMSplashContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSplashContactViewController.h; sourceTree = "<group>"; };
+		7A12C2EA196CE69A00272609 /* REMSplashContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSplashContactViewController.m; sourceTree = "<group>"; };
+		7A12C2EF196CEDDC00272609 /* QDCode_EMOPWeChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QDCode_EMOPWeChat.png; path = Setting/QDCode_EMOPWeChat.png; sourceTree = "<group>"; };
+		7A12C2F0196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QDCode_EMOPWeChat@2x.png"; path = "Setting/QDCode_EMOPWeChat@2x.png"; sourceTree = "<group>"; };
+		7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QRCodeIcon.png; path = Setting/QRCodeIcon.png; sourceTree = "<group>"; };
+		7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QRCodeIcon@2x.png"; path = "Setting/QRCodeIcon@2x.png"; sourceTree = "<group>"; };
 		7A1AE2C819371AE900A8BA48 /* REMSeriesKeyFormattor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSeriesKeyFormattor.h; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.h; sourceTree = "<group>"; };
 		7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSeriesKeyFormattor.m; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
@@ -1319,14 +1327,10 @@
 		7AC40243196BBD9F0028B3CA /* Logo_About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo_About@2x.png"; path = "Setting/Logo_About@2x.png"; sourceTree = "<group>"; };
 		7AC40244196BBD9F0028B3CA /* QDCode_EMOP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QDCode_EMOP.png; path = Setting/QDCode_EMOP.png; sourceTree = "<group>"; };
 		7AC40245196BBD9F0028B3CA /* QDCode_EMOP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QDCode_EMOP@2x.png"; path = "Setting/QDCode_EMOP@2x.png"; sourceTree = "<group>"; };
-		7AC40246196BBD9F0028B3CA /* QDCode_EMOPWeChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QDCode_EMOPWeChat.png; path = Setting/QDCode_EMOPWeChat.png; sourceTree = "<group>"; };
-		7AC40247196BBD9F0028B3CA /* QDCode_EMOPWeChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QDCode_EMOPWeChat@2x.png"; path = "Setting/QDCode_EMOPWeChat@2x.png"; sourceTree = "<group>"; };
 		7AC40248196BBD9F0028B3CA /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Setting.png; path = Setting/Setting.png; sourceTree = "<group>"; };
 		7AC40249196BBD9F0028B3CA /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Setting@2x.png"; path = "Setting/Setting@2x.png"; sourceTree = "<group>"; };
 		7AC40252196BDF780028B3CA /* REMSettingContactInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactInformationViewController.h; sourceTree = "<group>"; };
 		7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactInformationViewController.m; sourceTree = "<group>"; };
-		7AC40256196BF0F60028B3CA /* REMTextFiledCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMTextFiledCell.h; path = Setting/REMTextFiledCell.h; sourceTree = "<group>"; };
-		7AC40257196BF0F60028B3CA /* REMTextFiledCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMTextFiledCell.m; path = Setting/REMTextFiledCell.m; sourceTree = "<group>"; };
 		7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoView.h; sourceTree = "<group>"; };
 		7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoView.m; sourceTree = "<group>"; };
 		7AE89181195A6393004F4E2E /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
@@ -2343,6 +2347,8 @@
 			children = (
 				7A63E10218B44CBB00A13464 /* REMSplashScreenController.h */,
 				7A63E10318B44CBB00A13464 /* REMSplashScreenController.m */,
+				7A12C2E9196CE69A00272609 /* REMSplashContactViewController.h */,
+				7A12C2EA196CE69A00272609 /* REMSplashContactViewController.m */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -2543,7 +2549,6 @@
 		7A63E17418B44CBC00A13464 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7AC40255196BF0CA0028B3CA /* Setting */,
 				7A63E17518B44CBC00A13464 /* Building */,
 				7A63E18818B44CBC00A13464 /* Chart */,
 				7A63E19118B44CBC00A13464 /* Controls */,
@@ -2973,15 +2978,6 @@
 			name = DataStore;
 			sourceTree = "<group>";
 		};
-		7AC40255196BF0CA0028B3CA /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				7AC40256196BF0F60028B3CA /* REMTextFiledCell.h */,
-				7AC40257196BF0F60028B3CA /* REMTextFiledCell.m */,
-			);
-			name = Setting;
-			sourceTree = "<group>";
-		};
 		7AE8917F195A6393004F4E2E /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -3072,12 +3068,14 @@
 		B485EFE2187BA17900D16583 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */,
+				7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */,
+				7A12C2EF196CEDDC00272609 /* QDCode_EMOPWeChat.png */,
+				7A12C2F0196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png */,
 				7AC40242196BBD9F0028B3CA /* Logo_About.png */,
 				7AC40243196BBD9F0028B3CA /* Logo_About@2x.png */,
 				7AC40244196BBD9F0028B3CA /* QDCode_EMOP.png */,
 				7AC40245196BBD9F0028B3CA /* QDCode_EMOP@2x.png */,
-				7AC40246196BBD9F0028B3CA /* QDCode_EMOPWeChat.png */,
-				7AC40247196BBD9F0028B3CA /* QDCode_EMOPWeChat@2x.png */,
 				7AC40248196BBD9F0028B3CA /* Setting.png */,
 				7AC40249196BBD9F0028B3CA /* Setting@2x.png */,
 			);
@@ -3558,7 +3556,6 @@
 				B4707D9618697B2900FBA393 /* Cooling_normal@2x.png in Resources */,
 				B44D26A418A9E94C00D7C06D /* DatePicker_Chart@2x.png in Resources */,
 				7ABFDDF318483119004DD4E7 /* JumpLogin-Pressed.png in Resources */,
-				7AC4024F196BBD9F0028B3CA /* QDCode_EMOPWeChat@2x.png in Resources */,
 				6A61A7761839B82000C6A228 /* LoginTextField-Focus@2x.png in Resources */,
 				B44D26A518A9E94C00D7C06D /* DateView_Chart.png in Resources */,
 				6A61A7711839B82000C6A228 /* Login-Normal.png in Resources */,
@@ -3627,6 +3624,7 @@
 				6A61A7741839B82000C6A228 /* Login-Pressed@2x.png in Resources */,
 				B4175107188CC80F0020AE8E /* Down.png in Resources */,
 				7ABFDDF418483119004DD4E7 /* JumpLogin-Pressed@2x.png in Resources */,
+				7A12C2F2196CEDDC00272609 /* QDCode_EMOPWeChat@2x.png in Resources */,
 				6A61A7731839B82000C6A228 /* Login-Pressed.png in Resources */,
 				6A61A7871839B82000C6A228 /* QualifiedPin_Focus.png in Resources */,
 				B4175116188CC83E0020AE8E /* Map@2x.png in Resources */,
@@ -3686,6 +3684,7 @@
 				6A61A7701839B82000C6A228 /* Login-Disable@2x.png in Resources */,
 				7A63E28B18B454BA00A13464 /* Localizable_Common.strings in Resources */,
 				7A50ECB81957F91E007A945A /* Default-Landscape-IOS7@2x.png in Resources */,
+				7A12C2F6196D1BEA00272609 /* QRCodeIcon@2x.png in Resources */,
 				6A61A70A1839B82000C6A228 /* Coal_pressed@2x.png in Resources */,
 				B44D26A818A9E94C00D7C06D /* Descend@2x.png in Resources */,
 				7A5A97371856D54E0084E228 /* share-email@2x.png in Resources */,
@@ -3710,7 +3709,6 @@
 				B4D534E018AAFC3A00BCFFA2 /* DefaultBuildingBlur@2x.png in Resources */,
 				6A61A7231839B82000C6A228 /* Menu_normal.png in Resources */,
 				B44D26A118A9E94C00D7C06D /* Close_Chart.png in Resources */,
-				7AC4024E196BBD9F0028B3CA /* QDCode_EMOPWeChat.png in Resources */,
 				7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */,
 				7A9EAA9518D2946300EF1B85 /* WeiboDialogClose.png in Resources */,
 				7A47F3A418482C1B007EE37B /* JumpTrial.png in Resources */,
@@ -3719,6 +3717,7 @@
 				B44D26A318A9E94C00D7C06D /* DatePicker_Chart.png in Resources */,
 				7A50EC9B1957F82A007A945A /* EMOP_App_Phone_7.png in Resources */,
 				6A61A7091839B82000C6A228 /* Coal_pressed.png in Resources */,
+				7A12C2F5196D1BEA00272609 /* QRCodeIcon.png in Resources */,
 				6A61A7721839B82000C6A228 /* Login-Normal@2x.png in Resources */,
 				7A50EC991957F82A007A945A /* EMOP_App_Phone_6.png in Resources */,
 				B4707D8C18697B1C00FBA393 /* Temperature_normal.png in Resources */,
@@ -3726,6 +3725,7 @@
 				6A61A7781839B82000C6A228 /* LoginTextField@2x.png in Resources */,
 				7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */,
 				7AC40250196BBD9F0028B3CA /* Setting.png in Resources */,
+				7A12C2F1196CEDDC00272609 /* QDCode_EMOPWeChat.png in Resources */,
 				6A61A7241839B82000C6A228 /* Menu_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3963,7 +3963,6 @@
 				7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */,
 				7A9EAA9918D2946300EF1B85 /* PathHelper.m in Sources */,
 				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
-				7AC40258196BF0F60028B3CA /* REMTextFiledCell.m in Sources */,
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,
 				7A63E23718B44CBD00A13464 /* REMTargetEnergyData.m in Sources */,
 				7A63E1E918B44CBD00A13464 /* REMEnergySeacherBase.m in Sources */,
@@ -4039,6 +4038,7 @@
 				7A9EAA8E18D2946300EF1B85 /* GeoInfo.m in Sources */,
 				7A63E26918B44CBD00A13464 /* REMRankingTooltipView.m in Sources */,
 				7A63E22818B44CBD00A13464 /* REMCommodityModel.m in Sources */,
+				7A12C2EB196CE69A00272609 /* REMSplashContactViewController.m in Sources */,
 				7A63E25618B44CBD00A13464 /* REMStackChartLegendView.m in Sources */,
 				EFE86989185EEF7300DC0007 /* DCLabelingStage.m in Sources */,
 				7A63E20418B44CBD00A13464 /* REMLoginCustomerTableViewController.m in Sources */,

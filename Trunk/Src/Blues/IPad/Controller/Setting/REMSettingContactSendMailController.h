@@ -7,6 +7,6 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 
-@interface REMSettingContactSendMailController : UITableViewController
+@interface REMSettingContactSendMailController : UITableViewController<UITextFieldDelegate>
 
 @end

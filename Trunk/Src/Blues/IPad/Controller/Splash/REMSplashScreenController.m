@@ -24,7 +24,7 @@
 #import "DCXYChartBackgroundBand.h"
 #import "REMEnlargedButton.h"
 #import "REMSettingQRCodeController.h"
-#import "REMSettingContactViewController.h"
+#import "REMSplashContactViewController.h"
 
 @interface REMSplashScreenController ()
 
@@ -152,7 +152,6 @@
     
     self.carouselController = [[self storyboard] instantiateViewControllerWithIdentifier:@"loginCarousel"];
     UIView *carouselView = self.carouselController.view;
-    carouselView.frame = self.view.bounds;
     
     [self addChildViewController:self.carouselController];
     [self.view addSubview:carouselView];
@@ -241,9 +240,12 @@
 
 -(void)contactButtonPressed:(UIButton *)target
 {
-    REMSettingContactViewController *controller = [[REMSettingContactViewController alloc] init];
+    UINavigationController *controller = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"splashContactPage"];
+    controller.modalInPopover = YES;
+    controller.modalPresentationStyle = UIModalPresentationFormSheet;
+    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
-    [self modalPresentController:controller];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 -(void)modalPresentController:(UIViewController *)controller
