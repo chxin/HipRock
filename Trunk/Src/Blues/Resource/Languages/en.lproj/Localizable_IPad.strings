@@ -199,10 +199,6 @@
 "Building_WidgetRelationPositionDeleted"="Addition failed! Addition position does not exist. Please update the data!";
 
 
-"Building_AnnualAverageUsageLabelTitle"="Annual energy usage per square meter";
-"Building_AnnualAverageBaselineLabelTitle"="Industry standard";
-"Building_AnnualEfficiencyLabelTitle"="Annual energy saving rate";
-
 //Dashboard, prefix: Dashboard_
 "Dashboard_PullDownShowGeneral"="Pull down to return to review energy consumption information";
 "Dashboard_TimeRange"="%@ to %@";
@@ -214,7 +210,6 @@
 "Widget_TimePickerStart"="Starting time";
 "Widget_TimePickerEnd"="Ending time";
 "Widget_TimePickerError"="Starting date should be earlier than ending date.";
-"Widget_StepRaw" = "Raw";
 "Widget_StepErrorHour"="By hour";
 "Widget_StepErrorDay"="By day";
 "Widget_StepErrorWeek"="By week";
@@ -281,15 +276,6 @@
 "Chart_Labeling_MoreThan" = ">";
 "Chart_Labeling_LowEnergyUse" = "Low energy consumption";
 "Chart_Labeling_HighEnergyUse" = "High energy consumption";
-
-"Chart_Tooltip_YMDH" = "yyyy-MM-dd HH";
-"Chart_Tooltip_YMD" = "yyyy-MM-dd";
-"Chart_Tooltip_YM" = "yyyy-MM";
-"Chart_Tooltip_Y" = "yyyy";
-"Chart_Tooltip_MD" = "MM-dd";
-"Chart_Tooltip_D" = "dd";
-"Chart_Tooltip_H" = "HH";
-"Chart_Tooltip_24_OClock" = "24";
 
 
 //Energy, prefix:Energy_
