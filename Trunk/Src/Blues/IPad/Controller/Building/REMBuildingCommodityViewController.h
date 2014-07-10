@@ -10,6 +10,8 @@
 #import "REMBuildingTitleLabelView.h"
 #import "REMBuildingRankingView.h"
 #import "REMManagedBuildingModel.h"
+#import "REMBuildingCoverWidgetRelationModel.h"
+
 @interface REMBuildingCommodityViewController : UIViewController<UIPopoverControllerDelegate>
 
 @property (nonatomic,weak) REMManagedBuildingCommodityUsageModel *commodityInfo;
@@ -23,5 +25,7 @@
 - (void)loadChartComplete;
 
 - (void)updateChartController;
+
+-(NSString *)chartTitleByPosition:(REMBuildingCoverWidgetPosition)position;
 
 @end

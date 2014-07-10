@@ -544,71 +544,115 @@
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    
     NSString* stringFormat = nil;
     BOOL isCommodity = self.currentCommodityIndex<self.buildingInfo.commodities.count;
-    if(isMail) {
-        if(isCommodity){ //mail, commodity
-            NSString *table = @"<table cellspacing=\"0\" border=\"1\">\
-                <tbody>\
-                    <tr>\
-                        <td rowspan=\"4\">##BuildingName##</td>\
-                        <td>a</td>\
-                        <td>a</td>\
-                    </tr>\
-                    <tr>\
-                        <td>a</td>\
-                        <td>a</td>\
-                    </tr>\
-                    <tr>\
-                        <td>a</td>\
-                        <td>a</td>\
-                    </tr>\
-                    <tr>\
-                        <td>a</td>\
-                        <td>a</td>\
-                    </tr>\
-                </tbody>\
-            </table>";
+    
+    if(isCommodity){ //commodity usage
+        REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
+        NSString *commodityKey = REMCommodities[model.id];
+        NSString *commodityName = REMIPadLocalizedString(commodityKey);//model.comment;
+        
+        NSString *totlaUsageTitle = [NSString stringWithFormat: REMIPadLocalizedString(@"Building_ThisMonthEnergyUsage"), commodityName];
+        NSString *totalUsage = REMIsNilOrNull(model.totalValue) ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.totalValue.stringValue stringByAppendingString:model.totalUom];
+        NSString *co2Usage = REMIsNilOrNull(model.carbonValue) ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.carbonValue.stringValue stringByAppendingString:model.carbonUom];
+        NSString *annualAverageUsageTitle = REMIPadLocalizedString(@"Building_AnnualAverageUsageLabelTitle");
+        NSString *annualAverageUsage = REMIsNilOrNull(model.annualUsage) ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.annualUsage.stringValue stringByAppendingString:model.annualUsageUom];
+        NSString *ranking = REMIsNilOrNull(model.rankingDenominator) || REMIsNilOrNull(model.rankingNumerator) ? REMIPadLocalizedString(@"Building_LabelNoData") : [NSString stringWithFormat:@"%@/%@", model.rankingNumerator.stringValue, model.rankingDenominator.stringValue];
+        NSString *industryStandardTitle = REMIPadLocalizedString(@"Building_AnnualAverageBaselineLabelTitle");
+        NSString *industryStandard = REMIsNilOrNull(model.annualBaseline) ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.annualBaseline.stringValue stringByAppendingString:model.annualBaselineUom];
+        NSString *targetValue = REMIsNilOrNull(model.targetValue) || REMIsNilOrNull(model.targetUom) ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.targetValue.stringValue stringByAppendingString:model.targetUom];
+        NSString *efficiencyTitle = REMIPadLocalizedString(@"Building_AnnualEfficiencyLabelTitle");
+        NSString *efficiency = REMIsNilOrNull(model.annualEfficiency) ? REMIPadLocalizedString(@"Building_LabelNoData") : [[NSString alloc] initWithFormat:@"%2.2f%%",(model.annualEfficiency.doubleValue*100)];
+        NSString *chart1Title = [controller chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
+        NSString *chart2Title = [controller chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
+        NSString *charts = [NSString stringWithFormat: REMIPadLocalizedString(@"Mail_Charts"), chart1Title, chart2Title];
+        
+        NSMutableDictionary *values = [NSMutableDictionary dictionary];
+        [self setDictionary:values key:@"##BuildingName##"              object:self.buildingInfo.name];
+        [self setDictionary:values key:@"##CommodityName##"             object:commodityName];
+        [self setDictionary:values key:@"##TotalUsageTitle##"           object:totlaUsageTitle];
+        [self setDictionary:values key:@"##TotalUsage##"                object:totalUsage];
+        [self setDictionary:values key:@"##Co2UsageTitle##"             object:REMIPadLocalizedString(@"Building_CarbonUsage")];
+        [self setDictionary:values key:@"##Co2Usage##"                  object:co2Usage];
+        [self setDictionary:values key:@"##AnnualAverageUsageTitle##"   object:annualAverageUsageTitle];
+        [self setDictionary:values key:@"##AnnualAverageUsage##"        object:annualAverageUsage];
+        [self setDictionary:values key:@"##RankingTitle##"              object:REMIPadLocalizedString(@"Building_CorporationRanking")];
+        [self setDictionary:values key:@"##Ranking##"                   object:ranking],
+        [self setDictionary:values key:@"##IndustryStandardTitle##"     object:industryStandardTitle];
+        [self setDictionary:values key:@"##IndustryStandard##"          object:industryStandard];
+        [self setDictionary:values key:@"##TargetTitle##"               object:REMIPadLocalizedString(@"Building_Target")];
+        [self setDictionary:values key:@"##TargetValue##"               object:targetValue];
+        [self setDictionary:values key:@"##EfficiencyTitle##"           object:efficiencyTitle];
+        [self setDictionary:values key:@"##AnnualEfficiency##"          object:efficiency];
+        [self setDictionary:values key:@"##Charts##"                    object:charts];
+        [self setDictionary:values key:@"##Sign##"                      object:REMIPadLocalizedString(@"Mail_Sign")];
+        [self setDictionary:values key:@"##iPadQRCode##"                object:REMAppConfig.qrCodeUrl];
+        
+        if(isMail){
+            NSError *error = nil;
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MailTemplate_Commodity" ofType:@"html"];
+            NSString *table = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+            
+            for(NSString *key in values.allKeys){
+                table = [table stringByReplacingOccurrencesOfString:key withString:values[key]];
+            }
+            
+            stringFormat = table;
         }
-        else{ //mail, pm2.5
-        }
-    }
-    else {
-        if(isCommodity){ //weibo, commodity
+        else{
             stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfElectirc");
-            REMManagedBuildingCommodityUsageModel *model =controller.commodityUsage;
-            NSString *commodityKey = REMCommodities[model.id];
-            NSString* commodityName = REMIPadLocalizedString(commodityKey);//model.comment;
-            NSString* uomName = model.totalUom;
-            NSString* val = [model.totalValue isEqual:[NSNull null]] ? nil : model.totalValue.stringValue;
-            if (val == nil || commodityName == nil || uomName == nil) {
+            
+            if (model.totalValue == nil || commodityName == nil || model.totalUom == nil) {
                 stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
             } else {
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#UomName#" withString:uomName];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Usage#" withString:val];
+                for(NSString *key in @[@"##CommodityName##",@"##TotalUsage##"]){
+                    stringFormat = [stringFormat stringByReplacingOccurrencesOfString:key withString:values[key]];
+                }
             }
         }
-        else{ //weibo, pm2.5
-            stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfPM25");
-            REMManagedBuildingAirQualityModel *model = self.buildingInfo.airQuality;
+    }
+    else{ //pm2.5
+        REMManagedBuildingAirQualityModel *model = self.buildingInfo.airQuality;
+        
+        if(isMail){
+            NSDictionary *values = @{
+                @"##BuildingName##":self.buildingInfo.name,
+                @"##IndoorTitle##":REMIPadLocalizedString(@"Building_AirQualityIndoor"),
+                @"##HoneywellVal##":model.honeywellValue == nil ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.honeywellValue.stringValue stringByAppendingString:model.honeywellUom],
+                @"##HoneywellTitle##":REMIPadLocalizedString(@"Building_AirQualityHoneywell"),
+                @"##OutdoorTitle##":REMIPadLocalizedString(@"Building_AirQualityOutdoor"),
+                @"##OutdoorVal##":model.outdoorValue == nil ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.outdoorValue.stringValue stringByAppendingString:model.outdoorUom],
+                @"##MayairTitle##":REMIPadLocalizedString(@"Building_AirQualityMayair"),
+                @"##MayairVal##":model.mayairValue == nil ? REMIPadLocalizedString(@"Building_LabelNoData") : [model.mayairValue.stringValue stringByAppendingString:model.mayairUom],
+                @"##Sign##": REMIPadLocalizedString(@"Mail_Sign"),
+                @"##iPadQRCode##": REMAppConfig.qrCodeUrl,
+            };
+            
+            NSError *error = nil;
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:@"MailTemplate_Air" ofType:@"html"];
+            NSString *table = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+            
+            for(NSString *key in values.allKeys){
+                table = [table stringByReplacingOccurrencesOfString:key withString:values[key]];
+            }
+            
+            stringFormat = table;
+        }
+        else{
             NSString* commodityName = model.commodityName;
-            NSString* outdoorVal = model.outdoorValue == nil ? nil : model.outdoorValue.stringValue;
-            NSString* outdoorUom = model.outdoorUom;
-            NSString* honeywellVal = model.honeywellValue == nil ? nil : model.honeywellValue.stringValue;
-            NSString* honeywellUom = model.honeywellUom;
-            NSString* mayairVal = model.mayairValue == nil ? nil : model.mayairValue.stringValue;
-            NSString* mayairUom = model.mayairUom;
-            if (commodityName == nil || outdoorUom == nil || outdoorVal == nil || honeywellUom == nil || honeywellVal == nil || mayairUom == nil || mayairVal == nil) {
+            
+            stringFormat = REMIPadLocalizedString(@"Weibo_ContentOfPM25");
+            if (commodityName == nil || model.outdoorUom == nil || model.outdoorValue == nil || model.honeywellUom == nil || model.honeywellValue == nil || model.mayairUom == nil || model.mayairValue == nil) {
                 stringFormat = REMIPadLocalizedString(@"BuildingChart_NoData");
             } else {
                 stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#Commodity#" withString:commodityName];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:outdoorVal];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:outdoorUom];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:honeywellVal];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:honeywellUom];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:mayairVal];
-                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString:mayairUom];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorVal#" withString:model.outdoorValue.stringValue];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#OutdoorUomName#" withString:model.outdoorUom];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellVal#" withString:model.honeywellValue.stringValue];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#HoneywellUomName#" withString:model.honeywellUom];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairVal#" withString:model.mayairValue.stringValue];
+                stringFormat = [stringFormat stringByReplacingOccurrencesOfString:@"#MayairUomName#" withString: model.mayairUom];
             }
         }
     }
@@ -617,6 +661,11 @@
              @"image": img,
              @"text": stringFormat
              };
+}
+
+-(void)setDictionary:(NSMutableDictionary *)dictionary key:(NSString *)key object:(NSObject *)object
+{
+    [dictionary setObject:object forKey:key];
 }
 
 

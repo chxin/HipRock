@@ -65,6 +65,11 @@ const static NSString *BUILDOPTION = @"Release";
     return self.dictionary[@"AppStoreUrl"];
 }
 
+-(NSString *)qrCodeUrl
+{
+    return [NSString stringWithFormat:@"%@%@",self.currentDataSource[@"url"], self.dictionary[@"QRCodeUrl"]];
+}
+
 @end
 
 

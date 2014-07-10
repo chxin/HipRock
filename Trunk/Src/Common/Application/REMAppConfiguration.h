@@ -22,6 +22,7 @@
 @property (nonatomic,readonly) NSNumber *requestLogMode;
 
 @property (nonatomic,strong) NSString *appStoreUrl;
+@property (nonatomic,strong) NSString *qrCodeUrl;
 
 
 @end

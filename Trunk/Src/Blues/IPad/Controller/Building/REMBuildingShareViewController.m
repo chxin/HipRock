@@ -123,8 +123,9 @@
         
         picker.mailComposeDelegate = self;
         
-        //来自XXX（User Real Name）的“能源管理开放平台”信息分享
-        [picker setSubject:[NSString stringWithFormat:REMIPadLocalizedString(@"Mail_Title"), REMAppContext.currentUser.realname]];
+        REMManagedBuildingModel *building = self.buildingController.buildingInfoArray[self.buildingController.currentBuildingIndex];
+        //
+        [picker setSubject:[NSString stringWithFormat:REMIPadLocalizedString(@"Mail_Title"), building.name]];
         
         // Attach an image to the email.
         NSData *myData = UIImagePNGRepresentation(image);
@@ -132,7 +133,7 @@
         
         // Fill out the email body text.
         NSString *emailBody = text;
-        [picker setMessageBody:emailBody isHTML:NO];
+        [picker setMessageBody:emailBody isHTML:YES];
         
         // Present the mail composition interface.
         [self.buildingController presentViewController:picker animated:YES completion:nil];
