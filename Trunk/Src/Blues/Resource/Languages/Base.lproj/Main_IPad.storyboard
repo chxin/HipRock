@@ -702,7 +702,6 @@
         <!--Setting Contact Information View Controller-->
         <scene sceneID="aHf-ld-LbS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-oK-Qfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="lDu-mF-Kbc" customClass="REMSettingContactInformationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YiH-Pv-nVH"/>
@@ -715,6 +714,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="KFA-OJ-DET"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-oK-Qfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4311" y="-3806"/>
         </scene>

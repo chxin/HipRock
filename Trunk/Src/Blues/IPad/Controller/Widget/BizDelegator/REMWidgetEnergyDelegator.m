@@ -23,6 +23,8 @@
 #import "DCLabelingWrapper.h"
 #import "DCPieWrapper.h"
 #import "REMWidgetStepCalculationModel.h"
+#import "REMWidgetCommoditySearchModel.h"
+#import "REMCommonHeaders.h"
 
 
 
@@ -46,6 +48,8 @@
 
 @property (nonatomic) BOOL isReloadChart;
 
+@property (nonatomic,weak) UIButton *touButton;
+@property (nonatomic) BOOL isCostStacked;
 
 
 @end
@@ -84,6 +88,8 @@
 
 
 - (void)initBizView{
+    self.isCostStacked = [self isWidgetStacking];
+    
     [self initModelAndSearcher];
     
     [self initSearchView];
@@ -208,11 +214,6 @@
     self.stepControl=stepControl;
     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
     
-    //峰谷分项
-    UIButton *touButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [touButton setTitle:REMIPadLocalizedString(@"Chart_TouButton") forState:UIControlStateNormal];
-    [searchViewContainer addSubview:touButton];
-    touButton.backgroundColor = [UIColor orangeColor];
     
     
     
@@ -236,13 +237,42 @@
     [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[searchViewContainer(width)]" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
     [searchContainerConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[searchViewContainer(height)]-0-|" options:0 metrics:searchContainerMetrics views:searchContainerDic]];
     
-    NSLayoutConstraint *touButtonConstraintX = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeLeft multiplier:1.0 constant:20];
-    NSLayoutConstraint *touButtonConstraintY = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
     
-//    [searchViewContainer addConstraint:touButtonConstraintX];
-//    [searchViewContainer addConstraint:touButtonConstraintY];
+    //峰谷分项
+    if([self isElectricityCost]){
+        UIFont *buttonFont = [REMFont defaultFontOfSize:14];
+        NSString *buttonText = REMIPadLocalizedString(@"Chart_TouButton");
+        UIButton *touButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        touButton.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        touButton.titleLabel.font = buttonFont;
+        touButton.translatesAutoresizingMaskIntoConstraints = NO;
+        touButton.layer.cornerRadius = 3;
+        [touButton setTitle:buttonText forState:UIControlStateNormal];
+        [touButton addTarget:self action:@selector(touButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [searchViewContainer addSubview:touButton];
+        self.touButton = touButton;
+        [self updateTouButtonStyle];
+        
+        NSLayoutConstraint *touButtonConstraintX = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-20];
+        NSLayoutConstraint *touButtonConstraintY = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+        
+        [searchViewContainer addConstraint:touButtonConstraintX];
+        [searchViewContainer addConstraint:touButtonConstraintY];
+    }
 
     [searchLegendViewContainer addConstraints:searchContainerConstraints];
+}
+
+-(void)updateTouButtonStyle
+{
+    if(self.isCostStacked){
+        [self.touButton setBackgroundColor:[REMColor colorByHexString:@"#37ab3c"]];
+        [self.touButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    else{
+        [self.touButton setBackgroundColor:[UIColor clearColor]];
+        [self.touButton setTitleColor:[REMColor colorByHexString:@"#37ab3c"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)initChartView{
@@ -792,7 +822,6 @@
 }
 
 - (void)reloadChart{
-    
     if (self.chartWrapper==nil) {
         [self showEnergyChart];
         return;
@@ -913,6 +942,56 @@
     [self setDatePickerButtonValueNoSearchByTimeRange:newRange withRelative:text withRelativeType:REMRelativeTimeRangeTypeNone];
     
     return;
+}
+
+#pragma mark - Electricity cost
+
+-(BOOL)isElectricityCost
+{
+    REMDataStoreType store = self.contentSyntax.dataStoreType;
+    
+    if(store == REMDSEnergyCost || store == REMDSEnergyCostElectricity || store == REMDSEnergyCostDistribute || store == REMDSEnergyCostDistributeElectricity){
+        NSArray *commidities = self.contentSyntax.params[@"commodityIds"];
+        if(!REMIsNilOrNull(commidities) && commidities.count == 1 && [commidities[0] integerValue] == REMCommodityElectricity){
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+-(BOOL)isWidgetStacking
+{
+    REMDataStoreType store = self.contentSyntax.dataStoreType;
+    
+    return store == REMDSEnergyCostElectricity || store == REMDSEnergyCostDistributeElectricity;
+}
+
+-(void)touButtonPressed:(UIButton *)sender
+{
+    REMDataStoreType store = self.contentSyntax.dataStoreType;
+    
+    if(self.isCostStacked){
+        self.isCostStacked = NO;
+        if(store == REMDSEnergyCostElectricity){
+            self.contentSyntax.dataStoreType = REMDSEnergyCost;
+        }
+        if(store == REMDSEnergyCostDistributeElectricity){
+            self.contentSyntax.dataStoreType = REMDSEnergyCostDistribute;
+        }
+    }
+    else{
+        self.isCostStacked = YES;
+        if(store == REMDSEnergyCost){
+            self.contentSyntax.dataStoreType = REMDSEnergyCostElectricity;
+        }
+        if(store == REMDSEnergyCostDistribute){
+            self.contentSyntax.dataStoreType = REMDSEnergyCostDistributeElectricity;
+        }
+    }
+    
+    [self updateTouButtonStyle];
+    [self search];
 }
 
 

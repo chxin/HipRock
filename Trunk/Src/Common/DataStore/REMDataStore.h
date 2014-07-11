@@ -85,6 +85,7 @@ typedef enum _REMDataStoreType : NSUInteger
     REMDSEnergyCostUnit                 = 106010,
     REMDSEnergyCostDistribute           = 106011,
     REMDSEnergyCostElectricity          = 106012,
+    REMDSEnergyCostDistributeElectricity= 106018, 
     REMDSEnergyRatio                    = 106013,
     REMDSEnergyRankingEnergy            = 106014,
     REMDSEnergyRankingCost              = 106015,

@@ -9,12 +9,12 @@
 #ifndef Blues_REMConstants_h
 #define Blues_REMConstants_h
 
-//typedef enum _REMCommodity : int{
-//    REMCommodityElectricity = 1,
-//    REMCommodityWater = 2,
-//    REMCommodityGas = 3,
-//    REMCommoditySoftWater = 4,
-//} REMCommodity;
+typedef enum _REMCommodity : int{
+    REMCommodityElectricity = 1,
+    REMCommodityWater = 2,
+    REMCommodityGas = 3,
+    REMCommoditySoftWater = 4,
+} REMCommodity;
 
 const static long REMDAY = 24*3600;
 const static long REMWEEK = REMDAY*7;

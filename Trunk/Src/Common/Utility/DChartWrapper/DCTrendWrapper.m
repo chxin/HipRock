@@ -36,7 +36,7 @@
             DCSeriesStatus *status = [[DCSeriesStatus alloc] init];
             status.seriesType = REMIsNilOrNull(item[@"type"])?DCSeriesTypeStatusLine:(DCSeriesTypeStatus)[item[@"type"] shortValue];
             status.seriesKey = item[@"seriesKey"];
-            status.canBeHidden = [item[@"suppressible"] boolValue];
+            status.canBeHidden = REMIsNilOrNull(item[@"suppressible"])? YES : [item[@"suppressible"] boolValue];
             status.hidden = ![item[@"visible"] boolValue];
             
             NSMutableArray *types = [NSMutableArray arrayWithArray:@[@(DCSeriesTypeStatusLine),@(DCSeriesTypeStatusColumn),@(DCSeriesTypeStatusStackedColumn),@(DCSeriesTypeStatusPie)]];
