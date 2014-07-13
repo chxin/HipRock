@@ -24,6 +24,8 @@
 @property (nonatomic) long long offset;
 
 
+- (id)initWithDictionary:(NSDictionary *)dictionary andBaseTime:(REMTimeRange *)dictionary;
+
 - (id)initWithArray:(NSArray *)array;
 
 - (id)initWithStartTime:(NSDate *)start EndTime:(NSDate *)end;

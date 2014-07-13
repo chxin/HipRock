@@ -56,7 +56,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>local</string>
+		<string>test</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>
@@ -405,7 +405,7 @@
 			<key>Processor</key>
 			<string></string>
 		</dict>
-		<key>New item</key>
+		<key>REMDSEnergyCostDistributeElectricity</key>
 		<dict>
 			<key>ID</key>
 			<integer>106018</integer>

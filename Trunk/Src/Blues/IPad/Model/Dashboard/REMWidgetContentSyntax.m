@@ -116,9 +116,14 @@
     
     NSArray *origTimeRanges = viewOption[@"TimeRanges"];
     NSMutableArray* newTimeRanges = [[NSMutableArray alloc]initWithCapacity:origTimeRanges.count];
-    for(NSDictionary *dic in origTimeRanges)
-    {
-        [newTimeRanges addObject: [[REMTimeRange alloc]initWithDictionary:dic]];
+    
+    if(origTimeRanges.count > 0){
+        REMTimeRange *baseTime = [[REMTimeRange alloc] initWithDictionary:origTimeRanges[0]];
+        
+        for(NSDictionary *dic in origTimeRanges)
+        {
+            [newTimeRanges addObject: [[REMTimeRange alloc] initWithDictionary:dic andBaseTime:baseTime]];
+        }
     }
     
     self.timeRanges = newTimeRanges;
@@ -184,14 +189,6 @@
     NSArray *seriesStates = p[@"seriesStates"];
     if(!REMIsNilOrNull(seriesStates)){
         self.seriesStates = seriesStates;
-//        NSMutableArray *seriesModels = [[NSMutableArray alloc] init];
-//        for(NSDictionary *seriesStateItem in seriesStates){
-//            REMSeriesStateModel *stateModel = [[REMSeriesStateModel alloc] initWithDictionary:seriesStateItem];
-//            
-//            [seriesModels addObject:stateModel];
-//        }
-//        
-//        self.seriesStates = seriesModels;
     }
 
 }

@@ -300,16 +300,12 @@
     [chartConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-margin-[chartContainer(width)]-margin-|" options:0 metrics:metrics views:dic]];
     [chartConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchView]-top-[chartContainer]-margin-|" options:0 metrics:metrics views:dic]];
     
-    
     [self.view addConstraints:chartConstraints];
-
-    
 }
 
 - (void)timePickerPressDown{
     [self.timePickerButton setBackgroundColor:[REMColor colorByHexString:@"#ebebeb"]];
 }
-
 
 - (void) showTimePicker{
     [self.timePickerButton setBackgroundColor:[UIColor clearColor]];

@@ -49,6 +49,39 @@
     return self;
 }
 
+- (id)initWithDictionary:(NSDictionary *)dictionary andBaseTime:(REMTimeRange *)baseTime
+{
+    self.relativeTimeType = REMRelativeTimeRangeTypeNone;// REMIsNilOrNull(dictionary[@"relativeDate"]) ? REMRelativeTimeRangeTypeNone : [REMTimeHelper relativeTimeTypeByName: dictionary[@"relativeDate"]];
+    
+    if(!REMIsNilOrNull(dictionary[@"StartTime"]) && !REMIsNilOrNull(dictionary[@"EndTime"])){
+        self.longStartTime=[REMTimeHelper longLongFromJSONString:dictionary[@"StartTime"]];
+        self.longEndTime=[REMTimeHelper longLongFromJSONString:dictionary[@"EndTime"]];
+        
+        self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:self.longStartTime/1000];
+        self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime/1000];
+    }
+    if(!REMIsNilOrNull(dictionary[@"timeType"]) && !REMIsNilOrNull(dictionary[@"offset"]) && baseTime != nil){
+        int timeType = [dictionary[@"timeType"] integerValue];
+        long long offset = [dictionary[@"offset"] longLongValue];
+        
+        if(timeType == 0){
+            self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.startTime timeIntervalSince1970] - offset];
+            self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.endTime timeIntervalSince1970] - offset];
+        }
+        if(timeType == 1){
+            self.startTime = [REMTimeHelper addMonthToDate:baseTime.startTime month:0-offset];
+            self.endTime = [REMTimeHelper addMonthToDate:baseTime.endTime month:0-offset];
+        }
+    }
+    if(!REMIsNilOrNull(dictionary[@"relativeDate"])){
+        self.relativeTimeType = [REMTimeHelper relativeTimeTypeByName: dictionary[@"relativeDate"]];
+        
+        self = [REMTimeHelper relativeDateFromType:self.relativeTimeType];
+    }
+    
+    return self;
+}
+
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
     self.relativeTimeType = REMIsNilOrNull(dictionary[@"relativeDate"]) ? REMRelativeTimeRangeTypeNone : [REMTimeHelper relativeTimeTypeByName: dictionary[@"relativeDate"]];
