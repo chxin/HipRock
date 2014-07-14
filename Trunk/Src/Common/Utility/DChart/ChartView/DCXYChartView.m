@@ -419,6 +419,7 @@
 -(void)calculateColumnWidth {
     NSMutableArray* columnGroups = [[NSMutableArray alloc]init];
     for (DCXYSeries* s in self.seriesList) {
+        if (s.hidden) continue;
         NSString* cs2groupKeys = [NSString stringWithFormat:@"%@-%@", s.coordinateSystemName, s.groupName];
         if (s.type == DCSeriesTypeColumn && ![columnGroups containsObject:cs2groupKeys]) {
             [columnGroups addObject:cs2groupKeys];
@@ -562,6 +563,7 @@
     
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
+    [self calculateColumnWidth];
     for (_DCCoordinateSystem* s in self.coodinates) {
         [s recalculatorYMaxInRange:self.graphContext.hRange];
     }
