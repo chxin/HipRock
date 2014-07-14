@@ -113,7 +113,6 @@
         self.stepType = REMEnergyStepWeek;
     }
     
-    
     NSArray *origTimeRanges = viewOption[@"TimeRanges"];
     NSMutableArray* newTimeRanges = [[NSMutableArray alloc]initWithCapacity:origTimeRanges.count];
     

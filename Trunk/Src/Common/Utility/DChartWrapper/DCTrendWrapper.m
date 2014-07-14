@@ -39,12 +39,14 @@
             status.canBeHidden = REMIsNilOrNull(item[@"suppressible"])? YES : [item[@"suppressible"] boolValue];
             status.hidden = ![item[@"visible"] boolValue];
             
+            int availableTypes = REMIsNilOrNull(item[@"availableType"]) ? (DCSeriesTypeStatusLine + DCSeriesTypeStatusColumn + DCSeriesTypeStatusStackedColumn) : [item[@"availableType"] intValue];
+            
             NSMutableArray *types = [NSMutableArray arrayWithArray:@[@(DCSeriesTypeStatusLine),@(DCSeriesTypeStatusColumn),@(DCSeriesTypeStatusStackedColumn),@(DCSeriesTypeStatusPie)]];
             for(int i=types.count-1;i>=0;i--){
                 __block short sum = 0;
                 [types enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { sum += [obj shortValue]; }];
                 
-                if(sum == [item[@"availableType"] shortValue]){
+                if(sum == availableTypes){
                     status.avilableTypes = types;
                     break;
                 }

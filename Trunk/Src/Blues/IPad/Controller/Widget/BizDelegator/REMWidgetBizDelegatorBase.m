@@ -183,7 +183,6 @@
             [self reloadChart];
             
             [self processEnergyDataInnerError:data];
-            
         }
         else{
             if (error == nil) { //timeout or server error

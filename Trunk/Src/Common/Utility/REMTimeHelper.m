@@ -354,27 +354,6 @@
         
         end = [calendar dateFromComponents:lastDayThisWeekComps];
         start = [calendar dateFromComponents:firstDayThisWeekComps];
-        
-        
-        
-//        NSDateComponents *todayEndComps = [calendarWithZone components:( NSWeekdayCalendarUnit| NSHourCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
-//        [todayEndComps setSecond:0];
-//        [todayEndComps setMinute:0];
-//        [todayEndComps setYear:todayEndComps.year];
-//        [todayEndComps setMonth:todayEndComps.month];
-//        [todayEndComps setDay:todayEndComps.day];
-//        
-//        NSDateComponents *firstDayOfThisWeek = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
-//        
-//        
-//        int gap=todayEndComps.weekday-2;
-//        if(gap<0) gap=6;
-//        
-//        [firstDayOfThisWeek setDay:([todayEndComps day] - gap)];
-//        
-//        
-//        end = [calendar dateFromComponents:todayEndComps];
-//        start = [calendar dateFromComponents:firstDayOfThisWeek];
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeLastWeek)
     {
@@ -387,12 +366,6 @@
         long weekday = (long)todayEndComps.weekday - 2;
         long firstDayLastWeekToToday = weekday >= 0 ? weekday + 7 : weekday + 14;
         long lastDayLastWeekToToday = weekday >= 0 ?  weekday : 7+weekday;
-        
-//        NSDateComponents *firstDayOfThisWeek = [calendar components:(NSWeekdayCalendarUnit|NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:today];
-//        [firstDayOfThisWeek setDay:([todayEndComps day] - ([todayEndComps weekday] - 2))];
-//        
-//        end = [calendar dateFromComponents:firstDayOfThisWeek];
-//        start = [REMTimeHelper getDate:end daysAhead:-7];
         
         NSDate *firstDayLastWeek = [REMTimeHelper getDate:today daysAhead: -firstDayLastWeekToToday];
         NSDate *lastDayLastWeek = [REMTimeHelper getDate:today daysAhead: -lastDayLastWeekToToday];

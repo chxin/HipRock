@@ -86,12 +86,20 @@
 - (NSArray *)timeRangeToModelArray:(NSArray *)array
 {
     NSMutableArray *newArray=[[NSMutableArray alloc]initWithCapacity:array.count];
-    for (int i=0; i<array.count; ++i) {
-        REMTimeRange *range=[[REMTimeRange alloc]initWithDictionary:array[i]];
-        [newArray addObject:range];
-    }
     
-
+    if(array.count > 0){
+        REMTimeRange *baseTime = [[REMTimeRange alloc] initWithDictionary:array[0]];
+        
+        for (int i=0; i<array.count; ++i) {
+            if(i == 0){
+                [newArray addObject:baseTime];
+                continue;
+            }
+                
+            REMTimeRange *range=[[REMTimeRange alloc] initWithDictionary:array[i] andBaseTime:baseTime];
+            [newArray addObject:range];
+        }
+    }
     
     return newArray;
 }
