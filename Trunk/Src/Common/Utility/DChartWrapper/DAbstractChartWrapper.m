@@ -8,10 +8,6 @@
 
 #import "DAbstractChartWrapper.h"
 
-@interface DAbstractChartWrapper()
-@property (nonatomic, strong) NSMutableArray* hiddenTargets;
-@end
-
 @implementation DAbstractChartWrapper
 -(void)beginAnimationDone {
     if (!(REMIsNilOrNull(self.delegate)) && [self.delegate respondsToSelector:@selector(beginAnimationDone)]) {
@@ -27,12 +23,45 @@
         _energyViewData = energyViewData;
         _style = style;
         _chartStatus = DChartStatusNormal;
-        _hiddenTargets = [[NSMutableArray alloc]init];
+        
+//        if(self.wrapperConfig.seriesStates != nil){
+//            NSMutableDictionary *seriesStates = [[NSMutableDictionary alloc] init];
+//            for(NSDictionary *item in self.wrapperConfig.seriesStates){
+//                DCSeriesStatus *status = [[DCSeriesStatus alloc] init];
+//                status.seriesType = REMIsNilOrNull(item[@"type"])?DCSeriesTypeStatusLine:(DCSeriesTypeStatus)[item[@"type"] shortValue];
+//                status.seriesKey = item[@"seriesKey"];
+//                status.canBeHidden = REMIsNilOrNull(item[@"suppressible"])? YES : [item[@"suppressible"] boolValue];
+//                status.hidden = ![item[@"visible"] boolValue];
+//                
+//                int availableTypes = REMIsNilOrNull(item[@"availableType"]) ? (DCSeriesTypeStatusLine + DCSeriesTypeStatusColumn + DCSeriesTypeStatusStackedColumn) : [item[@"availableType"] intValue];
+//                
+//                NSMutableArray *types = [NSMutableArray arrayWithArray:@[@(DCSeriesTypeStatusLine),@(DCSeriesTypeStatusColumn),@(DCSeriesTypeStatusStackedColumn),@(DCSeriesTypeStatusPie)]];
+//                for(int i=types.count-1;i>=0;i--){
+//                    __block short sum = 0;
+//                    [types enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { sum += [obj shortValue]; }];
+//                    
+//                    if(sum == availableTypes){
+//                        status.avilableTypes = types;
+//                        break;
+//                    }
+//                    
+//                    [types removeObject:types[i]];
+//                }
+//                
+//                [seriesStates setObject:status forKey:status.seriesKey];
+//            }
+//            
+//            self.seriesStates = seriesStates;
+//        }
     }
     return self;
 }
 -(void)cancelToolTipStatus {
     _chartStatus = DChartStatusNormal;
+}
+
+-(void)initializeStates {
+    
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData {

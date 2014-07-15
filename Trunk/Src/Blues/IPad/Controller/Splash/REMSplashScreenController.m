@@ -29,6 +29,7 @@
 @interface REMSplashScreenController ()
 
 @property (nonatomic,weak) UILabel *copyrightLabel;
+//@property (nonatomic,strong) DCTrendWrapper* wrapper;
 
 @end
 
@@ -287,7 +288,7 @@
     
     REMEnergyViewData* energyViewData = [[REMEnergyViewData alloc]init];
     NSMutableArray* sereis = [[NSMutableArray alloc]init];
-    for (int sIndex = 0; sIndex < 3; sIndex++) {
+    for (int sIndex = 0; sIndex < 20; sIndex++) {
         NSMutableArray* energyDataArray = [[NSMutableArray alloc]init];
         for (int i = 0; i < 100; i++) {
             REMEnergyData* data = [[REMEnergyData alloc]init];
@@ -305,8 +306,8 @@
         sData.target = [[REMEnergyTargetModel alloc]init];
         sData.target.targetId = @(1);
         sData.target.name = @"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
-        sData.target.uomId = 0;
-        sData.target.uomName = [NSString stringWithFormat:@"UOM%i", 0];
+        sData.target.uomId = sIndex;
+        sData.target.uomName = [NSString stringWithFormat:@"UOM%i", sIndex];
         [sereis addObject:sData];
     }
     energyViewData.visibleTimeRange = r;
@@ -359,8 +360,12 @@
     b.color = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:0.5];
     [bands addObject:b];
     [lineWidget.view setBackgoundBands:bands];
+    for (int i = 0; i < lineWidget.view.seriesList.count; i++) {
+        DCXYSeries* s = lineWidget.view.seriesList[i];
+        s.type = DCSeriesTypeColumn;
+    }
     [self.view addSubview:lineWidget.view];
-    //self.carouselController = lineWidget;
+//    self.wrapper = lineWidget;
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 605, 100, 30)];
     //btn.titleLabel.text=[NSString stringWithFormat:@"%d",i];
@@ -392,17 +397,17 @@
 }
 
 //-(void)buttonPressed:(UIButton*)btn {
-//    DCColumnWrapper* columnWidget = self.carouselController;
-//    [columnWidget switchSeriesTypeAtIndex:0];
+//    NSUInteger index = 0;
+//    [self.wrapper setHiddenAtIndex:index hidden:![self.wrapper.view.seriesList[index] hidden]];
 //}
 //
 //-(void)buttonPressed1:(UIButton*)btn {
-//    DCColumnWrapper* columnWidget = self.carouselController;
-//    [columnWidget switchSeriesTypeAtIndex:1];
+//    NSUInteger index = 1;
+//    [self.wrapper setHiddenAtIndex:index hidden:![self.wrapper.view.seriesList[index] hidden]];
 //}
 //
 //-(void)buttonPressed2:(UIButton*)btn {
-//    DCColumnWrapper* columnWidget = self.carouselController;
-//    [columnWidget switchSeriesTypeAtIndex:2];
+//    NSUInteger index = 2;
+//    [self.wrapper setHiddenAtIndex:index hidden:![self.wrapper.view.seriesList[index] hidden]];
 //}
 @end

@@ -30,36 +30,6 @@
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
     
-    if(self.wrapperConfig.seriesStates != nil){
-        NSMutableDictionary *seriesStates = [[NSMutableDictionary alloc] init];
-        for(NSDictionary *item in self.wrapperConfig.seriesStates){
-            DCSeriesStatus *status = [[DCSeriesStatus alloc] init];
-            status.seriesType = REMIsNilOrNull(item[@"type"])?DCSeriesTypeStatusLine:(DCSeriesTypeStatus)[item[@"type"] shortValue];
-            status.seriesKey = item[@"seriesKey"];
-            status.canBeHidden = REMIsNilOrNull(item[@"suppressible"])? YES : [item[@"suppressible"] boolValue];
-            status.hidden = ![item[@"visible"] boolValue];
-            
-            int availableTypes = REMIsNilOrNull(item[@"availableType"]) ? (DCSeriesTypeStatusLine + DCSeriesTypeStatusColumn + DCSeriesTypeStatusStackedColumn) : [item[@"availableType"] intValue];
-            
-            NSMutableArray *types = [NSMutableArray arrayWithArray:@[@(DCSeriesTypeStatusLine),@(DCSeriesTypeStatusColumn),@(DCSeriesTypeStatusStackedColumn),@(DCSeriesTypeStatusPie)]];
-            for(int i=types.count-1;i>=0;i--){
-                __block short sum = 0;
-                [types enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { sum += [obj shortValue]; }];
-                
-                if(sum == availableTypes){
-                    status.avilableTypes = types;
-                    break;
-                }
-                
-                [types removeObject:types[i]];
-            }
-            
-            [seriesStates setObject:status forKey:status.seriesKey];
-        }
-        
-        self.seriesStates = seriesStates;
-    }
-    
     if (self && energyViewData.targetEnergyData.count != 0) {
         _defaultSeriesType = DCSeriesTypeLine;
         self.animationManager = [[DCTrendAnimationManager alloc]init];
