@@ -53,6 +53,9 @@
         case REMChartSeriesIndicatorColumn:
             content = [self getColumnIndicator];
             break;
+        case REMChartSeriesIndicatorStack:
+            content = [self getStackIndicator];
+            break;
         case REMChartSeriesIndicatorPie:
             content = [self getPieIndicator];
             break;
@@ -88,6 +91,20 @@
     //add into view
     UIView *indicator = [[UIView alloc] initWithFrame:mainframe];
     indicator.backgroundColor = self.color;
+    
+    return indicator;
+}
+
+-(UIView *)getStackIndicator
+{
+    CGFloat padding = (kDMChart_LegendItemHeight - kDMChart_IndicatorSize) / 2;
+    CGRect mainframe = CGRectMake(padding, padding, kDMChart_IndicatorSize, kDMChart_IndicatorSize);
+    UIView *indicator = [[UIView alloc] initWithFrame:mainframe];
+    indicator.backgroundColor = self.color;
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 6, mainframe.size.width, 2)];
+    line.backgroundColor = [UIColor whiteColor];
+    [indicator addSubview:line];
     
     return indicator;
 }

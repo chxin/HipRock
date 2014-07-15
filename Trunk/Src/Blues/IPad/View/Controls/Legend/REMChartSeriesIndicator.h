@@ -12,6 +12,7 @@
 typedef enum _REMChartSeriesIndicatorType{
     REMChartSeriesIndicatorLine,
     REMChartSeriesIndicatorColumn,
+    REMChartSeriesIndicatorStack,
     REMChartSeriesIndicatorPie,
 } REMChartSeriesIndicatorType;
 
