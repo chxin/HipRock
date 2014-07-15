@@ -115,7 +115,8 @@
         if (isSelected) return; // 已经隐藏的序列，无法修改序列的类型
         if (!REMIsNilOrNull(delegate)) {
             [delegate tapLegendIconOnIndex:self.seriesIndex];
-            self.indicatorType = self.indicatorType == REMChartSeriesIndicatorLine ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
+            
+            self.indicatorType = [self nextIndicatorType];//self.indicatorType == REMChartSeriesIndicatorLine ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
             [self.indicator renderWithType:self.indicatorType];
         }
     } else {
@@ -140,6 +141,20 @@
                 [delegate legendStateChanged:self.state onIndex:self.seriesIndex];
             }
         }
+    }
+}
+
+-(REMChartSeriesIndicatorType)nextIndicatorType
+{
+    switch (self.indicatorType) {
+        case REMChartSeriesIndicatorLine:
+            return REMChartSeriesIndicatorColumn;
+        case REMChartSeriesIndicatorColumn:
+            return REMChartSeriesIndicatorStack;
+        case REMChartSeriesIndicatorStack:
+            return REMChartSeriesIndicatorLine;
+        default:
+            return REMChartSeriesIndicatorLine;
     }
 }
 

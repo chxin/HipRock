@@ -26,9 +26,9 @@
     if(diagramType == REMDiagramTypePie){
         return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }
-    else if(diagramType == REMDiagramTypeStackColumn){
-        return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
-    }
+//    else if(diagramType == REMDiagramTypeStackColumn){
+//        return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
+//    }
     else{
         return [[REMTrendChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }

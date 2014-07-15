@@ -21,7 +21,8 @@
 
 @property (nonatomic) REMRelativeTimeRangeType relativeTimeType;
 @property (nonatomic) long long baseTime;
-@property (nonatomic) long long offset;
+@property (nonatomic,strong) NSNumber *timeType;
+@property (nonatomic,strong) NSNumber *offset;
 
 
 - (id)initWithDictionary:(NSDictionary *)dictionary andBaseTime:(REMTimeRange *)dictionary;

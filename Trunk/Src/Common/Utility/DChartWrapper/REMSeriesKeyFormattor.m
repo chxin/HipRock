@@ -42,14 +42,18 @@
         
         timeType = @"0";
         offset = @"0";
-        REMTimeRange *timeRange = syntax.timeRanges[targetIndex];
-        if(REMIsNilOrNull(timeRange)){
-            timeType=@"0";
-            offset=@"0";
-        }
-        else{
-            timeType = [NSString stringWithFormat:@"%d", timeRange.relativeTimeType];
-            offset = [NSString stringWithFormat:@"%llu", timeRange.offset];
+        REMTimeRange *baseRange = syntax.timeRanges[0];
+        if(targetIndex != 0){
+            REMTimeRange *timeRange = syntax.timeRanges[targetIndex];
+            
+            if(!REMIsNilOrNull(timeRange.timeType) && !REMIsNilOrNull(timeRange.offset)){
+                timeType = [NSString stringWithFormat:@"%d", [timeRange.timeType intValue] ];
+                offset = [NSString stringWithFormat:@"%lld", [timeRange.offset longLongValue]];
+            }
+            else {
+                timeType = @"1";
+                offset = [NSString stringWithFormat:@"%0.0f", fabs([timeRange.startTime timeIntervalSinceDate:baseRange.startTime])];
+            }
         }
     }
     else if(storeType == REMDSEnergyCarbon || storeType == REMDSEnergyCarbonDistribute || storeType == REMDSEnergyCost || storeType == REMDSEnergyCostDistribute || storeType == REMDSEnergyCostElectricity){
@@ -120,9 +124,14 @@
     NSString *targetPath = @"%";
     
     if(association == nil){
-        if(syntax.dataStoreType == REMDSEnergyTagsTrend || syntax.dataStoreType == REMDSEnergyTagsDistribute ||syntax.dataStoreType == REMDSEnergyMultiTimeTrend || syntax.dataStoreType == REMDSEnergyMultiTimeDistribute){
+        if(syntax.dataStoreType == REMDSEnergyTagsTrend || syntax.dataStoreType == REMDSEnergyTagsDistribute ||syntax.dataStoreType == REMDSEnergyMultiTimeTrend || syntax.dataStoreType == REMDSEnergyMultiTimeDistribute || syntax.dataStoreType == REMDSEnergyRatio || syntax.dataStoreType==REMDSEnergyTagsTrendUnit || syntax.dataStoreType == REMDSEnergyMultiTimeTrend || syntax.dataStoreType == REMDSEnergyMultiTimeDistribute){
             if(!REMIsNilOrNull(syntax.params[@"options"]) && !REMIsNilOrNull(syntax.params[@"options"][0]) && !REMIsNilOrNull(syntax.params[@"options"][0][@"HierId"]))
                 hierarchyId = syntax.params[@"options"][0][@"HierId"];
+        }
+        else if(syntax.dataStoreType == REMDSEnergyCarbon || syntax.dataStoreType == REMDSEnergyCarbonDistribute || syntax.dataStoreType == REMDSEnergyCarbonUnit){
+            if(!REMIsNilOrNull(syntax.params[@"hierarchyId"])){
+                hierarchyId = syntax.params[@"hierarchyId"];
+            }
         }
         else{
             hierarchyId = @(-999);

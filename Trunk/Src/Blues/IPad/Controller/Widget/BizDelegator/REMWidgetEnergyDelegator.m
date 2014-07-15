@@ -31,8 +31,6 @@
 
 @interface REMWidgetEnergyDelegator()
 
-
-
 @property (nonatomic,strong) UIPopoverController *datePickerPopoverController;
 
 @property (nonatomic,strong) DAbstractChartWrapper *chartWrapper;
@@ -60,10 +58,7 @@
     self = [super init];
     if(self){
         _currentLegendStatus=REMWidgetLegendTypeSearch;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(receiveNotification:)
-                                                     name:@"BizDetailChanged"
-                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"BizDetailChanged" object:nil];
         self.isReloadChart=NO;
     }
     return self;
@@ -113,7 +108,6 @@
     
 }
 - (void)initSearchView{
-    
     UIView *searchLegendViewContainer=[[UIView alloc]initWithFrame:CGRectMake(0,self.ownerController.titleContainer.frame.origin.y+self.ownerController.titleContainer.frame.size.height,kDMScreenWidth,kDMChart_ToolbarHeight)];
     
     [searchLegendViewContainer setBackgroundColor:[UIColor clearColor]];
