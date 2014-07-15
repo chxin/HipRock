@@ -61,16 +61,16 @@
         self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:self.longEndTime/1000];
     }
     if(!REMIsNilOrNull(dictionary[@"timeType"]) && !REMIsNilOrNull(dictionary[@"offset"]) && baseTime != nil){
-        int timeType = [dictionary[@"timeType"] integerValue];
-        long long offset = [dictionary[@"offset"] longLongValue];
+        self.timeType = (NSNumber *)dictionary[@"timeType"];
+        self.offset = (NSNumber *)dictionary[@"offset"];
         
-        if(timeType == 0){
-            self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.startTime timeIntervalSince1970] - offset];
-            self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.endTime timeIntervalSince1970] - offset];
+        if([self.timeType intValue] == 0){
+            self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.startTime timeIntervalSince1970] - [self.offset longLongValue]];
+            self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.endTime timeIntervalSince1970] - [self.offset longLongValue]];
         }
-        if(timeType == 1){
-            self.startTime = [REMTimeHelper addMonthToDate:baseTime.startTime month:0-offset];
-            self.endTime = [REMTimeHelper addMonthToDate:baseTime.endTime month:0-offset];
+        if([self.timeType intValue] == 1){
+            self.startTime = [REMTimeHelper addMonthToDate:baseTime.startTime month:0-[self.offset longLongValue]];
+            self.endTime = [REMTimeHelper addMonthToDate:baseTime.endTime month:0-[self.offset longLongValue]];
         }
     }
     if(!REMIsNilOrNull(dictionary[@"relativeDate"])){
