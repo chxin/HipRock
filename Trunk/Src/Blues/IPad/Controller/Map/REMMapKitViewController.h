@@ -8,8 +8,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "REMControllerBase.h"
+#import "REMCustomerLogoView.h"
 
-@interface REMMapKitViewController : REMControllerBase<MKMapViewDelegate>
+@interface REMMapKitViewController : REMControllerBase<MKMapViewDelegate, REMCustomerLogoViewDelegate>
 
 #pragma mark - Properties
 @property (nonatomic,weak) NSArray *buildingInfoArray;

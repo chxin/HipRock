@@ -112,9 +112,15 @@
     }
     
     REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    logoView.delegate = self;
     
     [self.view addSubview:logoView];
     self.customerLogoView = logoView;
+}
+
+-(void)logoPressed
+{
+    [self switchButtonPressed];
 }
 
 #pragma mark - Business

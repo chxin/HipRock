@@ -21,8 +21,18 @@
         innerView.contentMode = UIViewContentModeScaleAspectFit;
         
         [self addSubview:innerView];
+        
+        UITapGestureRecognizer *tapRecognizer =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+        [self addGestureRecognizer:tapRecognizer];
     }
     return self;
+}
+
+-(void)tapped:(UITapGestureRecognizer *)tapRecognizer
+{
+    if(tapRecognizer.state == UIGestureRecognizerStateEnded && self.delegate != nil){
+        [self.delegate logoPressed];
+    }
 }
 
 /*
@@ -44,21 +54,6 @@
     }
     
     CGFloat width = 0.0, height = 0.0;
-    
-//    if(imageWidth < frameWidth) {
-//        if(imageHeight < frameHeight){
-//            //以宽为基准放大还是以高为基准放大
-//        }
-//        else{
-//        }
-//    }
-//    else{
-//        if(imageHeight < frameHeight){
-//        }
-//        else{
-//            //以宽为基准缩小还是以高为基准缩小
-//        }
-//    }
     
     CGFloat widthRatio = frameWidth / imageWidth;
     CGFloat heightRatio = frameHeight / imageHeight;

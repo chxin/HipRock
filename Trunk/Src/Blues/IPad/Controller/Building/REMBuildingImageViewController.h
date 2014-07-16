@@ -8,13 +8,14 @@
 #import <UIKit/UIKit.h>
 #import "REMControllerBase.h"
 #import "REMManagedBuildingModel.h"
+#import "REMCustomerLogoView.h"
 
 typedef enum _REMBuildingCoverStatus{
     REMBuildingCoverStatusCoverPage,
     REMBuildingCoverStatusDashboard
 } REMBuildingCoverStatus;
 
-@interface REMBuildingImageViewController : REMControllerBase<UIGestureRecognizerDelegate>
+@interface REMBuildingImageViewController : REMControllerBase<UIGestureRecognizerDelegate, REMCustomerLogoViewDelegate>
 
 
 

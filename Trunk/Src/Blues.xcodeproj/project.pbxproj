@@ -1244,8 +1244,6 @@
 		7A63E1D818B44CBD00A13464 /* REMGalleryGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryGroupView.m; sourceTree = "<group>"; };
 		7A63E1D918B44CBD00A13464 /* REMGalleryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMGalleryTableView.h; sourceTree = "<group>"; };
 		7A63E1DA18B44CBD00A13464 /* REMGalleryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMGalleryTableView.m; sourceTree = "<group>"; };
-		7A63E1DB18B44CBD00A13464 /* REMMarkerBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMarkerBubbleView.h; sourceTree = "<group>"; };
-		7A63E1DC18B44CBD00A13464 /* REMMarkerBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMarkerBubbleView.m; sourceTree = "<group>"; };
 		7A63E1DE18B44CBD00A13464 /* REMBuildingEntranceSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMBuildingEntranceSegue.h; sourceTree = "<group>"; };
 		7A63E1DF18B44CBD00A13464 /* REMBuildingEntranceSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMBuildingEntranceSegue.m; sourceTree = "<group>"; };
 		7A63E1E018B44CBD00A13464 /* REMMapGallerySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapGallerySegue.h; sourceTree = "<group>"; };
@@ -2757,8 +2755,6 @@
 				7A63E1D818B44CBD00A13464 /* REMGalleryGroupView.m */,
 				7A63E1D918B44CBD00A13464 /* REMGalleryTableView.h */,
 				7A63E1DA18B44CBD00A13464 /* REMGalleryTableView.m */,
-				7A63E1DB18B44CBD00A13464 /* REMMarkerBubbleView.h */,
-				7A63E1DC18B44CBD00A13464 /* REMMarkerBubbleView.m */,
 			);
 			path = Map;
 			sourceTree = "<group>";

@@ -143,30 +143,19 @@
     
     [self.view addSubview:switchButton];
     
-    //add customer logo button
-//    UIView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
-//    logoView.contentMode = UIViewContentModeLeft;
-//    logoView.layer.borderColor = [UIColor orangeColor].CGColor;
-//    logoView.layer.borderWidth = 1;
-//    
-//    UIImage *logo = [UIImage imageWithData:REMAppContext.currentCustomer.logoImage];
-//    UIImageView *logoInnerView = [[UIImageView alloc] initWithImage:logo];// | UIViewContentModeScaleAspectFit
-//    
-//    logoInnerView.frame = CGRectMake(0, 0, logo.size.width, CGFloat height);
-//    logoInnerView.contentMode = UIViewContentModeScaleAspectFit;
-//    logoInnerView.layer.borderColor = [UIColor blueColor].CGColor;
-//    logoInnerView.layer.borderWidth = 1;
-//    
-//    [logoView addSubview:logoInnerView];
-    
     REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    logoView.delegate = self;
     
     [self.view addSubview:logoView];
     self.customerLogoView = logoView;
     
-    
     UIButton *settingButton=self.settingButton;
     [self.view addSubview:settingButton];
+}
+
+-(void)logoPressed
+{
+    [self switchButtonPressed];
 }
 
 -(void)stylize
