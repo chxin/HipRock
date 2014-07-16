@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "REMEnum.h"
 #import "REMWidgetContentSyntax.h"
+#import "DCSeriesStatus.h"
 
 typedef enum _REMChartFromLevel2 {
     REMChartFromLevel2None = 0, // 非Jazz的Widget的图，例如BuildingCover上的默认图形，以及PM25图
@@ -22,7 +23,8 @@ typedef enum _REMChartFromLevel2 {
 } REMChartFromLevel2;
 
 @interface DWrapperConfig : NSObject
-@property (nonatomic, readonly) REMDataStoreType storeType; // 当此值为-1时，表示Wrapper为非widget的内容，例如buildingCover和PM25
+@property (nonatomic, readonly) REMDataStoreType dataStoreType; // 当此值为-1时，表示Wrapper为非widget的内容，例如buildingCover和PM25
+@property (nonatomic, readonly) NSString* storeType;
 
 // widgetFrom,isMultiTimeEnergyAnalysisChart,isTouChart根据storeType来计算
 @property (nonatomic, readonly, getter = getWidgetFrom) REMChartFromLevel2 widgetFrom;
@@ -41,6 +43,8 @@ typedef enum _REMChartFromLevel2 {
 @property (nonatomic, strong) NSArray* timeRanges; // 从Syntax复制的TimeRange
 
 @property (nonatomic, strong) NSArray *seriesStates;
+
+@property (nonatomic, assign) DCSeriesTypeStatus defaultSeriesType;
 
 //@property (nonatomic, strong) NSArray* multiTimeSpans;  // 多时间段比较的每个序列的总体时间区间
 

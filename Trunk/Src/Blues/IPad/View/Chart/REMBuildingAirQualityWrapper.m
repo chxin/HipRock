@@ -107,8 +107,8 @@
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
     state.seriesKey = series.seriesKey;
     state.seriesType = DCSeriesTypeStatusColumn;
-    state.avilableTypes = @[@(state.seriesType)];
-    state.hidden = NO;
+    state.avilableTypes = state.seriesType;
+    state.visible = YES;
     REMEnergyTargetModel* target = series.target;
     UIColor* sColor = nil;
     if([target.code hasSuffix:kTagCodeSuffixHoneywell]){

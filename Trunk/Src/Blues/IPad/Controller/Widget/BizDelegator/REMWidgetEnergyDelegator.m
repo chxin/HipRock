@@ -496,13 +496,11 @@
     
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeLine;
         widgetWrapper.delegate = self;
         
         
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeColumn;
         widgetWrapper.delegate = self;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];

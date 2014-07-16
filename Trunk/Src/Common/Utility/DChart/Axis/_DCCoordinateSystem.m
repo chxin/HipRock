@@ -19,8 +19,8 @@
 
 @property (nonatomic, strong) NSMutableArray* yIntervalObservers;
 
-@property (nonatomic, strong) NSNumber* currentYMaxValue;
-@property (nonatomic, strong) NSNumber* currentYMinValue;
+//@property (nonatomic, strong) NSNumber* currentYMaxValue;
+//@property (nonatomic, strong) NSNumber* currentYMinValue;
 @property (nonatomic, strong) DCRange* latestValueRange; // The latest xRange when recalculatorYMaxInRange called
 
 @end

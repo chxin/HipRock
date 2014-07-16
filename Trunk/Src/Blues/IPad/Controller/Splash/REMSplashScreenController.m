@@ -337,6 +337,7 @@
     }
     
     DWrapperConfig* config = [[DWrapperConfig alloc]init];
+    config.defaultSeriesType = DCSeriesTypeStatusColumn;
     config.step = REMEnergyStepDay;
     config.calendarType = REMCalendarTypeNone;
 //    DCPieWrapper* pieWrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
@@ -350,7 +351,6 @@
 //    [self.view addSubview:columnWidget.view];
     
     DCTrendWrapper* lineWidget = [[DCTrendWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:config style:style];
-    lineWidget.defaultSeriesType = DCSeriesTypeLine;
     lineWidget.view.backgroundColor = [UIColor blackColor];
     NSMutableArray* bands = [[NSMutableArray alloc]init];
     DCRange* bandRange = [[DCRange alloc]initWithLocation:0 length:20];

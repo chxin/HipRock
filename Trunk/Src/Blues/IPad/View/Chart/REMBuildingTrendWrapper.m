@@ -91,9 +91,9 @@
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
     state.seriesKey = series.seriesKey;
     state.seriesType = DCSeriesTypeStatusLine;
-    state.avilableTypes = @[@(state.seriesType)];
+    state.avilableTypes = DCSeriesTypeStatusLine;
     state.forcedColor = [self getSeriesColorByIndex:index];
-    state.hidden = NO;
+    state.visible = YES;
     return state;
 }
 

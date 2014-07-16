@@ -18,12 +18,18 @@ typedef enum _DCSeriesTypeStatus {
 }DCSeriesTypeStatus;
 
 @interface DCSeriesStatus : NSObject
-@property (nonatomic,assign) BOOL hidden;
+
+//// Properties store in database
+@property (nonatomic,assign) BOOL visible;
 @property (nonatomic,assign) DCSeriesTypeStatus seriesType;
 @property (nonatomic, strong) NSString* seriesKey;
+@property (nonatomic, assign) NSUInteger avilableTypes;
+@property (nonatomic, assign) BOOL suppressible;
+
+// Customized properties for blues
 @property (nonatomic, strong) UIColor* forcedColor;
-@property (nonatomic, strong) NSArray* avilableTypes;
-@property (nonatomic, assign) BOOL canBeHidden;
+
+
 -(void)applyToXYSeries:(DCXYSeries*)series;
 -(void)applyToPieSlice:(DCPieDataPoint*)pieSlice;
 //@property (nonatomic,strong,readonly) NSNumber* targetId;

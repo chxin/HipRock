@@ -12,7 +12,7 @@
 -(id)init {
     self = [super init];
     if (self) {
-        _storeType = -1;
+        _dataStoreType = -1;
     }
     return self;
 }
@@ -24,9 +24,23 @@
         _rankingSortOrder=contentSyntax.rankingSortOrder;
         _rankingRangeCode=contentSyntax.rankingRangeCode;
         _relativeDateType = contentSyntax.relativeDateType;
-        _storeType = contentSyntax.dataStoreType;
+        _dataStoreType = contentSyntax.dataStoreType;
+        _storeType = contentSyntax.storeType;
         _timeRanges = [contentSyntax.timeRanges copy];
         _seriesStates = contentSyntax.seriesStates;
+        
+        _defaultSeriesType = DCSeriesTypeStatusColumn;
+
+        NSString* defaultType = contentSyntax.config[@"type"];
+        if ([defaultType isEqualToString:@"line"]) {
+            _defaultSeriesType = DCSeriesTypeStatusLine;
+        } else if ([defaultType isEqualToString:@"column"]) {
+            _defaultSeriesType = DCSeriesTypeStatusColumn;
+        } else if ([defaultType isEqualToString:@"pie"]) {
+            _defaultSeriesType = DCSeriesTypeStatusPie;
+        } else if ([defaultType isEqualToString:@"stack"]) {
+            _defaultSeriesType = DCSeriesTypeStatusStackedColumn;
+        }
         
         self.contentSyntax = contentSyntax;
     }
@@ -35,7 +49,7 @@
 
 -(REMChartFromLevel2)getWidgetFrom {
     REMChartFromLevel2 widgetFrom = REMChartFromLevel2None;
-    switch (self.storeType) {
+    switch (self.dataStoreType) {
         case REMDSEnergyTagsTrend:
         case REMDSEnergyTagsDistribute:
         case REMDSEnergyMultiTimeTrend:
@@ -76,10 +90,10 @@
 
 -(BOOL)getIsMultiTimeEnergyAnalysisChart {
     if (self.widgetFrom != REMChartFromLevel2EnergyAnalysis) return NO;
-    return  self.storeType == REMDSEnergyMultiTimeTrend || self.storeType == REMDSEnergyMultiTimeDistribute;
+    return  self.dataStoreType == REMDSEnergyMultiTimeTrend || self.dataStoreType == REMDSEnergyMultiTimeDistribute;
 }
 
 -(BOOL)getIsTouChart {
-    return self.storeType == REMDSEnergyCostElectricity;
+    return self.dataStoreType == REMDSEnergyCostElectricity;
 }
 @end
