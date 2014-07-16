@@ -54,7 +54,7 @@
 #define kDMGallery_GalleryCellTitleLeftOffset 9
 #define kDMGallery_GalleryCellTitleRightOffset 9
 #define kDMGallery_GalleryCellTitleFontSize 14
-#define kDMGallery_GalleryCellTitleHeight kDMGallery_GalleryCellTitleFontSize+1
+#define kDMGallery_GalleryCellTitleHeight kDMGallery_GalleryCellTitleFontSize
 
 
 #define kDMGallery_BackgroundColor [UIColor colorWithRed:29.0/255.0 green:30.0/255.0 blue:31.0/255.0 alpha:1]

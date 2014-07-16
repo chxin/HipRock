@@ -48,14 +48,19 @@
         [self addSubview:button];
         self.backgroundButton = button;
         
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:kDMGallery_GalleryCellTitleFrame];
+        UIFont *labelFont = [REMFont defaultFontOfSize:kDMGallery_GalleryCellTitleFontSize];
+        CGSize labelSize = [@"a" sizeWithFont:labelFont];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kDMGallery_GalleryCellTitleLeftOffset, kDMGallery_GalleryCellTitleTopOffset, kDMGallery_GalleryCellWidth - kDMGallery_GalleryCellTitleLeftOffset - kDMGallery_GalleryCellTitleRightOffset, labelSize.height)];
         label.textColor = [UIColor whiteColor];
         label.backgroundColor = [UIColor clearColor];
-        label.font = [REMFont defaultFontOfSize:kDMGallery_GalleryCellTitleFontSize];
+        label.font = labelFont;
         
         [self.backgroundButton addSubview:label];
         self.titleLabel = label;
+        
+//        [self.backgroundButton addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.backgroundButton attribute:NSLayoutAttributeLeft multiplier:1.0 constant:kDMGallery_GalleryCellTitleLeftOffset]];
+//        [self.backgroundButton addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.backgroundButton attribute:NSLayoutAttributeRight multiplier:1.0 constant:kDMGallery_GalleryCellTitleRightOffset]];
+//        [self.backgroundButton addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.backgroundButton attribute:NSLayoutAttributeTop multiplier:1.0 constant:kDMGallery_GalleryCellTitleTopOffset]];
         
         UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinching:)];
         [self addGestureRecognizer:pinchRecognizer];

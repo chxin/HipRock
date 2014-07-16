@@ -8,6 +8,12 @@
 #import "REMCustomerLogoView.h"
 #import "REMCommonHeaders.h"
 
+@interface REMCustomerLogoView ()
+
+@property (nonatomic,weak) UIButton *innerView;
+
+@end
+
 @implementation REMCustomerLogoView
 
 - (id)initWithFrame:(CGRect)frame
@@ -16,21 +22,25 @@
     if (self) {
         // Initialization code
         UIImage *logo = [UIImage imageWithData:REMAppContext.currentCustomer.logoImage];
-        UIImageView *innerView = [[UIImageView alloc] initWithFrame:[self calculateInnerViewFrame:logo.size]];
-        innerView.image = logo;
+        UIButton *innerView = [[UIButton alloc] initWithFrame:[self calculateInnerViewFrame:logo.size]];
+        [innerView setBackgroundImage:logo forState:UIControlStateNormal];
         innerView.contentMode = UIViewContentModeScaleAspectFit;
+        //innerView.imageEdgeInsets = UIEdgeInsetsMake(-5, -10, -5, -10);
         
         [self addSubview:innerView];
+        self.innerView = innerView;
         
-        UITapGestureRecognizer *tapRecognizer =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-        [self addGestureRecognizer:tapRecognizer];
+//        UITapGestureRecognizer *tapRecognizer =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+//        [self addGestureRecognizer:tapRecognizer];
+        
+        [self.innerView addTarget:self action:@selector(tapped:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
 
--(void)tapped:(UITapGestureRecognizer *)tapRecognizer
+-(void)tapped:(UIButton *)sender
 {
-    if(tapRecognizer.state == UIGestureRecognizerStateEnded && self.delegate != nil){
+    if(self.delegate != nil){
         [self.delegate logoPressed];
     }
 }

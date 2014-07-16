@@ -58,6 +58,7 @@
     copyright.text = text;
     copyright.textColor = [UIColor whiteColor];
     copyright.font = font;
+    copyright.backgroundColor = [UIColor clearColor];
     
     [background addSubview:copyright];
     self.copyrightLabel = copyright;
@@ -209,6 +210,7 @@
     seperatorLabel.text = seperatorText;
     seperatorLabel.font = buttonFont;
     seperatorLabel.textColor = [UIColor whiteColor];
+    seperatorLabel.backgroundColor = [UIColor clearColor];
     
     REMEnlargedButton *contactUsButton = [REMEnlargedButton buttonWithType:UIButtonTypeCustom];
     contactUsButton.titleLabel.font = buttonFont;
@@ -226,8 +228,7 @@
     [contactView addSubview:quickResponseCodeButton];
     [contactView addSubview:seperatorLabel];
     [contactView addSubview:contactUsButton];
-//    contactView.layer.borderColor = [UIColor orangeColor].CGColor;
-//    contactView.layer.borderWidth = 1.0;
+    contactView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:contactView];
 }
