@@ -10,6 +10,6 @@
 
 @implementation REMSeriesGroupingUomGen
 -(NSString*)getGroupName:(REMEnergyTargetModel*)target {
-    return [NSString stringWithFormat:@"%lld", target.uomId];
+    return target.uomName;
 }
 @end

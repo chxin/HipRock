@@ -24,15 +24,15 @@ typedef enum _DCSeriesType {
 @property (nonatomic) DCSeriesType type;
 @property (nonatomic,strong) NSString* seriesKey;
 
-@property (nonatomic, strong, readonly) NSString* groupName;  // 默认groupName为Series的内存地址
-//@property (nonatomic, assign, readonly) BOOL grouped;         // 默认为No
+@property (nonatomic, strong) NSString* groupName;  // 默认groupName为Series的内存地址
+@property (nonatomic, assign) BOOL stacked;         // 默认为No
 
 /*
  * seriesData: IList<DCDataPoint>
  */
 -(DCSeries*)initWithEnergyData:(NSArray*)seriesData;
 
--(void)groupSeries:(NSString*)groupName;
--(void)degroup;
+//-(void)groupSeries:(NSString*)groupName;
+//-(void)degroup;
 
 @end

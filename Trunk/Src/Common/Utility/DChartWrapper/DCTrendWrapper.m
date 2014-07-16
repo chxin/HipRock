@@ -59,6 +59,29 @@
     return state;
 }
 
+-(NSString*)getCoordinateNameBySeries:(DCXYSeries*)series inSeriesList:(NSArray*)seriesList {
+    DCXYSeries* groupFirstSeries = nil;
+    for (DCXYSeries* s in seriesList) {
+        if (s.groupName == series.groupName) {
+            groupFirstSeries = s;
+            break;
+        }
+    }
+    if (REMIsNilOrNull(groupFirstSeries)) {
+        return [self getUomNameOfTarget:series.target];
+    } else {
+        return groupFirstSeries.coordinateSystemName;
+    }
+}
+
+-(NSString*)getUomNameOfTarget:(REMEnergyTargetModel*)target {
+    if (REMIsNilOrNull(target)) {
+        return REMEmptyString;
+    } else {
+        return target.uomName;
+    }
+}
+
 -(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
     DCXYChartView* view = [[DCXYChartView alloc]initWithFrame:frame beginHRange:beginRange];
     view.chartStyle = self.style;   
@@ -71,10 +94,10 @@
     NSUInteger seriesIndex = 0;
     NSUInteger seriesAmount = [self getSeriesAmount];
     for (; seriesIndex < seriesAmount; seriesIndex++) {
-        [seriesList addObject:[self createSeriesAt:seriesIndex style:self.style]];
+        DCXYSeries* s = [self createSeriesAt:seriesIndex style:self.style];
+        s.coordinateSystemName = s.stacked ? [self getCoordinateNameBySeries:s inSeriesList:seriesList] : [self getUomNameOfTarget:s.target];
+        [seriesList addObject:s];
     }
-//    view.yAxisList = [self createYAxes:seriesList];
-    
     
     view.graphContext.globalHRange = globalRange;
     [view setSeriesList:seriesList];
@@ -142,26 +165,20 @@
         [datas addObject:p];
     }
     
-    
     DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
     s.symbolType = [self getSymbolTypeByIndex:index];
     s.symbolSize = style.symbolSize;
     s.color = [REMColor colorByIndex:index];
     s.target = targetEnergy.target;
     
-    if (REMIsNilOrNull(targetEnergy.target)) {
-        s.coordinateSystemName = REMEmptyString;
-    } else {
-        s.coordinateSystemName = targetEnergy.target.uomName;
-    }
-    
     s.seriesKey = [self getSeriesKeyByTarget:s.target seriesIndex:index];
-    
+    s.groupName = [self.chartStrategy.groupingGen getGroupName:s.target];
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
         state = [self getDefaultSeriesState:s.target seriesIndex:index];
         [self.seriesStates setObject:state forKey:s.seriesKey];
     }
+    
     [state applyToXYSeries:s];
     return s;
 }
@@ -293,12 +310,44 @@
     if (seriesIndex >= self.view.seriesList.count) return;
     DCXYSeries* series = self.view.seriesList[seriesIndex];
     [self.view setSeries:series hidden:hidden];
-    if (REMIsNilOrNull(series.target)) return;
+//    if (REMIsNilOrNull(series.target)) return;
     DCSeriesStatus* state = self.seriesStates[series.seriesKey];
     if (state!=nil) state.visible = !hidden;
 }
 
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index {
+    if (index >= self.view.seriesList.count) return;
+    DCXYSeries* series = self.view.seriesList[index];
+    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
+    DCSeriesTypeStatus nextType = [state getNextSeriesType];
+    if (nextType == state.seriesType) return;
+    
+    
+    NSString*toCoordinateName = series.coordinateSystemName;
+    if (state.seriesType == DCSeriesTypeStatusStackedColumn) {
+        toCoordinateName = [self getUomNameOfTarget:series.target];
+    }
+    DCSeriesType sType;
+    BOOL stacked = NO;
+    switch (nextType) {
+        case DCSeriesTypeStatusLine:
+            sType = DCSeriesTypeLine;
+            break;
+        case DCSeriesTypeStatusColumn:
+            sType = DCSeriesTypeColumn;
+            break;
+        case DCSeriesTypeStatusStackedColumn:
+            sType = DCSeriesTypeColumn;
+            toCoordinateName = [self getCoordinateNameBySeries:series inSeriesList:self.view.seriesList];
+            stacked = YES;
+            break;
+        default:
+            sType = DCSeriesTypeColumn;
+            break;
+    }
+    state.seriesType = nextType;
+    [self.view updateSeries:series type:sType coordinateName:toCoordinateName stacked:stacked];
+    
 //    DCXYChartView* view = self.view;
 //    if (index >= view.seriesList.count) return;
 //    DCXYSeries* series = view.seriesList[index];
@@ -320,26 +369,11 @@
 }
 
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
-    return NO;
-//    if (index >= self.view.seriesList.count) return NO;
-//    DCXYSeries* series = self.view.seriesList[index];
-//    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
-//    if (REMIsNilOrNull(state)) return NO;
-//    
-//    NSArray* stateMachine = state.avilableTypes;
-//    return stateMachine.count > 1;
-    
-    // TBD
-    
-    
-    
-    
-    
-//    if ([stateMachine containsObject:@(state.seriesType)]) {
-//        return stateMachine.count > 1;
-//    } else {
-//        return NO;
-//    }
+    if (index >= self.view.seriesList.count) return NO;
+    DCXYSeries* series = self.view.seriesList[index];
+    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
+    if (REMIsNilOrNull(state)) return NO;
+    return state.seriesType != [state getNextSeriesType];
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData step:(REMEnergyStep)step {

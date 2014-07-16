@@ -32,6 +32,8 @@ typedef enum _DCSeriesTypeStatus {
 
 -(void)applyToXYSeries:(DCXYSeries*)series;
 -(void)applyToPieSlice:(DCPieDataPoint*)pieSlice;
+
+-(DCSeriesTypeStatus)getNextSeriesType;
 //@property (nonatomic,strong,readonly) NSNumber* targetId;
 //@property (nonatomic,assign,readonly) REMEnergyTargetType type;
 //@property (nonatomic,assign,readonly) long commodityId;

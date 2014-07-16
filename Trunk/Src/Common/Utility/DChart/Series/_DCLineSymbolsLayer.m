@@ -13,13 +13,6 @@
 #import "REMColor.h"
 
 @implementation _DCLineSymbolsLayer
--(NSUInteger)getVisableSeriesCount {
-    NSUInteger count = 0;
-    for (DCXYSeries* s in self.seriesList) {
-        if (!s.hidden) count++;
-    }
-    return count;
-}
 
 -(void)redraw {
     if (self.enableGrowAnimation) {
@@ -78,8 +71,8 @@
     CGContextSetBlendMode(ctx, kCGBlendModeNormal);
     CGContextSetAllowsAntialiasing(ctx, YES);
     CGPoint linePoints[end-start+2];
-    for (DCXYSeries* s in self.seriesList) {
-        if (s.hidden) continue;
+    for (DCXYSeries* s in self.view.seriesList) {
+        if (s.hidden || ![self isValidSeriesForMe:s]) continue;
         if (start >= s.datas.count) continue;
         
         CGFloat r, g, b, a;
@@ -141,8 +134,8 @@
     }
     
     // 绘制Symbol
-    for (DCXYSeries* s in self.seriesList) {
-        if (s.hidden) continue;
+    for (DCXYSeries* s in self.view.seriesList) {
+        if (s.hidden || ![self isValidSeriesForMe:s]) continue;
         CGFloat r, g, b, a;
         [s.color getRed:&r green:&g blue:&b alpha:&a];
         for (int j = start; j<=end; j++) {

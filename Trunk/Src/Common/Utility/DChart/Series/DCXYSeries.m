@@ -104,9 +104,9 @@
 //    _visableYMin = yMin;
 //}
 
--(void)setHidden:(BOOL)hidden {
-    if (hidden == _hidden) return;
-    _hidden = hidden;
-    [self.seriesLayer redraw];
-}
+//-(void)setHidden:(BOOL)hidden {
+//    if (hidden == _hidden) return;
+//    _hidden = hidden;
+//    [self.seriesLayer redraw];
+//}
 @end

@@ -415,22 +415,41 @@
 }
 
 -(void)calculateColumnWidth {
-    NSMutableArray* columnGroups = [[NSMutableArray alloc]init];
+//    NSMutableArray* columnGroups = [[NSMutableArray alloc]init];
+    
+    NSUInteger columnsCount = 0;    // Column位置的总数
+    NSMutableDictionary* groupLocationDic = [[NSMutableDictionary alloc]init]; // 存储每个Group在ColumnLayer中绘图时占用的Column位置Index
+    NSMutableArray* seriesLocations = [[NSMutableArray alloc]init]; // 存储每个可见的柱序列在ColumnLayer中绘图时占用的Column位置Index
+    
     for (DCXYSeries* s in self.seriesList) {
-        if (s.hidden) continue;
-        NSString* cs2groupKeys = [NSString stringWithFormat:@"%@-%@", s.coordinateSystemName, s.groupName];
-        if (s.type == DCSeriesTypeColumn && ![columnGroups containsObject:cs2groupKeys]) {
-            [columnGroups addObject:cs2groupKeys];
+        if (s.hidden || s.type == DCSeriesTypeLine) continue;
+        NSUInteger sLocation = 0;
+        if (s.stacked) {
+            NSString* cs2groupKeys = [NSString stringWithFormat:@"%@-%@", s.coordinateSystemName, s.groupName];
+            if ([groupLocationDic.allKeys containsObject:cs2groupKeys]) {
+                sLocation = [groupLocationDic[cs2groupKeys] integerValue];
+            } else {
+                [groupLocationDic setObject:@(columnsCount) forKey:cs2groupKeys];
+                sLocation = columnsCount;
+                columnsCount++;
+            }
+        } else {
+            sLocation = columnsCount;
+            columnsCount++;
         }
+        [seriesLocations addObject:@(sLocation)];
     }
     
-    
-    if (columnGroups.count == 0) return;
-    double columnWidth = (1 - kDCColumnOffset * 2) / columnGroups.count;
+    if (columnsCount == 0) return;
+    double columnWidth = (1 - kDCColumnOffset * 2) / columnsCount;
+    NSUInteger i = 0;
+    for (DCXYSeries* s in self.seriesList) {
+        if (s.hidden || s.type == DCSeriesTypeLine) continue;
+        s.xRectStartAt = (-0.5 + [seriesLocations[i] floatValue]) * columnWidth;
+        i++;
+    }
     for (_DCCoordinateSystem* cs in self.coodinates) {
         for (DCColumnSeriesGroup* group in cs.columnGroupSeriesDic.allValues) {
-            NSString* cs2groupKeys = [NSString stringWithFormat:@"%@-%@", cs.name, group.groupName];
-            group.xRectStartAt = -0.5 + kDCColumnOffset + columnWidth * [columnGroups indexOfObject:cs2groupKeys];
             group.columnWidthInCoordinate = columnWidth;
         }
     }
@@ -548,29 +567,24 @@
     return self.yAxisList;
 }
 
--(void)updateChart {
-    [self updateCoordinateSystems];
-    
-    [self recalculatePlotRect];
-}
-
 -(void)setSeries:(DCXYSeries *)series hidden:(BOOL)hidden {
     if (series.hidden == hidden) return;
     series.hidden = hidden;
-    if ([self.coodinates indexOfObject:series.coordinate] >= self.visableYAxisAmount) return;
     
     [self recalculatePlotRect];
     [self updateAllLayerFrame];
-    [self calculateColumnWidth];
+    if (series.type == DCSeriesTypeColumn) {
+        [self calculateColumnWidth];
+    }
+    [self.indicatorLayer setNeedsDisplay];
+    [self._hGridlineLayer setNeedsDisplay];
+    [self._xLabelLayer setNeedsDisplay];
+    [self._columnLayer redraw];
     for (_DCCoordinateSystem* s in self.coodinates) {
         [s recalculatorYMaxInRange:self.graphContext.hRange];
     }
     [self redrawBgBands];
     [self._symbolLayer redraw];
-    [self.indicatorLayer setNeedsDisplay];
-    [self._hGridlineLayer setNeedsDisplay];
-    [self._xLabelLayer setNeedsDisplay];
-    [self._columnLayer redraw];
     
     for (int i = 0; i < self.coodinates.count; i++) {
         if (i >= self.visableYAxisAmount) break;
@@ -579,6 +593,32 @@
         
         [_yLabelLayer setNeedsDisplay];
     }
+}
+
+-(void)updateSeries:(DCXYSeries*)series type:(DCSeriesType)type coordinateName:(NSString*)coordinateName stacked:(BOOL)stacked {
+    BOOL isTypeChanged = series.type != type;
+    BOOL isCoordinateChanged = [series.coordinateSystemName isEqual:coordinateName];
+    if (!isTypeChanged && !isCoordinateChanged) return;
+    
+    if (isCoordinateChanged) {
+        _DCCoordinateSystem* sourceCs = series.coordinate;
+        [sourceCs detachSeries:series];
+        [sourceCs recalculatorYMaxInRange:self.graphContext.hRange];
+        [[self getCoodinateByName:coordinateName]attachSeries:series];
+    }
+    [series.coordinate recalculatorYMaxInRange:self.graphContext.hRange];
+    series.type = type;
+    series.stacked = stacked;
+    [self calculateColumnWidth];
+    [self._symbolLayer redraw];
+    [self._columnLayer redraw];
+}
+
+-(_DCCoordinateSystem*)getCoodinateByName:(NSString*)name {
+    for (_DCCoordinateSystem* cs in self.coodinates) {
+        if ([cs.name isEqualToString:name]) return cs;
+    }
+    return nil;
 }
 
 //-(DCRange*)getRangeOfAxis:(DCAxis*)axis {
@@ -618,26 +658,5 @@
             [self.delegate beginAnimationDone];
         }
     }
-}
-
--(void)replaceSeries:(DCXYSeries*)original byReplacement:(DCXYSeries*)replacement {
-    if (original.type == replacement.type) return;
-    [((NSMutableArray*)replacement.coordinate.seriesList) replaceObjectAtIndex:[replacement.coordinate.seriesList  indexOfObject:original] withObject:replacement];
-    [((NSMutableArray*)self.seriesList) replaceObjectAtIndex:[self.seriesList indexOfObject:original] withObject:replacement];
-    if (original.type == DCSeriesTypeLine) {
-        [((NSMutableArray*)self._symbolLayer.seriesList) removeObject:original];
-        [(NSMutableArray*)self._columnLayer.seriesList addObject:replacement];
-        replacement.seriesLayer = self._columnLayer;
-    } else {
-        [((NSMutableArray*)self._columnLayer.seriesList) removeObject:original];
-        [(NSMutableArray*)self._symbolLayer.seriesList addObject:replacement];
-        replacement.seriesLayer = self._symbolLayer;
-    }
-//    [self.graphContext removeHRangeObsever:original];
-//    [self.graphContext addHRangeObsever:replacement];
-    [replacement.coordinate recalculatorYMaxInRange:self.graphContext.hRange];
-    [self calculateColumnWidth];
-    [self._symbolLayer redraw];
-    [self._columnLayer redraw];
 }
 @end

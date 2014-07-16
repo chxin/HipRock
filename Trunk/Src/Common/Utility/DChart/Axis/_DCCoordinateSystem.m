@@ -58,19 +58,16 @@
         series.coordinate = self;
         NSMutableArray* seriesList= (NSMutableArray*)self.seriesList;
         [seriesList addObject:series];
-//        [self.graphContext addHRangeObsever:series];
         
-        if (series.type == DCSeriesTypeColumn) {
-            DCColumnSeriesGroup* groupSeriesList = self.columnGroupSeriesDic[series.groupName];
-            if (REMIsNilOrNull(groupSeriesList)) {
-                groupSeriesList = [[DCColumnSeriesGroup alloc]initWithGroupName:series.groupName coordinateSystem:self];
-                [self.columnGroupSeriesDic setObject:groupSeriesList forKey:series.groupName];
-            }
-            if (![groupSeriesList containsSeries:series]) {
-                [groupSeriesList addSeries:series];
-            }
-            series.seriesGroup = groupSeriesList;
+        DCColumnSeriesGroup* groupSeriesList = self.columnGroupSeriesDic[series.groupName];
+        if (REMIsNilOrNull(groupSeriesList)) {
+            groupSeriesList = [[DCColumnSeriesGroup alloc]initWithGroupName:series.groupName coordinateSystem:self];
+            [self.columnGroupSeriesDic setObject:groupSeriesList forKey:series.groupName];
         }
+        if (![groupSeriesList containsSeries:series]) {
+            [groupSeriesList addSeries:series];
+        }
+        series.seriesGroup = groupSeriesList;
     }
 }
 
@@ -79,15 +76,12 @@
         series.coordinate = nil;
         NSMutableArray* seriesList= (NSMutableArray*)self.seriesList;
         [seriesList removeObject:series];
-//        [self.graphContext removeHRangeObsever:series];
         
-        if (series.type == DCSeriesTypeColumn) {
-            DCColumnSeriesGroup* groupSeriesList = self.columnGroupSeriesDic[series.groupName];
-            if (!REMIsNilOrNull(groupSeriesList) && [groupSeriesList containsSeries:series]) {
-                [groupSeriesList removeSeries:series];
-                if (groupSeriesList.count == 0) {
-                    [self.columnGroupSeriesDic removeObjectForKey:series.groupName];
-                }
+        DCColumnSeriesGroup* groupSeriesList = self.columnGroupSeriesDic[series.groupName];
+        if (!REMIsNilOrNull(groupSeriesList) && [groupSeriesList containsSeries:series]) {
+            [groupSeriesList removeSeries:series];
+            if (groupSeriesList.count == 0) {
+                [self.columnGroupSeriesDic removeObjectForKey:series.groupName];
             }
         }
     }

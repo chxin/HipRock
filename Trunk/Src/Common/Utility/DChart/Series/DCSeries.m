@@ -16,7 +16,7 @@
     if (self) {
         _color = [UIColor blackColor];
         _datas = seriesData;
-//        _grouped = NO;
+        _stacked = NO;
         _groupName = [NSString stringWithFormat:@"%p", self];
         for (DCDataPoint* p in self.datas) {
             p.series = self;
@@ -32,13 +32,13 @@
     return self;
 }
 
--(void)groupSeries:(NSString*)groupName {
-    _groupName = groupName;
-//    _grouped = YES;
-}
-
--(void)degroup {
-//    _grouped = NO;
-    _groupName = [NSString stringWithFormat:@"%p", self];
-}
+//-(void)groupSeries:(NSString*)groupName {
+//    _groupName = groupName;
+////    _grouped = YES;
+//}
+//
+//-(void)degroup {
+////    _grouped = NO;
+//    _groupName = [NSString stringWithFormat:@"%p", self];
+//}
 @end

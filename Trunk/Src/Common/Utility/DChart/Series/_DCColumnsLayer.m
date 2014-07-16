@@ -68,7 +68,7 @@
                 NSArray* groupSeriesList = group.allSeries;
                 for (int i = groupSeriesList.count - 1; i >= 0; i--) {
                     DCXYSeries* s = groupSeriesList[i];
-                    if (s.hidden) continue;
+                    if (s.hidden || ![self isValidSeriesForMe:s]) continue;
                     for (int j = start; j<=end; j++) {
                         if (j >= s.datas.count) continue;
                         DCDataPoint* point = s.datas[j];
@@ -76,7 +76,7 @@
                         NSString* key = [NSString stringWithFormat:@"%u@%i", point.series.hash, j];
                         CALayer* column = self.columnsDic[key];
                         CGRect toFrame = [self getRectForSeries:s index:j stackedHeight:stackedHeights[j-start] coordinate:cs];
-                        stackedHeights[j-start] = stackedHeights[j-start] + toFrame.size.height;
+                        if (s.stacked) stackedHeights[j-start] = stackedHeights[j-start] + toFrame.size.height;
                         BOOL isRectVisable = [DCUtility isFrame:toFrame visableIn:self.bounds];
                         if (column == nil && isRectVisable) {
                             column = [[CALayer alloc]init];
@@ -132,10 +132,11 @@
     CGFloat columnHeight = [self getHeightOfPoint:point coordinate:coordinate];
     CGFloat pointXOffset = self.graphContext.pointHorizentalOffset;
 //    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
-    return CGRectMake(self.frame.size.width * (index + pointXOffset + series.seriesGroup.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length,
-                      self.frame.size.height-columnHeight-stackedHeight,
+    CGRect r = CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length,
+                      series.stacked ? self.frame.size.height-columnHeight-stackedHeight : self.frame.size.height-columnHeight,
                       self.frame.size.width * series.seriesGroup.columnWidthInCoordinate / self.graphContext.hRange.length,
                       columnHeight);
+    return r;
 }
 
 -(CGFloat)getHeightOfPoint:(DCDataPoint*)point coordinate:(_DCCoordinateSystem*)coordinate {

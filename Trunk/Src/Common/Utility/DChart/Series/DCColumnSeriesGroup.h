@@ -13,7 +13,7 @@
 @interface DCColumnSeriesGroup : NSObject
 @property (nonatomic, strong, readonly) NSString* groupName;
 @property (nonatomic, weak, readonly) _DCCoordinateSystem* coordinateSystem;
-@property (nonatomic, assign) CGFloat xRectStartAt;
+//@property (nonatomic, assign) CGFloat xRectStartAt;
 @property (nonatomic, assign) CGFloat columnWidthInCoordinate;
 @property (nonatomic, readonly, getter = getCount) NSUInteger count;
 @property (nonatomic, readonly, getter = getAllSeries) NSArray* allSeries;
