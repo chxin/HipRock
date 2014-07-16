@@ -22,7 +22,7 @@
 @interface DCTrendWrapper : DAbstractChartWrapper<DCXYChartViewDelegate, DCTrendAnimationDelegate>
 
 @property (nonatomic, readonly) DCXYChartView* view;
-@property (nonatomic, assign) DCSeriesType defaultSeriesType;
+//@property (nonatomic, assign) DCSeriesTypeStatus defaultSeriesType;
 @property (nonatomic, strong, readonly) NSMutableArray* processors;
 @property (nonatomic, strong, readonly) DCTrendChartDataProcessor* sharedProcessor;
 
@@ -36,5 +36,4 @@
 -(void)customizeView:(DCXYChartView*)view;
 -(NSUInteger)getSeriesAmount;
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index;
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index;
 @end

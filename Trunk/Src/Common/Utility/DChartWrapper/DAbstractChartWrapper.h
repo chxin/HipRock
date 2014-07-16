@@ -15,6 +15,7 @@
 #import "DCChartWrapperDelegate.h"
 #import "DCSeriesStatus.h"
 #import "REMSeriesKeyFormattor.h"
+#import "REMChartStrategyFactor.h"
 
 @interface DAbstractChartWrapper : NSObject
 
@@ -24,6 +25,7 @@
 @property (nonatomic, assign) DChartStatus chartStatus;
 @property (nonatomic,strong) NSMutableDictionary* seriesStates;
 @property (nonatomic,strong) DWrapperConfig* wrapperConfig;
+@property (nonatomic,strong,readonly) REMChartStrategy* chartStrategy;
 
 -(void)cancelToolTipStatus;
 -(void)redraw:(REMEnergyViewData *)energyViewData;
@@ -35,4 +37,6 @@
 //-(DCSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex;
 
 -(void)beginAnimationDone;
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index;
+-(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index;
 @end

@@ -86,14 +86,11 @@
     
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.defaultSeriesType = DCSeriesTypeLine;
     }
     else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.defaultSeriesType = DCSeriesTypeColumn;
     }
     else if (widgetType == REMDiagramTypeRanking) {
-        
         widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
     }
     else if (widgetType == REMDiagramTypeStackColumn) {

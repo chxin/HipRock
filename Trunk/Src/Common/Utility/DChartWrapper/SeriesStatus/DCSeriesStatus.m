@@ -25,7 +25,7 @@
 //    return self;
 //}
 -(void)applyToXYSeries:(DCXYSeries*)series {
-    series.hidden = self.hidden;
+    series.hidden = !self.visible;
     switch (self.seriesType) {
         case DCSeriesTypeStatusLine:
             series.type = DCSeriesTypeLine;
@@ -46,7 +46,7 @@
     }
 }
 -(void)applyToPieSlice:(DCPieDataPoint*)pieSlice {
-    pieSlice.hidden = self.hidden;
+    pieSlice.hidden = !self.visible;
     if (!REMIsNilOrNull(self.forcedColor)) {
         pieSlice.color = self.forcedColor;
     }

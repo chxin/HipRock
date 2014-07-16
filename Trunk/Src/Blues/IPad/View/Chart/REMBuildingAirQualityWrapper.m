@@ -95,21 +95,20 @@
     }
 }
 
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [NSString stringWithFormat:@"%p", series];
+-(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel *)target seriesIndex:(NSUInteger)index {
+    return [NSString stringWithFormat:@"%p", target];
 }
 
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
     return DCLineSymbolTypeRound;
 }
 
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries *)series seriesIndex:(NSUInteger)index {
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
-    state.seriesKey = series.seriesKey;
+    state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
     state.seriesType = DCSeriesTypeStatusColumn;
-    state.avilableTypes = @[@(state.seriesType)];
-    state.hidden = NO;
-    REMEnergyTargetModel* target = series.target;
+    state.avilableTypes = state.seriesType;
+    state.visible = YES;
     UIColor* sColor = nil;
     if([target.code hasSuffix:kTagCodeSuffixHoneywell]){
         sColor = [UIColor colorWithRed:97.0/255.0 green:184.0/255.0 blue:2.0/255.0 alpha:1];

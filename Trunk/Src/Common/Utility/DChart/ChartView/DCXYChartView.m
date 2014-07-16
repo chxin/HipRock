@@ -215,18 +215,17 @@
     
     self._columnLayer.frame = self._columnLayerContainer.bounds;
     
-    NSUInteger visableAxisAmount = 0;
-    NSUInteger seriesAmountThr = self.visableYAxisAmount-1;
     for (int i = 0; i < self.coodinates.count; i++) {
-//        if (i >= self.visableYAxisAmount) break;
         _DCCoordinateSystem* ds = self.coodinates[i];
         _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
-        if (visableAxisAmount >= seriesAmountThr || [ds.yAxis getVisableSeriesAmount] == 0) {
+        if (i >= self.visableYAxisAmount || [ds.yAxis getVisableSeriesAmount] == 0 ) {
             _yLabelLayer.hidden = YES;
+        } else if (i == 0) {
+            _yLabelLayer.hidden = NO;
+            _yLabelLayer.frame = CGRectMake(ds.yAxis.startPoint.x-ds.yAxis.size.width, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
         } else {
             _yLabelLayer.hidden = NO;
-            visableAxisAmount++;
-            _yLabelLayer.frame = CGRectMake(ds.isMajor ? ds.yAxis.startPoint.x-ds.yAxis.size.width :ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
+            _yLabelLayer.frame = CGRectMake(ds.yAxis.startPoint.x, self.graphContext.plotRect.origin.y, ds.yAxis.size.width, ds.yAxis.size.height);
         }
     }
 }
@@ -245,13 +244,13 @@
     axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.xTextFont];
     plotSpaceBottom = plotSpaceBottom - axisSize.height - self.chartStyle.yLineWidth - self.chartStyle.xLabelToLine;
     
-    int nowVisableYAmount = 0;
-    for (DCAxis* yAxis in self.yAxisList) {
+    for (NSUInteger i = 0; i < self.yAxisList.count; i++) {
+        if (i >= self.visableYAxisAmount) break;
+        DCAxis* yAxis = self.yAxisList[i];
         if ([yAxis getVisableSeriesAmount] <= 0) continue;
-        if (nowVisableYAmount >= self.visableYAxisAmount) break;
         
         axisSize = [DCUtility getSizeOfText:kDCMaxLabel forFont:self.chartStyle.yTextFont];
-        if (nowVisableYAmount == 0) {
+        if (i == 0) {
             plotSpaceLeft = plotSpaceLeft + axisSize.width + self.chartStyle.yLineWidth + self.chartStyle.yLabelToLine;
             yAxis.startPoint = CGPointMake(plotSpaceLeft, self.chartStyle.plotPaddingTop);
             yAxis.endPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
@@ -263,7 +262,6 @@
             yAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);
             yAxis.size = CGSizeMake(axisWidth, plotSpaceBottom-self.chartStyle.plotPaddingTop);
         }
-        nowVisableYAmount++;
     }
     self.xAxis.startPoint = CGPointMake(plotSpaceLeft, plotSpaceBottom);
     self.xAxis.endPoint = CGPointMake(plotSpaceRight, plotSpaceBottom);

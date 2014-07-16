@@ -48,7 +48,7 @@
     
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
-        state = [self getDefaultSeriesState:s seriesIndex:0];
+        state = [self getDefaultSeriesState:s.target seriesIndex:0];
         [self.seriesStates setObject:state forKey:s.seriesKey];
     }
     [state applyToXYSeries:s];
@@ -60,18 +60,15 @@
     [view setXLabelFormatter:formatter];
     return s;
 }
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [NSString stringWithFormat:@"%p", series];
-}
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
-    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
-    state.seriesKey = series.seriesKey;
-    state.seriesType = DCSeriesTypeStatusColumn;
-    state.avilableTypes = @[@(state.seriesType)];
-    state.hidden = NO;
-    state.canBeHidden = NO;
-    return state;
-}
+//-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
+//    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+//    state.seriesKey = series.seriesKey;
+//    state.seriesType = DCSeriesTypeStatusColumn;
+//    state.avilableTypes = @[@(state.seriesType)];
+//    state.hidden = NO;
+//    state.canBeHidden = NO;
+//    return state;
+//}
 
 -(void)customizeView:(DCXYChartView*)view {
     view.graphContext.pointHorizentalOffset = 0.5;

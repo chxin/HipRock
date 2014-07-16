@@ -157,10 +157,8 @@
     }
     if (widgetType == REMDiagramTypeLine) {
         widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeLine;
     } else if (widgetType == REMDiagramTypeColumn) {
         widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-        ((DCTrendWrapper*)widgetWrapper).defaultSeriesType = DCSeriesTypeColumn;
     } else if (widgetType == REMDiagramTypePie) {
         widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     } else if (widgetType == REMDiagramTypeRanking) {

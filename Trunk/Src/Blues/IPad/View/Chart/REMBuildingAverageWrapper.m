@@ -41,21 +41,21 @@
     return DCLineSymbolTypeRound;
 }
 
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [NSString stringWithFormat:@"%p", series];
+-(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel *)target seriesIndex:(NSUInteger)index {
+    return [NSString stringWithFormat:@"%p", target];
 }
 
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries *)series seriesIndex:(NSUInteger)index {
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
-    state.seriesKey = series.seriesKey;
-    state.seriesType = series.target.type == REMEnergyTargetCalcValue ? DCSeriesTypeStatusColumn : DCSeriesTypeStatusLine;
-    state.avilableTypes = @[@(state.seriesType)];
+    state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
+    state.seriesType = target.type == REMEnergyTargetCalcValue ? DCSeriesTypeStatusColumn : DCSeriesTypeStatusLine;
+    state.avilableTypes = state.seriesType;
     if (state.seriesType == DCSeriesTypeLine) {
         state.forcedColor = self.style.benchmarkColor;
     } else {
         state.forcedColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7f];
     }
-    state.hidden = NO;
+    state.visible = YES;
     return state;
 }
 @end

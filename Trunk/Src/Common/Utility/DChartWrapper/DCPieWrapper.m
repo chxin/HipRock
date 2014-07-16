@@ -61,8 +61,8 @@
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
     state.seriesKey = point.pointKey;
     state.seriesType = DCSeriesTypeStatusPie;
-    state.avilableTypes = @[@(state.seriesType)];
-    state.hidden = NO;
+    state.avilableTypes = state.seriesType;
+    state.visible = YES;
     return state;
 }
 

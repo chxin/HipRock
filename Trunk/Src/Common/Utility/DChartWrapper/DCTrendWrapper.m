@@ -29,64 +29,34 @@
 }
 -(DCTrendWrapper*)initWithFrame:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig *)wrapperConfig style:(DCChartStyle *)style {
     self = [super initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
-    
-    if(self.wrapperConfig.seriesStates != nil){
-        NSMutableDictionary *seriesStates = [[NSMutableDictionary alloc] init];
-        for(NSDictionary *item in self.wrapperConfig.seriesStates){
-            DCSeriesStatus *status = [[DCSeriesStatus alloc] init];
-            status.seriesType = REMIsNilOrNull(item[@"type"])?DCSeriesTypeStatusLine:(DCSeriesTypeStatus)[item[@"type"] shortValue];
-            status.seriesKey = item[@"seriesKey"];
-            status.canBeHidden = REMIsNilOrNull(item[@"suppressible"])? YES : [item[@"suppressible"] boolValue];
-            status.hidden = ![item[@"visible"] boolValue];
-            
-            int availableTypes = REMIsNilOrNull(item[@"availableType"]) ? (DCSeriesTypeStatusLine + DCSeriesTypeStatusColumn + DCSeriesTypeStatusStackedColumn) : [item[@"availableType"] intValue];
-            
-            NSMutableArray *types = [NSMutableArray arrayWithArray:@[@(DCSeriesTypeStatusLine),@(DCSeriesTypeStatusColumn),@(DCSeriesTypeStatusStackedColumn),@(DCSeriesTypeStatusPie)]];
-            for(int i=types.count-1;i>=0;i--){
-                __block short sum = 0;
-                [types enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) { sum += [obj shortValue]; }];
-                
-                if(sum == availableTypes){
-                    status.avilableTypes = types;
-                    break;
-                }
-                
-                [types removeObject:types[i]];
-            }
-            
-            [seriesStates setObject:status forKey:status.seriesKey];
-        }
-        
-        self.seriesStates = seriesStates;
-    }
+
     
     if (self && energyViewData.targetEnergyData.count != 0) {
-        _defaultSeriesType = DCSeriesTypeLine;
         self.animationManager = [[DCTrendAnimationManager alloc]init];
         self.animationManager.delegate = self;
         NSDictionary* dic = [self updateProcessorRangesFormatter:wrapperConfig.step];
         _myStableRange = dic[@"beginRange"];
         
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
-        
-//        for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
-//            DCXYSeries* s = self.view.seriesList[i];
-//            DTrendSeriesStatus* status = nil;
-//            if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
-//                status = [[DTrendSeriesStatus alloc]initWithTarget:nil index:@(i)];
-//            } else {
-//                status = [[DTrendSeriesStatus alloc]initWithTarget:s.target index:nil];
-//            }
-//            status.hidden = s.hidden;
-//            status.currentType = s.type;
-//            status.originalType = s.type;
-//            [self.seriesStates addObject:status];
-//            
-////            if (s.hidden) [self addHiddenTarget:s.target index:i];
-//        }
+    
         [self updateCalendar];
     }
     return self;
+}
+
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
+    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
+    state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
+    state.seriesType = self.wrapperConfig.defaultSeriesType;
+    state.suppressible = YES;
+    state.visible = [self.chartStrategy.defaultVisibleGen getDefaultVisible:target];
+    state.avilableTypes = [self.chartStrategy.avalibleTypeGen getAvalibleTypeBySeriesKey:state.seriesKey targetTypeFromServer:target.type defaultChartType:self.wrapperConfig.defaultSeriesType];
+    
+    if (target.type == REMEnergyTargetBenchmarkValue) {
+        state.forcedColor = self.style.benchmarkColor;
+    }
+    
+    return state;
 }
 
 -(void)createChartView:(CGRect)frame beginRange:(DCRange*)beginRange globalRange:(DCRange*)globalRange xFormatter:(NSFormatter*)xLabelFormatter step:(REMEnergyStep)step{
@@ -185,52 +155,19 @@
         s.coordinateSystemName = targetEnergy.target.uomName;
     }
     
-    s.seriesKey = [self getKeyOfSeries:s];
+    s.seriesKey = [self getSeriesKeyByTarget:s.target seriesIndex:index];
     
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
-        state = [self getDefaultSeriesState:s seriesIndex:index];
+        state = [self getDefaultSeriesState:s.target seriesIndex:index];
         [self.seriesStates setObject:state forKey:s.seriesKey];
     }
     [state applyToXYSeries:s];
     return s;
 }
 
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:series.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig.contentSyntax];
-}
-
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
     return index % 5;
-}
-
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
-    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
-    state.seriesKey = series.seriesKey;
-    state.seriesType = self.defaultSeriesType==DCSeriesTypeColumn ? DCSeriesTypeStatusColumn : DCSeriesTypeStatusLine;
-    state.hidden = NO;
-    state.avilableTypes = @[@(DCSeriesTypeStatusColumn), @(DCSeriesTypeStatusLine)];
-    
-    /* Jazz各种Widget的特殊处理 Start */
-    REMChartFromLevel2 chartLevel = self.wrapperConfig.widgetFrom;
-    // Ratio和Unit图形内的原始值默认为隐藏，benchmark的序列只能是线图，并且覆盖序列的默认颜色
-    if (chartLevel==REMChartFromLevel2Ratio || chartLevel==REMChartFromLevel2Unit) {
-        if (series.target.type == REMEnergyTargetOrigValue) {
-            state.hidden = YES;
-        } else if (series.target.type == REMEnergyTargetBenchmarkValue) {
-            state.seriesType = DCSeriesTypeLine;
-            state.forcedColor = self.style.benchmarkColor;
-            state.avilableTypes = @[@(state.seriesType)];
-        }
-    }
-    // Cost图形内，如果选择电介质并开启峰谷平，所有的图序列为堆积图
-    if (chartLevel == REMChartFromLevel2Cost && self.wrapperConfig.storeType == REMDSEnergyCostElectricity) {
-        state.seriesType = DCSeriesTypeStatusStackedColumn;
-        state.avilableTypes = @[@(state.seriesType)];
-    }
-    /* Jazz各种Widget的特殊处理 End */
-    
-    return state;
 }
 
 -(NSNumber*)roundDate:(NSDate*)lengthDate startDate:(NSDate*)startDate processor:(DCTrendChartDataProcessor*)processor roundToFloor:(BOOL)roundToFloor {
@@ -358,13 +295,9 @@
     [self.view setSeries:series hidden:hidden];
     if (REMIsNilOrNull(series.target)) return;
     DCSeriesStatus* state = self.seriesStates[series.seriesKey];
-    if (state!=nil) state.hidden = hidden;
+    if (state!=nil) state.visible = !hidden;
 }
 
--(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
-    return !self.wrapperConfig.isTouChart && index < [self getSeriesAmount];
-//    return !self.graphContext.stacked && [self getVisableSeriesCount] > 1 && index < [self getSeriesAmount];
-}
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index {
 //    DCXYChartView* view = self.view;
 //    if (index >= view.seriesList.count) return;
@@ -387,13 +320,21 @@
 }
 
 -(BOOL)canBeChangeSeriesAtIndex:(NSUInteger)index {
-    if (index >= self.view.seriesList.count) return NO;
-    DCXYSeries* series = self.view.seriesList[index];
-    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
-    if (REMIsNilOrNull(state)) return NO;
+    return NO;
+//    if (index >= self.view.seriesList.count) return NO;
+//    DCXYSeries* series = self.view.seriesList[index];
+//    DCSeriesStatus* state = self.seriesStates[series.seriesKey];
+//    if (REMIsNilOrNull(state)) return NO;
+//    
+//    NSArray* stateMachine = state.avilableTypes;
+//    return stateMachine.count > 1;
     
-    NSArray* stateMachine = state.avilableTypes;
-    return stateMachine.count > 1;
+    // TBD
+    
+    
+    
+    
+    
 //    if ([stateMachine containsObject:@(state.seriesType)]) {
 //        return stateMachine.count > 1;
 //    } else {
