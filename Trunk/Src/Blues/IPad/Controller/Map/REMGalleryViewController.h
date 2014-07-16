@@ -10,8 +10,9 @@
 #import "REMMapKitViewController.h"
 #import "REMControllerBase.h"
 #import "REMGalleryCollectionCell.h"
+#import "REMCustomerLogoView.h"
 
-@interface REMGalleryViewController : REMControllerBase<UITableViewDataSource, UITableViewDelegate>
+@interface REMGalleryViewController : REMControllerBase<UITableViewDataSource, UITableViewDelegate, REMCustomerLogoViewDelegate>
 
 #pragma mark - Properties
 @property (nonatomic,weak) NSArray *buildingInfoArray;

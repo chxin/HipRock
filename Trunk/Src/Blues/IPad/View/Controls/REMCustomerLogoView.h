@@ -7,6 +7,15 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 
-@interface REMCustomerLogoView : UIView
+@protocol REMCustomerLogoViewDelegate <NSObject>
+
+-(void)logoPressed;
+
+@end
+
+
+@interface REMCustomerLogoView : UIButton
+
+@property (nonatomic,weak) NSObject<REMCustomerLogoViewDelegate> *delegate;
 
 @end

@@ -361,9 +361,18 @@
 //    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
     
     REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
+    logoView.delegate = self;
+    if (REMISIOS7) {
+        [logoView setTintColor:[UIColor whiteColor]];
+    }
 
     [self.container addSubview:logoView];
     self.logoButton=logoView;
+}
+
+-(void)logoPressed
+{
+    [self.parentViewController performSelector:@selector(backButtonPressed:)];
 }
 
 

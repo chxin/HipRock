@@ -13,6 +13,7 @@
 #import "REMEnergyViewData.h"
 #import "REMTargetEnergyData.h"
 #import "REMWidgetContentSyntax.h"
+#import "REMDataStore.h"
 
 @implementation REMTextIndicatorFormator
 
@@ -81,6 +82,8 @@
         case REMEnergyTargetBaseValue:
         {
             NSString *format = nil;
+            REMDataStoreType store = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType;
+            
             switch (target.type) {
                 case REMEnergyTargetCalcValue:
                     format = REMIPadLocalizedString(@"Chart_TargetCalcValue");
@@ -88,15 +91,16 @@
                 case REMEnergyTargetOrigValue:
                     format = REMIPadLocalizedString(@"Chart_TargetOrigValue");
                     break;
-                case REMEnergyTargetTargetValue:
-                    if([[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType == REMDSEnergyTagsTrendUnit){
+                case REMEnergyTargetTargetValue:{
+                    if(store == REMDSEnergyTagsTrendUnit || store==REMDSEnergyRatio){
                         return target.name;
                     }
                     
                     format = REMIPadLocalizedString(@"Chart_TargetTargetValue");
                     break;
+                }
                 case REMEnergyTargetBaseValue:
-                    if([[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType == REMDSEnergyTagsTrendUnit){
+                    if(store == REMDSEnergyTagsTrendUnit || store==REMDSEnergyRatio){
                         return target.name;
                     }
                     
