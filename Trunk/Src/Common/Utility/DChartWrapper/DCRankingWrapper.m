@@ -48,7 +48,7 @@
     
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
-        state = [self getDefaultSeriesState:s seriesIndex:0];
+        state = [self getDefaultSeriesState:s.target seriesIndex:0];
         [self.seriesStates setObject:state forKey:s.seriesKey];
     }
     [state applyToXYSeries:s];
@@ -59,9 +59,6 @@
     formatter.graphContext = view.graphContext;
     [view setXLabelFormatter:formatter];
     return s;
-}
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [NSString stringWithFormat:@"%p", series];
 }
 //-(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
 //    DCSeriesStatus* state = [[DCSeriesStatus alloc]init];

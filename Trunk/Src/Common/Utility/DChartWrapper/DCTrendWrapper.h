@@ -36,5 +36,4 @@
 -(void)customizeView:(DCXYChartView*)view;
 -(NSUInteger)getSeriesAmount;
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index;
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index;
 @end

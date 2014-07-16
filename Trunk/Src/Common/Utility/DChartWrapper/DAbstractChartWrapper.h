@@ -36,6 +36,7 @@
 -(NSUInteger)getVisableSeriesCount;
 //-(DCSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex;
 
--(NSString*)getKeyOfSeries:(DCSeries*)series;
 -(void)beginAnimationDone;
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index;
+-(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index;
 @end

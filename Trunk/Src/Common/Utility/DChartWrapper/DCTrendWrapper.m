@@ -38,44 +38,23 @@
         _myStableRange = dic[@"beginRange"];
         
         [self createChartView:frame beginRange:dic[@"beginRange"] globalRange:dic[@"globalRange"] xFormatter:dic[@"xformatter"] step:wrapperConfig.step];
-        
-        NSMutableDictionary *seriesStates = [[NSMutableDictionary alloc] init];
-        for (NSUInteger i = 0; i < self.view.seriesList.count; i++) {
-            DCXYSeries* s = self.view.seriesList[i];
-            DCSeriesStatus* status = nil;
-            NSString* sKey = [self getKeyOfSeries:s];
-            if (self.wrapperConfig.seriesStates != nil) {
-                for(NSDictionary *item in self.wrapperConfig.seriesStates){
-                    NSString* dicSKey = item[@"seriesKey"];
-                    if (dicSKey != nil && dicSKey != NULL && [dicSKey isEqualToString:sKey]) {
-                        status = [[DCSeriesStatus alloc] init];
-                        status.seriesKey = sKey;
-                        
-                        status.seriesType = REMIsNilOrNull(item[@"type"])?self.wrapperConfig.defaultSeriesType:(DCSeriesTypeStatus)[item[@"type"] shortValue];
-                        status.suppressible = REMIsNilOrNull(item[@"suppressible"])? YES : [item[@"suppressible"] boolValue];
-                        status.visible = REMIsNilOrNull(item[@"visible"]) ? [self.chartStrategy.defaultVisibleGen getDefaultVisible:s.target] : [item[@"visible"] boolValue];
-                        status.avilableTypes = REMIsNilOrNull(item[@"availableType"]) ? [self.chartStrategy.avalibleTypeGen getAvalibleTypeBySeriesKey:sKey targetTypeFromServer:s.target.type defaultChartType:self.wrapperConfig.defaultSeriesType] : [item[@"availableType"] intValue];
-                    }
-                }
-            }
-            
-            if (status == nil) {
-                status = [self getDefaultSeriesState:s seriesIndex:i];
-            }
-            [seriesStates setObject:status forKey:status.seriesKey];
-        }
+    
         [self updateCalendar];
     }
     return self;
 }
 
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
-    state.seriesKey = series.seriesKey;
+    state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
     state.seriesType = self.wrapperConfig.defaultSeriesType;
     state.suppressible = YES;
-    state.visible = [self.chartStrategy.defaultVisibleGen getDefaultVisible:series.target];
-    state.avilableTypes = [self.chartStrategy.avalibleTypeGen getAvalibleTypeBySeriesKey:state.seriesKey targetTypeFromServer:series.target.type defaultChartType:self.wrapperConfig.defaultSeriesType];
+    state.visible = [self.chartStrategy.defaultVisibleGen getDefaultVisible:target];
+    state.avilableTypes = [self.chartStrategy.avalibleTypeGen getAvalibleTypeBySeriesKey:state.seriesKey targetTypeFromServer:target.type defaultChartType:self.wrapperConfig.defaultSeriesType];
+    
+    if (target.type == REMEnergyTargetBenchmarkValue) {
+        state.forcedColor = self.style.benchmarkColor;
+    }
     
     return state;
 }
@@ -176,19 +155,15 @@
         s.coordinateSystemName = targetEnergy.target.uomName;
     }
     
-    s.seriesKey = [self getKeyOfSeries:s];
+    s.seriesKey = [self getSeriesKeyByTarget:s.target seriesIndex:index];
     
     DCSeriesStatus* state = self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
-        state = [self getDefaultSeriesState:s seriesIndex:index];
+        state = [self getDefaultSeriesState:s.target seriesIndex:index];
         [self.seriesStates setObject:state forKey:s.seriesKey];
     }
     [state applyToXYSeries:s];
     return s;
-}
-
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [REMSeriesKeyFormattor seriesKeyWithEnergyTarget:series.target energyData:self.energyViewData andWidgetContentSyntax:self.wrapperConfig.contentSyntax];
 }
 
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {

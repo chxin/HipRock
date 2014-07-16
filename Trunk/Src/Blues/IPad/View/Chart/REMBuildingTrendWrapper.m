@@ -78,18 +78,17 @@
     view.acceptPan = NO;
 }
 
-
--(NSString*)getKeyOfSeries:(DCXYSeries*)series {
-    return [NSString stringWithFormat:@"%p", series];
+-(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel *)target seriesIndex:(NSUInteger)index {
+    return [NSString stringWithFormat:@"%p", target];
 }
 
 -(DCLineSymbolType)getSymbolTypeByIndex:(NSUInteger)index {
     return DCLineSymbolTypeRound;
 }
 
--(DCSeriesStatus*)getDefaultSeriesState:(DCXYSeries*)series seriesIndex:(NSUInteger)index {
+-(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
-    state.seriesKey = series.seriesKey;
+    state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
     state.seriesType = DCSeriesTypeStatusLine;
     state.avilableTypes = DCSeriesTypeStatusLine;
     state.forcedColor = [self getSeriesColorByIndex:index];
