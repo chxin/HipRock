@@ -298,10 +298,6 @@
     if (state!=nil) state.visible = !hidden;
 }
 
--(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
-    return !self.wrapperConfig.isTouChart && index < [self getSeriesAmount];
-//    return !self.graphContext.stacked && [self getVisableSeriesCount] > 1 && index < [self getSeriesAmount];
-}
 -(void)switchSeriesTypeAtIndex:(NSUInteger)index {
 //    DCXYChartView* view = self.view;
 //    if (index >= view.seriesList.count) return;

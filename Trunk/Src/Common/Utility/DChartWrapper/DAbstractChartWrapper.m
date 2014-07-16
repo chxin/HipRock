@@ -48,7 +48,9 @@
             if (status == nil) {
                 status = [self getDefaultSeriesState:t.target seriesIndex:i];
             }
-            [seriesStates setObject:status forKey:status.seriesKey];
+            if (status != nil) {
+                [seriesStates setObject:status forKey:status.seriesKey];
+            }
 //            [status applyToXYSeries:s];
         }
         _seriesStates = seriesStates;
@@ -90,7 +92,7 @@
 }
 
 -(BOOL)canSeriesBeHiddenAtIndex:(NSUInteger)index {
-    return [self getVisableSeriesCount] > 1;
+    return YES;
 }
 //-(DSeriesStatus*)getSeriesStatusByTarget:(REMEnergyTargetModel*)target index:(NSNumber*)seriesIndex {
 //    if (self.wrapperConfig.isMultiTimeEnergyAnalysisChart) {
