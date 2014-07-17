@@ -16,14 +16,14 @@
         self.contentsScale = [UIScreen mainScreen].scale;
         _enableGrowAnimation = YES;
         _growthAnimationDone = NO;
-        NSMutableArray* s = [[NSMutableArray alloc]init];
-        for (DCXYSeries* se in view.seriesList) {
-            if ([self isValidSeriesForMe:se]) {
-                [s addObject:se];
-                se.seriesLayer = self;
-            }
-        }
-        _seriesList = s;
+//        NSMutableArray* s = [[NSMutableArray alloc]init];
+//        for (DCXYSeries* se in view.seriesList) {
+//            if ([self isValidSeriesForMe:se]) {
+//                [s addObject:se];
+////                se.seriesLayer = self;
+//            }
+//        }
+//        _seriesList = s;
         self.masksToBounds = YES;
         _coordinateSystems = coordinateSystems;
     }
@@ -40,8 +40,8 @@
 
 -(NSUInteger)getVisableSeriesCount {
     NSUInteger count = 0;
-    for (DCXYSeries* s in self.seriesList) {
-        if (!s.hidden) count++;
+    for (DCXYSeries* s in self.view.seriesList) {
+        if (!s.hidden && [self isValidSeriesForMe:s]) count++;
     }
     return count;
 }

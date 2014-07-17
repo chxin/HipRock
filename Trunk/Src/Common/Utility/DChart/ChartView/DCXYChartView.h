@@ -45,5 +45,5 @@
 -(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis;
 -(NSArray*)getYAxes;
 
--(void)replaceSeries:(DCXYSeries*)original byReplacement:(DCXYSeries*)replacement;
+-(void)updateSeries:(DCXYSeries*)series type:(DCSeriesType)type coordinateName:(NSString*)coordinateName stacked:(BOOL)stacked;
 @end
