@@ -103,7 +103,7 @@
     
     style.labelingLineWidth = 1;
     style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
-    style.labelingFontName = @"STHeitiSC-Medium";
+    style.labelingFontName = nil;
     style.labelingTooltipArcLineWidth = 0;
     style.labelingStageMinWidth = 157;
     style.labelingStageToLineMargin = 14;
@@ -202,7 +202,7 @@
     
     style.labelingLineWidth = 0.5f;
     style.labelingLineColor = [REMColor colorByHexString:@"#cfcfcf"];
-    style.labelingFontName = @"STHeitiSC-Medium";
+    style.labelingFontName = nil;
     style.labelingTooltipArcLineWidth = 0;
     style.labelingStageMinWidth = 39;
     style.labelingStageToLineMargin = 3;
