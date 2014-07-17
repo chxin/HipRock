@@ -282,7 +282,7 @@
     //backButton.showsTouchWhenHighlighted=YES;
     backButton.titleLabel.text=@"Back";
     [backButton setImage:REMIMG_Back forState:UIControlStateNormal];
-    [backButton addTarget:self.parentViewController action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton addTarget:self.parentViewController action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:backButton];
     self.backButton=backButton;
@@ -372,7 +372,7 @@
 
 -(void)logoPressed
 {
-    [self.parentViewController performSelector:@selector(backButtonPressed:)];
+    [self.parentViewController performSelector:@selector(backButtonPressed)];
 }
 
 

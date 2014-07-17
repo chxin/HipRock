@@ -534,7 +534,7 @@ const static CGFloat buildingGap=20;
 }
 
 
--(IBAction)backButtonPressed:(id)sender
+-(void)backButtonPressed
 {
     [self.view setUserInteractionEnabled:NO];
     [self back];
