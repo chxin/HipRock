@@ -48,7 +48,7 @@
         [self.layer addSublayer:self.triangleLayer];
 
         self.benchmarkLabel = [[UILabel alloc]init];
-        self.benchmarkLabel.font = [UIFont fontWithName:self.style.labelingFontName size:self.style.labelingTooltipViewFontSize];
+        self.benchmarkLabel.font = [UIFont systemFontOfSize:self.style.labelingTooltipViewFontSize];//[UIFont fontWithName:self.style.labelingFontName size:self.style.labelingTooltipViewFontSize];
         self.benchmarkLabel.textColor = self.style.labelingTooltipViewFontColor;
         self.benchmarkLabel.backgroundColor = [UIColor clearColor];
         self.benchmarkLabel.textAlignment = NSTextAlignmentLeft;

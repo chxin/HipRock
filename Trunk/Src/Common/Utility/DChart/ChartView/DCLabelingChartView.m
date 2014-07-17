@@ -166,7 +166,7 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
     CGFloat plotWidth = style.labelingStageMaxWidth + style.labelingStageToLineMargin + style.labelingLineWidth + labelCount * (style.labelingLabelToLineMargin*2 + style.labelingLineWidth + style.labelingLabelWidth)+style.labelingArrowLineWidth+style.labelingArrowVMargin*2;
     CGFloat hPadding = (CGRectGetWidth(self.bounds) - plotWidth) / 2;
     
-    UIFont* effFont = [UIFont fontWithName:style.labelingFontName size:style.labelingEffectFontSize];
+    UIFont* effFont = [UIFont systemFontOfSize:style.labelingEffectFontSize];//[UIFont fontWithName:style.labelingFontName size:style.labelingEffectFontSize];
     [self drawText:REMIPadLocalizedString(@"Chart_Labeling_LowEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, style.labelingStageToBorderMargin-style.labelingStageToStageTextMargin-style.labelingEffectFontSize+style.plotPaddingTop, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
     [self drawText:REMIPadLocalizedString(@"Chart_Labeling_HighEnergyUse") inContext:ctx font:effFont rect:CGRectMake(hPadding, self.frame.size.height-style.plotPaddingBottom-style.labelingStageToBorderMargin+style.labelingStageToStageTextMargin, 9999, 9999) alignment:NSTextAlignmentLeft color:style.labelingStageFontColor];
     
@@ -221,15 +221,15 @@ CGFloat const kDCLabelingLabelHorizentalMargin = 0.05;
         basePoint.y = basePoint.y + stageHeight + stageVMargin;
         
         
-        UIFont* stageTextFont = [UIFont fontWithName:style.labelingFontName size:style.labelingStageFontSize];
+        UIFont* stageTextFont = [UIFont systemFontOfSize:style.labelingStageFontSize];//[UIFont fontWithName:style.labelingFontName size:style.labelingStageFontSize];
         NSString* stageText = [self.series.stages[i] stageText];
         CGSize stageSize = [DCUtility getSizeOfText:stageText forFont:stageTextFont];
         [self drawText:stageText inContext:ctx font:stageTextFont rect:CGRectMake(baseX+theWidth-style.labelingStageFontRightMargin-stageSize.width, baseY+(stageHeight-stageSize.height)/2+style.labelingStageFontTopMargin, stageSize.width, stageSize.height) alignment:NSTextAlignmentLeft color:[UIColor whiteColor]];
     }
     [self drawLineAt:hPadding+arrowSpaceWidth+style.labelingStageMaxWidth+style.labelingStageToLineMargin+style.labelingLineWidth/2 inContext:ctx];
 
-    UIFont* labelFont = [UIFont fontWithName:style.labelingFontName size:style.labelingLabelFontSize];
-    UIFont* labelTagNameFont = [UIFont fontWithName:style.labelingFontName size:style.labelingLabelTagNameFontSize];
+    UIFont* labelFont = [UIFont systemFontOfSize:style.labelingLabelFontSize];//[UIFont fontWithName:style.labelingFontName size:style.labelingLabelFontSize];
+    UIFont* labelTagNameFont = [UIFont systemFontOfSize:style.labelingLabelTagNameFontSize];//[UIFont fontWithName:style.labelingFontName size:style.labelingLabelTagNameFontSize];
     CGFloat labelHeight = style.labelingLabelHeight;
     CGFloat labelWidth = style.labelingLabelWidth;
     for (int i = 0; i < labelCount; i++) {

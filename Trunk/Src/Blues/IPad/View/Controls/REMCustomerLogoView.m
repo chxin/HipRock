@@ -60,7 +60,7 @@
     CGFloat frameWidth = self.frame.size.width, frameHeight = self.frame.size.height;
     
     if(imageWidth == frameWidth && imageHeight == frameHeight){
-        return CGRectMake(0,0,imageSize.width,imageSize.height) ;
+        return CGRectMake(0,0,imageSize.width,imageSize.height);
     }
     
     CGFloat width = 0.0, height = 0.0;
