@@ -114,6 +114,8 @@
     NSString *token = [REMEncryptHelper base64AES256EncryptString:info withKey:REMSecurityTokenKey];
     
     NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";
+    NSString *language = [NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]];
+    language = [language isEqualToString:@"zh-Hans"] ? @"zh_CN" : @"en_US";
     
     NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary: @{ @"Accept": accept,
                               @"Content-Type": @"application/json",
@@ -121,6 +123,7 @@
                               @"User-Agent": userAgent,
                               @"Blues-Version": fullVersion,
                               @"Blues-Token": token,
+                              @"Blues-Language": language,
                               }];
     
     return headers;
