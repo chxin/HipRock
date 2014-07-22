@@ -30,8 +30,11 @@
         
         REMChartLegendItemModel *model = [[REMChartLegendItemModel alloc] init];
         
+        
+        DCSeriesStatus *seriesState = ((DCTrendWrapper *)self.chartWrapper).seriesStates[series.seriesKey];
+        
         model.index = i;
-        model.type = series.type == DCSeriesTypeColumn ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
+        model.type = seriesState.seriesType == DCSeriesTypeStatusLine ? REMChartSeriesIndicatorLine : (seriesState.seriesType == DCSeriesTypeStatusColumn ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorStack);//series.type == DCSeriesTypeColumn ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
         model.title = [self format:series.target];
         model.legendView = self;
         model.color = [series.color copy];
