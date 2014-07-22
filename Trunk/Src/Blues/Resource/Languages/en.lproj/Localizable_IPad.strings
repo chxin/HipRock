@@ -132,7 +132,7 @@
 "Setting_DetailOperationDate"="Operation time";
 "Setting_DetailCustomerAdmin"="Clients administrator";
 "Setting_DetailCustomerAdminTwoName"="%@ and %@"; //张三和李四
-"Setting_DetailCustomerAdminThreeName"="%d persons including %@ and %@"; //张三和李四等5人
+"Setting_DetailCustomerAdminThreeName"="%3$d persons including %1$@ and %2$@"; //张三和李四等5人
 "Setting_About"="About EnergyMost";
 "Setting_BindWeibo"="Binding to Sina weibo";
 "Setting_UserName"="Display name";
@@ -143,7 +143,7 @@
 "Setting_UpdateAll"="Update all data";
 "Setting_AreYouSureLogout"="Log out the current account?";
 "Setting_AboutProductName"="Schneider Electric EnergyMost Management Platform";
-"Setting_AboutVersion"="iPad version V%@ b%@(%@)"; //iPad版V1.0.0 b100(p|t|l|d)
+"Setting_AboutVersion"="iPad version V%@.%@%@"; //iPad版V1.0.0 b100(p|t|l|d)
 "Setting_AboutCopyrightChinese"="© Schneider Electric  - All rights reserved";
 "Setting_AboutCopyrightEnglish%d"="Copyright©%d Schneider Electric - All rights reserved.";
 "Setting_UpdateFailed"="Data updating failed.";
