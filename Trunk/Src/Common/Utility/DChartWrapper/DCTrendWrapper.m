@@ -54,6 +54,7 @@
     
     if (target.type == REMEnergyTargetBenchmarkValue) {
         state.forcedColor = self.style.benchmarkColor;
+        state.seriesType = DCSeriesTypeStatusLine;
     }
     
     return state;

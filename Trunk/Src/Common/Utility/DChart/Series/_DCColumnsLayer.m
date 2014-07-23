@@ -134,7 +134,7 @@
 //    if (!self.graphContext.pointAlignToTick) pointXOffset = 0.5;
     CGRect r = CGRectMake(self.frame.size.width * (index + pointXOffset + series.xRectStartAt - self.graphContext.hRange.location) / self.graphContext.hRange.length,
                       series.stacked ? self.frame.size.height-columnHeight-stackedHeight : self.frame.size.height-columnHeight,
-                      self.frame.size.width * series.seriesGroup.columnWidthInCoordinate / self.graphContext.hRange.length,
+                          self.graphContext.hRange.length==0 ? 0 : self.frame.size.width * series.seriesGroup.columnWidthInCoordinate / self.graphContext.hRange.length,
                       columnHeight);
     return r;
 }

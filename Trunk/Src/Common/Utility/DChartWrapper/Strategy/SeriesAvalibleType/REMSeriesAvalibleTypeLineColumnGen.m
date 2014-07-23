@@ -11,6 +11,7 @@
 @implementation REMSeriesAvalibleTypeLineColumnGen
 
 -(int)getAvalibleTypeBySeriesKey:(NSString *)seriesKey targetTypeFromServer:(REMEnergyTargetType)targetType defaultChartType:(DCSeriesTypeStatus)defaultChartType {
+    if (targetType == REMEnergyTargetBenchmarkValue) return DCSeriesTypeStatusLine;
     return DCSeriesTypeStatusColumn | DCSeriesTypeStatusLine;
 }
 
