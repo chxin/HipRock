@@ -246,6 +246,7 @@
         [searchViewContainer addSubview:touButton];
         self.touButton = touButton;
         [self updateTouButtonStyle];
+        [self updateStepButton];
         
         NSLayoutConstraint *touButtonConstraintX = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-20];
         NSLayoutConstraint *touButtonConstraintY = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
@@ -266,6 +267,18 @@
     else{
         [self.touButton setBackgroundColor:[UIColor clearColor]];
         [self.touButton setTitleColor:[REMColor colorByHexString:@"#37ab3c"] forState:UIControlStateNormal];
+    }
+}
+
+-(void)updateStepButton
+{
+    for (int i=0;i<self.stepControl.numberOfSegments;i++){
+        NSString *title = [self.stepControl titleForSegmentAtIndex:i];
+        
+        if([title isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")] || [title isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
+            //if there is raw or hour step button, disable/enable them according to stack status
+            [self.stepControl setEnabled:!self.isCostStacked forSegmentAtIndex:i];
+        }
     }
 }
 
@@ -969,6 +982,19 @@
         }
     }
     else{
+//        "Chart_TouNotSupportHourly"="峰谷平电价不支持按小时查看";
+//        "Chart_TouNotSupportRaw"="峰谷平电价不支持按原始步长查看";
+        NSString *selectedStep = [self.stepControl titleForSegmentAtIndex:[self.stepControl selectedSegmentIndex]];
+        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")]){
+            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportRaw")];
+            return;
+        }
+            
+        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
+            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportHourly")];
+            return;
+        }
+        
         self.isCostStacked = YES;
         if(store == REMDSEnergyCost){
             self.contentSyntax.dataStoreType = REMDSEnergyCostElectricity;
@@ -979,6 +1005,7 @@
     }
     
     [self updateTouButtonStyle];
+    [self updateStepButton];
     [self search];
 }
 

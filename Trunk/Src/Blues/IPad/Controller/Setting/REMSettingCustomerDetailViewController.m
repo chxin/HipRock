@@ -110,6 +110,8 @@ static NSString * cellId=@"customerCell";
             REMManagedAdministratorModel *model1=customer.administrators[1];
             NSString *str=REMIPadLocalizedString(@"Setting_DetailCustomerAdminThreeName"); //%@和%@等%d人
             cell.detailTextLabel.text=[NSString stringWithFormat:str,model.realName,model1.realName,customer.administrators.count];
+            
+            [NSString stringWithFormat:NSLocalizedString(@"UserDescription", @""), @"张三", @"李四", 5];
         }
     }
     

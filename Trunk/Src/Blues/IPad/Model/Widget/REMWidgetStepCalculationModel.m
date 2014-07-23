@@ -54,7 +54,7 @@
             
             [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
             [titleList addObject: REMIPadLocalizedString(@"Common_Hour")];
-            defaultStepIndex=0;
+            defaultStepIndex=1;
             break;
         case 1:
             [list addObject:@(REMEnergyStepRaw)];
@@ -78,7 +78,7 @@
             [titleList addObject:REMIPadLocalizedString(@"Common_Hour")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Week")];
-            defaultStepIndex=0;
+            defaultStepIndex=1;
             break;
         case 3:
             [list addObject:@(REMEnergyStepRaw)];
@@ -106,7 +106,7 @@
             [titleList addObject:REMIPadLocalizedString(@"Common_Day")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Week")];
             [titleList addObject:REMIPadLocalizedString(@"Common_Month")];
-            defaultStepIndex=0;
+            defaultStepIndex=2;
             break;
         case 5:
         case 6:

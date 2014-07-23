@@ -74,9 +74,9 @@
         }
     }
     if(!REMIsNilOrNull(dictionary[@"relativeDate"])){
-        self.relativeTimeType = [REMTimeHelper relativeTimeTypeByName: dictionary[@"relativeDate"]];
-        
-        self = [REMTimeHelper relativeDateFromType:self.relativeTimeType];
+        REMRelativeTimeRangeType timeType = [REMTimeHelper relativeTimeTypeByName: dictionary[@"relativeDate"]];
+        self = [REMTimeHelper relativeDateFromType:timeType];
+        //self.relativeTimeType = timeType;
     }
     
     return self;

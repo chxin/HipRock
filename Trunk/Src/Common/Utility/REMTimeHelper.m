@@ -285,7 +285,7 @@
         [todayStartComps setHour:0];
         
         end = [calendar dateFromComponents:todayComps];
-        start = [calendar dateFromComponents:todayComps];
+        start = [calendar dateFromComponents:todayStartComps];
     }
     else if(relativeDateType == REMRelativeTimeRangeTypeYesterday)
     {
@@ -476,8 +476,10 @@
         start = [calendar dateFromComponents:last12monthEndComps];
     }
     
+    REMTimeRange *range = [[REMTimeRange alloc]initWithStartTime:start EndTime:end];
+    range.relativeTimeType = relativeDateType;
     
-    return [[REMTimeRange alloc]initWithStartTime:start EndTime:end];
+    return range;
 }
 
 +(NSDate*)dateFromYear:(int)year Month:(int)month Day:(int)day
@@ -512,7 +514,12 @@ static NSDateFormatter *_formatter;
 +(NSDateFormatter *)currentFormatter
 {
     if(_formatter == nil){
-        _formatter = [[NSDateFormatter alloc]init];
+        _formatter = [[NSDateFormatter alloc] init];
+        
+        NSString *language = [NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]];
+        NSLocale *locale = [NSLocale localeWithLocaleIdentifier:language];
+        
+        [_formatter setLocale:locale];
         [_formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     }
     

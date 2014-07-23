@@ -14,7 +14,7 @@
 {
     NSDictionary *p = dictionary[@"params"];
     self.params= p[@"submitParams"];
-    self.relativeDate=p[@"relativeDate"];
+    //self.relativeDate=p[@"relativeDate"];
     self.calendar=p[@"calendar"];
     self.config = p[@"config"];
     self.storeType=self.config[@"storeType"];
@@ -51,53 +51,19 @@
         self.calendarType=REMCalendarTypeNone;
     }
     
-    if([self.relativeDate isEqual:[NSNull null]]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeNone;
+    NSString *relativeDate=p[@"relativeDate"];
+    if(!REMIsNilOrNull(relativeDate)){
+        self.relativeDateType = [REMTimeHelper relativeTimeTypeByName:relativeDate];
     }
-    else if([self.relativeDate isEqualToString:@"Last7Day"]==YES){
-        self.relativeDateType = REMRelativeTimeRangeTypeLast7Day;
-    }
-    else if([self.relativeDate isEqualToString:@"Today"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeToday;
-    }
-    else if([self.relativeDate isEqualToString:@"Yesterday"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeYesterday;
-    }
-    else if([self.relativeDate isEqualToString:@"ThisMonth"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeThisMonth;
-    }
-    else if([self.relativeDate isEqualToString:@"LastMonth"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeLastMonth;
-    }
-    else if([self.relativeDate isEqualToString:@"ThisWeek"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeThisWeek;
-    }
-    else if([self.relativeDate isEqualToString:@"LastWeek"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeLastWeek;
-    }
-    else if([self.relativeDate isEqualToString:@"ThisYear"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeThisYear;
-    }
-    else if([self.relativeDate isEqualToString:@"LastYear"]==YES){
-        self.relativeDateType=REMRelativeTimeRangeTypeLastYear;
-    }
-    else if([self.relativeDate isEqualToString:@"Last30Day"] == YES){
-        self.relativeDateType = REMRelativeTimeRangeTypeLast30Day;
-    }
-    else if([self.relativeDate isEqualToString:@"Last12Month"] == YES){
-        self.relativeDateType = REMRelativeTimeRangeTypeLast12Month;
-    }
-    else{
-        self.relativeDateType=REMRelativeTimeRangeTypeNone;
-    }
-    
-    self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];
     
     NSDictionary *viewOption=self.params[@"viewOption"];
     
     self.step = viewOption[@"Step"];
     
-    if ([self.step isEqualToNumber:@(1)]==YES) {
+    if([self.step isEqualToNumber:@(0)]==YES){
+        self.stepType = REMEnergyStepRaw;
+    }
+    else if ([self.step isEqualToNumber:@(1)]==YES) {
         self.stepType = REMEnergyStepHour;
     }
     else if([self.step isEqualToNumber:@(2)]==YES){
@@ -118,7 +84,7 @@
     
     if(origTimeRanges.count > 0){
         REMTimeRange *baseTime = [[REMTimeRange alloc] initWithDictionary:origTimeRanges[0]];
-        
+
         for(NSDictionary *dic in origTimeRanges)
         {
             [newTimeRanges addObject: [[REMTimeRange alloc] initWithDictionary:dic andBaseTime:baseTime]];
@@ -126,7 +92,13 @@
     }
     
     self.timeRanges = newTimeRanges;
-    
+    if(REMIsNilOrNull(relativeDate)){
+        self.relativeDateType = REMRelativeTimeRangeTypeNone;
+        if(self.timeRanges.count > 0){
+            self.relativeDateType = ((REMTimeRange *)self.timeRanges[0]).relativeTimeType;
+        }
+        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];
+    }
     
     if([self.storeType isEqualToString:@"energy.Energy"] == YES){
         if(self.timeRanges.count>1){
