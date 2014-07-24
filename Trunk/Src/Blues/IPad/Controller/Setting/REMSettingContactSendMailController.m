@@ -66,11 +66,7 @@
 }
 
 - (IBAction)submitButtonClicked:(id)sender {
-    //嗖
-    NSURL *fileURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/mail-sent.caf"];
-    SystemSoundID soundID;
-    AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)fileURL,&soundID);
-    AudioServicesPlaySystemSound(soundID);
+    
     
     NSString *name = REMStringTrim(self.nameField.text);
     NSString *phone = REMStringTrim(self.phoneField.text);
@@ -82,9 +78,20 @@
     REMDataStore *store = [[REMDataStore alloc] initWithName:REMDSUserSendContactMail parameter:parameter accessCache:NO andMessageMap:nil];
     store.isDisableAlert = YES;
     
-    [store access:nil];
+    [self.submitButton setEnabled:NO];
     
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [store access:^(id object) {
+        //嗖
+        NSURL *fileURL = [NSURL URLWithString:@"/System/Library/Audio/UISounds/mail-sent.caf"];
+        SystemSoundID soundID;
+        AudioServicesCreateSystemSoundID((__bridge_retained CFURLRef)fileURL,&soundID);
+        AudioServicesPlaySystemSound(soundID);
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
+        [self.submitButton setEnabled:YES];
+    } failure:^(NSError *error, REMDataAccessStatus status, id response) {
+        [self.submitButton setEnabled:YES];
+    }];
 }
 
 - (void)didReceiveMemoryWarning

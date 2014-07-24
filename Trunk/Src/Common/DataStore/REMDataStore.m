@@ -120,8 +120,9 @@ static REMCacheStoreHolder *cacheStoreHolder;
         }
         else{
             [REMAlertHelper alert:self.messageMap[@(REMDataAccessNoConnection)]];
-            
-            failure(nil, REMDataAccessNoConnection, nil);
+            if(failure){
+                failure(nil, REMDataAccessNoConnection, nil);
+            }
         }
         
         return;

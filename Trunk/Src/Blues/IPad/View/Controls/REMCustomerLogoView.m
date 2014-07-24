@@ -22,18 +22,20 @@
     if (self) {
         // Initialization code
         UIImage *logo = [UIImage imageWithData:REMAppContext.currentCustomer.logoImage];
-        UIButton *innerView = [[UIButton alloc] initWithFrame:[self calculateInnerViewFrame:logo.size]];
-        [innerView setBackgroundImage:logo forState:UIControlStateNormal];
-        innerView.contentMode = UIViewContentModeScaleAspectFit;
-        //innerView.imageEdgeInsets = UIEdgeInsetsMake(-5, -10, -5, -10);
-        
-        [self addSubview:innerView];
-        self.innerView = innerView;
-        
-//        UITapGestureRecognizer *tapRecognizer =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-//        [self addGestureRecognizer:tapRecognizer];
-        
-        [self.innerView addTarget:self action:@selector(tapped:) forControlEvents:UIControlEventTouchUpInside];
+        if(logo){
+            UIButton *innerView = [[UIButton alloc] initWithFrame:[self calculateInnerViewFrame:logo.size]];
+            [innerView setBackgroundImage:logo forState:UIControlStateNormal];
+            innerView.contentMode = UIViewContentModeScaleAspectFit;
+            //innerView.imageEdgeInsets = UIEdgeInsetsMake(-5, -10, -5, -10);
+            
+            [self addSubview:innerView];
+            self.innerView = innerView;
+            
+    //        UITapGestureRecognizer *tapRecognizer =  [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    //        [self addGestureRecognizer:tapRecognizer];
+            
+            [self.innerView addTarget:self action:@selector(tapped:) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     return self;
 }
