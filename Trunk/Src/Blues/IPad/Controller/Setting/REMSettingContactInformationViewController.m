@@ -48,8 +48,9 @@
     
     [self.view addSubview:titleLable];
     
+    CGFloat top = REMISIOS7 ? 97.0 : 97.0-44.0;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:titleLable attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:27.0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:titleLable attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:97.0] ];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:titleLable attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:top] ];
     
     //phones
     UILabel *phoneTitleLabel = [[UILabel alloc] init];

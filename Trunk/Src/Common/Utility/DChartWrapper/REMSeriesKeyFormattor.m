@@ -99,8 +99,10 @@
             sourceType = @"1";
         }
         else if(target.type == REMEnergyTargetBenchmarkValue){
+            NSNumber *industryId = syntax.params[@"benchmarkOption"][@"IndustryId"];
+            NSNumber *zoneId = syntax.params[@"benchmarkOption"][@"ZoneId"];
             targetType = @"2";
-            targetId = @""; //industryId+zoneId?
+            targetId = [NSString stringWithFormat: @"%llu+%llu",[industryId longLongValue],[zoneId longLongValue]]; //industryId+zoneId?
             sourceType = @"4";
         }
         else{
@@ -120,13 +122,39 @@
 {
     REMTargetAssociationModel *association = target.association;
     
-    NSNumber *hierarchyId = nil;
+    NSNumber *hierarchyId = @(-1);
     NSString *targetPath = @"%";
+    if(target.type == REMEnergyTargetBenchmarkValue){
+        return targetPath;
+    }
     
     if(association == nil){
-        if(syntax.dataStoreType == REMDSEnergyTagsTrend || syntax.dataStoreType == REMDSEnergyTagsDistribute ||syntax.dataStoreType == REMDSEnergyMultiTimeTrend || syntax.dataStoreType == REMDSEnergyMultiTimeDistribute || syntax.dataStoreType == REMDSEnergyRatio || syntax.dataStoreType==REMDSEnergyTagsTrendUnit || syntax.dataStoreType == REMDSEnergyMultiTimeTrend || syntax.dataStoreType == REMDSEnergyMultiTimeDistribute){
-            if(!REMIsNilOrNull(syntax.params[@"options"]) && !REMIsNilOrNull(syntax.params[@"options"][0]) && !REMIsNilOrNull(syntax.params[@"options"][0][@"HierId"]))
-                hierarchyId = syntax.params[@"options"][0][@"HierId"];
+        if(syntax.dataStoreType == REMDSEnergyTagsTrend ||
+           syntax.dataStoreType == REMDSEnergyTagsDistribute ||
+           syntax.dataStoreType == REMDSEnergyMultiTimeTrend ||
+           syntax.dataStoreType == REMDSEnergyMultiTimeDistribute ||
+           syntax.dataStoreType == REMDSEnergyRatio ||
+           syntax.dataStoreType == REMDSEnergyTagsTrendUnit ||
+           syntax.dataStoreType == REMDSEnergyMultiTimeTrend ||
+           syntax.dataStoreType == REMDSEnergyMultiTimeDistribute){
+            
+            if(!REMIsNilOrNull(syntax.params[@"options"]) && [syntax.params[@"options"] count] > 0){
+                if([syntax.params[@"options"] count] == 1){
+                    hierarchyId = syntax.params[@"options"][0][@"HierId"];
+                }
+                else{
+                    //NSLog(syntax.params[@"options"]);
+                    int index = -1;
+                    for (int i=0;i<[syntax.params[@"options"] count];i++) {// NSDictionary *item in syntax.params[@"options"]){
+                        NSDictionary *item = syntax.params[@"options"][i];
+                        if(!REMIsNilOrNull(item) && !REMIsNilOrNull(item[@"Id"]) && [item[@"Id"] isEqualToNumber:target.targetId]){
+                            index = i;
+                            break;
+                        }
+                    }
+                    hierarchyId = [syntax.params[@"options"][index] objectForKey:@"HierId"];
+                }
+            }
         }
         else if(syntax.dataStoreType == REMDSEnergyCarbon || syntax.dataStoreType == REMDSEnergyCarbonDistribute || syntax.dataStoreType == REMDSEnergyCarbonUnit){
             if(!REMIsNilOrNull(syntax.params[@"hierarchyId"])){
@@ -134,7 +162,7 @@
             }
         }
         else{
-            hierarchyId = @(-999);
+            hierarchyId = @(-1);
         }
         
         targetPath = [NSString stringWithFormat:@"0/%llu", [hierarchyId longLongValue]];

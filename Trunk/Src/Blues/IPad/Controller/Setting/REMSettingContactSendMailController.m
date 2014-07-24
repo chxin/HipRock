@@ -116,7 +116,12 @@
     // Configure the cell...
     UITextField *field = [[UITextField alloc] init];
     field.placeholder = self.items[indexPath.row];
-    field.frame = CGRectMake(15, 5, cell.bounds.size.width - 30, cell.bounds.size.height - 10);
+    if(REMISIOS7){
+        field.frame = CGRectMake(15, 5, cell.bounds.size.width - 30, cell.bounds.size.height - 10);
+    }
+    else{
+        field.frame = CGRectMake(38, 10, cell.bounds.size.width - 30, cell.bounds.size.height - 10);
+    }
     [field addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     
     [cell addSubview:field];
@@ -155,9 +160,9 @@
     NSString *phone = [self.phoneField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *company = [self.companyField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
-    NSTextCheckingResult *phoneRegMatch = [[NSRegularExpression regularExpressionWithPattern:REMREGEX_Telephone options:NSRegularExpressionCaseInsensitive error:NULL] firstMatchInString:phone options:0 range:NSMakeRange(0, phone.length)];
+    //NSTextCheckingResult *phoneRegMatch = [[NSRegularExpression regularExpressionWithPattern:REMREGEX_Telephone options:NSRegularExpressionCaseInsensitive error:NULL] firstMatchInString:phone options:0 range:NSMakeRange(0, phone.length)];
     
-    if(REMStringNilOrEmpty(name) || REMStringNilOrEmpty(phone) || REMStringNilOrEmpty(company) || phoneRegMatch == nil){
+    if(REMStringNilOrEmpty(name) || REMStringNilOrEmpty(phone) || REMStringNilOrEmpty(company)/* || phoneRegMatch == nil*/){
         self.submitButton.enabled = NO;
     }
     else{

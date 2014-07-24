@@ -45,6 +45,6 @@
  */
 #define REMREGEXMatch_Password(a,b) [[NSRegularExpression regularExpressionWithPattern:REMREGEX_UserValidation[(b)] options:0 error:NULL] firstMatchInString:(a) options:0 range:NSMakeRange(0, (a).length)]
 
-#define REMREGEX_Telephone @"^(\\d)+(-(\\d)+)*$"
+//#define REMREGEX_Telephone @"^(\\d)+(-(\\d)+)*$"
 
 #endif
