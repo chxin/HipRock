@@ -9,6 +9,7 @@
 #import <MapKit/MapKit.h>
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMNumberHelper.h"
+#import "REMGISHelper.h"
 
 @implementation REMAnnotation
 
@@ -20,7 +21,13 @@
     annotation.latitude = [building.latitude doubleValue];
     annotation.longitude = [building.longitude doubleValue];
     
-    annotation.coordinate = CLLocationCoordinate2DMake([building.latitude doubleValue], [building.longitude doubleValue]);
+    CLLocationCoordinate2D coordinate =  CLLocationCoordinate2DMake([building.latitude doubleValue], [building.longitude doubleValue]);
+    
+//    CLLocation *location = [[CLLocationManager sharedLocationManager] _applyChinaLocationShift:[[CLLocation alloc] initWithLatitude:annotation.latitude longitude:annotation.longitude]];
+//    
+//    annotation.coordinate = location.coordinate;
+    
+    annotation.coordinate = coordinate;//[REMGISHelper isLocationOutOfChina:coordinate] ? coordinate : [REMGISHelper transformFromGCJToWGS:coordinate];
     
     annotation.title = building.name;
     annotation.subtitle = REMIsNilOrNull(building.electricityUsageThisMonth.totalValue) ? nil : [NSString stringWithFormat:REMIPadLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  [REMNumberHelper formatDataValueWithCarry:building.electricityUsageThisMonth.totalValue], building.electricityUsageThisMonth.totalUom];

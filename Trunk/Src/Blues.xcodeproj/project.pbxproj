@@ -92,6 +92,7 @@
 		7A12C2F5196D1BEA00272609 /* QRCodeIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */; };
 		7A12C2F6196D1BEA00272609 /* QRCodeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */; };
 		7A12C2F8196D31B100272609 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A12C2F7196D31B100272609 /* AudioToolbox.framework */; };
+		7A1A6B8B198205FE00D62153 /* REMGISHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1A6B8A198205FE00D62153 /* REMGISHelper.m */; };
 		7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */; };
 		7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D142B1785211000CC2922 /* REMAlertHelper.m */; };
 		7A1D7C4217A637FD0050779D /* REMJSONObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1D7C4117A637FD0050779D /* REMJSONObject.m */; };
@@ -838,6 +839,8 @@
 		7A12C2F3196D1BEA00272609 /* QRCodeIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QRCodeIcon.png; path = Setting/QRCodeIcon.png; sourceTree = "<group>"; };
 		7A12C2F4196D1BEA00272609 /* QRCodeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "QRCodeIcon@2x.png"; path = "Setting/QRCodeIcon@2x.png"; sourceTree = "<group>"; };
 		7A12C2F7196D31B100272609 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7A1A6B89198205FE00D62153 /* REMGISHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMGISHelper.h; path = Common/Utility/REMGISHelper.h; sourceTree = "<group>"; };
+		7A1A6B8A198205FE00D62153 /* REMGISHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMGISHelper.m; path = Common/Utility/REMGISHelper.m; sourceTree = "<group>"; };
 		7A1AE2C819371AE900A8BA48 /* REMSeriesKeyFormattor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMSeriesKeyFormattor.h; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.h; sourceTree = "<group>"; };
 		7A1AE2C919371AE900A8BA48 /* REMSeriesKeyFormattor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMSeriesKeyFormattor.m; path = Common/Utility/DChartWrapper/REMSeriesKeyFormattor.m; sourceTree = "<group>"; };
 		7A1D142A1785211000CC2922 /* REMAlertHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMAlertHelper.h; path = Common/Utility/REMAlertHelper.h; sourceTree = "<group>"; };
@@ -2136,6 +2139,8 @@
 				EF2043B2187BD94400272319 /* REMNumberExtension.m */,
 				7A9BBF901952E0E0000A45F5 /* REMFont.h */,
 				7A9BBF911952E0E0000A45F5 /* REMFont.m */,
+				7A1A6B89198205FE00D62153 /* REMGISHelper.h */,
+				7A1A6B8A198205FE00D62153 /* REMGISHelper.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -4348,6 +4353,7 @@
 				7AEFD87119668FC800316D76 /* REMSettingContactSendMailController.m in Sources */,
 				7A0CCD6F192A01D800C35C2F /* REMManagedSharedModel.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
+				7A1A6B8B198205FE00D62153 /* REMGISHelper.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,
 				7A63E26218B44CBD00A13464 /* REMStatusBar.m in Sources */,
 			);
