@@ -66,15 +66,18 @@ static NSString *cellId=@"dashboardcell";
     self.tableView.contentInset = UIEdgeInsetsMake(-REMDMCOMPATIOS7(14), 0, 0, 0);
     //NSLog(@"frame:%@",NSStringFromCGRect(self.view.frame));
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, 300, kDashboardDragTitleSize)];
-    label.text=REMIPadLocalizedString(@"Dashboard_PullDownShowGeneral");//@"下拉返回概览能耗信息";
-    label.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:label.frame.size.height];
+    UIFont *font = [REMFont defaultFontOfSize:kDashboardDragTitleSize];
+    NSString *text = REMIPadLocalizedString(@"Dashboard_PullDownShowGeneral");
+    CGSize size = [text sizeWithFont:font];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, kDashboardDragTitleMargin, size.width, kDashboardDragTitleSize)];
+    label.text=text;
+    label.font=font;
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor clearColor];
     [self.tableView addSubview:label];
     self.buildingLabel=label;
     
-    CGRect imgFrame=CGRectMake(178, kDashboardDragTitleMargin-2,  15, 20);
+    CGRect imgFrame=CGRectMake(size.width + 5, kDashboardDragTitleMargin-2,  15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Down];
     [arrow setFrame:imgFrame];
     [self.tableView addSubview:arrow];

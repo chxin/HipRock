@@ -367,7 +367,7 @@
     marker.image = ((REMAnnotation *)annotation).icon;
     marker.canShowCallout = YES;
     marker.calloutOffset = CGPointMake(0, -1);
-    marker.centerOffset = CGPointMake(0, -55);
+    marker.centerOffset = CGPointMake(0.0f, -marker.frame.size.height/2);
     marker.rightCalloutAccessoryView = [UIButton buttonWithType: UIButtonTypeInfoLight];
     
     return marker;

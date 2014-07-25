@@ -13,7 +13,7 @@
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMCommonHeaders.h"
 
-#define kDashboardThreshold 361+65+85*2+45
+#define kDashboardThreshold 361+65+85*2+45+(85+30)
 
 @interface REMBuildingDataViewController (){
     @private
@@ -321,30 +321,23 @@
 - (void)initDragLabel
 {
     UIScrollView *scroll=(UIScrollView *)self.view;
-    CGRect frame = CGRectMake(0, scroll.contentSize.height-27- REMDMCOMPATIOS7(10), 500, 17);
     
-    UILabel *label =[[UILabel alloc]initWithFrame:frame];
-    //label.layer.borderColor=[UIColor redColor].CGColor;
-    //label.layer.borderWidth=1;
+    UIFont *font = [REMFont defaultFontOfSize:17];
+    NSString *text = REMIPadLocalizedString(@"Building_PullUpMoreInfo");
+    CGSize size = [text sizeWithFont:font];
+    UILabel *label =[[UILabel alloc]initWithFrame:CGRectMake(0, scroll.contentSize.height/*-27- REMDMCOMPATIOS7(10)*/, size.width, 17)];
     label.textAlignment=NSTextAlignmentLeft;
-    label.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:frame.size.height];
-    
-    label.text=REMIPadLocalizedString(@"Building_PullUpMoreInfo");//  @"￼上拉查看更多能耗信息";
-    //label.text=@"asd上拉查看更多能耗信息";
-    //label.adjustsLetterSpacingToFitWidth=YES;
-    //label.lineBreakMode=NSLineBreakByTruncatingTail;
-    
-    //label.autoresizingMask = UIViewAutoresizingNone;
-    //[label sizeToFit];
-    
+    label.font=font;
+    label.text=text;
     label.textColor=[UIColor whiteColor];
     label.backgroundColor=[UIColor clearColor];
+    
     [self.view addSubview:label];
     
     self.dashboardLabel=label;
     
     
-    CGRect imgFrame=CGRectMake(178, scroll.contentSize.height-30-REMDMCOMPATIOS7(10), 15, 20);
+    CGRect imgFrame=CGRectMake(size.width + 10, scroll.contentSize.height-3/*-30-REMDMCOMPATIOS7(10)*/, 15, 20);
     UIImageView *arrow=[[UIImageView alloc]initWithImage:REMIMG_Up];
     [arrow setFrame:imgFrame];
     [self.view addSubview:arrow];
