@@ -61,7 +61,7 @@
     MKMapView *mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     mapView.zoomEnabled = YES;
     mapView.scrollEnabled = YES;
-    mapView.mapType = MKMapTypeSatellite;
+    mapView.mapType = MKMapTypeStandard;
     mapView.delegate = self;
     
     if(REMISIOS7){
