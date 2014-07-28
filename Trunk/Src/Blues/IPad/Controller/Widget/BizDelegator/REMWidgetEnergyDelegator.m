@@ -246,7 +246,6 @@
         [searchViewContainer addSubview:touButton];
         self.touButton = touButton;
         [self updateTouButtonStyle];
-        [self updateStepButton];
         
         NSLayoutConstraint *touButtonConstraintX = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-20];
         NSLayoutConstraint *touButtonConstraintY = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
@@ -609,6 +608,10 @@
         [self.stepControl setWidth:kWidgetStepSingleButtonWidth forSegmentAtIndex:i];
     }
     
+    if([self isElectricityCost]){
+        [self updateStepButton];
+    }
+    
     NSUInteger idx;
     if([list containsObject:newStep] == YES)
     {
@@ -700,7 +703,7 @@
     else if([availableStep isEqualToString:@"Hourly"]==YES){
         //buttonArray=@[REMIPadLocalizedString(@"Common_Hour"),REMIPadLocalizedString(@"Common_Daily"),REMIPadLocalizedString(@"Common_Week")];
         supportStep =@[@(REMEnergyStepHour),@(REMEnergyStepDay),@(REMEnergyStepWeek)];
-        errorMsgArray=@[];
+        errorMsgArray=@[REMIPadLocalizedString(@"Widget_StepRaw")];
     }
     
     self.supportStepArray=supportStep;
@@ -982,18 +985,18 @@
         }
     }
     else{
-//        "Chart_TouNotSupportHourly"="峰谷平电价不支持按小时查看";
-//        "Chart_TouNotSupportRaw"="峰谷平电价不支持按原始步长查看";
-        NSString *selectedStep = [self.stepControl titleForSegmentAtIndex:[self.stepControl selectedSegmentIndex]];
-        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")]){
-            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportRaw")];
-            return;
-        }
-            
-        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
-            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportHourly")];
-            return;
-        }
+////        "Chart_TouNotSupportHourly"="峰谷平电价不支持按小时查看";
+////        "Chart_TouNotSupportRaw"="峰谷平电价不支持按原始步长查看";
+//        NSString *selectedStep = [self.stepControl titleForSegmentAtIndex:[self.stepControl selectedSegmentIndex]];
+//        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")]){
+//            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportRaw")];
+//            return;
+//        }
+//            
+//        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
+//            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportHourly")];
+//            return;
+//        }
         
         self.isCostStacked = YES;
         if(store == REMDSEnergyCost){

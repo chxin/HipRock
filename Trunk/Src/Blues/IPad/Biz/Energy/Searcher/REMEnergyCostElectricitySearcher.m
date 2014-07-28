@@ -13,13 +13,22 @@
 @implementation REMEnergyCostElectricitySearcher
 
 - (REMBusinessErrorInfo *)beforeSendRequest{
-    REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
-    if(stepModel.step == REMEnergyStepHour){
-        REMClientErrorInfo *bizError=[[REMClientErrorInfo alloc]init];
-        bizError.code=@"";
-        bizError.messageInfo=REMIPadLocalizedString(@"Widget_CalendarCostElectricityStepError");
-        
-        return bizError;
+    if(self.contentSyntax.dataStoreType == REMDSEnergyCostElectricity || self.contentSyntax.dataStoreType == REMDSEnergyCostDistributeElectricity){
+        REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
+        if(stepModel.step == REMEnergyStepHour){
+            REMClientErrorInfo *bizError=[[REMClientErrorInfo alloc] init];
+            bizError.code=@"";
+            bizError.messageInfo=REMIPadLocalizedString(@"Chart_TouNotSupportHourly");
+            
+            return bizError;
+        }
+        if(stepModel.step == REMEnergyStepRaw){
+            REMClientErrorInfo *bizError=[[REMClientErrorInfo alloc] init];
+            bizError.code=@"";
+            bizError.messageInfo=REMIPadLocalizedString(@"Chart_TouNotSupportRaw");
+            
+            return bizError;
+        }
     }
     return nil;
 }
