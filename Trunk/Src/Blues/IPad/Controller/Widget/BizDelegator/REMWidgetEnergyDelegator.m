@@ -672,6 +672,9 @@
     [self initStepButtonWithRange:stepModel.timeRangeArray[0] WithStep:stepModel.step];
     [self setStepControlStatusByStepNoSearch:stepModel.step];
     [self setDatePickerButtonValueNoSearchByTimeRange:stepModel.timeRangeArray[0] withRelative:stepModel.relativeDateComponent withRelativeType:stepModel.relativeDateType];
+    
+    //TODO: need rollback tou button status
+    
     self.tempModel=[self.model copy];
     
 }

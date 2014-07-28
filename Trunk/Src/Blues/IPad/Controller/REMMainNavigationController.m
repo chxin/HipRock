@@ -105,6 +105,8 @@
 {
     [self destroy];
     
+    [REMDataStore cancel];
+    
     UIViewController *controller=self.topViewController;
     controller.view.alpha=0;
     [self popToRootViewControllerAnimated:YES];
