@@ -225,7 +225,7 @@
 - (void)persistWidget:(NSArray *)widgetArray intoDashboard:(REMManagedDashboardModel *)dashboard{
     for(NSDictionary *dictionary in widgetArray)
     {
-        REMWidgetContentSyntax *syntax = [[REMWidgetContentSyntax alloc]initWithJSONString:dictionary[@"ContentSyntax"]];
+        REMWidgetContentSyntax *syntax = [[REMWidgetContentSyntax alloc] initWithJSONString:dictionary[@"ContentSyntax"]];
         NSString *xtype = syntax.xtype;
         REMDiagramType diagramType = REMDiagramTypeLine;
         if([xtype isEqualToString:@"linechartcomponent"] ==YES ||
@@ -277,7 +277,6 @@
         widget.dashboard=dashboard;
 //        [dashboard addWidgetsObject:widget];
         [widget setDashboard:dashboard];
-
     }
     
 

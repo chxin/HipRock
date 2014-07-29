@@ -81,17 +81,17 @@ typedef enum _REMRatioType{
 } REMRatioType;
 
 
-typedef enum _REMDiagramType
-{
-    REMDiagramTypePie,
-    REMDiagramTypeRanking,
-    REMDiagramTypeStackColumn,
-    REMDiagramTypeLine,
-    REMDiagramTypeColumn,
-    REMDiagramTypeGrid,
-    REMDiagramTypeLabelling
-}
-REMDiagramType;
+//typedef enum _REMDiagramType
+//{
+//    REMDiagramTypePie,
+//    REMDiagramTypeRanking,
+//    REMDiagramTypeStackColumn,
+//    REMDiagramTypeLine,
+//    REMDiagramTypeColumn,
+//    REMDiagramTypeGrid,
+//    REMDiagramTypeLabelling
+//}
+//REMDiagramType;
 
 typedef enum _REMEnergyStep:NSUInteger
 {
