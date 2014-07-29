@@ -49,6 +49,7 @@
 
 @property (nonatomic,weak) UIButton *touButton;
 @property (nonatomic) BOOL isCostStacked;
+@property (nonatomic) BOOL tempIsCostStacked;
 
 
 @end
@@ -277,7 +278,8 @@
         
         if([title isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")] || [title isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
             //if there is raw or hour step button, disable/enable them according to stack status
-            [self.stepControl setEnabled:!self.isCostStacked forSegmentAtIndex:i];
+            BOOL enable = self.isCostStacked ? NO : YES;
+            [self.stepControl setEnabled:enable forSegmentAtIndex:i];
         }
     }
 }
@@ -483,10 +485,6 @@
 
 }
 
-
-
-
-
 - (void) showEnergyChart{
     if(self.chartWrapper!=nil){
         return;
@@ -664,6 +662,12 @@
     [self setDatePickerButtonValueNoSearchByTimeRange:stepModel.timeRangeArray[0] withRelative:stepModel.relativeDateComponent withRelativeType:stepModel.relativeDateType];
     
     //TODO: need rollback tou button status
+    if([self isElectricityCost]){
+        self.isCostStacked = self.tempIsCostStacked;
+        [self updateTouButtonStyle];
+        [self updateStepButton];
+    }
+    
     
     self.tempModel=[self.model copy];
     
@@ -967,6 +971,8 @@
 -(void)touButtonPressed:(UIButton *)sender
 {
     REMDataStoreType store = self.contentSyntax.dataStoreType;
+    
+    self.tempIsCostStacked = !!self.isCostStacked;
     
     if(self.isCostStacked){
         self.isCostStacked = NO;
