@@ -29,7 +29,7 @@
         _timeRanges = [contentSyntax.timeRanges copy];
         _seriesStates = contentSyntax.seriesStates;
         
-        _defaultSeriesType = DCSeriesTypeStatusColumn;
+        _defaultSeriesType = DCSeriesTypeStatusNone;
 
         NSString* defaultType = contentSyntax.config[@"type"];
         if ([defaultType isEqualToString:@"line"]) {
