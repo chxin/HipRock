@@ -22,13 +22,11 @@
 
 +(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters delegate:(id<REMChartLegendItemDelegate>)delegate
 {
-    REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
-    if(diagramType == REMDiagramTypePie){
+    REMWidgetContentSyntaxWidgetType syntaxType = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].contentSyntaxWidgetType;
+    
+    if(syntaxType == REMWidgetContentSyntaxWidgetTypePie){
         return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }
-//    else if(diagramType == REMDiagramTypeStackColumn){
-//        return [[REMStackChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
-//    }
     else{
         return [[REMTrendChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];
     }

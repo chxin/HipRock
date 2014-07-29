@@ -16,6 +16,7 @@
 #import "REMWidgetRankingSearchModel.h"
 #import "REMTextIndicatorFormator.h"
 #import "REMEnergySeacherBase.h"
+#import "REMWrapperFactor.h"
 
 @interface REMBuildingWidgetChartViewController ()
 
@@ -70,7 +71,6 @@
 
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DCTrendWrapper *widgetWrapper = nil;
-    REMDiagramType widgetType = self.widgetInfo.diagramType.integerValue;
     DCChartStyle* style = [DCChartStyle getCoverStyle];
     style.acceptPan = [self getEnergyStep] != REMEnergyStepHour;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
@@ -83,19 +83,8 @@
 //        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
     
+    widgetWrapper = (DCTrendWrapper*)[REMWrapperFactor constructorWrapper:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
     
-    if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
-    }
-    else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig style:style];
-    }
-    else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
-    }
-    else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:frame data:self.energyViewData wrapperConfig:wrapperConfig  style:style];
-    }
     for (DCXYSeries* s in widgetWrapper.view.seriesList) {
         s.color = [REMColor makeTransparent:0.8 withColor:s.color];
     }

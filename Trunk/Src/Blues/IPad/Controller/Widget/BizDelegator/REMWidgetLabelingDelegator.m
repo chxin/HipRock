@@ -14,6 +14,7 @@
 #import "REMWidgetMonthPickerViewController.h"
 #import "DCLabelingWrapper.h"
 #import "DCLabelingChartView.h"
+#import "REMWrapperFactor.h"
 
 const static CGFloat kLabellingTimePickerWidth=105;
 const static CGFloat kLabellingBenchmarkFontSize=20;
@@ -155,24 +156,21 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     
     
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
-    REMDiagramType widgetType = self.widgetInfo.diagramType.integerValue;
     
     DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DCLabelingWrapper  *widgetWrapper;
-    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]init];
+    DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
 //    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
     }
-    if (widgetType == REMDiagramTypeLabelling) {
-        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.delegate = self;
-    }
+    widgetWrapper = (DCLabelingWrapper*)[REMWrapperFactor constructorWrapper:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
+    
     if (widgetWrapper != nil) {
+        widgetWrapper.delegate = self;
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
-        
     }
     
 }

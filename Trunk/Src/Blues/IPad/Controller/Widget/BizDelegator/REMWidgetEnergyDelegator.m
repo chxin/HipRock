@@ -25,6 +25,7 @@
 #import "REMWidgetStepCalculationModel.h"
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMCommonHeaders.h"
+#import "REMWrapperFactor.h"
 
 
 
@@ -90,7 +91,7 @@
     [self initSearchView];
     [self initChartView];
     
-    if (((REMDiagramType)[self.widgetInfo.diagramType intValue]) == REMDiagramTypePie) {
+    if (self.contentSyntax.contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypePie) {
         [self.stepControl setHidden:YES];
     }
     
@@ -493,7 +494,6 @@
     
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
     
-    REMDiagramType widgetType = self.widgetInfo.diagramType.integerValue;
     
     DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DAbstractChartWrapper  *widgetWrapper;
@@ -505,28 +505,9 @@
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
 //        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
-    
-    if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.delegate = self;
-        
-        
-    } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.delegate = self;
-    } else if (widgetType == REMDiagramTypePie) {
-        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.delegate = self;
-    } else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.delegate = self;
-    } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-        widgetWrapper.delegate = self;
-    } else if (widgetType == REMDiagramTypeLabelling) {
-        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-    }
+    widgetWrapper = [REMWrapperFactor constructorWrapper:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
     if (widgetWrapper != nil) {
+        widgetWrapper.delegate = self;
         [self.chartContainer addSubview:[widgetWrapper getView]];
         self.chartWrapper=widgetWrapper;
     }
