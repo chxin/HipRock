@@ -63,7 +63,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     //[self.view setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view setFrame:CGRectMake(0, 0, kDMScreenWidth, REMDMCOMPATIOS7(kDMScreenHeight-kDMStatusBarHeight))];
-    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
+    self.contentSyntax = [self.widgetInfo getSyntax];
     self.bizDelegator=[REMWidgetBizDelegatorBase bizDelegatorByWidgetInfo:self.widgetInfo andSyntax:self.contentSyntax];
     self.bizDelegator.view=self.view;
     self.bizDelegator.energyData=self.energyData;

@@ -490,7 +490,7 @@
 - (NSArray *)trendWidgetArray:(REMManagedDashboardModel *)dashboard{
     NSArray *trendWidgets = [dashboard.widgets.array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         REMManagedWidgetModel* wModel = evaluatedObject;
-        REMWidgetContentSyntaxWidgetType syntaxType = [[REMWidgetContentSyntax alloc]initWithJSONString:wModel.contentSyntax].contentSyntaxWidgetType;
+        REMWidgetContentSyntaxWidgetType syntaxType = [wModel getSyntax].contentSyntaxWidgetType;
         return (syntaxType == REMWidgetContentSyntaxWidgetTypeColumn || syntaxType == REMWidgetContentSyntaxWidgetTypeLine || syntaxType == REMWidgetContentSyntaxWidgetTypeStack);
     }]];
     

@@ -279,7 +279,6 @@
 
 -(void)oscarTest {
     REMWidgetContentSyntax* syntax = [[REMWidgetContentSyntax alloc]init];
-    syntax.xtype = @"columnchartcomponent";
     syntax.step = [NSNumber numberWithInt: REMEnergyStepDay];
     NSMutableArray* timeRanges = [[NSMutableArray alloc]initWithCapacity:1];
     REMTimeRange* r = [[REMTimeRange alloc]initWithStartTime:[NSDate dateWithTimeIntervalSince1970:0] EndTime:[NSDate dateWithTimeIntervalSince1970:86400*12]];

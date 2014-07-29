@@ -22,7 +22,7 @@
 
 +(REMChartLegendBase *)legendViewChartWrapper:(DAbstractChartWrapper *)chartWrapper data:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget parameters:(REMWidgetSearchModelBase *)parameters delegate:(id<REMChartLegendItemDelegate>)delegate
 {
-    REMWidgetContentSyntaxWidgetType syntaxType = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].contentSyntaxWidgetType;
+    REMWidgetContentSyntaxWidgetType syntaxType = [widget getSyntax].contentSyntaxWidgetType;
     
     if(syntaxType == REMWidgetContentSyntaxWidgetTypePie){
         return [[REMPieChartLegendView alloc] initWithChartWrapper:chartWrapper data:data widget:widget parameters:parameters delegate:delegate];

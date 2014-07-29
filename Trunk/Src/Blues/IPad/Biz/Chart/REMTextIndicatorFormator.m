@@ -58,7 +58,7 @@
             if([parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){
                 REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)parameters;
                 
-                REMWidgetContentSyntaxWidgetType contentSyntaxWidgetType = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].contentSyntaxWidgetType;
+                REMWidgetContentSyntaxWidgetType contentSyntaxWidgetType = [widget getSyntax].contentSyntaxWidgetType;
                 if(commodityParameters.commodityIdArray.count>0 || contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypePie){
                     //return REMCommodities[@(target.commodityId)];
                     NSString *commodityKey = REMCommodities[@(target.commodityId)];
@@ -83,7 +83,7 @@
         case REMEnergyTargetBaseValue:
         {
             NSString *format = nil;
-            REMDataStoreType store = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].dataStoreType;
+            REMDataStoreType store = [widget getSyntax].dataStoreType;
             
             switch (target.type) {
                 case REMEnergyTargetCalcValue:

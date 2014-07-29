@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "REMWidgetContentSyntax.h"
 
 @class REMManagedDashboardModel, REMManagedSharedModel;
 
@@ -22,5 +23,7 @@
 @property (nonatomic, retain) NSNumber * syntaxVersion;
 @property (nonatomic, retain) REMManagedDashboardModel *dashboard;
 @property (nonatomic, retain) REMManagedSharedModel *sharedInfo;
+
+-(REMWidgetContentSyntax*)getSyntax;
 
 @end

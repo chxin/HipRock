@@ -55,7 +55,7 @@
     //self.view.layer.borderColor=[UIColor redColor].CGColor;
     //self.view.layer.borderWidth=1;
     
-    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
+    self.contentSyntax = [self.widgetInfo getSyntax];
 
     self.searchModel=[REMWidgetSearchModelBase searchModelByDataStoreType:self.contentSyntax.dataStoreType withParam:self.contentSyntax.params];
     if(self.contentSyntax.relativeDateType!=REMRelativeTimeRangeTypeNone){

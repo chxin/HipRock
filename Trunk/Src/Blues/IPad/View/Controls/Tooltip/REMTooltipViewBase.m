@@ -25,7 +25,7 @@
 
 +(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    REMWidgetContentSyntax* contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax];
+    REMWidgetContentSyntax* contentSyntax = [widget getSyntax];
     
     if(contentSyntax.dataStoreType == REMDSEnergyLabeling){
         return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];

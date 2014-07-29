@@ -18,7 +18,6 @@
     self.calendar=p[@"calendar"];
     self.config = p[@"config"];
     self.storeType=self.config[@"storeType"];
-    self.xtype=self.config[@"xtype"];
     
     NSDictionary* diagramConfig = p[@"diagramConfig"];
     if (diagramConfig != NULL && diagramConfig != Nil && diagramConfig != nil && ![diagramConfig isEqual:[NSNull null]]) {
@@ -51,10 +50,10 @@
         self.calendarType=REMCalendarTypeNone;
     }
     
-    NSString *relativeDate=p[@"relativeDate"];
-    if(!REMIsNilOrNull(relativeDate)){
-        self.relativeDateType = [REMTimeHelper relativeTimeTypeByName:relativeDate];
-    }
+//    NSString *relativeDate=p[@"relativeDate"];
+//    if(!REMIsNilOrNull(relativeDate)){
+//        self.relativeDateType = [REMTimeHelper relativeTimeTypeByName:relativeDate];
+//    }
     
     NSDictionary *viewOption=self.params[@"viewOption"];
     
@@ -105,13 +104,12 @@
     }
     
     self.timeRanges = newTimeRanges;
-    if(REMIsNilOrNull(relativeDate)){
-        self.relativeDateType = REMRelativeTimeRangeTypeNone;
-        if(self.timeRanges.count > 0){
-            self.relativeDateType = ((REMTimeRange *)self.timeRanges[0]).relativeTimeType;
-        }
-        self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];
+    self.relativeDateType = REMRelativeTimeRangeTypeNone;
+    if(self.timeRanges.count > 0){
+        self.relativeDateType = ((REMTimeRange *)self.timeRanges[0]).relativeTimeType;
     }
+    self.relativeDateComponent=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];
+    
     
     if([self.storeType isEqualToString:@"energy.Energy"] == YES){
         if(self.timeRanges.count>1){

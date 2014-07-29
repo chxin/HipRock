@@ -32,7 +32,7 @@
 
 - (void)loadData:(long long)buildingId :(long long)commodityID :(REMAverageUsageDataModel *)averageUsageData :(void (^)(id, REMBusinessErrorInfo *))loadCompleted
 {
-    self.contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:self.widgetInfo.contentSyntax];
+    self.contentSyntax = [self.widgetInfo getSyntax];
     
     
     REMWidgetSearchModelBase *model=[REMWidgetSearchModelBase searchModelByDataStoreType:self.contentSyntax.dataStoreType withParam:self.contentSyntax.params];

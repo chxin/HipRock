@@ -27,7 +27,14 @@
     if (xVal % self.interval == 0) {
         NSDate* date = nil;
         NSString* format = nil;
-        if (self.step == REMEnergyStepHour) {
+        if (self.step == REMEnergyStepRaw) {
+            date = [self.startDate dateByAddingTimeInterval:xVal*900];
+            if ([REMTimeHelper getHour:date] < self.interval && self.stepSupplementary) {
+                format = REMIPadLocalizedString(@"Chart_X_Axis_Format_Hour");
+            } else {
+                format = REMIPadLocalizedString(@"Chart_X_Axis_Format_Minute");
+            }
+        } else if (self.step == REMEnergyStepHour) {
             date = [self.startDate dateByAddingTimeInterval:xVal*3600];
             if ([REMTimeHelper getHour:date] < self.interval && self.stepSupplementary) {
                 format = REMIPadLocalizedString(@"Chart_X_Axis_Format_DayHour");
