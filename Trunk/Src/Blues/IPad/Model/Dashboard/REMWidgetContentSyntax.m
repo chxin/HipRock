@@ -78,6 +78,19 @@
     else if([self.step isEqualToNumber:@(5)]==YES){
         self.stepType = REMEnergyStepWeek;
     }
+    _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeNone;
+    NSString* typeCode = self.config[@"type"];
+    if ([typeCode isEqualToString:@"line"]) {
+        _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeLine;
+    } else if ([typeCode isEqualToString:@"column"]) {
+        _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeColumn;
+    } else if ([typeCode isEqualToString:@"stack"] || [typeCode isEqualToString:@"stacking"]) {
+        _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeStack;
+    } else if ([typeCode isEqualToString:@"pie"]) {
+        _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypePie;
+    } else if ([typeCode isEqualToString:@"grid"]) {
+        _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeGrid;
+    }
     
     NSArray *origTimeRanges = viewOption[@"TimeRanges"];
     NSMutableArray* newTimeRanges = [[NSMutableArray alloc]initWithCapacity:origTimeRanges.count];
