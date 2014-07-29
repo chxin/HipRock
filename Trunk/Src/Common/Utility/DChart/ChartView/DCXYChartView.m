@@ -85,28 +85,29 @@
 }
 
 -(void)willMoveToSuperview:(UIView *)newSuperview {
-    [self.graphContext addHRangeObsever:self];
-    [self updateGestures];
-    [self initializeLayers];
-    
-    [self updateCoordinateSystems];
-    [self recalculatePlotRect];
-    [self updateAllLayerFrame];
-    [self calculateColumnWidth];
-    
-    [self._hGridlineLayer setNeedsDisplay];
-    [self._vGridlineLayer setNeedsDisplay];
-    [self._xLabelLayer setNeedsDisplay];
-    [self redrawBgBands];
-    for (int i = 0; i < self.coodinates.count; i++) {
-        _DCCoordinateSystem* ds = self.coodinates[i];
-        _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
+    if (newSuperview != nil) {
+        [self.graphContext addHRangeObsever:self];
+        [self updateGestures];
+        [self initializeLayers];
         
-        [_yLabelLayer setNeedsDisplay];
+        [self updateCoordinateSystems];
+        [self recalculatePlotRect];
+        [self updateAllLayerFrame];
+        [self calculateColumnWidth];
+        
+        [self._hGridlineLayer setNeedsDisplay];
+        [self._vGridlineLayer setNeedsDisplay];
+        [self._xLabelLayer setNeedsDisplay];
+        [self redrawBgBands];
+        for (int i = 0; i < self.coodinates.count; i++) {
+            _DCCoordinateSystem* ds = self.coodinates[i];
+            _DCYAxisLabelLayer* _yLabelLayer = ds.yAxisLabelLayer;
+            
+            [_yLabelLayer setNeedsDisplay];
+        }
+        
+        self.graphContext.hRange = self.beginHRange;
     }
-    
-    self.graphContext.hRange = self.beginHRange;
-    
     [super willMoveToSuperview: newSuperview];
 }
 
@@ -506,7 +507,7 @@
         NSMutableArray* bands = [[NSMutableArray alloc]init];
         if (!REMIsNilOrNull(self.bgBands))  {
             for (DCXYChartBackgroundBand* b in self.bgBands) {
-                if (b.direction == DCAxisCoordinateY && b.coordinateSystemName == y.yAxis.coordinateSystem.name) {
+                if (b.direction == DCAxisCoordinateY) {
                     [bands addObject:b];
                 }
             }
@@ -561,6 +562,7 @@
         }
         [cs attachSeries:series];
     }
+    [self redrawBgBands];
 }
 
 -(NSArray*)getYAxes {

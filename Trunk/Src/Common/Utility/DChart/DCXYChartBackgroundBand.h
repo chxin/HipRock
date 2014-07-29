@@ -15,6 +15,6 @@
 @property (nonatomic, strong) DCRange* range;
 @property (nonatomic, strong) UIColor* color;
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic, strong) NSString* coordinateSystemName;
+//@property (nonatomic, strong) NSString* coordinateSystemName;
 @property (nonatomic, assign) DCAxisCoordinate direction;
 @end

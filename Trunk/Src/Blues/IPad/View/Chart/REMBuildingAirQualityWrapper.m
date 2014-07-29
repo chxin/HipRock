@@ -106,7 +106,7 @@
 -(DCSeriesStatus*)getDefaultSeriesState:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
     DCSeriesStatus* state = [[DCSeriesStatus alloc]init];
     state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
-    state.seriesType = DCSeriesTypeStatusColumn;
+    state.seriesType = DCSeriesTypeStatusLine;
     state.avilableTypes = state.seriesType;
     state.visible = YES;
     UIColor* sColor = nil;
@@ -153,7 +153,7 @@
         CGRect frame = CGRectMake(self.view.frame.size.width-141, 0, sLabel.frame.size.width, sLabel.frame.size.height);
         sLabel.frame = frame;
         b.direction = DCAxisCoordinateY;
-        b.coordinateSystemName = ((DCAxis*)[self.view getYAxes][0]).coordinateSystem.name;
+//        b.coordinateSystemName = ((DCAxis*)[self.view getYAxes][0]).coordinateSystem.name;
         [bands addObject:b];
     }
     self.view.clipsToBounds = NO;

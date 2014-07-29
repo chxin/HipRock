@@ -31,6 +31,7 @@
     for (DCAxis* yAxis in yAxes) {
         if (REMIsNilOrNull(yAxis.backgroundBands)) continue;
         DCRange * yRange = yAxis.coordinateSystem.yRange;
+        if (REMIsNilOrNull(yRange)) continue;
         for(DCXYChartBackgroundBand* band in yAxis.backgroundBands) {
             CGFloat yTop = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.end vRange:yRange];
             CGFloat yBottom = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.location vRange:yRange];
