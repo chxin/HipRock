@@ -75,7 +75,6 @@
 		7A0CCD4E192A01D800C35C2F /* REMManagedAdministratorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD4D192A01D800C35C2F /* REMManagedAdministratorModel.m */; };
 		7A0CCD51192A01D800C35C2F /* REMManagedCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD50192A01D800C35C2F /* REMManagedCustomerModel.m */; };
 		7A0CCD54192A01D800C35C2F /* REMManagedDashboardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD53192A01D800C35C2F /* REMManagedDashboardModel.m */; };
-		7A0CCD57192A01D800C35C2F /* REMManagedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD56192A01D800C35C2F /* REMManagedWidgetModel.m */; };
 		7A0CCD5A192A01D800C35C2F /* REMManagedBuildingPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD59192A01D800C35C2F /* REMManagedBuildingPictureModel.m */; };
 		7A0CCD5D192A01D800C35C2F /* REMManagedBuildingCommodityUsageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD5C192A01D800C35C2F /* REMManagedBuildingCommodityUsageModel.m */; };
 		7A0CCD60192A01D800C35C2F /* REMManagedPinnedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CCD5F192A01D800C35C2F /* REMManagedPinnedWidgetModel.m */; };
@@ -478,6 +477,7 @@
 		7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */; };
 		7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */; };
 		7A7B29951888C8DF00E74D3D /* SplashScreenBackgroud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */; };
+		7A8AD89A19876E1F00F671EE /* REMManagedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AD89919876E1F00F671EE /* REMManagedWidgetModel.m */; };
 		7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2B177B3A8B00C282A8 /* main.m */; };
 		7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */; };
 		7A9BBF741952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A9BBF721952DF6F000A45F5 /* Hiragino-Sans-GB-W3.ttf */; };
@@ -810,8 +810,6 @@
 		7A0CCD50192A01D800C35C2F /* REMManagedCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedCustomerModel.m; sourceTree = "<group>"; };
 		7A0CCD52192A01D800C35C2F /* REMManagedDashboardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedDashboardModel.h; sourceTree = "<group>"; };
 		7A0CCD53192A01D800C35C2F /* REMManagedDashboardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedDashboardModel.m; sourceTree = "<group>"; };
-		7A0CCD55192A01D800C35C2F /* REMManagedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedWidgetModel.h; sourceTree = "<group>"; };
-		7A0CCD56192A01D800C35C2F /* REMManagedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedWidgetModel.m; sourceTree = "<group>"; };
 		7A0CCD58192A01D800C35C2F /* REMManagedBuildingPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingPictureModel.h; sourceTree = "<group>"; };
 		7A0CCD59192A01D800C35C2F /* REMManagedBuildingPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedBuildingPictureModel.m; sourceTree = "<group>"; };
 		7A0CCD5B192A01D800C35C2F /* REMManagedBuildingCommodityUsageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedBuildingCommodityUsageModel.h; sourceTree = "<group>"; };
@@ -1273,6 +1271,8 @@
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenBackgroud.png; sourceTree = "<group>"; };
 		7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenBackgroud@2x.png"; sourceTree = "<group>"; };
+		7A8AD89819876E1F00F671EE /* REMManagedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedWidgetModel.h; sourceTree = "<group>"; };
+		7A8AD89919876E1F00F671EE /* REMManagedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedWidgetModel.m; sourceTree = "<group>"; };
 		7A8EF18018DAE21200951CD4 /* REMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMConstants.h; path = Common/Application/REMConstants.h; sourceTree = "<group>"; };
 		7A9B1E1C177B3A8B00C282A8 /* Blues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9B1E2B177B3A8B00C282A8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2537,6 +2537,8 @@
 			isa = PBXGroup;
 			children = (
 				7A50EC361957F233007A945A /* BluesPad.xcdatamodeld */,
+				7A8AD89819876E1F00F671EE /* REMManagedWidgetModel.h */,
+				7A8AD89919876E1F00F671EE /* REMManagedWidgetModel.m */,
 				7A0CCD49192A01D700C35C2F /* REMManagedBuildingAirQualityModel.h */,
 				7A0CCD70192A01D900C35C2F /* REMManagedUserModel.h */,
 				7A0CCD71192A01D900C35C2F /* REMManagedUserModel.m */,
@@ -2556,8 +2558,6 @@
 				7A0CCD5C192A01D800C35C2F /* REMManagedBuildingCommodityUsageModel.m */,
 				7A0CCD58192A01D800C35C2F /* REMManagedBuildingPictureModel.h */,
 				7A0CCD59192A01D800C35C2F /* REMManagedBuildingPictureModel.m */,
-				7A0CCD55192A01D800C35C2F /* REMManagedWidgetModel.h */,
-				7A0CCD56192A01D800C35C2F /* REMManagedWidgetModel.m */,
 				7A0CCD52192A01D800C35C2F /* REMManagedDashboardModel.h */,
 				7A0CCD53192A01D800C35C2F /* REMManagedDashboardModel.m */,
 				7A0CCD4F192A01D800C35C2F /* REMManagedCustomerModel.h */,
@@ -4093,6 +4093,7 @@
 				7A63E27118B44CBD00A13464 /* REMGalleryCollectionCell.m in Sources */,
 				7A63E20118B44CBD00A13464 /* REMWidgetCollectionViewController.m in Sources */,
 				7A63E1EF18B44CBD00A13464 /* REMBuildingAirQualityViewController.m in Sources */,
+				7A8AD89A19876E1F00F671EE /* REMManagedWidgetModel.m in Sources */,
 				7A63E25718B44CBD00A13464 /* REMTrendChartLegendView.m in Sources */,
 				7A0CCD69192A01D800C35C2F /* REMManagedImageModel.m in Sources */,
 				7AEFD87419668FE100316D76 /* REMSettingContactPhoneViewController.m in Sources */,
@@ -4210,7 +4211,6 @@
 				7A63E28818B450B200A13464 /* REMIPhoneMainViewController.m in Sources */,
 				EFDBD2DA190760D80013BAFA /* DCSeriesStatus.m in Sources */,
 				7A63E22418B44CBD00A13464 /* REMBuildingTimeRangeDataModel.m in Sources */,
-				7A0CCD57192A01D800C35C2F /* REMManagedWidgetModel.m in Sources */,
 				EF0459941845CEAF0086D5AC /* _DCXYIndicatorLayer.m in Sources */,
 				7A9EAA8B18D2946300EF1B85 /* WeiboRequest.m in Sources */,
 				7A63E22018B44CBD00A13464 /* REMAverageUsageDataModel.m in Sources */,

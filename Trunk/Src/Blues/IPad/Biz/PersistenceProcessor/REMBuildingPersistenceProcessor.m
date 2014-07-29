@@ -225,49 +225,50 @@
 - (void)persistWidget:(NSArray *)widgetArray intoDashboard:(REMManagedDashboardModel *)dashboard{
     for(NSDictionary *dictionary in widgetArray)
     {
-        REMWidgetContentSyntax *syntax = [[REMWidgetContentSyntax alloc] initWithJSONString:dictionary[@"ContentSyntax"]];
-        NSString *xtype = syntax.xtype;
-        REMDiagramType diagramType = REMDiagramTypeLine;
-        if([xtype isEqualToString:@"linechartcomponent"] ==YES ||
-           [xtype isEqualToString:@"multitimespanlinechartcomponent"]==YES)
-        {
-            diagramType =REMDiagramTypeLine;
-        }
-        else if([xtype isEqualToString:@"columnchartcomponent"]== YES ||
-                [xtype isEqualToString:@"multitimespancolumnchartcomponent"]==YES)
-        {
-            diagramType =REMDiagramTypeColumn;
-        }
-        else if([xtype rangeOfString:@"grid"].location!=NSNotFound)
-        {
-            diagramType =REMDiagramTypeGrid;
-        }
-        else if([xtype isEqualToString:@"piechartcomponent"]== YES)
-        {
-            diagramType =REMDiagramTypePie;
-        }
-        else if([xtype isEqualToString:@"rankcolumnchartcomponent"]== YES)
-        {
-            diagramType =REMDiagramTypeRanking;
-        }
-        else if([xtype isEqualToString:@"stackchartcomponent"]== YES)
-        {
-            diagramType =REMDiagramTypeStackColumn;
-        }
-        else if([xtype isEqualToString:@"labelingchartcomponent"]==YES){
-            diagramType=REMDiagramTypeLabelling;
-        }
-
-        if (diagramType ==REMDiagramTypeGrid) {
-            continue;
-        }
+//        REMWidgetContentSyntax *syntax = [[REMWidgetContentSyntax alloc] initWithJSONString:dictionary[@"ContentSyntax"]];
+//        NSString *xtype = syntax.xtype;
+//        REMDiagramType diagramType = REMDiagramTypeLine;
+//        if([xtype isEqualToString:@"linechartcomponent"] ==YES ||
+//           [xtype isEqualToString:@"multitimespanlinechartcomponent"]==YES)
+//        {
+//            diagramType =REMDiagramTypeLine;
+//        }
+//        else if([xtype isEqualToString:@"columnchartcomponent"]== YES ||
+//                [xtype isEqualToString:@"multitimespancolumnchartcomponent"]==YES)
+//        {
+//            diagramType =REMDiagramTypeColumn;
+//        }
+//        else if([xtype rangeOfString:@"grid"].location!=NSNotFound)
+//        {
+//            diagramType =REMDiagramTypeGrid;
+//        }
+//        else if([xtype isEqualToString:@"piechartcomponent"]== YES)
+//        {
+//            diagramType =REMDiagramTypePie;
+//        }
+//        else if([xtype isEqualToString:@"rankcolumnchartcomponent"]== YES)
+//        {
+//            diagramType =REMDiagramTypeRanking;
+//        }
+//        else if([xtype isEqualToString:@"stackchartcomponent"]== YES)
+//        {
+//            diagramType =REMDiagramTypeStackColumn;
+//        }
+//        else if([xtype isEqualToString:@"labelingchartcomponent"]==YES){
+//            diagramType=REMDiagramTypeLabelling;
+//        }
+//
+//        if (diagramType ==REMDiagramTypeGrid) {
+//            continue;
+//        }
         
         REMManagedWidgetModel *widget = [self create:[REMManagedWidgetModel class]];
         widget.id=dictionary[@"Id"];
         widget.name=dictionary[@"Name"];
         widget.isRead=dictionary[@"IsRead"];
         widget.contentSyntax = dictionary[@"ContentSyntax"];
-        widget.diagramType=@(diagramType);
+        widget.syntaxVersion = REMIsNilOrNull(dictionary[@"syntaxVersion"]) ? @(0) : dictionary[@"syntaxVersion"];
+        //widget.diagramType=@(diagramType);
         NSDictionary *shareInfo = dictionary[@"SimpleShareInfo"];
         
         if(!REMIsNilOrNull(shareInfo)){
