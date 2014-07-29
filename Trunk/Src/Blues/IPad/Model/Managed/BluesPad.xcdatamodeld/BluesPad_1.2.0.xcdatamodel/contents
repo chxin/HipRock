@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="REMManagedAdministratorModel" representedClassName="REMManagedAdministratorModel" syncable="YES">
         <attribute name="realName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -137,10 +137,10 @@
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contentSyntax" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="diagramType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="syntaxVersion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="dashboard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="REMManagedDashboardModel" inverseName="widgets" inverseEntity="REMManagedDashboardModel" syncable="YES"/>
         <relationship name="sharedInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="REMManagedSharedModel" inverseName="widget" inverseEntity="REMManagedSharedModel" syncable="YES"/>
     </entity>
