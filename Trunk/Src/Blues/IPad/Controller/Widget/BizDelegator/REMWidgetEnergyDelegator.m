@@ -592,18 +592,27 @@
     NSUInteger defaultStepIndex=model.defaultStepIndex;
     NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     if (mustContain==YES) {
-        
-        if([list containsObject:newStep] == NO)
-        {
+        if([list containsObject:newStep] == NO){
             return step;
         }
-
+    }
+    
+    //Ratio should have no raw & hour step
+    if(self.contentSyntax.dataStoreType == REMDSEnergyRatio){
+        list = [list filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ![@[@(REMEnergyStepRaw), @(REMEnergyStepHour)] containsObject:evaluatedObject];
+        }]];
+        
+        titleList = [titleList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ![@[REMIPadLocalizedString(@"Widget_StepRaw"),REMIPadLocalizedString(@"Common_Hour")] containsObject:evaluatedObject];
+        }]];
     }
     
     self.currentStepList=list;
     [self.stepControl removeAllSegments];
     
     for (int i=0; i<titleList.count; ++i) {
+        
         [self.stepControl insertSegmentWithTitle:titleList[i] atIndex:i animated:NO];
         [self.stepControl setWidth:kWidgetStepSingleButtonWidth forSegmentAtIndex:i];
     }
