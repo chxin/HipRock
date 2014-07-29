@@ -65,7 +65,7 @@
     copyrightEnglishLabel.font=[REMFont defaultFontOfSize:12];
     NSUInteger year = [REMTimeHelper getYear:[NSDate date] withCalendar:[NSCalendar currentCalendar]];
     
-    copyrightEnglishLabel.text = [NSString stringWithFormat:REMIPadLocalizedString(@"Setting_AboutCopyrightEnglish%d"),year];
+    copyrightEnglishLabel.text = [NSString stringWithFormat:REMIPadLocalizedString(@"Setting_AboutCopyrightEnglish"),year];
     [self.view addSubview:copyrightEnglishLabel];
     
     for (UIView *view in self.view.subviews) {

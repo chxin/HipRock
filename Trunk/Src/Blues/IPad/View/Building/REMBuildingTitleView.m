@@ -98,7 +98,7 @@
 - (void)initTitle:(NSString *)text withSize:(CGFloat)size withLeftMargin:(CGFloat)leftMargin
 {
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, 0, kBuildingCommodityDetailWidth, size)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin, 0, self.frame.size.width, size)];
     titleLabel.text=text;
     titleLabel.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel.shadowOffset=CGSizeMake(1, 1);

@@ -538,12 +538,12 @@ static NSDateFormatter *_localFormatter;
 + (NSString *)formatTimeFullHour:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour
 {
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
-    [f setDateFormat:@"yyyy-MM-dd HH:mm"];
+    [f setDateFormat:REMIPadLocalizedString(@"Common_DateToMinuteFormat")];
     if(change24Hour==YES && [REMTimeHelper getHour:date]==0){
-        [f setDateFormat:@"yyyy-MM-dd"];
+        [f setDateFormat:REMIPadLocalizedString(@"Common_DateFormat")];
         date = [date dateByAddingTimeInterval:-24*60*60];
         NSString *mid=[f stringFromDate:date];
-        return [NSString stringWithFormat:@"%@ %@",mid,@"24:00"];
+        return [NSString stringWithFormat:@"%@ %@",mid,REMIPadLocalizedString(@"Common_2400Format")];
     }
     return [f stringFromDate:date];
 }
@@ -551,7 +551,7 @@ static NSDateFormatter *_localFormatter;
 + (NSString *)formatTimeFullDay:(NSDate *)date isChangeTo24Hour:(BOOL)change24Hour;
 {
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
-    [f setDateFormat:@"yyyy-MM-dd"];
+    [f setDateFormat:REMIPadLocalizedString(@"Common_DateFormat")];
     NSString *ret;
     if(change24Hour ==YES && [REMTimeHelper getHour:date]==0){
         NSDate *newEndDate=[REMTimeHelper add:-1 onPart:REMDateTimePartDay ofDate:date];
