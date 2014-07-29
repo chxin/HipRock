@@ -7,6 +7,10 @@
 //
 
 #import "DAbstractChartWrapper.h"
+#import "DCRankingWrapper.h"
+#import "DCLabelingWrapper.h"
+#import "DCTrendWrapper.h"
+#import "DCPieWrapper.h"
 
 @implementation DAbstractChartWrapper
 -(void)beginAnimationDone {

@@ -11,6 +11,7 @@
 #import "DCXYSeries.h"
 
 typedef enum _DCSeriesTypeStatus {
+    DCSeriesTypeStatusNone = 0,
     DCSeriesTypeStatusLine = 1,
     DCSeriesTypeStatusColumn = 2,
     DCSeriesTypeStatusStackedColumn = 4,
