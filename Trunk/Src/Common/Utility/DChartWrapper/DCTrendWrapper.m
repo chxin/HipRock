@@ -63,7 +63,7 @@
 -(NSString*)getCoordinateNameBySeries:(DCXYSeries*)series inSeriesList:(NSArray*)seriesList {
     DCXYSeries* groupFirstSeries = nil;
     for (DCXYSeries* s in seriesList) {
-        if (s.groupName == series.groupName) {
+        if ([s.groupName isEqualToString:series.groupName]) {
             groupFirstSeries = s;
             break;
         }
