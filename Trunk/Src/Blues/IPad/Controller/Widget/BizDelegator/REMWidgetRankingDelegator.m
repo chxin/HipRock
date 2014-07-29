@@ -9,6 +9,7 @@
 #import "REMWidgetRankingDelegator.h"
 #import "DCRankingWrapper.h"
 #import "REMRankingTooltipView.h"
+#import "REMWrapperFactor.h"
 
 const static CGFloat kRankButtonDimension=32;
 const static CGFloat kRankingTimePickerWidth=250;
@@ -204,16 +205,13 @@ const static CGFloat kRankingTimePickerWidth=250;
     
     
     CGRect widgetRect = CGRectMake(0, 0, kWidgetChartWidth, kWidgetChartHeight);
-    REMDiagramType widgetType = self.widgetInfo.diagramType.integerValue;
     
     DCChartStyle* style = [DCChartStyle getMaximizedStyle];
     DCRankingWrapper  *widgetWrapper;
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
 //    wrapperConfig.multiTimeSpans=self.model.timeRangeArray;
 
-    if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
-    }
+    widgetWrapper = (DCRankingWrapper*)[REMWrapperFactor constructorWrapper:widgetRect data:self.energyData wrapperConfig:wrapperConfig style:style];
     if (widgetWrapper != nil) {
         [self.chartContainer addSubview:widgetWrapper.view];
         self.chartWrapper=widgetWrapper;

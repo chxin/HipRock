@@ -25,12 +25,13 @@
 
 +(REMTooltipViewBase *)tooltipWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {
-    REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
-    if(diagramType== REMDiagramTypePie){
-        return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
-    }
-    else if(diagramType == REMDiagramTypeLabelling){
+    REMWidgetContentSyntax* contentSyntax = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax];
+    
+    if(contentSyntax.dataStoreType == REMDSEnergyLabeling){
         return [[REMLabelingTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
+    }
+    else if(contentSyntax.contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypePie){
+        return [[REMPieChartTooltipView  alloc] initWithHighlightedPoints:points chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];
     }
     else{
         return [[REMTrendChartTooltipView alloc] initWithHighlightedPoints:points atX:x chartWrapper:chartWrapper inEnergyData:data widget:widget andParameters:parameters];

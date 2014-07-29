@@ -58,7 +58,8 @@
             if([parameters isKindOfClass:[REMWidgetCommoditySearchModel class]]){
                 REMWidgetCommoditySearchModel *commodityParameters = (REMWidgetCommoditySearchModel *)parameters;
                 
-                if(commodityParameters.commodityIdArray.count>0 || ((REMDiagramType)[widget.diagramType intValue]) == REMDiagramTypePie){
+                REMWidgetContentSyntaxWidgetType contentSyntaxWidgetType = [[REMWidgetContentSyntax alloc]initWithJSONString:widget.contentSyntax].contentSyntaxWidgetType;
+                if(commodityParameters.commodityIdArray.count>0 || contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypePie){
                     //return REMCommodities[@(target.commodityId)];
                     NSString *commodityKey = REMCommodities[@(target.commodityId)];
                     return REMIPadLocalizedString(commodityKey);

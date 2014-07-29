@@ -11,6 +11,16 @@
 #import "REMEnum.h"
 #import "REMCommonHeaders.h"
 
+// 对应于能源管理下，保存widget时，默认的序列类型，
+typedef enum _REMWidgetContentSyntaxWidgetType {
+    REMWidgetContentSyntaxWidgetTypeNone = 0,   // Labeling时没有默认类型
+    REMWidgetContentSyntaxWidgetTypeLine = 1,
+    REMWidgetContentSyntaxWidgetTypeColumn = 2,
+    REMWidgetContentSyntaxWidgetTypeStack = 3,
+    REMWidgetContentSyntaxWidgetTypePie = 4,
+    REMWidgetContentSyntaxWidgetTypeGrid = 5
+}REMWidgetContentSyntaxWidgetType;
+
 @interface REMWidgetContentSyntax : REMJSONObject
 
 @property (nonatomic,strong) NSDictionary *params;
@@ -30,6 +40,8 @@
 @property (nonatomic) NSNumber* rankingMinPosition;
 @property (nonatomic, assign) REMRankingRange rankingRangeCode;
 @property (nonatomic,strong) NSArray *seriesStates;
+
+@property (nonatomic,assign) REMWidgetContentSyntaxWidgetType contentSyntaxWidgetType;
 
 
 -(BOOL)isHourSupported;

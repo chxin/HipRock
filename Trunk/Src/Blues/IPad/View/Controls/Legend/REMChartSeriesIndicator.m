@@ -119,21 +119,4 @@
     return indicator;
 }
 
-+(REMChartSeriesIndicatorType)indicatorTypeWithDiagramType:(REMDiagramType)diagramType
-{
-    switch (diagramType) {
-        case REMDiagramTypeLine:
-            return REMChartSeriesIndicatorLine;
-        case REMDiagramTypeRanking:
-        case REMDiagramTypeStackColumn:
-        case REMDiagramTypeColumn:
-            return REMChartSeriesIndicatorColumn;
-        case REMDiagramTypePie:
-            return REMChartSeriesIndicatorPie;
-            
-        default:
-            return REMChartSeriesIndicatorLine;
-    }
-}
-
 @end

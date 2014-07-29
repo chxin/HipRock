@@ -75,15 +75,10 @@
 - (void)initBizView{}
 
 - (BOOL) shouldPinToBuildingCover{
-    REMDiagramType diagramType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
-    if (diagramType == REMDiagramTypeColumn ||
-        diagramType == REMDiagramTypeLine ||
-        diagramType == REMDiagramTypeRanking ||
-        diagramType == REMDiagramTypeStackColumn) {
-        return YES;
-    }
-    
-    return NO;
+    REMWidgetContentSyntaxWidgetType contentSyntaxWidgetType = self.contentSyntax.contentSyntaxWidgetType;
+    return (contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeColumn ||
+        contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeLine ||
+        contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeStack);
 }
 
 - (BOOL)shouldEnablePinToBuildingCoverButton

@@ -19,7 +19,7 @@
 #import "REMWidgetCellDelegator.h"
 #import "REMWidgetStepEnergyModel.h"
 #import "REMManagedSharedModel.h"
-
+#import "REMWrapperFactor.h"
 
 @interface REMWidgetCellViewController ()
 
@@ -143,7 +143,6 @@
     }
     
     DAbstractChartWrapper *widgetWrapper = nil;
-    REMDiagramType widgetType = (REMDiagramType)[self.widgetInfo.diagramType intValue];
     CGRect widgetRect = self.chartContainer.bounds;
     REMEnergyViewData *data=self.chartData;
     DCChartStyle* style = [DCChartStyle getMinimunStyle];
@@ -155,19 +154,7 @@
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
 //        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
-    if (widgetType == REMDiagramTypeLine) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-    } else if (widgetType == REMDiagramTypeColumn) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-    } else if (widgetType == REMDiagramTypePie) {
-        widgetWrapper = [[DCPieWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-    } else if (widgetType == REMDiagramTypeRanking) {
-        widgetWrapper = [[DCRankingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-    } else if (widgetType == REMDiagramTypeStackColumn) {
-        widgetWrapper = [[DCTrendWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-    } else if (widgetType == REMDiagramTypeLabelling) {
-        widgetWrapper = [[DCLabelingWrapper alloc]initWithFrame:widgetRect data:data wrapperConfig:wrapperConfig style:style];
-    }
+    widgetWrapper = [REMWrapperFactor constructorWrapper:widgetRect data:data wrapperConfig:wrapperConfig style:style];
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
         widgetWrapper.delegate = self;

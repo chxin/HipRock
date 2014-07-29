@@ -289,7 +289,7 @@
     
     REMEnergyViewData *data=[super processEnergyData:rawData];
     
-    if (((REMDiagramType)[self.widgetInfo.diagramType intValue]) == REMDiagramTypePie) {
+    if (self.contentSyntax.contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypePie) {
         return data;
     }
     

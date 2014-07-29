@@ -488,23 +488,10 @@
 }
 
 - (NSArray *)trendWidgetArray:(REMManagedDashboardModel *)dashboard{
-//    NSMutableArray *array=[NSMutableArray array];
-//    for (int i=0; i<dashboard.widgets.count; ++i) {
-//        REMManagedWidgetModel *widget=[dashboard.widgets allObjects][i];
-//        REMDiagramType diagramType = (REMDiagramType)[widget.diagramType intValue];
-//        if (diagramType == REMDiagramTypeColumn ||
-//            diagramType == REMDiagramTypeLine ||
-//            diagramType == REMDiagramTypeRanking ||
-//            diagramType == REMDiagramTypeStackColumn) {
-//            [array addObject:widget];
-//        }
-//    }
-//    
-//    return array;
-    
     NSArray *trendWidgets = [dashboard.widgets.array filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        REMDiagramType diagramType = [[evaluatedObject diagramType] intValue];
-        return (diagramType == REMDiagramTypeColumn || diagramType == REMDiagramTypeLine || diagramType == REMDiagramTypeRanking || diagramType == REMDiagramTypeStackColumn);
+        REMManagedWidgetModel* wModel = evaluatedObject;
+        REMWidgetContentSyntaxWidgetType syntaxType = [[REMWidgetContentSyntax alloc]initWithJSONString:wModel.contentSyntax].contentSyntaxWidgetType;
+        return (syntaxType == REMWidgetContentSyntaxWidgetTypeColumn || syntaxType == REMWidgetContentSyntaxWidgetTypeLine || syntaxType == REMWidgetContentSyntaxWidgetTypeStack);
     }]];
     
     NSArray *sortedTrendWidgets = [trendWidgets sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
