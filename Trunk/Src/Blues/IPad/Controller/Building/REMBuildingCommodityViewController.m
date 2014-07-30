@@ -514,8 +514,6 @@
         }
     }
     
-    //TODO:fix order
-    
     return  @{@"list":dashboardList,@"widget":dic};
 }
 

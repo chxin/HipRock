@@ -21,12 +21,18 @@
         callback(REMPinToBuildingCoverStatusSuccess);
     }failure:^(NSError *error,REMDataAccessStatus status, REMBusinessErrorInfo * bizError){
         if (status == REMDataAccessErrorMessage) {
-            if ([bizError.code isEqualToString:@"050001216002"]==YES) {//widget deleted
+            if([bizError matchesErrorCode:@"050001216002"]){//widget deleted
                 [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationWidgetDeleted")];
             }
-            else if([bizError.code isEqualToString:@"050001216001"]==YES || [bizError.code isEqualToString:@"050001216005"]==YES){//container deleted
+            else if([bizError matchesErrorCode:@"050001216001"] || [bizError matchesErrorCode:@"050001216005"]){//container deleted
                 [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationPositionDeleted")];
             }
+//            if ([bizError.code isEqualToString:@"050001216002"]==YES) {//widget deleted
+//                [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationWidgetDeleted")];
+//            }
+//            else if([bizError.code isEqualToString:@"050001216001"]==YES || [bizError.code isEqualToString:@"050001216005"]==YES){//container deleted
+//                [self showMessage:REMIPadLocalizedString(@"Building_WidgetRelationPositionDeleted")];
+//            }
         }
     }];
 }
@@ -50,5 +56,6 @@
         }
     }];
 }
+
 
 @end

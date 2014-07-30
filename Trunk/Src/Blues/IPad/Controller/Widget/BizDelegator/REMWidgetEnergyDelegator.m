@@ -49,6 +49,7 @@
 
 @property (nonatomic,weak) UIButton *touButton;
 @property (nonatomic) BOOL isCostStacked;
+@property (nonatomic) BOOL tempIsCostStacked;
 
 
 @end
@@ -277,7 +278,8 @@
         
         if([title isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")] || [title isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
             //if there is raw or hour step button, disable/enable them according to stack status
-            [self.stepControl setEnabled:!self.isCostStacked forSegmentAtIndex:i];
+            BOOL enable = self.isCostStacked ? NO : YES;
+            [self.stepControl setEnabled:enable forSegmentAtIndex:i];
         }
     }
 }
@@ -483,10 +485,6 @@
 
 }
 
-
-
-
-
 - (void) showEnergyChart{
     if(self.chartWrapper!=nil){
         return;
@@ -573,18 +571,27 @@
     NSUInteger defaultStepIndex=model.defaultStepIndex;
     NSNumber *newStep = [NSNumber numberWithInt:((int)step)];
     if (mustContain==YES) {
-        
-        if([list containsObject:newStep] == NO)
-        {
+        if([list containsObject:newStep] == NO){
             return step;
         }
-
+    }
+    
+    //Ratio should have no raw & hour step
+    if(self.contentSyntax.dataStoreType == REMDSEnergyRatio){
+        list = [list filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ![@[@(REMEnergyStepRaw), @(REMEnergyStepHour)] containsObject:evaluatedObject];
+        }]];
+        
+        titleList = [titleList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ![@[REMIPadLocalizedString(@"Widget_StepRaw"),REMIPadLocalizedString(@"Common_Hour")] containsObject:evaluatedObject];
+        }]];
     }
     
     self.currentStepList=list;
     [self.stepControl removeAllSegments];
     
     for (int i=0; i<titleList.count; ++i) {
+        
         [self.stepControl insertSegmentWithTitle:titleList[i] atIndex:i animated:NO];
         [self.stepControl setWidth:kWidgetStepSingleButtonWidth forSegmentAtIndex:i];
     }
@@ -655,6 +662,12 @@
     [self setDatePickerButtonValueNoSearchByTimeRange:stepModel.timeRangeArray[0] withRelative:stepModel.relativeDateComponent withRelativeType:stepModel.relativeDateType];
     
     //TODO: need rollback tou button status
+    if([self isElectricityCost]){
+        self.isCostStacked = self.tempIsCostStacked;
+        [self updateTouButtonStyle];
+        [self updateStepButton];
+    }
+    
     
     self.tempModel=[self.model copy];
     
@@ -958,6 +971,8 @@
 -(void)touButtonPressed:(UIButton *)sender
 {
     REMDataStoreType store = self.contentSyntax.dataStoreType;
+    
+    self.tempIsCostStacked = !!self.isCostStacked;
     
     if(self.isCostStacked){
         self.isCostStacked = NO;
