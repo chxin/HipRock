@@ -363,6 +363,7 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
     MKAnnotationView *marker = [[MKAnnotationView alloc] init];
+    
     marker.annotation = annotation;
     marker.image = ((REMAnnotation *)annotation).icon;
     marker.canShowCallout = YES;

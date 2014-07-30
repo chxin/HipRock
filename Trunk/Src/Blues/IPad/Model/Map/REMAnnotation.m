@@ -30,6 +30,7 @@
     annotation.coordinate = coordinate;//[REMGISHelper isLocationOutOfChina:coordinate] ? coordinate : [REMGISHelper transformFromGCJToWGS:coordinate];
     
     annotation.title = building.name;
+    
     annotation.subtitle = REMIsNilOrNull(building.electricityUsageThisMonth.totalValue) ? nil : [NSString stringWithFormat:REMIPadLocalizedString(@"Map_MarkerBubbleSubtitleFormat"),  [REMNumberHelper formatDataValueWithCarry:building.electricityUsageThisMonth.totalValue], building.electricityUsageThisMonth.totalUom];
     
     annotation.building = building;

@@ -12,6 +12,7 @@
 #import "REMCommonHeaders.h"
 #import "UIKit+AFNetworking.h"
 #import "REMVendorMacro.h"
+#import <MapKit/MapKit.h>
 
 
 @implementation REMAppDelegate
@@ -29,6 +30,8 @@
     [[UINavigationBar appearance] setTitleTextAttributes:REMNavigationTitleFontAttribute];
     [[UIBarButtonItem appearance] setTitleTextAttributes:REMNavigationItemFontAttribute forState:UIControlStateNormal];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[REMFont defaultFontSystemSize]];
+    
+    
     
     // Log init
     [REMLog bind];
