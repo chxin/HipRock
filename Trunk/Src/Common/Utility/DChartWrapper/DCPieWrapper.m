@@ -108,11 +108,12 @@
 }
 
 -(void)setHiddenAtIndex:(NSUInteger)seriesIndex hidden:(BOOL)hidden {
-//    if (seriesIndex >= self.view.series.datas.count) return;
-//    DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
-//    [self.view setSlice:slice hidden:hidden];
+    if (seriesIndex >= self.view.series.datas.count) return;
+    DCPieDataPoint* slice = self.view.series.datas[seriesIndex];
+    [self.view setSlice:slice hidden:hidden];
 //    if (REMIsNilOrNull(slice.target)) return;
-//    [self getSeriesStatusByTarget:slice.target index:@(seriesIndex)].hidden = hidden;
+    DCSeriesStatus* state = self.seriesStates[slice.pointKey];
+    if (state!=nil) state.visible = !hidden;
 }
 
 -(UIView*)getView {
