@@ -9,6 +9,7 @@
 
 #import "WeiboDialog.h"
 #import "WeiboDialogClosePNG.h"
+#import "REMFont.h"
 
 static CGFloat kBorderGray[4] = {0.3, 0.3, 0.3, 0.8};
 static CGFloat kBorderBlack[4] = {0.3, 0.3, 0.3, 1};
@@ -260,7 +261,7 @@ static BOOL IsDeviceIPad() {
         [_closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [_closeButton addTarget:self action:@selector(cancel)
                forControlEvents:UIControlEventTouchUpInside];
-        _closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        _closeButton.titleLabel.font = [REMFont defaultFontOfSize:12];
         _closeButton.showsTouchWhenHighlighted = YES;
         _closeButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin
         | UIViewAutoresizingFlexibleBottomMargin;

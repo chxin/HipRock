@@ -111,6 +111,8 @@
         }
     }
     
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
+    
     return cell;
 }
 

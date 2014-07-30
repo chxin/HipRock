@@ -174,7 +174,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     if (self.dashboards.count==0) {
         NSString *emptyText=REMIPadLocalizedString(@"Dashboard_Empty");//未配置任何仪表盘。
         cell.textLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
-        cell.textLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:29];
+        cell.textLabel.font=[REMFont defaultFontOfSize:29];
         cell.textLabel.text=emptyText;
         return cell;
     }
@@ -247,7 +247,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
         UILabel *shareLabel=[[UILabel alloc]initWithFrame:CGRectMake(shareFrame.origin.x, shareFrame.origin.y, frame.size.width, shareFrame.size.height)];
         //shareLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.8];
         shareLabel.textColor=[UIColor whiteColor];
-        shareLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kDashboardShareSize];
+        shareLabel.font=[REMFont defaultFontOfSize:kDashboardShareSize];
         [shareLabel setBackgroundColor:[UIColor clearColor]];
         REMManagedSharedModel *sharedObj =dashboardInfo.sharedInfo;
         NSString *shareName=sharedObj.userRealName;
@@ -268,7 +268,7 @@ static NSString *dashboardGroupName=@"building-data-%@";
     title.backgroundColor=[UIColor clearColor];
     title.textColor=[UIColor whiteColor];
     //title.font=[UIFont fontWithName:@(kBuildingFontSCRegular) size:kDashboardTitleSize];
-    title.font=[REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kDashboardTitleSize];
+    title.font=[REMFont defaultFontOfSize:kDashboardTitleSize];
     [cell.contentView addSubview:title];
     
     return CGRectMake(0, title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin, frame.size.width, cell.contentView.frame.size.height-(title.frame.origin.y+title.frame.size.height+kDashboardTitleBottomMargin+1));

@@ -36,6 +36,7 @@
     
     self.title = REMIPadLocalizedString(@"Building_WidgetRelationViewTitle");
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonClicked:)];
+    
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:REMIPadLocalizedString(@"Common_Done") style:UIBarButtonItemStylePlain target:self action:@selector(okButtonClicked:)];
     
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -176,8 +177,10 @@
     if(cell==nil){
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        
     }
+    
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
+    
     if (self.currentIndexPath.section == indexPath.section && self.currentIndexPath.row == indexPath.row) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }

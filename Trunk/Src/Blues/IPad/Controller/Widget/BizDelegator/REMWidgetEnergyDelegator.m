@@ -180,7 +180,7 @@
     [timePickerButton sizeToFit];
     //timePickerButton.layer.borderColor=[UIColor redColor].CGColor;
     //timePickerButton.layer.borderWidth=1;
-    timePickerButton.titleLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kWidgetDatePickerTitleSize];
+    timePickerButton.titleLabel.font=[REMFont defaultFontOfSize:kWidgetDatePickerTitleSize];
     [timePickerButton setTitleColor:[REMColor colorByHexString:@"#5e5e5e"] forState:UIControlStateNormal];
     
     [timePickerButton addTarget:self action:@selector(showTimePicker) forControlEvents:UIControlEventTouchUpInside];
@@ -203,7 +203,7 @@
     [searchViewContainer addSubview:stepControl];
     
     stepControl.tintColor=[UIColor grayColor];
-    UIFont *font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:14];
+    UIFont *font = [REMFont defaultFontOfSize:14];
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:UITextAttributeFont];
     [stepControl setTitleTextAttributes:attributes forState:UIControlStateNormal];

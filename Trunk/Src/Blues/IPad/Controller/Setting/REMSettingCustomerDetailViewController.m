@@ -55,6 +55,9 @@ static NSString * cellId=@"customerCell";
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
     
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
+    cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+    
     REMManagedCustomerModel *customer = REMAppContext.currentCustomer;
     
     

@@ -296,7 +296,7 @@
     titleLabel1.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel1.backgroundColor=[UIColor clearColor];
-    titleLabel1.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kBuildingCommodityTitleFontSize];
+    titleLabel1.font = [REMFont defaultFontOfSize:kBuildingCommodityTitleFontSize];
     titleLabel1.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel1];
     

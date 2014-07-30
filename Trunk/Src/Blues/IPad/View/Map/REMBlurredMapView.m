@@ -73,21 +73,6 @@
     
     [self addSubview:loadingView];
     self.loadingView = loadingView;
-    
-    
-//    NSString *text = @"正在加载...";
-//    UIFont *font = [UIFont systemFontOfSize:24];
-//    CGSize labelSize = [text sizeWithFont:font];
-//    CGRect logoFrame = self.logo.frame;
-//    CGRect labelFrame = CGRectMake((kDMScreenWidth-labelSize.width)/2, logoFrame.origin.y+logoFrame.size.height+43, labelSize.width, labelSize.height);
-//    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
-//    label.text = text;
-//    label.font = font;
-//    label.textColor = [UIColor whiteColor];
-//    label.backgroundColor = [UIColor clearColor];
-//    
-//    [self addSubview:label];
-//    self.label = label;
 }
 
 @end

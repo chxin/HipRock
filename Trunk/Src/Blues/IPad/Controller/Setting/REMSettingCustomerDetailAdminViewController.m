@@ -34,6 +34,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    
     self.title = REMIPadLocalizedString(@"Setting_CustomerAdministratorViewTitle");
 }
 
@@ -70,6 +71,7 @@
     //REMAdministratorModel *model = REMAppCurrentCustomer.administratorArray[indexPath.row];
     REMManagedAdministratorModel *model = REMAppContext.currentCustomer.administrators[indexPath.row];
     cell.textLabel.text = model.realName;
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
     return cell;
 }
 

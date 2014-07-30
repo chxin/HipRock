@@ -106,7 +106,7 @@
         CGFloat labelTopOffset = 10;
         CGFloat labelLeftOffset = 57;
         CGFloat labelDistance = 18;
-        UIFont* legendFont = [UIFont systemFontOfSize:kCoverLegendFontSize];
+        UIFont* legendFont = [REMFont defaultFontOfSize:kCoverLegendFontSize];
         
         for (NSUInteger i = 0; i < self.chartWrapper.view.seriesList.count; i++) {
             DCXYSeries* series = self.chartWrapper.view.seriesList[i];
@@ -225,7 +225,7 @@
 {
     if (REMIsNilOrNull(self.textLabel)) {
         CGFloat fontSize = 29;
-        UIFont *font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:fontSize];
+        UIFont *font = [REMFont defaultFontOfSize:fontSize];
         CGSize labelSize = [text sizeWithFont:font];
         UILabel *noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 48, labelSize.width, labelSize.height)];
         noDataLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];

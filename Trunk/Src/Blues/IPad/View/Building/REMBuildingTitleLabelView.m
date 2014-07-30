@@ -85,11 +85,11 @@
     [self addSubview:textLabel];
     self.textLabel=textLabel;    //NSLog(@"font:%@",[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:valueSize]);
     
-    CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[REMFont fontWithKey:@(kBuildingFontKeyLight) size:valueSize]];
+    CGSize expectedLabelSize = [self.textLabel.text sizeWithFont:[REMFont numberLabelFontOfSize:valueSize]];
     
     //NSLog(@"valuesize:%f",valueSize);
     self.uomLabel = [[UILabel alloc]initWithFrame:CGRectMake(leftMargin+expectedLabelSize.width, marginTop+expectedLabelSize.height-valueSize, 200, valueSize)];
-    self.uomLabel.font=[REMFont fontWithKey:@(kBuildingFontKeyLight) size:uomSize];
+    self.uomLabel.font=[REMFont numberLabelFontOfSize:uomSize];
     self.uomLabel.backgroundColor=[UIColor clearColor];
     //self.uomLabel.contentHorizontalAlignment = UIControlContentVerticalAlignmentBottom;
     self.uomLabel.textColor=[UIColor whiteColor];

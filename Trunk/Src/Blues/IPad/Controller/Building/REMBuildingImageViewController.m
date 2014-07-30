@@ -328,7 +328,7 @@
     buildingType.text=REMIPadLocalizedString(@"Common_Building");//  @"楼宇";
     buildingType.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     buildingType.shadowOffset=CGSizeMake(1, 1);
-    buildingType.font = [REMFont fontWithKey:@(kBuildingFontKeyLight) size:kBuildingTypeTitleFontSize];
+    buildingType.font = [REMFont defaultFontOfSize:kBuildingTypeTitleFontSize];
     
     buildingType.textAlignment=NSTextAlignmentCenter;
     buildingType.textColor=[UIColor whiteColor];
@@ -346,7 +346,7 @@
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:titleSize];
+    titleLabel.font = [REMFont defaultFontOfSize:titleSize];
     
     titleLabel.textAlignment=NSTextAlignmentCenter;
     titleLabel.textColor=[UIColor whiteColor];

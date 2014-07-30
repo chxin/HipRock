@@ -89,7 +89,7 @@ const NSInteger kWeiboMaxLength = 140;
     toolbarLabel.textAlignment = NSTextAlignmentCenter;
     toolbarLabel.backgroundColor = [UIColor clearColor];
     [toolbarLabel setTextColor:[UIColor blackColor]];
-    toolbarLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:titleTextSize];
+    toolbarLabel.font = [REMFont defaultFontOfSize:titleTextSize];// [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:titleTextSize];
     [topToolbar addSubview:toolbarLabel];
     
     cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -97,7 +97,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancelBtn setFrame:CGRectMake(kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
-    cancelBtn.titleLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:buttonTextSize];
+    cancelBtn.titleLabel.font = [REMFont defaultFontOfSize:buttonTextSize];//[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:buttonTextSize];
     cancelBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
     [cancelBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
     [cancelBtn setTitle:REMIPadLocalizedString(@"Weibo_CancelButtonText") forState:UIControlStateNormal];
@@ -105,7 +105,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     [sendBtn setFrame:CGRectMake(kWeiboWindowWidth - kWeiboButtonWidth - kWeiboButtonMargin, 0, kWeiboButtonWidth, kWeiboToolbarHeight)];
     sendBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    sendBtn.titleLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:buttonTextSize];
+    sendBtn.titleLabel.font = [REMFont defaultFontOfSize:buttonTextSize];//[REMFont fontWithKey:@(kBuildingFontKeyTitle) size:buttonTextSize];
     sendBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [sendBtn setTitleColor:buttonEnableTextColor forState:UIControlStateNormal];
     [sendBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
@@ -127,7 +127,7 @@ const NSInteger kWeiboMaxLength = 140;
     textImageView.backgroundColor = mainBackgroundColor;
     
     textView = [[UITextView alloc]initWithFrame:CGRectMake(kWeiboTextViewMargin, kWeiboTextViewMargin, leftViewWidth - kWeiboTextViewMargin, textImageViewHeight - kWeiboTextViewMargin - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom)];
-    [textView setFont:[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:inputTextSize]];
+    [textView setFont:[REMFont defaultFontOfSize:inputTextSize]];
     textView.backgroundColor = [UIColor clearColor];
     textView.scrollEnabled = YES;
     textView.editable = YES;
@@ -137,7 +137,7 @@ const NSInteger kWeiboMaxLength = 140;
     
     charactorLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, textImageViewHeight - kWeiboCharactorLabelHeight - kWeiboCharactorLabelMarginBottom, 100, kWeiboCharactorLabelHeight)];
     charactorLabel.backgroundColor = [UIColor clearColor];
-    [charactorLabel setFont:[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:9]];
+    [charactorLabel setFont:[REMFont defaultFontOfSize:9]];
     [charactorLabel setTextColor:[UIColor grayColor]];
     [textImageView addSubview:charactorLabel];
     [charactorLabel setText:[NSString stringWithFormat:@"%i", (kWeiboMaxLength-self.weiboText.length)]];

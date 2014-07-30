@@ -123,6 +123,7 @@
     // Configure the cell...
     UITextField *field = [[UITextField alloc] init];
     field.placeholder = self.items[indexPath.row];
+    field.font = [REMFont defaultFontSystemSize];
     if(REMISIOS7){
         field.frame = CGRectMake(15, 5, cell.bounds.size.width - 30, cell.bounds.size.height - 10);
     }

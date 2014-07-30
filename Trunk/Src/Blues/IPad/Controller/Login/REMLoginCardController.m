@@ -282,7 +282,6 @@
     
     //text label
     NSString *promptLabelText = REMIPadLocalizedString(@"Login_LoginPrompt");
-    //UIFont *promptLabelFont = [UIFont systemFontOfSize:kDMLogin_LoginCardPromptLabelFontSize];
     CGSize promptLabelSize = [promptLabelText sizeWithFont:promptLabelFont];
     UILabel *promptLabel = [[UILabel alloc] initWithFrame:CGRectMake(kDMLogin_LoginCardPromptLabelLeftOffset, kDMLogin_LoginCardPromptLabelTopOffset, kDMLogin_LoginCardPromptLabelWidth, promptLabelSize.height)];
     promptLabel.text = promptLabelText;

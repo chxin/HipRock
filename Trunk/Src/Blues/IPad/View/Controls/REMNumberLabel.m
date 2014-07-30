@@ -43,7 +43,7 @@
         }
     }
     
-    UIFont *customFont = [REMFont fontWithKey:@(kBuildingFontKeyUltraLight) size:fontSize];
+    UIFont *customFont = [REMFont numberLabelFontOfSize:fontSize];
     self.font = customFont;
     
     [super drawRect:rect];

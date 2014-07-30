@@ -61,7 +61,7 @@
     [self addSubview:icon];
     CGFloat textMarginTop=marginTop+icon.frame.size.height-fs;
     UILabel *emptyLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin+icon.frame.size.width+8, textMarginTop, 1000, fs)];
-    emptyLabel.font=[REMFont fontWithKey:self.emptyTextFont size:fs];
+    emptyLabel.font=[REMFont defaultFontOfSize:fs];
     emptyLabel.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.5];
     if(self.emptyText ==nil){
         self.emptyText=REMIPadLocalizedString(@"Building_LabelNoData");
@@ -104,26 +104,11 @@
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.font = [REMFont fontWithKey:@kBuildingFontKeyTitle size:size];
-    
-    //self.titleLabel.font=[UIFont boldSystemFontOfSize:20];
+    titleLabel.font = [REMFont defaultFontOfSize:size];
     titleLabel.textColor=[UIColor whiteColor];
-    //NSLog(@"font:%@",[UIFont fontWithName:@(kBuildingFontSC) size:size]);
-    //CGSize expectedLabelSize = [text sizeWithFont:[UIFont fontWithName:@(kBuildingFontSC) size:size]];
     
-    //NSLog(@"valuesize:%@",NSStringFromCGSize(expectedLabelSize));
-    //self.titleLabel.contentMode = UIViewContentModeTopLeft;
     [self addSubview:titleLabel];
     self.titleLabel=titleLabel;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

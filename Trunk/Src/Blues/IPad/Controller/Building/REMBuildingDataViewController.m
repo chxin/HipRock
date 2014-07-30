@@ -102,7 +102,7 @@
         [btn setTitleColor:[REMColor colorByHexString:@"#00ff48"] forState:UIControlStateSelected];
         btn.titleLabel.textColor=[UIColor whiteColor];
         
-        [btn.titleLabel setFont:[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:12]];
+        [btn.titleLabel setFont:[REMFont defaultFontOfSize:12]];
         NSString *str = [self retrieveCommodityImageName:model];
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentCenter;
         //btn.showsTouchWhenHighlighted=YES;
@@ -154,7 +154,7 @@
         label.shadowOffset=CGSizeMake(1, 1);
         
         label.backgroundColor=[UIColor clearColor];
-        label.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:25];
+        label.font = [REMFont defaultFontOfSize:25];
         label.textColor=[[UIColor whiteColor] colorWithAlphaComponent:0.6];
         
         [self.view addSubview:label];

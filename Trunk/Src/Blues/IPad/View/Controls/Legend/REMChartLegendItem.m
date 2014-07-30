@@ -47,7 +47,7 @@
         //add label
         UILabel *label = [[UILabel alloc] init];
         label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont systemFontOfSize:kDMChart_LegendLabelFontSize];
+        label.font = [REMFont defaultFontOfSize:kDMChart_LegendLabelFontSize];
         label.text = model.title;
         label.textColor = [REMColor colorByHexString:kDMChart_LegendLabelFontColor];
         self.label = label;

@@ -23,6 +23,7 @@
     
     self.title = REMIPadLocalizedString(@"Setting_AboutViewTitle");
     
+    
     UIImage *image=[UIImage imageNamed:@"Logo_About"];
     UIImageView *imageView=[[UIImageView alloc]initWithImage:image];
     imageView.translatesAutoresizingMaskIntoConstraints = NO;

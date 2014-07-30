@@ -131,13 +131,20 @@
     UITableViewCell *cell;
     if(indexPath.section==0){
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
+        cell.textLabel.font = [REMFont defaultFontSystemSize];
+        cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+        
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text= REMIPadLocalizedString(@"Widget_TimePickerTime");// @"时间";
+        
         cell.detailTextLabel.text=self.relativeDate;
     }
     else{
         if(indexPath.row==0){
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
+            cell.textLabel.font = [REMFont defaultFontSystemSize];
+            cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+            
             cell.textLabel.text=REMIPadLocalizedString(@"Widget_TimePickerStart");// @"起始";
             NSString *text;
             text=[REMTimeHelper formatTimeFullHour:self.timeRange.startTime isChangeTo24Hour:NO];
@@ -150,6 +157,9 @@
         else{
             if(self.cellCount==2){
                 cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"datePickerCell"];
+                cell.textLabel.font = [REMFont defaultFontSystemSize];
+                cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+                
                 cell.textLabel.text=REMIPadLocalizedString(@"Widget_TimePickerEnd");// @"终止";
                 NSString *text=[REMTimeHelper formatTimeFullHour:(NSDate *)self.timeRange.endTime isChangeTo24Hour:YES];
                 if(self.showHour==NO){
@@ -161,6 +171,9 @@
             else{
                 if(cell==nil){
                     cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"datePickerScrollerCell"];
+                    cell.textLabel.font = [REMFont defaultFontSystemSize];
+                    cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+                    
                     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                     
                     

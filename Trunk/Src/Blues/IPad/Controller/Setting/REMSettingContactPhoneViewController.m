@@ -6,6 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMSettingContactPhoneViewController.h"
+#import "REMFont.h"
 
 @interface REMSettingContactPhoneViewController ()
 
@@ -73,6 +74,7 @@
     
     // Configure the cell...
     cell.textLabel.text = self.items[indexPath.row];
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
     
     return cell;
 }

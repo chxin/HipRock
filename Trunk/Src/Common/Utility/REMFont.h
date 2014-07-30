@@ -7,8 +7,15 @@
 --------------------------------------------------------------------------*/
 #import <Foundation/Foundation.h>
 
+#define kSystemFontSize 17.0
+#define REMNavigationItemFontAttribute @{ NSFontAttributeName: [REMFont defaultFontOfSize:kSystemFontSize], }
+#define REMNavigationTitleFontAttribute @{ NSFontAttributeName: [REMFont defaultFontOfSize:kSystemFontSize], }
+
 @interface REMFont : NSObject
 +(UIFont *)defaultFontOfSize:(CGFloat)size;
-+(UIFont *)defaultFontSize;
-+(UIFont *)fontWithKey:(NSString *)key size:(CGFloat)size;
++(UIFont *)defaultFont;
++(UIFont *)defaultFontSystemSize;
++(UIFont *)numberLabelFontOfSize:(CGFloat)size;
+
+//+(UIFont *)fontWithKey:(NSString *)key size:(CGFloat)size;
 @end

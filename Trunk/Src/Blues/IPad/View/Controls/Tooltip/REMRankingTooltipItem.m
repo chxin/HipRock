@@ -77,7 +77,7 @@
 -(UILabel *)renderNumeratorLabel
 {
     NSString *text = [NSString stringWithFormat:@"%d",self.rankingModel.numerator];
-    UIFont *font = [UIFont systemFontOfSize:kDMChart_RankingTooltipNumeratorFontSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDMChart_RankingTooltipNumeratorFontSize];
     CGSize size = [text sizeWithFont:font];
     CGRect frame = CGRectMake(0, 0, size.width, size.height);
     
@@ -95,7 +95,7 @@
 -(UILabel *)renderDenominatorLabel
 {
     NSString *text = [NSString stringWithFormat:@"/%d",self.rankingModel.denominator];
-    UIFont *font = [UIFont systemFontOfSize:kDMChart_RankingTooltipDenominatorFontSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDMChart_RankingTooltipDenominatorFontSize];
     CGSize size = [text sizeWithFont:font];
     CGRect frame = CGRectMake(self.numeratorLabel.frame.origin.x+self.numeratorLabel.frame.size.width, self.numeratorLabel.frame.origin.y + self.numeratorLabel.frame.size.height - size.height, size.width, size.height);
     
@@ -114,7 +114,7 @@
 {
     CGFloat titleLeftOffset = [self getRankingSize].width + kDMChart_RankingTooltipTitleLeftOffset;
     
-    UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemTitleFontSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDMChart_TooltipItemTitleFontSize];
     CGSize size = [@"a" sizeWithFont:font];
     CGRect frame = CGRectMake(titleLeftOffset, self.numeratorLabel.frame.origin.y, self.frame.size.width - titleLeftOffset, size.height);
     
@@ -134,7 +134,7 @@
     CGFloat labelLeftOffset = [self getRankingSize].width + kDMChart_RankingTooltipTitleLeftOffset;
     CGFloat labelTopOffset = kDMChart_TooltipItemTitleFontSize + 11;
     
-    UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     CGRect frame = CGRectMake(labelLeftOffset, labelTopOffset, self.frame.size.width - labelLeftOffset, height);
     
@@ -157,7 +157,7 @@
     NSString *text = [NSString stringWithFormat:@"%d",model.numerator];
     
     CGSize oldSize = self.numeratorLabel.frame.size;
-    CGSize newSize = [text sizeWithFont:[UIFont systemFontOfSize:kDMChart_RankingTooltipNumeratorFontSize]];
+    CGSize newSize = [text sizeWithFont:[REMFont defaultFontOfSize:kDMChart_RankingTooltipNumeratorFontSize]];
     
     CGFloat diff = newSize.width - oldSize.width;
     

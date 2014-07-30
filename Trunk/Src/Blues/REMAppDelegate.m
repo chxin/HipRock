@@ -26,6 +26,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[UINavigationBar appearance] setTitleTextAttributes:REMNavigationTitleFontAttribute];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:REMNavigationItemFontAttribute forState:UIControlStateNormal];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[REMFont defaultFontSystemSize]];
     
     // Log init
     [REMLog bind];

@@ -115,6 +115,9 @@
     cell.textLabel.text = self.dataKeys[indexPath.row];
     cell.tag = [self.dataValues[indexPath.row] shortValue];
     
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
+    cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+    
     return cell;
 }
 

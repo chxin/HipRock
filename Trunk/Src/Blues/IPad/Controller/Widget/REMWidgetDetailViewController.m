@@ -142,7 +142,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     if (shareTitle!=nil) {
         NSRange shareRange=[fullTitle rangeOfString:shareTitle];
         [attrString addAttribute:NSForegroundColorAttributeName value:[REMColor colorByHexString:@"#a2a2a2"] range:shareRange];
-        [attrString addAttribute:NSFontAttributeName value:[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kWidgetShareTitleFontSize] range:shareRange];
+        [attrString addAttribute:NSFontAttributeName value:[REMFont defaultFontOfSize:kWidgetShareTitleFontSize] range:shareRange];
         NSMutableParagraphStyle *paraStyle=[[NSMutableParagraphStyle alloc]init];
         paraStyle.lineBreakMode=NSLineBreakByClipping;
         paraStyle.alignment=NSTextAlignmentLeft;
@@ -151,7 +151,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     }
     NSRange widgetTitleRange=[fullTitle rangeOfString:widgetTitle];
     [attrString addAttribute:NSForegroundColorAttributeName value:[REMColor colorByHexString:@"#37ab3c"] range:widgetTitleRange];
-    [attrString addAttribute:NSFontAttributeName value:[REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kWidgetTitleFontSize] range:widgetTitleRange];
+    [attrString addAttribute:NSFontAttributeName value:[REMFont defaultFontOfSize:kWidgetTitleFontSize] range:widgetTitleRange];
     NSMutableParagraphStyle *titleParaStyle=[[NSMutableParagraphStyle alloc]init];
     
     titleParaStyle.lineBreakMode=NSLineBreakByClipping;

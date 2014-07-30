@@ -70,7 +70,7 @@
 
 -(UILabel *)renderTitleLabel:(REMChartTooltipItemModel *)model
 {
-    UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemTitleFontSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDMChart_TooltipItemTitleFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     //CGRect frame = CGRectMake(0, ((kDMChart_IndicatorSize - height)/2), self.frame.size.width - 2*(kDMChart_IndicatorSize+kDMChart_TooltipItemTitleLeftOffset), height);
     CGRect frame = CGRectMake(kDMChart_TooltipItemTitleLeftOffset, kDMChart_TooltipItemTitleTopOffset, self.frame.size.width, height);
@@ -86,7 +86,7 @@
 
 -(UILabel *)renderDataValueLabel:(REMChartTooltipItemModel *)model
 {
-    UIFont *font = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
+    UIFont *font = [REMFont defaultFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     CGFloat height = [@"a" sizeWithFont:font].height;
     
     //CGRectMake(0, self.indicator.frame.origin.y + kDMChart_IndicatorSize + kDMChart_TooltipItemDataValueTopOffset, self.frame.size.width, height)
@@ -115,10 +115,10 @@
     
     //NSLog(@"valueRange:%@,uomRange:%@", NSStringFromRange(valueRange), NSStringFromRange(uomRange));
     
-    UIFont *valueFont = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueFontSize];
+    UIFont *valueFont = [REMFont defaultFontOfSize:kDMChart_TooltipItemDataValueFontSize];
     UIColor *valueColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueColor];
     
-    UIFont *uomFont = [UIFont systemFontOfSize:kDMChart_TooltipItemDataValueUomFontSize];
+    UIFont *uomFont = [REMFont defaultFontOfSize:kDMChart_TooltipItemDataValueUomFontSize];
     UIColor *uomColor = [REMColor colorByHexString:kDMChart_TooltipItemDataValueUomColor];
     
     NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:text];

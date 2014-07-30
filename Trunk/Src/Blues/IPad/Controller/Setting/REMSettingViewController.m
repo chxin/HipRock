@@ -54,6 +54,7 @@
     
     self.title = REMIPadLocalizedString(@"Setting_SettingViewTitle");
     
+    
     UIBarButtonItem *button = [[UIBarButtonItem alloc] init];
     [button setTitle:REMIPadLocalizedString(@"Common_Done")];
     
@@ -104,10 +105,13 @@
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
+    cell.detailTextLabel.font = [REMFont defaultFontSystemSize];
+    
     REMApplicationContext *context=REMAppContext;
     // weibo account binding cell
     if (indexPath.section == 1 && indexPath.item == 0) {
-        [[cell textLabel]setText:REMIPadLocalizedString(@"Setting_BindWeibo")]; //绑定新浪微博
+        [[cell textLabel] setText:REMIPadLocalizedString(@"Setting_BindWeibo")]; //绑定新浪微博
         cell.detailTextLabel.text=@"";
         UISwitch *switcher= [[UISwitch alloc]initWithFrame:CGRectZero];
         cell.accessoryView=switcher;
@@ -178,23 +182,8 @@
         cell1.textLabel.text=REMIPadLocalizedString(@"Setting_Logout");//@"退出登录";
         cell1.textLabel.textColor=[UIColor redColor];
         cell1.textLabel.textAlignment=NSTextAlignmentCenter;
+        cell1.textLabel.font = [REMFont defaultFontSystemSize];
         return cell1;
-        //NSLog(@"frame:%@",NSStringFromCGRect(cell.contentView.frame));
-        //NSLog(@"bounds:%@",NSStringFromCGRect(cell.contentView.frame));
-        
-        
-        /*
-         UIButton *logout= [UIButton buttonWithType:UIButtonTypeRoundedRect];
-         [logout setFrame: CGRectMake(0, 0, 480, cell.contentView.frame.size.height)];
-         
-         logout.layer.borderWidth=0;
-         
-         
-         [logout setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-         [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-         logout.contentMode=UIViewContentModeScaleAspectFit;
-         [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
-         [cell.contentView addSubview:logout];*/
     }
     else if(indexPath.section==3 && indexPath.row==0){
         cell.textLabel.text=REMIPadLocalizedString(@"Setting_UpdateAll"); //@"更新全部数据";

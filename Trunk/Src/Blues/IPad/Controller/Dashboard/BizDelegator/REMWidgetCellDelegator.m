@@ -63,7 +63,7 @@
     UILabel *time=[[UILabel alloc]initWithFrame:CGRectMake(self.title.frame.origin.x, self.title.frame.origin.y+self.title.frame.size.height+kDashboardWidgetTimeTopMargin, self.view.frame.size.width, kDashboardWidgetTimeSize)];
     time.backgroundColor=[UIColor clearColor];
     time.textColor=[REMColor colorByHexString:@"#5e5e5e"];
-    time.font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kDashboardWidgetTimeSize];
+    time.font = [REMFont defaultFontOfSize:kDashboardWidgetTimeSize];
     time.text=[self cellTimeTitle];
     [self.view addSubview:time];
     self.timeLabel=time;

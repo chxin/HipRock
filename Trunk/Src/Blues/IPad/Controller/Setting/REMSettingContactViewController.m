@@ -7,6 +7,7 @@
 --------------------------------------------------------------------------*/
 #import "REMSettingContactViewController.h"
 #import "REMSettingContactSendMailController.h"
+#import "REMFont.h"
 
 @interface REMSettingContactViewController ()
 
@@ -83,6 +84,7 @@
     
     NSString *text = self.items[indexPath.row];
     cell.textLabel.text = text;
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
     
     if(indexPath.row !=0){
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

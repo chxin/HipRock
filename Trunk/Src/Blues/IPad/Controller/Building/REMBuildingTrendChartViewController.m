@@ -96,6 +96,8 @@ const int buttonFirstMargin = -20;
     [btn setTitle:buttonText forState:UIControlStateNormal];
     [self.view addSubview:btn];
     [toggleGroup registerButton:btn];
+    
+    btn.titleLabel.font = [REMFont defaultFontSystemSize];
     return btn;
 }
 

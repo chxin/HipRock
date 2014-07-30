@@ -6,6 +6,7 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import "REMSplashContactViewController.h"
+#import "REMFont.h"
 
 @interface REMSplashContactViewController ()
 
@@ -83,6 +84,7 @@
     
     NSString *text = self.items[indexPath.row];
     cell.textLabel.text = text;
+    cell.textLabel.font = [REMFont defaultFontSystemSize];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     // Configure the cell...
     if(indexPath.row == 1){

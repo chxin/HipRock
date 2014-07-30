@@ -404,7 +404,7 @@
     titleLabel.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.font = [REMFont fontWithKey:@(kBuildingFontKeyRegular) size:kBuildingCommodityTitleFontSize];
+    titleLabel.font = [REMFont defaultFontOfSize:kBuildingCommodityTitleFontSize];
     titleLabel.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel];
     
@@ -561,7 +561,7 @@
     titleLabel1.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel1.backgroundColor=[UIColor clearColor];
-    titleLabel1.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kBuildingCommodityTitleFontSize];
+    titleLabel1.font = [REMFont defaultFontOfSize:kBuildingCommodityTitleFontSize];
     titleLabel1.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel1];
     self.firstChartTitleLabel=titleLabel1;
@@ -599,7 +599,7 @@
     titleLabel2.shadowOffset=CGSizeMake(1, 1);
     
     titleLabel2.backgroundColor=[UIColor clearColor];
-    titleLabel2.font = [REMFont fontWithKey:@(kBuildingFontKeyTitle) size:kBuildingCommodityTitleFontSize];
+    titleLabel2.font = [REMFont defaultFontOfSize:kBuildingCommodityTitleFontSize];
     titleLabel2.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel2];
     self.secondChartTitleLabel=titleLabel2;

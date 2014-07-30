@@ -27,6 +27,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    
     [self.view setBackgroundColor:[UIColor grayColor]];
     //self.logoImageVIew.image = REMAppCurrentLogo;
     UIImageView *image=[[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
