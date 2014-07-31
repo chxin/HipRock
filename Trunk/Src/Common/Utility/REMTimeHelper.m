@@ -694,7 +694,11 @@ static NSCalendar *_currentCalendar;
 +(NSCalendar *)currentCalendar
 {
     if(_currentCalendar == nil){
+        NSString *language = [NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]];
+        NSLocale *locale = [NSLocale localeWithLocaleIdentifier:language];
+        
         _currentCalendar = [NSCalendar currentCalendar];
+        _currentCalendar.locale = locale;
         [_currentCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"] ];
     }
     
