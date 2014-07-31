@@ -114,16 +114,16 @@ const static CGFloat widgetGap=20;
     
     //[self addBloodCell];
 //    if(__IPHONE_7_0 == YES){
-//        UIScreenEdgePanGestureRecognizer *rec=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
-//        rec.edges=UIRectEdgeLeft;
-//        [self.view addGestureRecognizer:rec];
-//        UIScreenEdgePanGestureRecognizer *rec1=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
-//        rec1.edges=UIRectEdgeRight;
-//        [self.view addGestureRecognizer:rec1];
+        UIScreenEdgePanGestureRecognizer *rec=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        rec.edges=UIRectEdgeLeft;
+        [self.view addGestureRecognizer:rec];
+        UIScreenEdgePanGestureRecognizer *rec1=[[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
+        rec1.edges=UIRectEdgeRight;
+        [self.view addGestureRecognizer:rec1];
 //    }
 //    else{
-        REMScreenEdgetGestureRecognizer *rec=[[REMScreenEdgetGestureRecognizer alloc]initWithTarget:self action:@selector(panthis:)];
-        [self.view addGestureRecognizer:rec];
+//        UIScreenEdgePanGestureRecognizer *rec=[[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(panthis:)];
+//        [self.view addGestureRecognizer:rec];
 //    }
     
 }
