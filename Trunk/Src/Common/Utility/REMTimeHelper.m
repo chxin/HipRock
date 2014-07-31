@@ -516,10 +516,11 @@ static NSDateFormatter *_formatter;
     if(_formatter == nil){
         _formatter = [[NSDateFormatter alloc] init];
         
-        NSString *language = [NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]];
-        NSLocale *locale = [NSLocale localeWithLocaleIdentifier:language];
+//        NSString *language = [NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]];
+//        NSLocale *locale = [NSLocale localeWithLocaleIdentifier:language];
+        //[NSLocale localeWithLocaleIdentifier:[NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]]];
         
-        [_formatter setLocale:locale];
+//        [_formatter setLocale:locale];
         [_formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     }
     

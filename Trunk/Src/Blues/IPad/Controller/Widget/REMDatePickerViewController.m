@@ -187,7 +187,7 @@
                 }
                 UIDatePicker *picker=[[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width+60-hourPickerWidth, cell.frame.size.height)];
                 [picker setDatePickerMode:UIDatePickerModeDate];
-
+                [picker setLocale:[NSLocale localeWithLocaleIdentifier:[NSLocale canonicalLanguageIdentifierFromString:[NSLocale preferredLanguages][0]]]];
                 
                 [picker setMinimumDate:[self minDate]];
                 
