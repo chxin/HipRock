@@ -31,7 +31,7 @@
     if (x == 0) return self.baseDate.copy;
     REMEnergyStep step = self.step;
     NSDate* startDate = self.baseDate;
-    if (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
+    if (step == REMEnergyStepRaw || step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek) {
         float i = (step == REMEnergyStepRaw ? 900.0 : (step == REMEnergyStepHour ? 3600.0 : (step == REMEnergyStepDay ? 86400.0 : 604800.0)));
         return[NSDate dateWithTimeInterval:i*x sinceDate:startDate];
     } else {
