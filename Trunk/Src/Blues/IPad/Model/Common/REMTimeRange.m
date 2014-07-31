@@ -64,11 +64,11 @@
         self.timeType = (NSNumber *)dictionary[@"timeType"];
         self.offset = (NSNumber *)dictionary[@"offset"];
         
-        if([self.timeType intValue] == 0){
+        if([self.timeType intValue] == 0 || [self.timeType intValue] == 1){
             self.startTime = [[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.startTime timeIntervalSince1970] - [self.offset longLongValue]];
             self.endTime=[[NSDate alloc]initWithTimeIntervalSince1970:[baseTime.endTime timeIntervalSince1970] - [self.offset longLongValue]];
         }
-        if([self.timeType intValue] == 1){
+        if([self.timeType intValue] == 2){
             self.startTime = [REMTimeHelper addMonthToDate:baseTime.startTime month:0-[self.offset longLongValue]];
             self.endTime = [REMTimeHelper addMonthToDate:baseTime.endTime month:0-[self.offset longLongValue]];
         }
