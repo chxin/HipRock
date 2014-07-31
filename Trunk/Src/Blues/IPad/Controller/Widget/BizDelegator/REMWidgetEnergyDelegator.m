@@ -204,8 +204,7 @@
     
     stepControl.tintColor=[UIColor grayColor];
     UIFont *font = [REMFont defaultFontOfSize:14];
-    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                           forKey:UITextAttributeFont];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font forKey:UITextAttributeFont];
     [stepControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
     self.stepControl=stepControl;
     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
@@ -664,6 +663,26 @@
     //TODO: need rollback tou button status
     if([self isElectricityCost]){
         self.isCostStacked = self.tempIsCostStacked;
+        
+        REMDataStoreType store = self.contentSyntax.dataStoreType;
+        
+        if(self.isCostStacked){
+            if(store == REMDSEnergyCost){
+                self.contentSyntax.dataStoreType = REMDSEnergyCostElectricity;
+            }
+            if(store == REMDSEnergyCostDistribute){
+                self.contentSyntax.dataStoreType = REMDSEnergyCostDistributeElectricity;
+            }
+        }
+        else{
+            if(store == REMDSEnergyCostElectricity){
+                self.contentSyntax.dataStoreType = REMDSEnergyCost;
+            }
+            if(store == REMDSEnergyCostDistributeElectricity){
+                self.contentSyntax.dataStoreType = REMDSEnergyCostDistribute;
+            }
+        }
+        
         [self updateTouButtonStyle];
         [self updateStepButton];
     }
