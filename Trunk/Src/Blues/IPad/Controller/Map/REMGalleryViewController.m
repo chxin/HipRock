@@ -19,7 +19,7 @@
 #import "REMGalleryCollectionViewController.h"
 #import "REMImages.h"
 #import "REMGalleryTableView.h"
-#import "REMCustomerLogoView.h"
+#import "REMCustomerLogoButton.h"
 
 
 @interface REMGalleryViewController ()
@@ -128,26 +128,10 @@
 -(void)addButtons
 {
     //add switch button
-    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    if (REMISIOS7) {
-        switchButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [switchButton setTintColor:[UIColor whiteColor]];
-    }
-    [switchButton setFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7( kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    switchButton.adjustsImageWhenHighlighted=NO;
-    if (!REMISIOS7) {
-        switchButton.showsTouchWhenHighlighted=YES;
-    }
-    [switchButton setImage:REMIMG_Map forState:UIControlStateNormal];
+    REMCustomerLogoButton *switchButton = [[REMCustomerLogoButton alloc] initWithIcon:REMIMG_Map];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
-    
-    REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
-    logoView.delegate = self;
-    
-    [self.view addSubview:logoView];
-    self.customerLogoView = logoView;
     
     UIButton *settingButton=self.settingButton;
     [self.view addSubview:settingButton];

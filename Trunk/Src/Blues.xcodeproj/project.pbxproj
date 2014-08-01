@@ -563,7 +563,7 @@
 		7AC40250196BBD9F0028B3CA /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40248196BBD9F0028B3CA /* Setting.png */; };
 		7AC40251196BBD9F0028B3CA /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40249196BBD9F0028B3CA /* Setting@2x.png */; };
 		7AC40254196BDF780028B3CA /* REMSettingContactInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */; };
-		7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */; };
+		7ADCFA63191B50820038A2A1 /* REMCustomerLogoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */; };
 		7AE89198195A6393004F4E2E /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89182195A6393004F4E2E /* CLIColor.m */; };
 		7AE89199195A6393004F4E2E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89184195A6393004F4E2E /* DDAbstractDatabaseLogger.m */; };
 		7AE8919A195A6393004F4E2E /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89186195A6393004F4E2E /* DDASLLogCapture.m */; };
@@ -1349,8 +1349,8 @@
 		7AC40249196BBD9F0028B3CA /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Setting@2x.png"; path = "Setting/Setting@2x.png"; sourceTree = "<group>"; };
 		7AC40252196BDF780028B3CA /* REMSettingContactInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactInformationViewController.h; sourceTree = "<group>"; };
 		7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactInformationViewController.m; sourceTree = "<group>"; };
-		7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoView.h; sourceTree = "<group>"; };
-		7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoView.m; sourceTree = "<group>"; };
+		7ADCFA61191B50820038A2A1 /* REMCustomerLogoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoButton.h; sourceTree = "<group>"; };
+		7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoButton.m; sourceTree = "<group>"; };
 		7AE89181195A6393004F4E2E /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
 		7AE89182195A6393004F4E2E /* CLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIColor.m; sourceTree = "<group>"; };
 		7AE89183195A6393004F4E2E /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
@@ -2676,8 +2676,8 @@
 				7A63E1B718B44CBD00A13464 /* REMToggleButton.m */,
 				7A63E1B818B44CBD00A13464 /* REMToggleButtonGroup.h */,
 				7A63E1B918B44CBD00A13464 /* REMToggleButtonGroup.m */,
-				7ADCFA61191B50820038A2A1 /* REMCustomerLogoView.h */,
-				7ADCFA62191B50820038A2A1 /* REMCustomerLogoView.m */,
+				7ADCFA61191B50820038A2A1 /* REMCustomerLogoButton.h */,
+				7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */,
 				7AEFD8661966864B00316D76 /* REMEnlargedButton.h */,
 				7AEFD8671966864B00316D76 /* REMEnlargedButton.m */,
 			);
@@ -4079,7 +4079,7 @@
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
 				7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */,
 				EFD947011839DCBB00E9EC50 /* _DCYAxisLabelLayer.m in Sources */,
-				7ADCFA63191B50820038A2A1 /* REMCustomerLogoView.m in Sources */,
+				7ADCFA63191B50820038A2A1 /* REMCustomerLogoButton.m in Sources */,
 				7A9EAA9918D2946300EF1B85 /* PathHelper.m in Sources */,
 				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,

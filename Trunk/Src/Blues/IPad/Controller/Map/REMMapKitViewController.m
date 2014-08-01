@@ -20,7 +20,7 @@
 #import "REMBlurredMapView.h"
 #import "REMUpdateAllManager.h"
 #import "REMManagedBuildingModel.h"
-#import "REMCustomerLogoView.h"
+#import "REMCustomerLogoButton.h"
 #import "REMAnnotation.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
 
@@ -28,7 +28,7 @@
 
 @property (nonatomic,weak) MKMapView *mapView;
 
-@property (nonatomic,weak) UIButton *switchButton;
+@property (nonatomic,weak) REMCustomerLogoButton *switchButton;
 @property (nonatomic,weak) UIView *customerLogoView;
 @property (nonatomic,weak) REMBlurredMapView *mask;
 
@@ -83,17 +83,7 @@
 -(void)loadButtons
 {
     //add switch button
-    UIButton *switchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    if (REMISIOS7) {
-        switchButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [switchButton setTintColor:[UIColor whiteColor]];
-    }
-    [switchButton setFrame:CGRectMake(kDMCommon_TopLeftButtonLeft, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop),kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    switchButton.adjustsImageWhenHighlighted=NO;
-    if (!REMISIOS7) {
-        switchButton.showsTouchWhenHighlighted=YES;
-    }
-    [switchButton setImage:REMIMG_Gallery forState:UIControlStateNormal];
+    REMCustomerLogoButton *switchButton = [[REMCustomerLogoButton alloc] initWithIcon:REMIMG_Gallery];
     [switchButton addTarget:self action:@selector(switchButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:switchButton];
@@ -101,26 +91,6 @@
     
     UIButton *settingButton=self.settingButton;
     [self.view addSubview:settingButton];
-}
-
-
--(void)renderCustomerLogo
-{
-    if(self.customerLogoView != nil){
-        [self.customerLogoView removeFromSuperview];
-        self.customerLogoView = nil;
-    }
-    
-    REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft,REMDMCOMPATIOS7(kDMCommon_CustomerLogoTop),kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
-    logoView.delegate = self;
-    
-    [self.view addSubview:logoView];
-    self.customerLogoView = logoView;
-}
-
--(void)logoPressed
-{
-    [self switchButtonPressed];
 }
 
 #pragma mark - Business
@@ -179,8 +149,7 @@
         [self.switchButton setEnabled:YES];
     }
     
-    [self renderCustomerLogo];
-    
+    [self.switchButton refresh];
     [self initMarkers];
     [self updateCamera];
 }

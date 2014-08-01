@@ -12,7 +12,7 @@
 #import "REMDimensions.h"
 #import "REMBuildingConstants.h"
 #import "REMManagedBuildingPictureModel.h"
-#import "REMCustomerLogoView.h"
+#import "REMCustomerLogoButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
@@ -267,21 +267,10 @@
 }
 
 - (void)initButtons{
-    
-   
-    UIButton *backButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    if (REMISIOS7) {
-        backButton=[UIButton buttonWithType:UIButtonTypeSystem];
-        [backButton setTintColor:[UIColor whiteColor]];
-    }
-    [backButton setFrame: CGRectMake(kDMCommon_TopLeftButtonLeft, kDMCommon_TopLeftButtonTop,kDMCommon_TopLeftButtonWidth,kDMCommon_TopLeftButtonHeight)];
-    if (!REMISIOS7) {
-        backButton.showsTouchWhenHighlighted=YES;
-    }
-    backButton.adjustsImageWhenHighlighted=NO;
-    //backButton.showsTouchWhenHighlighted=YES;
-    backButton.titleLabel.text=@"Back";
-    [backButton setImage:REMIMG_Back forState:UIControlStateNormal];
+    REMCustomerLogoButton *backButton = [[REMCustomerLogoButton alloc] initWithIcon:REMIMG_Back];
+    CGRect frame = backButton.frame;
+    frame.origin.y = kDMCommon_CustomerLogoTop;
+    [backButton setFrame: frame];
     [backButton addTarget:self.parentViewController action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self.container addSubview:backButton];
@@ -302,7 +291,7 @@
         shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
-    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, backButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
+    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, settingButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;
@@ -354,25 +343,6 @@
     [self.container addSubview:titleLabel];
     
     self.buildingTitleView=titleLabel;
-    
-    
-//    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageWithData:REMAppContext.currentCustomer.logoImage]];
-//    [logoView setFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
-//    logoView.contentMode = UIViewContentModeLeft | UIViewContentModeScaleAspectFit;
-    
-    REMCustomerLogoView *logoView = [[REMCustomerLogoView alloc] initWithFrame:CGRectMake(kDMCommon_CustomerLogoLeft, kDMCommon_CustomerLogoTop, kDMCommon_CustomerLogoWidth,kDMCommon_CustomerLogoHeight)];
-    logoView.delegate = self;
-    if (REMISIOS7) {
-        [logoView setTintColor:[UIColor whiteColor]];
-    }
-
-    [self.container addSubview:logoView];
-    self.logoButton=logoView;
-}
-
--(void)logoPressed
-{
-    [self.parentViewController performSelector:@selector(backButtonPressed)];
 }
 
 
