@@ -11,6 +11,7 @@
 #import "REMCommonHeaders.h"
 #import "REMSettingViewController.h"
 #import "REMStoryboardDefinitions.h"
+#import "REMEnlargedButton.h"
 
 @interface REMControllerBase ()
 
@@ -45,7 +46,7 @@
 }
 
 - (UIButton *)settingButton{
-    UIButton *button=[UIButton buttonWithType:UIButtonTypeCustom];
+    REMEnlargedButton *button=[REMEnlargedButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
         button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.tintColor=[UIColor whiteColor];
@@ -53,9 +54,13 @@
     else{
         button.showsTouchWhenHighlighted = YES;
     }
+    
+    CGRect frame = CGRectMake(967-kDMButtonExtending, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop)-kDMButtonExtending, kDMCommon_TopLeftButtonWidth+2*kDMButtonExtending, kDMCommon_TopLeftButtonHeight+2*kDMButtonExtending);
+    
     [button setImage:[UIImage imageNamed:@"Setting"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button setFrame:CGRectMake(967, REMDMCOMPATIOS7(kDMCommon_TopLeftButtonTop), kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
+    [button setFrame:frame];
+    
     return button;
 }
 

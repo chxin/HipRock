@@ -14,6 +14,7 @@
 #import "REMManagedBuildingPictureModel.h"
 #import "REMCustomerLogoButton.h"
 #import <QuartzCore/QuartzCore.h>
+#import "REMEnlargedButton.h"
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -286,12 +287,15 @@
     [self.container addSubview:settingButton];
     
     
-    UIButton *shareButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *shareButton=[REMEnlargedButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
-        shareButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        shareButton=[REMEnlargedButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
-    [shareButton setFrame:CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, settingButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)];
+    //CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, settingButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)
+    CGRect shareButtonFrame = CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, settingButton.frame.origin.y, kDMCommon_TopLeftButtonWidth + 2*kDMButtonExtending, kDMCommon_TopLeftButtonHeight + 2*kDMButtonExtending);
+    
+    [shareButton setFrame:shareButtonFrame];
     [shareButton setImage:REMIMG_Share_normal forState:UIControlStateNormal];
     //if (self.buildingInfo.commodityUsage.count == 0) {
     shareButton.enabled = NO;

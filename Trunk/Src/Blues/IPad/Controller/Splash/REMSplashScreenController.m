@@ -196,7 +196,7 @@
     CGSize button2Size = [contactUsText sizeWithFont:buttonFont];
     CGSize seperatorSize = [seperatorText sizeWithFont:buttonFont];
     
-    REMEnlargedButton *quickResponseCodeButton = [REMEnlargedButton buttonWithType:UIButtonTypeCustom];
+    UIButton *quickResponseCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     quickResponseCodeButton.titleLabel.font = buttonFont;
     quickResponseCodeButton.frame = CGRectMake(0, 0/*(button1Size.height-accessablityHeight)/2*/, button1Size.width, accessablityHeight);
     [quickResponseCodeButton setTitle:qrCodeText forState:UIControlStateNormal];
@@ -212,7 +212,7 @@
     seperatorLabel.textColor = [UIColor whiteColor];
     seperatorLabel.backgroundColor = [UIColor clearColor];
     
-    REMEnlargedButton *contactUsButton = [REMEnlargedButton buttonWithType:UIButtonTypeCustom];
+    UIButton *contactUsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     contactUsButton.titleLabel.font = buttonFont;
     contactUsButton.frame = CGRectMake(seperatorLabel.frame.origin.x + seperatorSize.width + 18, 0/*(button2Size.height-accessablityHeight)/2*/, button2Size.width, accessablityHeight);
     [contactUsButton setTitle:contactUsText forState:UIControlStateNormal];
