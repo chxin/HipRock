@@ -6,10 +6,11 @@
  * Copyright    : Schneider Electric (China) Co., Ltd.
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
+#import "REMButton.h"
 
 
 
-@interface REMCustomerLogoButton : UIButton
+@interface REMCustomerLogoButton : REMButton
 
 - (id)initWithIcon:(UIImage *)iconImage;
 - (void)refresh;

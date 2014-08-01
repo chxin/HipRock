@@ -26,6 +26,7 @@
     if (self) {
         [self setImage:iconImage forState:UIControlStateNormal];
         self.iconImage = iconImage;
+        self.extendingInsets = UIEdgeInsetsMake(12, 5, 12, 5);
         
         [self renderCustomerLogo];
     }
