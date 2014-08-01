@@ -26,6 +26,8 @@
 #import "REMWidgetCommoditySearchModel.h"
 #import "REMCommonHeaders.h"
 #import "REMWrapperFactor.h"
+#import "REMSegmentedControl.h"
+#import "REMButton.h"
 
 
 
@@ -124,11 +126,11 @@
     
     self.searchLegendViewContainer=searchLegendViewContainer;
     
-    UISegmentedControl *legendControl=[[UISegmentedControl alloc] initWithItems:@[@"search",@"legend"]];
+    REMSegmentedControl *legendControl=[[REMSegmentedControl alloc] initWithItems:@[@"search",@"legend"] andMargins:CGPointMake(5, 15)];
     //[legendControl setFrame:CGRectMake(kLegendSearchSwitcherLeft, kLegendSearchSwitcherTop, kLegendSearchSwitcherWidth, kLegendSearchSwitcherHeight)];
     
     
-    [legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
+    //[legendControl setSegmentedControlStyle:UISegmentedControlStylePlain];
     if (REMISIOS7) {
         [legendControl setImage:REMIMG_DateView_Chart forSegmentAtIndex:0];
         [legendControl setImage:REMIMG_Legend_Chart forSegmentAtIndex:1];
@@ -161,7 +163,8 @@
     self.legendSearchControl=legendControl;
     
     
-    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    REMButton *timePickerButton=[REMButton buttonWithType:UIButtonTypeCustom];
+    timePickerButton.extendingInsets = UIEdgeInsetsMake(12, 12, 12, 12);
     //[timePickerButton setFrame:CGRectMake(kWidgetDatePickerLeftMargin, kWidgetDatePickerTopMargin, kWidgetDatePickerWidth, kWidgetDatePickerHeight)];
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
@@ -198,7 +201,7 @@
     
     self.searchView=searchViewContainer;
     
-    UISegmentedControl *stepControl=[[UISegmentedControl alloc] initWithItems:@[]];
+    REMSegmentedControl *stepControl=[[REMSegmentedControl alloc] initWithItems:@[] andMargins:CGPointMake(5,15)];
     stepControl.translatesAutoresizingMaskIntoConstraints=NO;
     [searchViewContainer addSubview:stepControl];
     
@@ -208,7 +211,6 @@
     [stepControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
     self.stepControl=stepControl;
     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
-    
     
     
     
@@ -237,7 +239,8 @@
     if([self isElectricityCost]){
         UIFont *buttonFont = [REMFont defaultFontOfSize:14];
         NSString *buttonText = REMIPadLocalizedString(@"Chart_TouButton");
-        UIButton *touButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        REMButton *touButton = [REMButton buttonWithType:UIButtonTypeCustom];
+        touButton.extendingInsets = UIEdgeInsetsMake(15, 5, 15, 5);
         touButton.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
         touButton.titleLabel.font = buttonFont;
         touButton.translatesAutoresizingMaskIntoConstraints = NO;

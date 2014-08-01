@@ -7,6 +7,8 @@
 --------------------------------------------------------------------------*/
 #import <UIKit/UIKit.h>
 
-@interface REMEnlargedButton : UIButton
+@interface REMButton : UIButton
+
+@property (nonatomic) UIEdgeInsets extendingInsets;
 
 @end

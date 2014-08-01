@@ -15,8 +15,9 @@
 #import "DCLabelingWrapper.h"
 #import "DCLabelingChartView.h"
 #import "REMWrapperFactor.h"
+#import "REMButton.h"
 
-const static CGFloat kLabellingTimePickerWidth=105;
+const static CGFloat kLabellingTimePickerWidth=115;
 const static CGFloat kLabellingBenchmarkFontSize=20;
 
 @interface REMWidgetLabelingDelegator()
@@ -52,9 +53,11 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     
     [searchViewContainer setBackgroundColor:[REMColor colorByHexString:@"#f4f4f4"]];
     
-    UIButton *timePickerButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    REMButton *timePickerButton=[REMButton buttonWithType:UIButtonTypeCustom];
+    timePickerButton.extendingInsets = UIEdgeInsetsMake(12, 12, 12, 12);
     timePickerButton.layer.borderColor=[UIColor clearColor].CGColor;
     timePickerButton.layer.borderWidth=0;
+    
     timePickerButton.layer.cornerRadius=4;
     timePickerButton.translatesAutoresizingMaskIntoConstraints = NO;
     [timePickerButton setImage:REMIMG_DatePicker_Chart forState:UIControlStateNormal];

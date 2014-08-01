@@ -69,6 +69,7 @@ const int buttonFirstMargin = 0;
     
     for(int i=0;i<types.count;i++){
         REMToggleButton* btn = [REMToggleButton buttonWithType: UIButtonTypeCustom];
+        btn.extendingInsets = UIEdgeInsetsMake(12, 10, 12, 10);
         btn.tintColor=[UIColor whiteColor];
         btn.translatesAutoresizingMaskIntoConstraints = NO;
         btn.showsTouchWhenHighlighted = YES;

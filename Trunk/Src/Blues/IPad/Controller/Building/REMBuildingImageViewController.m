@@ -14,7 +14,7 @@
 #import "REMManagedBuildingPictureModel.h"
 #import "REMCustomerLogoButton.h"
 #import <QuartzCore/QuartzCore.h>
-#import "REMEnlargedButton.h"
+#import "REMButton.h"
 
 #define kBuildingImageLoadingKeyPrefix "buildingimage-%@"
 
@@ -287,9 +287,9 @@
     [self.container addSubview:settingButton];
     
     
-    UIButton *shareButton=[REMEnlargedButton buttonWithType:UIButtonTypeCustom];
+    UIButton *shareButton=[REMButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
-        shareButton=[REMEnlargedButton buttonWithType:UIButtonTypeSystem];
+        shareButton=[REMButton buttonWithType:UIButtonTypeSystem];
         [shareButton setTintColor:[UIColor whiteColor]];
     }
     //CGRectMake(settingButton.frame.origin.x-kDMCommon_TopLeftButtonWidth-kDMCommon_ContentLeftMargin, settingButton.frame.origin.y, kDMCommon_TopLeftButtonWidth, kDMCommon_TopLeftButtonHeight)

@@ -7,9 +7,9 @@
  --------------------------------------------------------------------------*///
 
 #import <UIKit/UIKit.h>
-//#import "REMToggleButtonGroup.h"
+#import "REMButton.h"
 
-@interface REMToggleButton : UIButton
+@interface REMToggleButton : REMButton
 
 @property (nonatomic, getter=isOn) BOOL on;
 @property (nonatomic, strong) id value;

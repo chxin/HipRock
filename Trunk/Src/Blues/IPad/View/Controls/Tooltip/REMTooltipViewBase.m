@@ -13,6 +13,7 @@
 #import "REMTrendChartTooltipView.h"
 #import "REMChartTooltipItem.h"
 #import "REMLabelingTooltipView.h"
+#import "REMButton.h"
 
 @interface REMTooltipViewBase()
 
@@ -113,7 +114,8 @@
     UIView *closeView = [[UIView alloc] initWithFrame:kDMChart_TooltipCloseViewFrame];
     closeView.backgroundColor = [REMColor colorByHexString:kDMChart_TooltipViewBackgroundColor];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    REMButton *button = [REMButton buttonWithType:UIButtonTypeCustom];
+    button.extendingInsets = UIEdgeInsetsMake(15, 15, 15, 15);
     [button setFrame:CGRectMake(kDMChart_TooltipCloseIconLeftOffset, kDMChart_TooltipCloseIconTopOffset, kDMChart_TooltipCloseIconSize,kDMChart_TooltipCloseIconSize)];
     [button setContentMode:UIViewContentModeCenter];
     [button setImage:REMIMG_Close_Chart forState:UIControlStateNormal];

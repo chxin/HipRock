@@ -22,7 +22,6 @@
 #import "REMUserValidationModel.h"
 #import "DCChartEnum.h"
 #import "DCXYChartBackgroundBand.h"
-#import "REMEnlargedButton.h"
 #import "REMSettingQRCodeController.h"
 #import "REMSplashContactViewController.h"
 

@@ -18,6 +18,10 @@
 #import "REMManagedDashboardModel.h"
 #import "REMManagedPinnedWidgetModel.h"
 #import "REMCommodityUsageValuePersistenceProcessor.h"
+#import "REMButton.h"
+
+
+
 @interface REMBuildingCommodityViewController ()
 
 
@@ -566,15 +570,15 @@
     [self.view addSubview:titleLabel1];
     self.firstChartTitleLabel=titleLabel1;
     UIImage *image=[UIImage imageNamed:@"ChartCustomization"];
-    UIButton *firstButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    REMButton *firstButton=[REMButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
-        firstButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        firstButton=[REMButton buttonWithType:UIButtonTypeSystem];
         firstButton.tintColor=[UIColor whiteColor];
     }
     else{
         firstButton.showsTouchWhenHighlighted=YES;
     }
-    
+    firstButton.extendingInsets = UIEdgeInsetsMake(15, 15, 15, 15);
     [firstButton setImage:image forState:UIControlStateNormal];
     [firstButton setFrame:CGRectMake(kBuildingChartWidth-40, marginTop, 32, 32)];
     firstButton.tag=0;
@@ -603,14 +607,15 @@
     titleLabel2.textColor=[UIColor whiteColor];
     [self.view addSubview:titleLabel2];
     self.secondChartTitleLabel=titleLabel2;
-    UIButton *secondButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    REMButton *secondButton=[REMButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
-        secondButton=[UIButton buttonWithType:UIButtonTypeSystem];
+        secondButton=[REMButton buttonWithType:UIButtonTypeSystem];
         secondButton.tintColor=[UIColor whiteColor];
     }
     else{
         secondButton.showsTouchWhenHighlighted=YES;
     }
+    secondButton.extendingInsets = UIEdgeInsetsMake(15, 15, 15, 15);
     [secondButton setImage:image forState:UIControlStateNormal];
     [secondButton setFrame:CGRectMake(kBuildingChartWidth-40, marginTop1, 32, 32)];
     secondButton.tag=1;

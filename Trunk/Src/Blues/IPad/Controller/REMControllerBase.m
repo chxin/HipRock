@@ -11,7 +11,7 @@
 #import "REMCommonHeaders.h"
 #import "REMSettingViewController.h"
 #import "REMStoryboardDefinitions.h"
-#import "REMEnlargedButton.h"
+#import "REMButton.h"
 
 @interface REMControllerBase ()
 
@@ -46,7 +46,7 @@
 }
 
 - (UIButton *)settingButton{
-    REMEnlargedButton *button=[REMEnlargedButton buttonWithType:UIButtonTypeCustom];
+    REMButton *button=[REMButton buttonWithType:UIButtonTypeCustom];
     if (REMISIOS7) {
         button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.tintColor=[UIColor whiteColor];

@@ -329,6 +329,7 @@
 		7A5A97381856D54E0084E228 /* share-weixin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5A97341856D54E0084E228 /* share-weixin.png */; };
 		7A5A97391856D54E0084E228 /* share-weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A5A97351856D54E0084E228 /* share-weixin@2x.png */; };
 		7A5E2D94177B41B0000F77F9 /* Main_IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A5E2D8B177B41B0000F77F9 /* Main_IPad.storyboard */; };
+		7A5F5ACF198B66DF00C4392D /* REMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A5F5ACE198B66DF00C4392D /* REMSegmentedControl.m */; };
 		7A62E33418DC1DB10029E908 /* REMBuildingPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A62E32B18DC1DB10029E908 /* REMBuildingPersistenceProcessor.m */; };
 		7A62E33518DC1DB10029E908 /* REMCommodityUsageValuePersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A62E32D18DC1DB10029E908 /* REMCommodityUsageValuePersistenceProcessor.m */; };
 		7A62E33618DC1DB10029E908 /* REMEnergyDataPersistenceProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A62E32F18DC1DB10029E908 /* REMEnergyDataPersistenceProcessor.m */; };
@@ -575,7 +576,7 @@
 		7AE891A0195A6393004F4E2E /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89194195A6393004F4E2E /* DDDispatchQueueLogFormatter.m */; };
 		7AE891A1195A6393004F4E2E /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89196195A6393004F4E2E /* DDMultiFormatter.m */; };
 		7AE8EEBC1835C9B4007D0020 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */; };
-		7AEFD8681966864B00316D76 /* REMEnlargedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD8671966864B00316D76 /* REMEnlargedButton.m */; };
+		7AEFD8681966864B00316D76 /* REMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD8671966864B00316D76 /* REMButton.m */; };
 		7AEFD86B19668F7000316D76 /* REMSettingQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD86A19668F7000316D76 /* REMSettingQRCodeController.m */; };
 		7AEFD86E19668FA400316D76 /* REMSettingContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD86D19668FA400316D76 /* REMSettingContactViewController.m */; };
 		7AEFD87119668FC800316D76 /* REMSettingContactSendMailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD87019668FC800316D76 /* REMSettingContactSendMailController.m */; };
@@ -974,6 +975,8 @@
 		7A5A97341856D54E0084E228 /* share-weixin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-weixin.png"; sourceTree = "<group>"; };
 		7A5A97351856D54E0084E228 /* share-weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-weixin@2x.png"; sourceTree = "<group>"; };
 		7A5E2D8C177B41B0000F77F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_IPad.storyboard; sourceTree = "<group>"; };
+		7A5F5ACD198B66DF00C4392D /* REMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSegmentedControl.h; sourceTree = "<group>"; };
+		7A5F5ACE198B66DF00C4392D /* REMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSegmentedControl.m; sourceTree = "<group>"; };
 		7A62E32A18DC1DB10029E908 /* REMBuildingPersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMBuildingPersistenceProcessor.h; path = PersistenceProcessor/REMBuildingPersistenceProcessor.h; sourceTree = "<group>"; };
 		7A62E32B18DC1DB10029E908 /* REMBuildingPersistenceProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMBuildingPersistenceProcessor.m; path = PersistenceProcessor/REMBuildingPersistenceProcessor.m; sourceTree = "<group>"; };
 		7A62E32C18DC1DB10029E908 /* REMCommodityUsageValuePersistenceProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMCommodityUsageValuePersistenceProcessor.h; path = PersistenceProcessor/REMCommodityUsageValuePersistenceProcessor.h; sourceTree = "<group>"; };
@@ -1373,8 +1376,8 @@
 		7AE89195195A6393004F4E2E /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
 		7AE89196195A6393004F4E2E /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
 		7AE8EEB21835C9B4007D0020 /* WeiboBana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WeiboBana.jpg; sourceTree = "<group>"; };
-		7AEFD8661966864B00316D76 /* REMEnlargedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMEnlargedButton.h; sourceTree = "<group>"; };
-		7AEFD8671966864B00316D76 /* REMEnlargedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMEnlargedButton.m; sourceTree = "<group>"; };
+		7AEFD8661966864B00316D76 /* REMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMButton.h; sourceTree = "<group>"; };
+		7AEFD8671966864B00316D76 /* REMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMButton.m; sourceTree = "<group>"; };
 		7AEFD86919668F7000316D76 /* REMSettingQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingQRCodeController.h; sourceTree = "<group>"; };
 		7AEFD86A19668F7000316D76 /* REMSettingQRCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingQRCodeController.m; sourceTree = "<group>"; };
 		7AEFD86C19668FA400316D76 /* REMSettingContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactViewController.h; sourceTree = "<group>"; };
@@ -2678,8 +2681,10 @@
 				7A63E1B918B44CBD00A13464 /* REMToggleButtonGroup.m */,
 				7ADCFA61191B50820038A2A1 /* REMCustomerLogoButton.h */,
 				7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */,
-				7AEFD8661966864B00316D76 /* REMEnlargedButton.h */,
-				7AEFD8671966864B00316D76 /* REMEnlargedButton.m */,
+				7AEFD8661966864B00316D76 /* REMButton.h */,
+				7AEFD8671966864B00316D76 /* REMButton.m */,
+				7A5F5ACD198B66DF00C4392D /* REMSegmentedControl.h */,
+				7A5F5ACE198B66DF00C4392D /* REMSegmentedControl.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -4087,6 +4092,7 @@
 				7A63E1E918B44CBD00A13464 /* REMEnergySeacherBase.m in Sources */,
 				EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */,
 				EFEBAE38185FFD5D00B76549 /* DCLabelingTooltipView.m in Sources */,
+				7A5F5ACF198B66DF00C4392D /* REMSegmentedControl.m in Sources */,
 				7A3290DF18D823EF00B3AE8A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				7A3290E318D823EF00B3AE8A /* UIImageView+AFNetworking.m in Sources */,
 				EF03DC201841C886004B9EFD /* _DCHPinchGestureRecognizer.m in Sources */,
@@ -4294,7 +4300,7 @@
 				7A63E25E18B44CBD00A13464 /* REMModalView.m in Sources */,
 				7AEFD86B19668F7000316D76 /* REMSettingQRCodeController.m in Sources */,
 				7A63E21318B44CBD00A13464 /* REMWidgetEnergyDelegator.m in Sources */,
-				7AEFD8681966864B00316D76 /* REMEnlargedButton.m in Sources */,
+				7AEFD8681966864B00316D76 /* REMButton.m in Sources */,
 				7A63E24718B44CBD00A13464 /* REMBuildingCommodityView.m in Sources */,
 				7AF9638318D6C63C005A8D12 /* AFURLRequestSerialization.m in Sources */,
 				7AE891A1195A6393004F4E2E /* DDMultiFormatter.m in Sources */,

@@ -17,6 +17,8 @@
 #import "REMBuildingCoverWidgetRelationModel.h"
 #import "REMManagedBuildingCommodityUsageModel.h"
 #import "REMManagedSharedModel.h"
+#import "REMButton.h"
+
 const static CGFloat kWidgetBackButtonLeft=25;
 const static CGFloat kWidgetBackButtonTop=16;
 //const static CGFloat kWidgetBackButtonWidthHeight=32;
@@ -88,12 +90,13 @@ const static CGFloat kWidgetShareTitleFontSize=14;
     [self.bizDelegator initBizView];
     
     if ([self.bizDelegator shouldPinToBuildingCover]==YES) {
-        UIButton *pinButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        REMButton *pinButton=[REMButton buttonWithType:UIButtonTypeCustom];
         if (REMISIOS7) {
-            pinButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            pinButton = [REMButton buttonWithType:UIButtonTypeSystem];
             pinButton.tintColor=[REMColor colorByHexString:@"#37ab3c"];
             
         }
+        pinButton.extendingInsets = UIEdgeInsetsMake(15, 15, 15, 5);
         CGFloat x=[self.bizDelegator xPositionForPinToBuildingCoverButton];
         
         [pinButton setFrame:CGRectMake(x, kWidgetBackButtonTop, 32, 32)];
