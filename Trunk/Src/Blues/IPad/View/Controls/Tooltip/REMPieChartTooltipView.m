@@ -168,7 +168,7 @@
         self.scrollView.contentOffset = CGPointZero;
         [self updateCenterItemLightenStatus:NO];
         
-        [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState animations:^{
             self.scrollView.contentOffset = destinationPoint;
         } completion:^(BOOL finished) {
             for(UIView *subview in self.scrollView.subviews){

@@ -371,9 +371,7 @@
             [self search];
         }
         else{
-            NSString *code = self.ownerController.serverError.code;
-            if([[code substringToIndex:2] isEqualToString:@"99"] == YES && [[code substringFromIndex:code.length-5 ] isEqualToString:@"02004"]==YES){
-            //if([self.ownerController.serverError.code isEqualToString:@"990001202004"]==YES){ //step error
+            if([self.ownerController.serverError matchesErrorCode:@"990001202004"]){
                 [self processStepErrorWithAvailableStep:self.ownerController.serverError.messages[0]];
             }
         }
