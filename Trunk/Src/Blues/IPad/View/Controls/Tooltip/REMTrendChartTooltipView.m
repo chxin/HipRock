@@ -21,6 +21,7 @@
 #import "DCTrendWrapper.h"
 
 
+
 @interface REMTrendChartTooltipView()
 
 @property (nonatomic,strong) NSMutableArray *tooltipItems;
@@ -49,7 +50,6 @@
  * Ranking
  */
 
-#define REMSeriesIsMultiTime ([self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]])
 
 -(REMTooltipViewBase *)initWithHighlightedPoints:(NSArray *)points atX:(id)x chartWrapper:(DAbstractChartWrapper *)chartWrapper  inEnergyData:(REMEnergyViewData *)data widget:(REMManagedWidgetModel *)widget andParameters:(REMWidgetSearchModelBase *)parameters
 {

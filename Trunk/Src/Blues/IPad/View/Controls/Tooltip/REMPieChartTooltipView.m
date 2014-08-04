@@ -14,6 +14,9 @@
 #import "REMTextIndicatorFormator.h"
 #import "DCPieDataPoint.h"
 #import "DCPieSeries.h"
+#import "REMTrendChartTooltipView.h"
+#import "REMWidgetMultiTimespanSearchModel.h"
+
 
 #define kPieTooltipItemBaseLeft (kDMChart_TooltipContentWidth - kDMChart_TooltipItemWidth) / 2
 #define REMPieTooltipItemFrame(i) CGRectMake(kPieTooltipItemBaseLeft + (i)*(kDMChart_TooltipItemWidth + kMDChart_TooltipItemLeftOffset), 0, kDMChart_TooltipItemWidth, kDMChart_TooltipContentHeight)
@@ -25,6 +28,8 @@
 
 @property (nonatomic) int highlightIndex;
 @property (nonatomic,weak) REMChartTooltipItem *centerItem;
+
+@property (nonatomic,weak) UILabel *targetLabel;
 
 @end
 
@@ -46,6 +51,8 @@
     if(self){
         [self renderItems2];
 //        [self renderPointer];
+        
+        [self renderTargetLabel];
     }
     
     return self;
@@ -204,6 +211,8 @@
             [self renderItems2];
         }];
     }
+    
+    self.targetLabel.text = ((DCPieDataPoint *)self.highlightedPoints[0]).target.name;
 }
 
 
@@ -253,6 +262,23 @@
     }
     
     [self updateCenterItemLightenStatus:YES];
+}
+
+-(void)renderTargetLabel
+{
+    if(REMSeriesIsMultiTime){
+        NSString *text = ((DCPieDataPoint *)self.highlightedPoints[0]).target.name;
+        
+        UILabel *targetLabel = [[UILabel alloc] initWithFrame:kDMChart_TooltipTimeViewFrame];
+        targetLabel.text = text == nil ? @" " : text;
+        targetLabel.textColor = [REMColor colorByHexString:kDMChart_TooltipTimeViewFontColor];
+        targetLabel.font = [REMFont defaultFontOfSize:kDMChart_TooltipTimeViewFontSize];
+        targetLabel.backgroundColor = [UIColor clearColor];
+        
+        [self.contentView addSubview:targetLabel];
+        
+        self.targetLabel = targetLabel;
+    }
 }
 
 

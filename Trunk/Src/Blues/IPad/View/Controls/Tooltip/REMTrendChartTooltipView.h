@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "REMTooltipViewBase.h"
 
+#define REMSeriesIsMultiTime ([self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]])
 
 @interface REMTrendChartTooltipView : REMTooltipViewBase
 

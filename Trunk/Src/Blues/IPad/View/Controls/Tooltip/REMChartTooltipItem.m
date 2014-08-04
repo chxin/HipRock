@@ -81,6 +81,8 @@
     label.font = font;
     label.textColor = model.color;
     
+    
+    
     return label;
 }
 

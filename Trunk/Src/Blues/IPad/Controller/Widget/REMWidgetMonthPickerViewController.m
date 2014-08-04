@@ -93,7 +93,8 @@
     NSUInteger year=[REMTimeHelper getYear:date withCalendar:[NSCalendar currentCalendar]];
     NSUInteger month=[REMTimeHelper getMonth:date withCalendar:[NSCalendar currentCalendar]];
     if (component==0) {
-        NSString *yearString = [NSString stringWithFormat:@"%d%@",row+1,REMIPadLocalizedString(@"Common_Year")];
+        NSDate *date = [REMTimeHelper dateFromYear:row+1 Month:1 Day:1];
+        NSString *yearString = [REMTimeHelper formatTime:date withFormat:REMIPadLocalizedString(@"Chart_X_Axis_Format_Year")]; //[NSString stringWithFormat:@"%d%@",row+1,REMIPadLocalizedString(@"Common_Year")];
         NSMutableAttributedString *attrString=[[NSMutableAttributedString alloc]initWithString:yearString];
         if (row == (year-1)) {
             NSRange range=NSMakeRange(0, yearString.length);
@@ -102,15 +103,17 @@
         return attrString;
     }
     else{
-        NSString *monthString = [NSString stringWithFormat:@"%d%@",row,REMIPadLocalizedString(@"Common_Month")];
+        if (row == 0) {
+            NSString *wholeYear=REMIPadLocalizedString(@"Common_WholeYear");
+            return [[NSAttributedString alloc]initWithString:wholeYear];
+        }
+        
+        NSDate *date = [REMTimeHelper dateFromYear:year Month:row Day:1];
+        NSString *monthString = [REMTimeHelper formatTime:date withFormat:REMIPadLocalizedString(@"Chart_X_Axis_Format_Month")];//[NSString stringWithFormat:@"%d%@",row,REMIPadLocalizedString(@"Common_Month")];
         NSMutableAttributedString *attrString=[[NSMutableAttributedString alloc]initWithString:monthString];
         NSRange range=NSMakeRange(0, monthString.length);
         if (row == month) {
             [attrString setAttributes:@{NSForegroundColorAttributeName:[UIColor blueColor]} range:range];
-        }
-        if (row == 0) {
-            NSString *wholeYear=REMIPadLocalizedString(@"Common_WholeYear");
-            return [[NSAttributedString alloc]initWithString:wholeYear];
         }
         return attrString;
     }
