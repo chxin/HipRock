@@ -77,6 +77,8 @@ const int buttonFirstMargin = 0;
         btn.value = types[i];
         [btn setTitle:REMIPadLocalizedString(texts[i]) forState:UIControlStateNormal];
         
+        [self.view addSubview:btn];
+        
         if(i == 0){
             [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0]];
             [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0]];
@@ -88,7 +90,6 @@ const int buttonFirstMargin = 0;
             [self.view addConstraint:[NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:previous attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
         }
         
-        [self.view addSubview:btn];
         [timeRangeButtons addObject:btn];
     }
     
