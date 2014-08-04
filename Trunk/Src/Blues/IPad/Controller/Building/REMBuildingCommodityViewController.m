@@ -559,7 +559,7 @@
     int chartContainerHeight=kBuildingChartHeight;
     NSString *title1=[self chartTitleByPosition:REMBuildingCoverWidgetPositionFirst];
     
-    UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
+    UILabel *titleLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop, 700, kBuildingCommodityTitleFontSize)];
     titleLabel1.text=title1;
     titleLabel1.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel1.shadowOffset=CGSizeMake(1, 1);
@@ -597,7 +597,7 @@
     CGFloat secondChartHeight=chartContainerHeight;
     NSString *title2=[self chartTitleByPosition:REMBuildingCoverWidgetPositionSecond];
     
-    UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop1, kBuildingCommodityDetailWidth, kBuildingCommodityTitleFontSize)];
+    UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(0, marginTop1, 700, kBuildingCommodityTitleFontSize)];
     titleLabel2.text=title2;
     titleLabel2.shadowColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
     titleLabel2.shadowOffset=CGSizeMake(1, 1);

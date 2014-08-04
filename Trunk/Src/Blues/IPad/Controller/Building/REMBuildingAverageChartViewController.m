@@ -26,7 +26,7 @@
 
 
 //static NSString *kBenchmarkTitle = @"目标值";
-static NSString *kAverageDataTitle = @"单位面积用%@";
+//static NSString *kAverageDataTitle = @"单位面积用%@";
 
 - (void)purgeMemory{
     [super purgeMemory];
