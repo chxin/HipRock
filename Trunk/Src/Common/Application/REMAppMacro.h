@@ -29,6 +29,7 @@
  *  Province array orderd by showing precedence
  */
 #define REMProvinceOrder @[@"北京",@"天津",@"河北",@"山西",@"内蒙古",@"辽宁",@"吉林",@"黑龙江",@"上海",@"江苏",@"浙江",@"安徽",@"福建",@"江西",@"山东",@"河南",@"湖北",@"湖南",@"广东",@"广西",@"海南",@"重庆",@"四川",@"贵州",@"云南",@"西藏",@"陕西",@"甘肃",@"青海",@"宁夏",@"新疆",@"香港",@"澳门",@"台湾",@"海外"]
+#define REMProvinceKeys @[@"Common_Province_Beijing",@"Common_Province_Tianjin",@"Common_Province_Hebei",@"Common_Province_Shanxi",@"Common_Province_InnerMongolia",@"Common_Province_Liaoning",@"Common_Province_Jilin",@"Common_Province_Heilongjiang",@"Common_Province_Shanghai",@"Common_Province_Jiangsu",@"Common_Province_Zhejiang",@"Common_Province_Anhui",@"Common_Province_Fujian",@"Common_Province_Jiangxi",@"Common_Province_Shandong",@"Common_Province_Henan",@"Common_Province_Hubei",@"Common_Province_Hunan",@"Common_Province_Guangdong",@"Common_Province_Guangxi",@"Common_Province_Hainan",@"Common_Province_Chongqing",@"Common_Province_Sichuan",@"Common_Province_Guizhou",@"Common_Province_Yunnan",@"Common_Province_Tibet",@"Common_Province_Shaanxi",@"Common_Province_Gansu",@"Common_Province_Qinghai",@"Common_Province_Ningxia",@"Common_Province_Xinjiang",@"Common_Province_HongKong",@"Common_Province_Macau",@"Common_Province_Taiwan",@"Common_Province_OutsideChinasBorder"]
 
 /**
  *  User validation regular expressions

@@ -13,7 +13,7 @@
 
 +(NSArray*) getStepIntervalRanges {
     NSMutableArray* intervalRanges = [[NSMutableArray alloc]init];
-    [intervalRanges addObject:[NSNull null]];   //    REMEnergyStepNone=0
+    [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(0, REMDAY)]];   //    REMEnergyStepNone=0
     [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(0, REMWEEK)]];    // REMEnergyStepHour=1,
     [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMDAY, REMMONTH*3 - REMDAY)]];// REMEnergyStepDay=2,
     [intervalRanges addObject:[NSValue valueWithRange:NSMakeRange(REMMONTH, NSUIntegerMax-REMMONTH)]];// REMEnergyStepMonth=3,

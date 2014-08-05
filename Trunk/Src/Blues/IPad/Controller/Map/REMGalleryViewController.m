@@ -84,21 +84,22 @@
     
     for(int i = 0; i<self.buildingInfoArray.count; i++){
         REMManagedBuildingModel *buildingInfo = self.buildingInfoArray[i];
-        NSString *province = buildingInfo.province;
         
-        int index = [self getProvinceIndex:province];
+        int index = [self getProvinceIndex:buildingInfo.province];
         
         if(index == -1){
-            province = @"海外";
-            index = REMProvinceOrder.count;
+            index = REMProvinceOrder.count-1;
         }
         
-        NSMutableArray *elements = REMIsNilOrNull(self.buildingGroups[province]) ? [[NSMutableArray alloc] init] : self.buildingGroups[province];
+        NSString *provinceKey = REMProvinceKeys[index];
+        //NSString *province = REMIPadLocalizedString(provinceKey);
+        
+        NSMutableArray *elements = REMIsNilOrNull(self.buildingGroups[provinceKey]) ? [[NSMutableArray alloc] init] : self.buildingGroups[provinceKey];
         
         [elements addObject:buildingInfo];
-        [tempKeys setObject:province atIndexedSubscript:index];
+        [tempKeys setObject:provinceKey atIndexedSubscript:index];
         
-        [self.buildingGroups setObject:elements forKey:province];
+        [self.buildingGroups setObject:elements forKey:provinceKey];
     }
     
     NSMutableArray *keys = [[NSMutableArray alloc] init];
@@ -228,7 +229,7 @@
     //REMGalleryGroupView *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_GalleryGroupCell forIndexPath:indexPath];
     REMGalleryGroupView *cell = [[REMGalleryGroupView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Nil];
     
-    [cell setGroupTitle:key];
+    [cell setGroupTitle:REMIPadLocalizedString(key)];
     [cell setCollectionView:collectionController.view];
     
     return cell;
@@ -314,14 +315,8 @@
     REMGalleryCollectionViewController *currentCollectionController = nil;
     
     for(UIViewController *controller in self.childViewControllers){
-        if([controller isKindOfClass:[REMGalleryCollectionViewController class]]){
+        if([controller isKindOfClass:[REMGalleryCollectionViewController class]] && [((REMGalleryCollectionViewController *)controller).buildingInfoArray containsObject:currentBuilding]){
             currentCollectionController = (REMGalleryCollectionViewController *)controller;
-            NSString *controllerKey = currentCollectionController.collectionKey;
-            
-            if(!REMIsNilOrNull(controllerKey) && [controllerKey isEqualToString:currentBuilding.province]){
-                currentCollectionController = (REMGalleryCollectionViewController *)controller;
-                break;
-            }
         }
     }
     
