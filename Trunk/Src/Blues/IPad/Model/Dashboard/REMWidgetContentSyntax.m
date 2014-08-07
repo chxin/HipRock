@@ -149,6 +149,9 @@
     else if([self.storeType isEqualToString:@"energy.CostElectricityUsage"]==YES){
         self.dataStoreType = REMDSEnergyCostElectricity;
     }
+    else if([self.storeType isEqualToString:@"energy.CostElectricityUsageDistribution"] == YES){
+        self.dataStoreType = REMDSEnergyCostDistributeElectricity;
+    }
     else if([self.storeType isEqualToString:@"energy.RatioUsage"]==YES){
         self.dataStoreType = REMDSEnergyRatio;
     }
@@ -166,6 +169,9 @@
         else{
             self.dataStoreType = REMDSEnergyRankingCost;
         }
+    }
+    else{
+        NSLog(@"%@",self.storeType);
     }
     
     NSArray *seriesStates = p[@"seriesStates"];

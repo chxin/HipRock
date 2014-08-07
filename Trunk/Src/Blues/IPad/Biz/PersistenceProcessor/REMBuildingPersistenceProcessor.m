@@ -237,6 +237,11 @@
             widget.sharedInfo = [self shareModelByDictionary:shareInfo];
             widget.sharedInfo.widget=widget;
         }
+        
+        if([widget getSyntax].contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeGrid){
+            continue;
+        }
+        
         widget.dashboard=dashboard;
 //        [dashboard addWidgetsObject:widget];
         [widget setDashboard:dashboard];
