@@ -23,7 +23,7 @@
 @property (nonatomic,weak) UIImageView *imageView;
 @property (nonatomic,weak) UIImageView *blurImageView;
 
-@property (nonatomic,weak) UIButton *backButton;
+@property (nonatomic,weak) REMCustomerLogoButton *backButton;
 @property (nonatomic,weak) UIView *glassView;
 @property (nonatomic,weak) UIView *container;
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
@@ -734,7 +734,7 @@
     }
     
     [newBgImage drawInRect:self.imageView.frame];
-    [[REMImageHelper imageWithView:self.backButton] drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.backButton.frame.size.width, self.backButton.frame.size.height)];
+    [[REMImageHelper imageWithView:self.backButton.logoView] drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.backButton.logoView.frame.size.width, self.backButton.logoView.frame.size.height)];
     [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
     [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];

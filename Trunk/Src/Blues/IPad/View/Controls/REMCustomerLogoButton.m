@@ -10,7 +10,6 @@
 
 @interface REMCustomerLogoButton ()
 
-@property (nonatomic,weak) UIButton *logoView;
 @property (nonatomic,strong) UIImage *iconImage;
 @property (nonatomic) BOOL _highlightFlag;
 
