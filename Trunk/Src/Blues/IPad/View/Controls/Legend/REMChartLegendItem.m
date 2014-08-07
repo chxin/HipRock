@@ -25,6 +25,8 @@
 @property (nonatomic) REMChartSeriesIndicatorType indicatorType;
 @property (nonatomic) BOOL canChangeSeriesType;
 
+@property (nonatomic,strong) NSString *seriesKey;
+
 @end
 
 
@@ -37,6 +39,8 @@
         self.seriesIndex = model.index;
         self.legendView = model.legendView;
         self.indicatorType = model.type;
+        
+        self.seriesKey = model.key;
         
         //add indicator
         REMChartSeriesIndicator *indicator = [REMChartSeriesIndicator indicatorWithType:model.type andColor:model.color];
@@ -116,7 +120,9 @@
         if (!REMIsNilOrNull(delegate)) {
             [delegate tapLegendIconOnIndex:self.seriesIndex];
             
-            self.indicatorType = [self nextIndicatorType];//self.indicatorType == REMChartSeriesIndicatorLine ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
+            DCSeriesStatus *newStatus = self.legendView.chartWrapper.seriesStates[self.seriesKey];
+            self.indicatorType = [self indicatorTypeWithSeriesType:newStatus.seriesType];
+            //self.indicatorType == REMChartSeriesIndicatorLine ? REMChartSeriesIndicatorColumn : REMChartSeriesIndicatorLine;
             [self.indicator renderWithType:self.indicatorType];
         }
     } else {
@@ -144,19 +150,38 @@
     }
 }
 
--(REMChartSeriesIndicatorType)nextIndicatorType
+-(REMChartSeriesIndicatorType)indicatorTypeWithSeriesType:(DCSeriesTypeStatus)status
 {
-    switch (self.indicatorType) {
-        case REMChartSeriesIndicatorLine:
-            return REMChartSeriesIndicatorColumn;
-        case REMChartSeriesIndicatorColumn:
-            return REMChartSeriesIndicatorStack;
-        case REMChartSeriesIndicatorStack:
+    switch (status) {
+        case DCSeriesTypeStatusNone:
             return REMChartSeriesIndicatorLine;
+        case DCSeriesTypeStatusLine:
+            return REMChartSeriesIndicatorLine;
+        case DCSeriesTypeStatusColumn:
+            return REMChartSeriesIndicatorColumn;
+        case DCSeriesTypeStatusStackedColumn:
+            return REMChartSeriesIndicatorStack;
+        case DCSeriesTypeStatusPie:
+            return REMChartSeriesIndicatorPie;
+            
         default:
             return REMChartSeriesIndicatorLine;
     }
 }
+
+//-(REMChartSeriesIndicatorType)nextIndicatorType
+//{
+//    switch (self.indicatorType) {
+//        case REMChartSeriesIndicatorLine:
+//            return REMChartSeriesIndicatorColumn;
+//        case REMChartSeriesIndicatorColumn:
+//            return REMChartSeriesIndicatorStack;
+//        case REMChartSeriesIndicatorStack:
+//            return REMChartSeriesIndicatorLine;
+//        default:
+//            return REMChartSeriesIndicatorLine;
+//    }
+//}
 
 -(void)updateState
 {
