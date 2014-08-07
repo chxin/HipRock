@@ -29,7 +29,7 @@
 @property (nonatomic,weak) CALayer *bottomGradientLayer;
 @property (nonatomic,weak) UILabel *buildingTypeTitleView;
 @property (nonatomic,weak) UILabel *buildingTitleView;
-@property (nonatomic,weak) UIView *logoButton;
+//@property (nonatomic,weak) UIView *logoButton;
 @property (nonatomic,strong) NSString *loadingImageKey;
 
 @property (nonatomic,weak) UIImageView *cropTitleView;
@@ -713,8 +713,6 @@
 {
     REMBuildingDataViewController *dataViewController=self.childViewControllers[0];
     
-    
-    
     NSDictionary *outputDic=[dataViewController realExport:isMail];
     UIImage* dataImage = [outputDic objectForKey:@"image"];
     float dataImageHeight = dataImage.size.height;
@@ -723,21 +721,20 @@
     CGFloat outputHeightWithoutFooter = dataImageHeight + kBuildingCommodityViewTop + kBuildingTitleHeight;
     CGFloat footerHeight = 98;
     UIImage *footerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WeiboBana" ofType:@"jpg"]];
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight),1,1);
-    [[UIColor blackColor]set];
-    UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
     
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(outputWidth, outputHeightWithoutFooter + footerHeight),1,1);
+    
+    [[UIColor blackColor] set];
+    
+    UIRectFill(CGRectMake(0, 0, outputWidth, outputHeightWithoutFooter + footerHeight));
     
     UIImage *newBgImage=[self getCachedImage:nil];
     if(newBgImage==nil){
         newBgImage = REMIMG_DefaultBuilding;
     }
     
-    
-    
-    
     [newBgImage drawInRect:self.imageView.frame];
-    [[REMImageHelper imageWithView:self.logoButton] drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.logoButton.frame.size.width, self.logoButton.frame.size.height)];
+    [[REMImageHelper imageWithView:self.backButton] drawInRect:CGRectMake(self.backButton.frame.origin.x, self.backButton.frame.origin.y, self.backButton.frame.size.width, self.backButton.frame.size.height)];
     [[REMImageHelper imageWithLayer:self.buildingTypeTitleView.layer] drawInRect:self.buildingTypeTitleView.frame];
     [[REMImageHelper imageWithLayer:self.buildingTitleView.layer] drawInRect:self.buildingTitleView.frame];
     //[[self getImageOfLayer:self.settingButton.layer]drawInRect:self.settingButton.frame];
@@ -748,11 +745,11 @@
     [dataImage drawInRect:CGRectMake(0, kBuildingCommodityViewTop + kBuildingTitleHeight, outputWidth, dataImageHeight)];
     
     [footerImage drawInRect:CGRectMake(0, outputHeightWithoutFooter, 800, footerHeight)];
-    [[REMImageHelper imageWithLayer:self.titleGradientLayer] drawInRect:self.titleGradientLayer.frame];
+    //[[REMImageHelper imageWithLayer:self.titleGradientLayer] drawInRect:self.titleGradientLayer.frame];
     UIImage* img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    
+    //UIImage *img = dataImage;
     
     //UIImage *compressedImage=[UIImage imageWithData:UIImagePNGRepresentation(img)];
     
