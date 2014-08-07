@@ -478,7 +478,6 @@
 		7A7B29911888C65000E74D3D /* UIView+FlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */; };
 		7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */; };
 		7A7B29951888C8DF00E74D3D /* SplashScreenBackgroud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */; };
-		7A88709F198F718E002B44F8 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A8870A1198F718E002B44F8 /* WeiboBana.jpg */; };
 		7A8AD89A19876E1F00F671EE /* REMManagedWidgetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A8AD89919876E1F00F671EE /* REMManagedWidgetModel.m */; };
 		7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2B177B3A8B00C282A8 /* main.m */; };
 		7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9B1E2F177B3A8B00C282A8 /* REMAppDelegate.m */; };
@@ -565,6 +564,7 @@
 		7AC40250196BBD9F0028B3CA /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40248196BBD9F0028B3CA /* Setting.png */; };
 		7AC40251196BBD9F0028B3CA /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC40249196BBD9F0028B3CA /* Setting@2x.png */; };
 		7AC40254196BDF780028B3CA /* REMSettingContactInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */; };
+		7AD046551993507E00AE1134 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AD046531993507E00AE1134 /* WeiboBana.jpg */; };
 		7ADCFA63191B50820038A2A1 /* REMCustomerLogoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */; };
 		7AE89198195A6393004F4E2E /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89182195A6393004F4E2E /* CLIColor.m */; };
 		7AE89199195A6393004F4E2E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89184195A6393004F4E2E /* DDAbstractDatabaseLogger.m */; };
@@ -1274,7 +1274,6 @@
 		7A7B29901888C65000E74D3D /* UIView+FlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FlipTransition.m"; sourceTree = "<group>"; };
 		7A7B29921888C8DF00E74D3D /* SplashScreenBackgroud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashScreenBackgroud.png; sourceTree = "<group>"; };
 		7A7B29931888C8DF00E74D3D /* SplashScreenBackgroud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SplashScreenBackgroud@2x.png"; sourceTree = "<group>"; };
-		7A8870A0198F718E002B44F8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "zh-Hans"; path = "zh-Hans.lproj/WeiboBana.jpg"; sourceTree = "<group>"; };
 		7A8AD89819876E1F00F671EE /* REMManagedWidgetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMManagedWidgetModel.h; sourceTree = "<group>"; };
 		7A8AD89919876E1F00F671EE /* REMManagedWidgetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMManagedWidgetModel.m; sourceTree = "<group>"; };
 		7A8EF18018DAE21200951CD4 /* REMConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMConstants.h; path = Common/Application/REMConstants.h; sourceTree = "<group>"; };
@@ -1353,6 +1352,8 @@
 		7AC40249196BBD9F0028B3CA /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Setting@2x.png"; path = "Setting/Setting@2x.png"; sourceTree = "<group>"; };
 		7AC40252196BDF780028B3CA /* REMSettingContactInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingContactInformationViewController.h; sourceTree = "<group>"; };
 		7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingContactInformationViewController.m; sourceTree = "<group>"; };
+		7AD046541993507E00AE1134 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "zh-Hans"; path = "zh-Hans.lproj/WeiboBana.jpg"; sourceTree = "<group>"; };
+		7AD046561993508700AE1134 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/WeiboBana.jpg; sourceTree = "<group>"; };
 		7ADCFA61191B50820038A2A1 /* REMCustomerLogoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoButton.h; sourceTree = "<group>"; };
 		7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoButton.m; sourceTree = "<group>"; };
 		7AE89181195A6393004F4E2E /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
@@ -3090,13 +3091,13 @@
 		7AE8EEA21835C9B4007D0020 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				7AD046531993507E00AE1134 /* WeiboBana.jpg */,
 				7A3C0B68196528030055FE90 /* Propaganda_1.jpg */,
 				7A3C0B6C196528100055FE90 /* Propaganda_1@2x.jpg */,
 				7A3C0B701965281A0055FE90 /* Propaganda_2.jpg */,
 				7A3C0B74196528220055FE90 /* Propaganda_2@2x.jpg */,
 				7A3C0B78196528290055FE90 /* Propaganda_3.jpg */,
 				7A3C0B7C196528320055FE90 /* Propaganda_3@2x.jpg */,
-				7A8870A1198F718E002B44F8 /* WeiboBana.jpg */,
 			);
 			name = Pictures;
 			path = Resource/Pictures;
@@ -3772,7 +3773,6 @@
 				7AA24AC1196E4090004A6CA8 /* MailTemplate_Commodity.html in Resources */,
 				6A61A71D1839B82000C6A228 /* Water_pressed.png in Resources */,
 				7A664FD9183B3369004B9FF3 /* MapPopover_Arrow@2x.png in Resources */,
-				7A88709F198F718E002B44F8 /* WeiboBana.jpg in Resources */,
 				6A61A7251839B82000C6A228 /* NotOverTarget.png in Resources */,
 				6A61A7081839B82000C6A228 /* Coal_normal@2x.png in Resources */,
 				7A5A97361856D54E0084E228 /* share-email.png in Resources */,
@@ -3825,6 +3825,7 @@
 				6A61A7151839B82000C6A228 /* Oil_pressed.png in Resources */,
 				B485EFED187BCF2900D16583 /* ChartCustomization.png in Resources */,
 				7A50ECCB19580A33007A945A /* Loading@2x.png in Resources */,
+				7AD046551993507E00AE1134 /* WeiboBana.jpg in Resources */,
 				7A7B29941888C8DF00E74D3D /* SplashScreenBackgroud.png in Resources */,
 				B41750E2188CC7600020AE8E /* Share_normal@2x.png in Resources */,
 				6A61A78A1839B82000C6A228 /* QualifiedPin_Normal@2x.png in Resources */,
@@ -4555,14 +4556,6 @@
 			name = Localizable_Common.strings;
 			sourceTree = "<group>";
 		};
-		7A8870A1198F718E002B44F8 /* WeiboBana.jpg */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7A8870A0198F718E002B44F8 /* zh-Hans */,
-			);
-			name = WeiboBana.jpg;
-			sourceTree = "<group>";
-		};
 		7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4570,6 +4563,15 @@
 				7A9BBF8F1952DF92000A45F5 /* zh-Hans */,
 			);
 			name = Localizable_Style.strings;
+			sourceTree = "<group>";
+		};
+		7AD046531993507E00AE1134 /* WeiboBana.jpg */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AD046541993507E00AE1134 /* zh-Hans */,
+				7AD046561993508700AE1134 /* en */,
+			);
+			name = WeiboBana.jpg;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

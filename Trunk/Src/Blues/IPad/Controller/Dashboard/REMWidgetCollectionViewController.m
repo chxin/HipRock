@@ -31,14 +31,6 @@ static NSString *cellId=@"widgetcell";
 
 -(NSArray *)widgets
 {
-//    if(_widgets == nil){
-//        _widgets = [self.dashboardInfo.widgets.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//            return [[obj1 id] compare:[obj2 id]];
-//        }];
-//    }
-    
-//    return _widgets;
-    
     return self.dashboardInfo.widgets.array;
 }
 
@@ -119,13 +111,9 @@ static NSString *cellId=@"widgetcell";
         [self addChildViewController:controller];
     }
     
-    
     [cell.contentView addSubview:controller.view];
     
-    
-    
     return cell;
-    
 }
 
 

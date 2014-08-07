@@ -32,7 +32,7 @@ const static CGFloat kWidgetShareTitleFontSize=14;
 
 @interface REMWidgetDetailViewController ()
 
-@property (nonatomic,weak) UIButton *backButton;
+@property (nonatomic,weak) REMCustomerLogoButton *backButton;
 @property (nonatomic,weak) UILabel *widgetTitleLabel;
 @property (nonatomic,weak) UISegmentedControl *legendControl;
 @property (nonatomic,weak) UISegmentedControl *stepControl;

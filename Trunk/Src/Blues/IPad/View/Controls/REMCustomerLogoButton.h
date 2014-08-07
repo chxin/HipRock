@@ -12,6 +12,8 @@
 
 @interface REMCustomerLogoButton : REMButton
 
+@property (nonatomic,weak) UIButton *logoView;
+
 - (id)initWithIcon:(UIImage *)iconImage;
 - (void)refresh;
 
