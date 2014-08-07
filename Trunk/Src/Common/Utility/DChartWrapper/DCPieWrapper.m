@@ -40,9 +40,10 @@
         [series0Data addObject:p];
     }
     DCPieSeries* series = [[DCPieSeries alloc]initWithEnergyData:series0Data];
+    BOOL isMultiChart = [self.wrapperConfig getIsMultiTimeEnergyAnalysisChart];
     for(NSUInteger i = 0; i < series.datas.count; i++) {
         DCPieDataPoint* slice = series.datas[i];
-        DCSeriesStatus* state = self.seriesStates[slice.pointKey];
+        DCSeriesStatus* state = isMultiChart ? nil : self.seriesStates[slice.pointKey];
         if (REMIsNilOrNull(state)) {
             state = [self getDefaultPointState:slice pointIndex:i];
             [self.seriesStates setObject:state forKey:slice.pointKey];

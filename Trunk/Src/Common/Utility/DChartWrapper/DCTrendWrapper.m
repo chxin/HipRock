@@ -174,7 +174,9 @@
     
     s.seriesKey = [self getSeriesKeyByTarget:s.target seriesIndex:index];
     s.groupName = [self.chartStrategy.groupingGen getGroupName:s.target];
-    DCSeriesStatus* state = self.seriesStates[s.seriesKey];
+    
+    BOOL isMultiChart = [self.wrapperConfig getIsMultiTimeEnergyAnalysisChart];
+    DCSeriesStatus* state = isMultiChart ? nil : self.seriesStates[s.seriesKey];
     if (REMIsNilOrNull(state)) {
         state = [self getDefaultSeriesState:s.target seriesIndex:index];
         [self.seriesStates setObject:state forKey:s.seriesKey];
