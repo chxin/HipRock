@@ -581,11 +581,11 @@
     [self.indicatorLayer setNeedsDisplay];
     [self._hGridlineLayer setNeedsDisplay];
     [self._xLabelLayer setNeedsDisplay];
-    [self._columnLayer redraw];
     for (_DCCoordinateSystem* s in self.coodinates) {
         [s recalculatorYMaxInRange:self.graphContext.hRange];
     }
     [self redrawBgBands];
+    [self._columnLayer redraw];
     [self._symbolLayer redraw];
     
     for (int i = 0; i < self.coodinates.count; i++) {

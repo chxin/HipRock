@@ -29,8 +29,8 @@
         NSString* format = nil;
         if (self.step == REMEnergyStepRaw) {
             date = [self.startDate dateByAddingTimeInterval:xVal*900];
-            if ([REMTimeHelper getHour:date] < self.interval && self.stepSupplementary) {
-                format = REMIPadLocalizedString(@"Chart_X_Axis_Format_Hour");
+            if ([REMTimeHelper getHour:date] * 4 + [REMTimeHelper getMinute:date]/15 < self.interval && self.stepSupplementary) {
+                format = REMIPadLocalizedString(@"Chart_X_Axis_Format_DayHour");
             } else {
                 format = REMIPadLocalizedString(@"Chart_X_Axis_Format_Minute");
             }

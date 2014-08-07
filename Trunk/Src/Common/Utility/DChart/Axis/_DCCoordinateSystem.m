@@ -134,7 +134,7 @@
     
     // Line序列
     for (DCXYSeries* series in self.seriesList) {
-        if (series.type != DCSeriesTypeLine || start >= series.datas.count) continue;
+        if (series.type != DCSeriesTypeLine || series.hidden || start >= series.datas.count) continue;
         int seriesEnd = (end >= series.datas.count ? (series.datas.count - 1) : end);
         if(!REMIsNilOrNull(series.visableYMaxThreshold) && currentYMax < series.visableYMaxThreshold.doubleValue) {
             currentYMax = series.visableYMaxThreshold.doubleValue;
