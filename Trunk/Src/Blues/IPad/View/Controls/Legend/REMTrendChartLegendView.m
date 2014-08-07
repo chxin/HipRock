@@ -40,6 +40,7 @@
         model.color = [series.color copy];
 //        model.isBenchmark = series.target.type == REMEnergyTargetBenchmarkValue;
         model.isDefaultHidden = series.hidden;
+        model.key = series.seriesKey;
         
         [models addObject:model];
     }

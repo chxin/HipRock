@@ -33,6 +33,7 @@
 //@property (nonatomic) BOOL isBenchmark;
 @property (nonatomic,weak) REMChartLegendBase *legendView;
 @property (nonatomic) BOOL isDefaultHidden;
+@property (nonatomic,strong) NSString *key;
 
 @end
 
