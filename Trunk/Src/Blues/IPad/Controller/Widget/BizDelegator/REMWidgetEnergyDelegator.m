@@ -828,7 +828,7 @@
 {
     [super rollbackWithError:error];
     
-    if([[error.code substringToIndex:2] isEqualToString:@"99"] == YES && [[error.code substringFromIndex:error.code.length-5 ] isEqualToString:@"02004"]==YES){
+    if([error matchesErrorCode:@"990001202004"]) {
     //if([error.code isEqualToString:@"990001202004"]==YES){ //step error
         [self processStepErrorWithAvailableStep:error.messages[0]];
     }

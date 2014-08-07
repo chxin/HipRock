@@ -241,8 +241,6 @@
 //        [dashboard addWidgetsObject:widget];
         [widget setDashboard:dashboard];
     }
-    
-
 }
 
 - (void)persistCommodity:(NSArray *)commodityArray intoBuilding:(REMManagedBuildingModel *)building{

@@ -64,7 +64,7 @@
     description1.text = REMIPadLocalizedString(@"Setting_QRCodeDescription");
     description1.font = [REMFont defaultFontOfSize:14.0];
     description1.textColor = [UIColor blackColor];
-    description1.numberOfLines = 2;
+    description1.numberOfLines = 4;
     description1.lineBreakMode = NSLineBreakByWordWrapping;
     description1.translatesAutoresizingMaskIntoConstraints = NO;
     description1.textAlignment = NSTextAlignmentCenter;
