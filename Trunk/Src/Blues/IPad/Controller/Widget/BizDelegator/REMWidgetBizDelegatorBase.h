@@ -14,6 +14,7 @@
 #import "REMBusinessErrorInfo.h"
 #import "REMWidgetDetailViewController.h"
 #import "REMManagedWidgetModel.h"
+#import "REMChartLegendBase.h"
 
 @interface REMWidgetBizDelegatorBase : NSObject
 
@@ -29,6 +30,7 @@
 @property (nonatomic,weak) REMWidgetDetailViewController *ownerController;
 @property (nonatomic,copy) NSString *status;
 @property (nonatomic,weak) UIView *chartContainer;
+@property (nonatomic,weak) REMChartLegendBase *legendView;
 
 + (REMWidgetBizDelegatorBase *)bizDelegatorByWidgetInfo:(REMManagedWidgetModel *)widgetInfo andSyntax:(REMWidgetContentSyntax *)contentSyntax;
 

@@ -862,10 +862,6 @@
 
 - (void)search{
     [self searchData:self.tempModel];
-    
-    if(self.contentSyntax.dataStoreType == REMDSEnergyMultiTimeTrend && self.legendView != nil){
-        [self.legendView refreshItemStatus];
-    }
 }
 
 -(void)legendSwitchSegmentPressed:(UISegmentedControl *)segment
