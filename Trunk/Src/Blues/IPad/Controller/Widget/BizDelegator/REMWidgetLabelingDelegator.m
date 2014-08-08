@@ -182,6 +182,23 @@ const static CGFloat kLabellingBenchmarkFontSize=20;
     [self searchData:self.tempModel];
 }
 
+- (void)rollbackWithError:(REMBusinessErrorInfo *)error
+{
+    [super rollbackWithError:error];
+    
+//    NSString *text=[REMTimeHelper formatTimeFullMonth:[self.tempModel.timeRangeArray[0] startTime]];
+//    if (((REMWidgetLabellingSearchModel *)self.tempModel).step == REMEnergyStepYear) {
+//        text=[REMTimeHelper formatTimeFullYear:[self.tempModel.timeRangeArray[0] startTime]];
+//    }
+//    [self.timePickerButton setTitle:text forState:UIControlStateNormal];
+    
+    if([error matchesErrorCode:@"050001202510"]){
+        [self.chartWrapper redraw:nil];
+    }
+    
+    self.tempModel = [self.model copy];
+}
+
 - (void) setDatePickerButtonValueNoSearchByTimeRange:(REMTimeRange *)range withStep:(REMEnergyStep)step
 {
     NSString *text=[REMTimeHelper formatTimeFullMonth:range.startTime];
