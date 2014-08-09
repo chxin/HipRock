@@ -531,7 +531,7 @@
     if (myStep == REMEnergyStepNone || newRange.length == currentRange.length) {
         updatedRange = newRange;
     } else {
-        NSRange lengthRange = [[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
+        NSRange lengthRange = NSMakeRange(0, UINT32_MAX);//[[REMWidgetStepCalculationModel getStepIntervalRanges][myStep] rangeValue];
         NSUInteger minTimeInterval = lengthRange.location;  // 步长允许的最短的时间距离
         NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
         BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
