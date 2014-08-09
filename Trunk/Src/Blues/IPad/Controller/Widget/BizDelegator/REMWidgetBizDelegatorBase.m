@@ -166,6 +166,11 @@
 {
     [self doSearchWithModel:model callback:^(REMEnergyViewData *data,REMBusinessErrorInfo *error){
         if(data!=nil){
+            
+            if(self.contentSyntax.dataStoreType == REMDSEnergyMultiTimeTrend && self.legendView != nil){
+                [self.legendView refreshItemStatus];
+            }
+            
             self.energyData=data;
             
             if (self.serverErrorLabel!=nil) {

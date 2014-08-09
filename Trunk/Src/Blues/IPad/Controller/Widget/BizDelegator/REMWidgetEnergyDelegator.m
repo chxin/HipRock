@@ -1037,7 +1037,7 @@
 -(void)showLegendView
 {
     if(self.legendView == nil){
-        UIView *view = [self prepareLegendView];
+        REMChartLegendBase *view = [self prepareLegendView];
         
         [self.searchLegendViewContainer addSubview:view];
         self.legendView = view;
@@ -1060,7 +1060,7 @@
     }
 }
 
--(UIView *)prepareLegendView
+-(REMChartLegendBase *)prepareLegendView
 {
     //REMChartLegendBase *legend = [REMChartLegendBase legendWithData:self.energyData widget:self.widgetInfo parameters:self.tempModel andHiddenIndexes:self.hiddenSeries];
     REMChartLegendBase *legend = [REMChartLegendBase legendViewChartWrapper:self.chartWrapper data:self.energyData widget:self.widgetInfo parameters:self.tempModel delegate:self];

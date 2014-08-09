@@ -211,6 +211,13 @@
     [self updateState];
 }
 
+-(void)refreshStatus
+{
+    DCSeriesStatus *newStatus = self.legendView.chartWrapper.seriesStates[self.seriesKey];
+    self.indicatorType = [self indicatorTypeWithSeriesType:newStatus.seriesType];
+    [self.indicator renderWithType:self.indicatorType];
+}
+
 @end
 
 

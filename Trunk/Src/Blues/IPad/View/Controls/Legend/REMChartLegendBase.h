@@ -29,6 +29,8 @@
 
 -(NSArray *)convertItemModels;
 
+-(void)refreshItemStatus;
+
 @end
 
 

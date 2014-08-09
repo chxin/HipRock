@@ -45,7 +45,6 @@ typedef enum _REMWidgetLegendType{
 @property (nonatomic,weak) UIView *searchLegendViewContainer;
 @property (nonatomic,weak) UIButton *timePickerButton;
 @property (nonatomic,weak) UISegmentedControl *stepControl;
-@property (nonatomic,weak) UIView *legendView;
 @property (nonatomic,weak) UISegmentedControl *legendSearchControl;
 @property (nonatomic) REMWidgetLegendType currentLegendStatus;
 

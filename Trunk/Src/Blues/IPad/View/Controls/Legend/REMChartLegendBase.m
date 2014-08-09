@@ -15,6 +15,14 @@
 #import "REMTrendChartLegendView.h"
 #import "REMPieChartLegendView.h"
 
+
+@interface REMChartLegendBase()
+
+@property (nonatomic,strong) NSArray *items;
+
+@end
+
+
 @implementation REMChartLegendBase
 
 #define REMSeriesIsMultiTime [self.parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]
@@ -70,6 +78,7 @@
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
     
+    NSMutableArray *items = [[NSMutableArray alloc] init];
     for(int i=0;i<self.itemModels.count; i++){
         REMChartLegendItemModel *model = self.itemModels[i];
         
@@ -78,7 +87,18 @@
         
         REMChartLegendItem *legend = [[REMChartLegendItem alloc] initWithFrame:CGRectMake(x, y, width, kDMChart_LegendItemHeight) andModel:model];
         
+        [items addObject:legend];
         [self addSubview:legend];
+    }
+    
+    self.items = items;
+}
+
+
+-(void)refreshItemStatus
+{
+    for (REMChartLegendItem *legend in self.items){
+        [legend refreshStatus];
     }
 }
 

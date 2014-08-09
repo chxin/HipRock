@@ -42,5 +42,6 @@
 
 -(REMChartLegendItem *)initWithFrame:(CGRect)frame andModel:(REMChartLegendItemModel *)model;
 -(void)setSelected:(BOOL)selected;
+-(void)refreshStatus;
 
 @end
