@@ -111,7 +111,7 @@
     view.graphContext.useTextLayer = self.style.useTextLayer;
     view.delegate = self;
     self.graphContext = view.graphContext;
-    if (step == REMEnergyStepHour || step == REMEnergyStepWeek) {
+    if (step == REMEnergyStepHour || step == REMEnergyStepWeek || step == REMEnergyStepRaw) {
         view.graphContext.pointHorizentalOffset = 0.5;
         view.graphContext.xLabelHorizentalOffset = 0;
     } else {
@@ -465,7 +465,7 @@
     self.view.acceptTap = NO;
 
     if (stopped) {
-        if (self.sharedProcessor.step == REMEnergyStepHour) {
+        if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepRaw) {
             self.myStableRange = self.view.graphContext.hRange;
         } else {
             [self.animationManager animateHRangeWithSpeed: self.panSpeed completion:^() {
@@ -506,7 +506,7 @@
 }
 -(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed {
     DCRange* updatedRange = nil;
-    if (self.sharedProcessor.step == REMEnergyStepHour) {
+    if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepRaw) {
         updatedRange = newRange;
     } else {
         double location = newRange.location;
@@ -536,7 +536,7 @@
         NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
         BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
         
-        if (myStep == REMEnergyStepHour) {
+        if (myStep == REMEnergyStepHour || myStep == REMEnergyStepWeek || myStep == REMEnergyStepRaw) {
             if ([self getTimeIntervalFrom:newRange.location to:newRange.end] > maxTimeInterval) {
                 updatedRange = currentRange;
             } else {
