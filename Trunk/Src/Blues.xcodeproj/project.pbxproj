@@ -302,7 +302,6 @@
 		7A50EC621957F377007A945A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A50EC4C1957F377007A945A /* Security.framework */; };
 		7A50EC631957F377007A945A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A50EC4D1957F377007A945A /* SystemConfiguration.framework */; };
 		7A50EC641957F377007A945A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A50EC4E1957F377007A945A /* UIKit.framework */; };
-		7A50EC681957F382007A945A /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A50EC671957F382007A945A /* GPUImage.framework */; };
 		7A50EC6B1957F3D4007A945A /* REMMapKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A50EC6A1957F3D4007A945A /* REMMapKitViewController.m */; };
 		7A50EC6F1957F43C007A945A /* REMAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A50EC6E1957F43C007A945A /* REMAnnotation.m */; };
 		7A50EC951957F82A007A945A /* EMOP_App_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A50EC731957F82A007A945A /* EMOP_App_6.png */; };
@@ -552,6 +551,7 @@
 		7AAA24B918B5AC9C002069EA /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		7AAA24BA18B5AC9C002069EA /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
 		7AAA24BB18B5AC9C002069EA /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
+		7AAF60D01997678E00053204 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF60CF1997678E00053204 /* UIImage+ImageEffects.m */; };
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
 		7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71687187F859B00EA7544 /* MapBlur@2x.png */; };
 		7ABA161118DAB255001624F8 /* REMDataStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ABA161018DAB255001624F8 /* REMDataStoreTests.m */; };
@@ -939,7 +939,6 @@
 		7A50EC4C1957F377007A945A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		7A50EC4D1957F377007A945A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		7A50EC4E1957F377007A945A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		7A50EC671957F382007A945A /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		7A50EC691957F3D4007A945A /* REMMapKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMMapKitViewController.h; sourceTree = "<group>"; };
 		7A50EC6A1957F3D4007A945A /* REMMapKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMMapKitViewController.m; sourceTree = "<group>"; };
 		7A50EC6D1957F43C007A945A /* REMAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMAnnotation.h; sourceTree = "<group>"; };
@@ -1335,6 +1334,8 @@
 		7AA24ABF196E4090004A6CA8 /* MailTemplate_Commodity.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MailTemplate_Commodity.html; sourceTree = "<group>"; };
 		7AA6464818C056050081E96E /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
+		7AAF60CE1997678E00053204 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		7AAF60CF1997678E00053204 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		7AB37B1D18D845B4007D4212 /* REMVendorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMVendorMacro.h; path = Common/Application/REMVendorMacro.h; sourceTree = "<group>"; };
 		7AB37B1E18D845CA007D4212 /* REMUtilityMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMUtilityMacro.h; path = Common/Application/REMUtilityMacro.h; sourceTree = "<group>"; };
 		7AB37B1F18D8460E007D4212 /* REMAppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMAppMacro.h; path = Common/Application/REMAppMacro.h; sourceTree = "<group>"; };
@@ -1644,7 +1645,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A12C2F8196D31B100272609 /* AudioToolbox.framework in Frameworks */,
-				7A50EC681957F382007A945A /* GPUImage.framework in Frameworks */,
 				7A50EC511957F377007A945A /* Accelerate.framework in Frameworks */,
 				7A50EC521957F377007A945A /* AVFoundation.framework in Frameworks */,
 				7A50EC531957F377007A945A /* CFNetwork.framework in Frameworks */,
@@ -2877,7 +2877,6 @@
 			isa = PBXGroup;
 			children = (
 				7A12C2F7196D31B100272609 /* AudioToolbox.framework */,
-				7A50EC671957F382007A945A /* GPUImage.framework */,
 				7A50EC3B1957F377007A945A /* Accelerate.framework */,
 				7A50EC3C1957F377007A945A /* AVFoundation.framework */,
 				7A50EC3D1957F377007A945A /* CFNetwork.framework */,
@@ -2898,6 +2897,7 @@
 				7A50EC4C1957F377007A945A /* Security.framework */,
 				7A50EC4D1957F377007A945A /* SystemConfiguration.framework */,
 				7A50EC4E1957F377007A945A /* UIKit.framework */,
+				7AAF60CD1997678E00053204 /* UIImage+ImageEffects */,
 				7A217E5418E51FA100383BED /* Reachability */,
 				7A9EAA5818D2946300EF1B85 /* WeiboSDK */,
 				7A3290CD18D823EF00B3AE8A /* UIKit+AFNetworking */,
@@ -3032,6 +3032,16 @@
 			);
 			name = Templates;
 			path = Resource/Templates;
+			sourceTree = "<group>";
+		};
+		7AAF60CD1997678E00053204 /* UIImage+ImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				7AAF60CE1997678E00053204 /* UIImage+ImageEffects.h */,
+				7AAF60CF1997678E00053204 /* UIImage+ImageEffects.m */,
+			);
+			name = "UIImage+ImageEffects";
+			path = "../Lib/UIImage+ImageEffects";
 			sourceTree = "<group>";
 		};
 		7ABA160E18DAB212001624F8 /* DataStore */ = {
@@ -4111,6 +4121,7 @@
 				7A0CCD63192A01D800C35C2F /* REMManagedBuildingModel.m in Sources */,
 				7A63E25018B44CBD00A13464 /* REMBuildingChartView.m in Sources */,
 				EFD947021839DCBB00E9EC50 /* DCXYChartView.m in Sources */,
+				7AAF60D01997678E00053204 /* UIImage+ImageEffects.m in Sources */,
 				EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */,
 				EF465003198768AA00391A1F /* REMWrapperFactor.m in Sources */,
 				7A63E26A18B44CBD00A13464 /* REMTooltipViewBase.m in Sources */,

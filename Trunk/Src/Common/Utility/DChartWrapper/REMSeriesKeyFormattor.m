@@ -52,7 +52,7 @@
             }
             else {
                 timeType = @"1";
-                offset = [NSString stringWithFormat:@"%0.0f", fabs([timeRange.startTime timeIntervalSinceDate:baseRange.startTime])];
+                offset = [NSString stringWithFormat:@"%0.0f", [baseRange.startTime timeIntervalSinceDate:timeRange.startTime]];
             }
         }
     }

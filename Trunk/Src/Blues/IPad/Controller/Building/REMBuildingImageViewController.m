@@ -489,7 +489,7 @@
         return blurred;
     }
     else{
-        UIImage *view = [REMImageHelper blurImage:imageView.image];
+        UIImage *view = [REMImageHelper blurImage2:imageView.image];
         if(view!=nil){
             blurred.image=view;
             NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(view)];

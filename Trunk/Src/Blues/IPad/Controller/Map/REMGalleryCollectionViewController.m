@@ -173,7 +173,7 @@
                 
                 [REMImageHelper writeImageFile:image withFullPath:smallImagePath];
                 
-                UIImage *smallBlurImage = [REMImageHelper blurImage:image];
+                UIImage *smallBlurImage = [REMImageHelper blurImage2:image];
                 [REMImageHelper writeImageFile:smallBlurImage withFullPath:smallBlurImagePath];
                 
                 completed(image);

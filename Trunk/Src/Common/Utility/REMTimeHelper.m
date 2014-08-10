@@ -752,22 +752,35 @@ static NSCalendar *_currentCalendar;
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
     
     switch (step) {
-        case REMEnergyStepHour:{
-            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YMDH")/* @"yyyy年MM月dd日HH点"*/];
+        case REMEnergyStepRaw:{ // yyyy年MM月dd日 HH:00-HH:15    HH:00-HH:15 on dd/MM/yyyy
+            f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeRaw");
+            
             NSString *s1 = [f stringFromDate:time];
             
+            f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_Hm");
+            NSDate *newDate = [time dateByAddingTimeInterval:15*60];
+            
+            NSString *s2 = [f stringFromDate:newDate];
+            if([REMTimeHelper getHour:newDate] ==0 && [REMTimeHelper getMinute:newDate]==0){
+                s2 = REMIPadLocalizedString(@"Chart_Tooltip_24_OClock");
+            }
+            
+            return [NSString stringWithFormat:s1,s2];
+        }
+        case REMEnergyStepHour:{ //yyyy年MM月dd日HH点-HH点      HH:00-HH:00 on dd/MM/yyyy
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeHour")];
+            NSString *s1 = [f stringFromDate:time];
+            
+            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_H")/*@"HH点"*/];
+            
             NSDate *newDate = [time dateByAddingTimeInterval:60*60];
-            NSString *s2 = REMEmptyString;
+            NSString *s2 = [f stringFromDate:newDate];
             
             if([REMTimeHelper getHour:newDate] < [REMTimeHelper getHour:time]){
                 s2 = REMIPadLocalizedString(@"Chart_Tooltip_24_OClock")/*@"24点"*/;
             }
-            else{
-                [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_H")/*@"HH点"*/];
-                s2 = [f stringFromDate:newDate];
-            }
             
-            return [NSString stringWithFormat:@"%@-%@",s1,s2];
+            return [NSString stringWithFormat:s1,s2];
         }
         case REMEnergyStepDay:{
             [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YMD")/*@"yyyy年MM月dd日"*/];
@@ -781,34 +794,37 @@ static NSCalendar *_currentCalendar;
             [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_Y")/*@"yyyy年"*/];
             return [f stringFromDate:time];
         }
-        case REMEnergyStepWeek:{//week 2010年10月3日-10日,2010年10月29日-11月5日,2010年12月29日-2011年1月5日{}
-            [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_YMD")/*@"yyyy年MM月dd日"*/];
+        case REMEnergyStepWeek:{
+            //week cn 2010年10月3日-10日,2010年10月29日-11月5日,2010年12月29日-2011年1月5日
+            //week en 03-10 07/2010, 03/07-10/08 2010, 29/12/2010-03/01/2011
             
             int weekDay = [REMTimeHelper getWeekDay:time];
-            NSDate *date = [REMTimeHelper add:(0-weekDay+2) onPart:REMDateTimePartDay ofDate:time]; //[time dateByAddingTimeInterval:(0-weekDay+1) * 60 * 60];
+            NSDate *date = [REMTimeHelper add:(0-weekDay+2) onPart:REMDateTimePartDay ofDate:time];
+            
+            f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeWeek");
+
             NSString *s1 = [f stringFromDate:date];
+            
             
             NSString *s2 = @"";
             NSDate *newDate = [REMTimeHelper add:6 onPart:REMDateTimePartDay ofDate:date];
             if ([REMTimeHelper getYear:newDate] > [REMTimeHelper getYear:date]) {
                 //2010年12月29日-2011年1月5日
-                //str += '-' + eft(newDate, ft.FullDay);
+                f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_YMD");
                 s2 = [f stringFromDate:newDate];
             }
             else if ([REMTimeHelper getMonth:newDate] > [REMTimeHelper getMonth:date]) {
                 //2010年10月29日-11月5日
-                //str += '-' + eft(newDate, ft.MonthDate);
                 [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_MD")/*@"MM月dd日"*/];
                 s2 = [f stringFromDate:newDate];
             }
             else {
                 //2010年10月3日-10日
-                //str += '-' + eft(newDate, ft.Day);
                 [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_D")/*@"dd日"*/];
                 s2 = [f stringFromDate:newDate];
             }
             
-            return [NSString stringWithFormat:@"%@-%@",s1,s2];
+            return [NSString stringWithFormat:s1,s2];
         }
             
         default:
