@@ -801,25 +801,31 @@ static NSCalendar *_currentCalendar;
             int weekDay = [REMTimeHelper getWeekDay:time];
             NSDate *date = [REMTimeHelper add:(0-weekDay+2) onPart:REMDateTimePartDay ofDate:time];
             
-            f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeWeek");
-
-            NSString *s1 = [f stringFromDate:date];
             
             
-            NSString *s2 = @"";
+            NSString *s1=@"", *s2 = @"";
             NSDate *newDate = [REMTimeHelper add:6 onPart:REMDateTimePartDay ofDate:date];
             if ([REMTimeHelper getYear:newDate] > [REMTimeHelper getYear:date]) {
                 //2010年12月29日-2011年1月5日
+                f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeWeek3");
+                s1 = [f stringFromDate:date];
+                
                 f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_YMD");
                 s2 = [f stringFromDate:newDate];
             }
             else if ([REMTimeHelper getMonth:newDate] > [REMTimeHelper getMonth:date]) {
                 //2010年10月29日-11月5日
+                f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeWeek2");
+                s1 = [f stringFromDate:date];
+                
                 [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_MD")/*@"MM月dd日"*/];
                 s2 = [f stringFromDate:newDate];
             }
             else {
                 //2010年10月3日-10日
+                f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeWeek1");
+                s1 = [f stringFromDate:date];
+                
                 [f setDateFormat:REMIPadLocalizedString(@"Chart_Tooltip_D")/*@"dd日"*/];
                 s2 = [f stringFromDate:newDate];
             }
