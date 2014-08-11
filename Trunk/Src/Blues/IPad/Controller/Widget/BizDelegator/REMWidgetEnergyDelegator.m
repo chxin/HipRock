@@ -910,7 +910,7 @@
     [self willRangeChange:start end:end];
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
 
-    if(tempModel.step == REMEnergyStepHour){
+    if(tempModel.step == REMEnergyStepHour || tempModel.step == REMEnergyStepRaw){
         [self search];
     }
 }

@@ -46,7 +46,7 @@
     else if (step == REMEnergyStepWeek){
         comp = [calendar components:unit fromDate:date];
         int hour = [REMTimeHelper getHour:date];
-        if(comp.weekday == 1 && hour == 0){
+        if(comp.weekday == 2 && hour == 0){
             return date;
         }
         else{

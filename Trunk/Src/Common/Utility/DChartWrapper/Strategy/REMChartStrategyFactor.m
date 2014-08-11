@@ -47,7 +47,7 @@ static REMChartStrategyFactor *singleTon = nil;
           @"energy.RankUsage": @{ @"seriesAvalibleTypeBuildGen": @"REMSeriesAvalibleTypeColumnOnlyGen" },
           
           
-          @"energy.RatioUsage": @{@"seriesDefaultVisibleGen": @"REMSeriesTargetBaselineVisableGen"},
+          @"energy.RatioUsage": @{@"seriesDefaultVisibleGen": @"REMSeriesTargetBaselineVisableGen", @"seriesAvalibleTypeBuildGen": @"REMSeriesAvalibleTypeLineColumnGen"},
           
           
           
