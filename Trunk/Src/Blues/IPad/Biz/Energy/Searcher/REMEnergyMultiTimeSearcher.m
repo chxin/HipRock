@@ -165,15 +165,34 @@
     REMWidgetTagSearchModel *model=[self tagModel];
     
     if(model.step == REMEnergyStepHour || model.step == REMEnergyStepRaw){
-        return [self processHourData:data];
+        data = [self processHourData:data];
     }
     else{
         [self makeCompleteEnergyData:data];
     }
     
-    
+    [self parseGlobalTimeRange:data];
     
     return data;
+}
+
+- (void) parseGlobalTimeRange:(REMEnergyViewData *)data
+{
+    NSDate *start = [[data.targetEnergyData[0] target] visiableTimeRange].startTime;
+    NSDate *end = [[data.targetEnergyData[0] target] visiableTimeRange].endTime;
+    
+    NSTimeInterval distance = [end timeIntervalSinceDate:start];
+    
+    for (int i=1; i<data.targetEnergyData.count; i++){
+        REMTimeRange *range = [[data.targetEnergyData[i] target] globalTimeRange];
+        NSTimeInterval temp = [range.endTime timeIntervalSinceDate:range.startTime];
+        
+        if (distance < temp) {
+            distance = temp;
+        }
+    }
+    
+    data.visibleTimeRange.endTime = [data.visibleTimeRange.startTime dateByAddingTimeInterval:distance];
 }
 
 @end
