@@ -16,11 +16,14 @@
 
 +(DAbstractChartWrapper*)constructorWrapper:(CGRect)frame data:(REMEnergyViewData*)energyViewData wrapperConfig:(DWrapperConfig*) wrapperConfig style:(DCChartStyle*)style {
     DAbstractChartWrapper* wrapper = nil;
-    if ([wrapperConfig.storeType isEqualToString:@"energy.Labeling"]) {
-        wrapper = [[DCLabelingWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
-    } else if ([wrapperConfig.storeType isEqualToString:@"energy.RankUsage"]) {
-        wrapper = [[DCRankingWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
-    } else {
+    if (!REMIsNilOrNull(wrapperConfig.contentSyntax)) {
+        if ([wrapperConfig.contentSyntax.storeType isEqualToString:@"energy.Labeling"]) {
+            wrapper = [[DCLabelingWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
+        } else if ([wrapperConfig.contentSyntax.storeType isEqualToString:@"energy.RankUsage"]) {
+            wrapper = [[DCRankingWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
+        }
+    }
+    if (REMIsNilOrNull(wrapper)) {
         switch (wrapperConfig.defaultSeriesType) {
             case DCSeriesTypeStatusPie:
                 wrapper = [[DCPieWrapper alloc]initWithFrame:frame data:energyViewData wrapperConfig:wrapperConfig style:style];
@@ -36,4 +39,6 @@
     }
     return wrapper;
 }
+
+
 @end

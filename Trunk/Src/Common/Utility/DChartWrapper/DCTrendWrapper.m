@@ -147,6 +147,14 @@
     view.graphContext.showIndicatorLineOnFocus = NO;
 }
 
+-(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
+    if ([self.wrapperConfig getIsMultiTimeEnergyAnalysisChart]) {
+        return [NSString stringWithFormat:@"%i", index];
+    } else {
+        return [super getSeriesKeyByTarget:target seriesIndex:index];
+    }
+}
+
 -(DCXYSeries*)createSeriesAt:(NSUInteger)index style:(DCChartStyle*)style {
     REMTargetEnergyData* targetEnergy = self.energyViewData.targetEnergyData[index];
     NSMutableArray* datas = [[NSMutableArray alloc]init];
