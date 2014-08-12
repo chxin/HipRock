@@ -676,20 +676,25 @@
         
         REMDataStoreType store = self.contentSyntax.dataStoreType;
         
+        //energy.CostUsage,energy.CostUsageDistribution,energy.CostElectricityUsage,energy.CostElectricityUsageDistribution
         if(self.isCostStacked){
             if(store == REMDSEnergyCost){
                 self.contentSyntax.dataStoreType = REMDSEnergyCostElectricity;
+                self.contentSyntax.storeType = @"energy.CostElectricityUsage";
             }
             if(store == REMDSEnergyCostDistribute){
                 self.contentSyntax.dataStoreType = REMDSEnergyCostDistributeElectricity;
+                self.contentSyntax.storeType = @"energy.CostElectricityUsageDistribution";
             }
         }
         else{
             if(store == REMDSEnergyCostElectricity){
                 self.contentSyntax.dataStoreType = REMDSEnergyCost;
+                self.contentSyntax.storeType = @"energy.CostUsage";
             }
             if(store == REMDSEnergyCostDistributeElectricity){
                 self.contentSyntax.dataStoreType = REMDSEnergyCostDistribute;
+                self.contentSyntax.storeType = @"energy.CostUsageDistribution";
             }
         }
         
@@ -1007,31 +1012,22 @@
         self.isCostStacked = NO;
         if(store == REMDSEnergyCostElectricity){
             self.contentSyntax.dataStoreType = REMDSEnergyCost;
+            self.contentSyntax.storeType = @"energy.CostUsage";
         }
         if(store == REMDSEnergyCostDistributeElectricity){
             self.contentSyntax.dataStoreType = REMDSEnergyCostDistribute;
+            self.contentSyntax.storeType = @"energy.CostUsageDistribution";
         }
     }
     else{
-////        "Chart_TouNotSupportHourly"="峰谷平电价不支持按小时查看";
-////        "Chart_TouNotSupportRaw"="峰谷平电价不支持按原始步长查看";
-//        NSString *selectedStep = [self.stepControl titleForSegmentAtIndex:[self.stepControl selectedSegmentIndex]];
-//        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Widget_StepRaw")]){
-//            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportRaw")];
-//            return;
-//        }
-//            
-//        if([selectedStep isEqualToString:REMIPadLocalizedString(@"Common_Hour")]){
-//            [REMAlertHelper alert:REMIPadLocalizedString(@"Chart_TouNotSupportHourly")];
-//            return;
-//        }
-        
         self.isCostStacked = YES;
         if(store == REMDSEnergyCost){
             self.contentSyntax.dataStoreType = REMDSEnergyCostElectricity;
+            self.contentSyntax.storeType = @"energy.CostElectricityUsage";
         }
         if(store == REMDSEnergyCostDistribute){
             self.contentSyntax.dataStoreType = REMDSEnergyCostDistributeElectricity;
+            self.contentSyntax.storeType = @"energy.CostElectricityUsageDistribution";
         }
     }
     
