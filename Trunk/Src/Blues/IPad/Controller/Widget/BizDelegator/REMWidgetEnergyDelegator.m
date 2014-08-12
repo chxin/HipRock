@@ -95,7 +95,8 @@
     [self initChartView];
     
     if (self.contentSyntax.contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypePie) {
-        [self.stepControl setHidden:YES];
+        [self.stepControl removeFromSuperview];
+        [self updateTouButtonConstraint];
     }
     
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
@@ -201,7 +202,7 @@
     
     self.searchView=searchViewContainer;
     
-    REMSegmentedControl *stepControl=[[REMSegmentedControl alloc] initWithItems:@[] andMargins:CGPointMake(5,15)];
+    REMSegmentedControl *stepControl=[[REMSegmentedControl alloc] initWithItems:@[@"test"] andMargins:CGPointMake(5,15)];
     stepControl.translatesAutoresizingMaskIntoConstraints=NO;
     [searchViewContainer addSubview:stepControl];
     
@@ -211,8 +212,6 @@
     [stepControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
     self.stepControl=stepControl;
     [self.stepControl addTarget:self action:@selector(stepChanged:) forControlEvents:UIControlEventValueChanged];
-    
-    
     
     
     NSMutableArray *searchViewSubViewConstraints = [NSMutableArray array];
@@ -254,6 +253,7 @@
         NSLayoutConstraint *touButtonConstraintX = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-20];
         NSLayoutConstraint *touButtonConstraintY = [NSLayoutConstraint constraintWithItem:touButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:stepControl attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
         
+        
         [searchViewContainer addConstraint:touButtonConstraintX];
         [searchViewContainer addConstraint:touButtonConstraintY];
     }
@@ -270,6 +270,15 @@
     else{
         [self.touButton setBackgroundColor:[UIColor clearColor]];
         [self.touButton setTitleColor:[REMColor colorByHexString:@"#37ab3c"] forState:UIControlStateNormal];
+    }
+}
+
+-(void)updateTouButtonConstraint{
+    if(self.touButton){
+        NSLayoutConstraint *touButtonConstraintX = [NSLayoutConstraint constraintWithItem:self.touButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.touButton.superview attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+        NSLayoutConstraint *touButtonConstraintY = [NSLayoutConstraint constraintWithItem:self.touButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.touButton.superview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+        [self.searchView addConstraint:touButtonConstraintX];
+        [self.searchView addConstraint:touButtonConstraintY];
     }
 }
 

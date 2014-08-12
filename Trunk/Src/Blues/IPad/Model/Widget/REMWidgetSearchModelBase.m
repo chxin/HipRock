@@ -41,6 +41,7 @@
             dataStoreType == REMDSEnergyCost ||
             dataStoreType ==REMDSEnergyCostDistribute ||
             dataStoreType == REMDSEnergyCostElectricity ||
+            dataStoreType == REMDSEnergyCostDistributeElectricity ||
             dataStoreType == REMDSEnergyCostUnit)
     {
         model = [[REMWidgetCommoditySearchModel alloc]init];
