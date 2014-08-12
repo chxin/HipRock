@@ -131,25 +131,36 @@
     }
     REMWidgetTagSearchModel *model=[self tagModel];
     
-    REMTargetEnergyData *baseTargetData= data.targetEnergyData[0];
-    
     REMTimeRange *baseTimeRange=model.timeRangeArray[0];
+    data.globalTimeRange.startTime=baseTimeRange.startTime;
+    data.globalTimeRange.endTime=baseTimeRange.endTime;
     
-    NSDate *minStart = baseTimeRange.startTime;
-    NSDate *maxEnd= baseTimeRange.endTime;
+    //
+    //REMTargetEnergyData *baseTargetData= data.targetEnergyData[0];
     
-    for (int i=1; i<data.targetEnergyData.count; ++i) {
+    for (int i=0; i<data.targetEnergyData.count; ++i) {
         REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
-        for (int j=0; j<targetEnergyData.energyData.count;++j) {
-            REMEnergyData *energyData = targetEnergyData.energyData[j];
-            REMEnergyData *baseData=baseTargetData.energyData[j];
-            energyData.offset = [energyData.localTime timeIntervalSinceDate:baseData.localTime];
-            energyData.localTime=baseData.localTime;
+        REMTimeRange *targetTimeRange = model.timeRangeArray[i];
+        
+        if(targetEnergyData.energyData.count > 0){
+            NSTimeInterval offset = [targetTimeRange.startTime timeIntervalSinceDate:baseTimeRange.startTime];
+            for (REMEnergyData *point in targetEnergyData.energyData) {
+                point.localTime = [point.localTime dateByAddingTimeInterval:-offset];
+                point.offset = offset;
+            }
         }
     }
     
-    data.globalTimeRange.startTime=minStart;
-    data.globalTimeRange.endTime=maxEnd;
+//    for (int i=1; i<data.targetEnergyData.count; ++i) {
+//        REMTargetEnergyData *targetEnergyData=data.targetEnergyData[i];
+//        for (int j=0; j<targetEnergyData.energyData.count;++j) {
+//            REMEnergyData *baseData=baseTargetData.energyData[j];
+//            
+//            REMEnergyData *energyData = targetEnergyData.energyData[j];
+//            energyData.offset = [energyData.localTime timeIntervalSinceDate:baseData.localTime];
+//            energyData.localTime=baseData.localTime;
+//        }
+//    }
 
     return data;
 }

@@ -12,12 +12,12 @@
 
 @property (nonatomic,strong) NSString *code;
 @property (nonatomic,strong) NSArray *messages;
-
-@property (nonatomic,readonly) int errorType;
-@property (nonatomic,readonly) int serverId;
-@property (nonatomic,readonly) int layer;
-@property (nonatomic,readonly) int module;
-@property (nonatomic,readonly) int detailCode;
+//
+//@property (nonatomic,readonly) int errorType;
+//@property (nonatomic,readonly) int serverId;
+//@property (nonatomic,readonly) int layer;
+//@property (nonatomic,readonly) int module;
+//@property (nonatomic,readonly) int detailCode;
 
 -(BOOL)matchesErrorCode:(NSString *)errorCode;
 

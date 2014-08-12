@@ -31,7 +31,7 @@
 -(BOOL)matchesErrorCode:(NSString *)errorCode
 {
     //@"0500 0021 6002"
-    if(errorCode.length != 12)
+    if(self.code.length != 12 || errorCode.length != 12)
         return NO;
     
     REMBusinessErrorInfo *temp = [[REMBusinessErrorInfo alloc] init];
@@ -42,7 +42,10 @@
 
 -(int) errorType
 {
-    return [[self.code substringToIndex:2] intValue];
+    if(self.code && self.code.length == 12)
+        return [[self.code substringToIndex:2] intValue];
+    
+    return -1;
 }
 -(int) serverId
 {

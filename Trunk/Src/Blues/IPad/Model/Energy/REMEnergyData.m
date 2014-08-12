@@ -8,6 +8,7 @@
 
 #import "REMEnergyData.h"
 #import "REMTimeHelper.h"
+#import "REMTimeHelper.h"
 
 @implementation REMEnergyData
 
@@ -46,5 +47,11 @@
     self.dataValue = value;
 }
 
+-(NSString *)description
+{
+    NSString *time = [REMTimeHelper formatTime:self.localTime withFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *dataValue = REMIsNilOrNull(self.dataValue) ? @"Null" : [NSString stringWithFormat:@"%f" ,[self.dataValue doubleValue]];
+    return [NSString stringWithFormat:@"%@,%@", time, dataValue];
+}
 
 @end

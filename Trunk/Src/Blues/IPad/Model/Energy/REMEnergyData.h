@@ -27,4 +27,6 @@ typedef enum _REMEnergyDataQuality:NSUInteger
 @property (nonatomic) NSTimeInterval offset;
 
 
+
+
 @end
