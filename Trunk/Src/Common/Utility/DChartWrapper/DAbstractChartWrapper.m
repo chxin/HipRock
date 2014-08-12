@@ -26,7 +26,7 @@
         _energyViewData = energyViewData;
         _style = style;
         _chartStatus = DChartStatusNormal;
-        _chartStrategy = [REMChartStrategyFactor getStrategyByStoreType:self.wrapperConfig.storeType];
+        _chartStrategy = [REMChartStrategyFactor getStrategyByStoreType:self.wrapperConfig.contentSyntax.storeType];
         
         NSMutableDictionary *seriesStates = [[NSMutableDictionary alloc] init];
         for (NSUInteger i = 0; i < self.energyViewData.targetEnergyData.count; i++) {
@@ -73,6 +73,7 @@
 }
 
 -(void)redraw:(REMEnergyViewData *)energyViewData {
+    _chartStrategy = [REMChartStrategyFactor getStrategyByStoreType:self.wrapperConfig.contentSyntax.storeType];
     _energyViewData = energyViewData;
     
     _chartStatus = DChartStatusNormal;

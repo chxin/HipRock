@@ -24,7 +24,7 @@ typedef enum _REMChartFromLevel2 {
 
 @interface DWrapperConfig : NSObject
 @property (nonatomic, readonly) REMDataStoreType dataStoreType; // 当此值为-1时，表示Wrapper为非widget的内容，例如buildingCover和PM25
-@property (nonatomic, readonly) NSString* storeType;
+//@property (nonatomic, readonly) NSString* storeType;
 
 // widgetFrom,isMultiTimeEnergyAnalysisChart,isTouChart根据storeType来计算
 @property (nonatomic, readonly, getter = getWidgetFrom) REMChartFromLevel2 widgetFrom;
