@@ -784,7 +784,7 @@
     [alert addButtonWithTitle:REMIPadLocalizedString(@"Common_Cancel")];
     
     alert.cancelButtonIndex=buttonArray.count;
-    NSString *str= [errorMsgArray componentsJoinedByString:@","];
+    NSString *str= [errorMsgArray componentsJoinedByString:REMIPadLocalizedString(@"Widget_StepErrorJoinString")];
     alert.message= [NSString stringWithFormat: REMIPadLocalizedString(@"Widget_StepError"),str];
     
     [alert show];
