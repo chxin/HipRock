@@ -275,6 +275,7 @@
 		7A3DDCDD1786C195008A1033 /* REMMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A3DDCDC1786C195008A1033 /* REMMaskManager.m */; };
 		7A3F66F3184C561D0079A244 /* JumpTrial-Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */; };
 		7A3F66F5184C56440079A244 /* JumpTrial-Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */; };
+		7A44A7FF199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A44A7FE199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.m */; };
 		7A45E9FA193DAB07007C7933 /* REMTargetAssociationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A45E9F9193DAB06007C7933 /* REMTargetAssociationModel.m */; };
 		7A47F3A018482C1B007EE37B /* JumpLogin.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39818482C1B007EE37B /* JumpLogin.png */; };
 		7A47F3A118482C1B007EE37B /* JumpLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A47F39918482C1B007EE37B /* JumpLogin@2x.png */; };
@@ -908,6 +909,8 @@
 		7A3DDCDC1786C195008A1033 /* REMMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMMaskManager.m; path = Common/Utility/REMMaskManager.m; sourceTree = "<group>"; };
 		7A3F66F2184C561D0079A244 /* JumpTrial-Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed.png"; sourceTree = "<group>"; };
 		7A3F66F4184C56440079A244 /* JumpTrial-Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JumpTrial-Pressed@2x.png"; sourceTree = "<group>"; };
+		7A44A7FD199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMWidgetMultiTimespanTrendSearchModel.h; sourceTree = "<group>"; };
+		7A44A7FE199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMWidgetMultiTimespanTrendSearchModel.m; sourceTree = "<group>"; };
 		7A45E9F8193DAB06007C7933 /* REMTargetAssociationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMTargetAssociationModel.h; sourceTree = "<group>"; };
 		7A45E9F9193DAB06007C7933 /* REMTargetAssociationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMTargetAssociationModel.m; sourceTree = "<group>"; };
 		7A47F39818482C1B007EE37B /* JumpLogin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JumpLogin.png; sourceTree = "<group>"; };
@@ -2594,6 +2597,8 @@
 				7A63E17118B44CBC00A13464 /* REMWidgetStepEnergyModel.m */,
 				7A63E17218B44CBC00A13464 /* REMWidgetTagSearchModel.h */,
 				7A63E17318B44CBC00A13464 /* REMWidgetTagSearchModel.m */,
+				7A44A7FD199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.h */,
+				7A44A7FE199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.m */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -4124,6 +4129,7 @@
 				7AAF60D01997678E00053204 /* UIImage+ImageEffects.m in Sources */,
 				EF1C5ADA183E00C9002A9AAD /* _DCXLabelFormatter.m in Sources */,
 				EF465003198768AA00391A1F /* REMWrapperFactor.m in Sources */,
+				7A44A7FF199B5854007D9A07 /* REMWidgetMultiTimespanTrendSearchModel.m in Sources */,
 				7A63E26A18B44CBD00A13464 /* REMTooltipViewBase.m in Sources */,
 				B445AEB2177BFAE8002D2A59 /* REMLog.m in Sources */,
 				EFCAF85A1976201B00753587 /* REMSeriesGroupingUomGen.m in Sources */,

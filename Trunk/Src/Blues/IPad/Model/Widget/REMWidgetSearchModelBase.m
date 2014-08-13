@@ -12,6 +12,7 @@
 #import "REMWidgetRankingSearchModel.h"
 #import "REMWidgetMultiTimespanSearchModel.h"
 #import "REMWidgetLabellingSearchModel.h"
+#import "REMWidgetMultiTimespanTrendSearchModel.h"
 
 
 @interface REMWidgetSearchModelBase(){
@@ -31,9 +32,11 @@
        dataStoreType == REMDSEnergyRatio){
         model = [[REMWidgetTagSearchModel alloc]init];
     }
-    else if( dataStoreType ==REMDSEnergyMultiTimeTrend ||
-            dataStoreType == REMDSEnergyMultiTimeDistribute){
-        model =[[REMWidgetMultiTimespanSearchModel alloc]init];
+    else if(dataStoreType ==REMDSEnergyMultiTimeTrend) {
+        model =[[REMWidgetMultiTimespanTrendSearchModel alloc] init];
+    }
+    else if(dataStoreType == REMDSEnergyMultiTimeDistribute){
+        model =[[REMWidgetMultiTimespanSearchModel alloc] init];
     }
     else if(dataStoreType ==REMDSEnergyCarbon ||
             dataStoreType ==REMDSEnergyCarbonDistribute ||
@@ -55,7 +58,7 @@
         model = [[REMWidgetLabellingSearchModel alloc]init];
     }
     [model setModelBySearchParam:param];
-    
+    model.dataStoreType = dataStoreType;
     return model;
 }
 
@@ -68,6 +71,7 @@
 - (NSArray *)timeRangeToDictionaryArray
 {
     NSMutableArray *newTimeRangeArray=[[NSMutableArray alloc]initWithCapacity:self.timeRangeArray.count];
+    
     
     for (int i=0; i<self.timeRangeArray.count; ++i) {
         REMTimeRange *range= self.timeRangeArray[i];

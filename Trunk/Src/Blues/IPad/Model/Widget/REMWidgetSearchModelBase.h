@@ -28,6 +28,7 @@
 
 @property (nonatomic,strong) NSString *relativeDateComponent;
 @property (nonatomic) REMRelativeTimeRangeType relativeDateType;
+@property (nonatomic) REMDataStoreType dataStoreType;
 
 + (REMWidgetSearchModelBase *)searchModelByDataStoreType:(REMDataStoreType)dataStoreType withParam:(NSDictionary *)param;
 

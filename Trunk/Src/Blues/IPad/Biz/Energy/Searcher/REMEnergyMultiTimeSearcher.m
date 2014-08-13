@@ -18,6 +18,29 @@
     return (REMWidgetTagSearchModel *)self.model;
 }
 
+- (REMBusinessErrorInfo *)beforeSendRequest
+{
+//    REMWidgetTagSearchModel *model=[self tagModel];
+//    
+//    NSTimeInterval distance = [[model.timeRangeArray[0] endTime] timeIntervalSinceDate:[model.timeRangeArray[0] startTime]];
+//    
+//    for (int i=0; i<model.timeRangeArray.count; i++){
+//        REMTimeRange *range = model.timeRangeArray[i];
+//        NSTimeInterval temp = [range.endTime timeIntervalSinceDate:range.startTime];
+//        
+//        if (distance < temp) {
+//            distance = temp;
+//        }
+//    }
+//    
+//    for (int i=0; i<model.timeRangeArray.count; i++){
+//        REMTimeRange *range = model.timeRangeArray[i];
+//        range.endTime = [range.startTime dateByAddingTimeInterval:distance];
+//    }
+    
+    return nil;
+}
+
 
 - (NSDate *)firstValidDateFromDate:(NSDate *)date forStep:(REMEnergyStep)step{
     NSCalendar *calendar = [REMTimeHelper currentCalendar];
