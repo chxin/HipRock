@@ -177,6 +177,7 @@
     DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
     s.symbolType = [self getSymbolTypeByIndex:index];
     s.symbolSize = style.symbolSize;
+    s.color = [REMColor colorByIndex:index];
     s.target = targetEnergy.target;
     
     s.seriesKey = [self getSeriesKeyByTarget:s.target seriesIndex:index];
