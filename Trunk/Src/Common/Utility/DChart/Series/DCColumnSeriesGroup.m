@@ -34,7 +34,7 @@
     NSArray* seriesList = self.coordinateSystem.chartView.seriesList;
     if ([self containsSeries:series] || ![seriesList containsObject:series]) return;
     [self.seriesList addObject:series];
-    self.seriesList = [[seriesList sortedArrayUsingComparator:^NSComparisonResult(DCXYSeries* obj1, DCXYSeries* obj2) {
+    self.seriesList = [[self.seriesList sortedArrayUsingComparator:^NSComparisonResult(DCXYSeries* obj1, DCXYSeries* obj2) {
         NSUInteger index1 = [seriesList indexOfObject:obj1];
         NSUInteger index2 = [seriesList indexOfObject:obj2];
         return [@(index1) compare:@(index2)];
