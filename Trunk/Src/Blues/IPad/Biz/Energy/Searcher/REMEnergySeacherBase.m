@@ -36,7 +36,7 @@
 }
 
 - (REMBusinessErrorInfo *)beforeSendRequest{
-    if(self.contentSyntax.dataStoreType == REMDSEnergyCostElectricity || self.contentSyntax.dataStoreType == REMDSEnergyCostDistributeElectricity){
+    if(self.contentSyntax.dataStoreType == REMDSEnergyCostElectricity){
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
         if(stepModel.step == REMEnergyStepHour){
             REMClientErrorInfo *bizError=[[REMClientErrorInfo alloc] init];
