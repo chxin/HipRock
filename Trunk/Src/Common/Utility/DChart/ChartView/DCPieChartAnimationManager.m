@@ -303,6 +303,7 @@ const NSString* stepKey = @"step";
         point.hidden = hidden;
         return;
     }
+    if (REMIsNilOrNull(point.value) || [point.value isEqualToNumber:@(0)]) return;
     [self.view hidePercentageTexts];
     for (NSMutableDictionary* valueDic in self.pointValueDics) {
         if (valueDic[pointKey] == point) {
@@ -344,7 +345,7 @@ const NSString* stepKey = @"step";
                 step = [valueDic[stepKey] doubleValue];
                 vDic = valueDic;
                 value = [valueDic[valueKey] doubleValue];
-                if (step < 0) {
+                if (step <= 0) {
                     to = 0;
                     isInHidden = YES;
                 } else {
