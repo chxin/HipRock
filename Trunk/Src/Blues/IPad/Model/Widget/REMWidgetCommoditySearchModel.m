@@ -138,7 +138,7 @@
     model.commodityIdArray=[NSKeyedUnarchiver unarchiveObjectWithData:
                       [NSKeyedArchiver archivedDataWithRootObject:self.commodityIdArray]];
     model.systemDimensionTemplateItemId=[self.systemDimensionTemplateItemId copyWithZone:zone];
-    model.areaDimensionId=[self.systemDimensionTemplateItemId copyWithZone:zone];
+    model.areaDimensionId=[self.areaDimensionId copyWithZone:zone];
     model.hierarchyId=[self.hierarchyId copyWithZone:zone];
     model.carbonUnit=self.carbonUnit;
     
