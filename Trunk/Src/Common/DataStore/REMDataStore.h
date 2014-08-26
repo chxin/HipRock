@@ -56,7 +56,7 @@ typedef enum _REMDataStoreType : NSUInteger
     REMDSBuildingInfo                   = 104001,
     REMDSBuildingCommodityTotalUsage    = 104002,
     REMDSBuildingOverallData            = 104003,
-    REMDSBuildingAverageData            = 104004,
+    //REMDSBuildingAverageData            = 104004,
     REMDSBuildingTimeRangeData          = 104005,
     REMDSBuildingPicture                = 104006,
     REMDSBuildingAirQualityTotalUsage   = 104007,
@@ -68,7 +68,7 @@ typedef enum _REMDataStoreType : NSUInteger
     /*
      * Dashboard stores     105
      */
-    REMDSDashboardFavorite              = 105001,
+    //REMDSDashboardFavorite              = 105001,
     
     /*
      * Energy stores        106

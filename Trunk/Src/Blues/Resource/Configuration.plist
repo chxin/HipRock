@@ -174,17 +174,6 @@
 			<key>Processor</key>
 			<string></string>
 		</dict>
-		<key>REMDSBuildingAverageData</key>
-		<dict>
-			<key>ID</key>
-			<integer>104004</integer>
-			<key>Url</key>
-			<string>API/Building.svc/GetBuildingAverageUsageData</string>
-			<key>Type</key>
-			<integer>1</integer>
-			<key>Processor</key>
-			<string></string>
-		</dict>
 		<key>REMDSBuildingTimeRangeData</key>
 		<dict>
 			<key>ID</key>
@@ -257,17 +246,6 @@
 			<integer>104011</integer>
 			<key>Url</key>
 			<string>API/Building.svc/GetBuildingAverageUsageDataWithBaseline</string>
-			<key>Type</key>
-			<integer>1</integer>
-			<key>Processor</key>
-			<string></string>
-		</dict>
-		<key>REMDSDashboardFavorite</key>
-		<dict>
-			<key>ID</key>
-			<integer>105001</integer>
-			<key>Url</key>
-			<string>API/Dashboard.svc/GetFavoriteDashboards</string>
 			<key>Type</key>
 			<integer>1</integer>
 			<key>Processor</key>
