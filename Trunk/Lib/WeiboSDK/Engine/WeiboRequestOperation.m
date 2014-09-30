@@ -38,8 +38,8 @@ static const int kGeneralErrorCode = 10000;
         _request = request;
         _completedBlock = [completedBlock copy];
         _cancelBlock = [cancelBlock copy];
-        _executing = NO;
-        _finished = NO;
+        self.executing = NO;
+        self.finished = NO;
     }
     return self;
 }
@@ -107,14 +107,14 @@ static const int kGeneralErrorCode = 10000;
 - (void)setFinished:(BOOL)finished
 {
     [self willChangeValueForKey:@"isFinished"];
-    _finished = finished;
+    self.finished = finished;
     [self didChangeValueForKey:@"isFinished"];
 }
 
 - (void)setExecuting:(BOOL)executing
 {
     [self willChangeValueForKey:@"isExecuting"];
-    _executing = executing;
+    self.executing = executing;
     [self didChangeValueForKey:@"isExecuting"];
 }
 
