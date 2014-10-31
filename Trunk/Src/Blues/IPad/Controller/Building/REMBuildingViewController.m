@@ -24,7 +24,6 @@
 #import "REMDimensions.h"
 #import "REMBuildingChartContainerView2.h"
 #import "DCXYChartView.h"
-#import <GPUImage/GPUImage.h>
 
 const static CGFloat buildingGap=20;
 
