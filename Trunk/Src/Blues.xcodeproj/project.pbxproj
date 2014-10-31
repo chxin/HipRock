@@ -485,6 +485,7 @@
 		7A9BBF751952DF6F000A45F5 /* MyriadSetPro-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A9BBF731952DF6F000A45F5 /* MyriadSetPro-Thin.ttf */; };
 		7A9BBF781952DF7C000A45F5 /* Localizable_Style.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7A9BBF761952DF7C000A45F5 /* Localizable_Style.strings */; };
 		7A9BBF921952E0E0000A45F5 /* REMFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9BBF911952E0E0000A45F5 /* REMFont.m */; };
+		7A9D36F11A036792003BAF72 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9D36F01A036792003BAF72 /* GPUImage.framework */; };
 		7A9EAA8A18D2946300EF1B85 /* WeiboAccounts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5B18D2946300EF1B85 /* WeiboAccounts.m */; };
 		7A9EAA8B18D2946300EF1B85 /* WeiboRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5D18D2946300EF1B85 /* WeiboRequest.m */; };
 		7A9EAA8C18D2946300EF1B85 /* WeiboRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EAA5F18D2946300EF1B85 /* WeiboRequestOperation.m */; };
@@ -1289,6 +1290,7 @@
 		7A9BBF8F1952DF92000A45F5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resource/Languages/zh-Hans.lproj/Localizable_Style.strings"; sourceTree = "<group>"; };
 		7A9BBF901952E0E0000A45F5 /* REMFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = REMFont.h; path = Common/Utility/REMFont.h; sourceTree = "<group>"; };
 		7A9BBF911952E0E0000A45F5 /* REMFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = REMFont.m; path = Common/Utility/REMFont.m; sourceTree = "<group>"; };
+		7A9D36F01A036792003BAF72 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = ../Lib/GPUImage.framework; sourceTree = "<group>"; };
 		7A9EAA5A18D2946300EF1B85 /* WeiboAccounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboAccounts.h; sourceTree = "<group>"; };
 		7A9EAA5B18D2946300EF1B85 /* WeiboAccounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboAccounts.m; sourceTree = "<group>"; };
 		7A9EAA5C18D2946300EF1B85 /* WeiboRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboRequest.h; sourceTree = "<group>"; };
@@ -1647,6 +1649,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A9D36F11A036792003BAF72 /* GPUImage.framework in Frameworks */,
 				7A12C2F8196D31B100272609 /* AudioToolbox.framework in Frameworks */,
 				7A50EC511957F377007A945A /* Accelerate.framework in Frameworks */,
 				7A50EC521957F377007A945A /* AVFoundation.framework in Frameworks */,
@@ -2881,6 +2884,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A9D36F01A036792003BAF72 /* GPUImage.framework */,
 				7A12C2F7196D31B100272609 /* AudioToolbox.framework */,
 				7A50EC3B1957F377007A945A /* Accelerate.framework */,
 				7A50EC3C1957F377007A945A /* AVFoundation.framework */,
