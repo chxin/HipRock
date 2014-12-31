@@ -96,4 +96,6 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 +(REMRelativeTimeRangeType)relativeTimeTypeByName:(NSString *)relativeTimeTypeName;
 
++(NSDate *)add:(int)count steps:(REMEnergyStep)step onTime:(NSDate *)time;
+
 @end
