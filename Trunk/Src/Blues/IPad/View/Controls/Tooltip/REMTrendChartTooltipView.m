@@ -266,8 +266,8 @@
         
         REMEnergyStep step = stepModel.step;
         
-        //TODO:move time point backward
-        time = [REMTimeHelper add:1 steps:step onTime:time];
+        //TODO:move time point forward
+        time = [REMTimeHelper add:-1 steps:step onTime:time];
         
         return [REMTimeHelper formatTooltipTime:time byStep:step inRange:nil];
     }

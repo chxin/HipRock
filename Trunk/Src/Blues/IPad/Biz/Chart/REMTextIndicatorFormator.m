@@ -29,10 +29,10 @@
                     }
                     return NO;
                 }];
-                //TODO: move time backward
+                //TODO: move time forward
                 REMEnergyStep step = ((REMWidgetMultiTimespanSearchModel *)parameters).step;
-                NSDate *start1 = [REMTimeHelper add:1 steps:step onTime:[parameters.searchTimeRangeArray[index] startTime]];
-                NSDate *end1 = [REMTimeHelper add:1 steps:step onTime:[parameters.searchTimeRangeArray[index] endTime]];
+                NSDate *start1 = [REMTimeHelper add:-1 steps:step onTime:[parameters.searchTimeRangeArray[index] startTime]];
+                NSDate *end1 = [REMTimeHelper add:-1 steps:step onTime:[parameters.searchTimeRangeArray[index] endTime]];
                 REMTimeRange *newRange = [[REMTimeRange alloc] initWithStartTime:start1 EndTime:end1];
                 
                 //NSString *timeString = [REMTimeHelper formatTimeRangeFullHour: parameters.searchTimeRangeArray[index]];

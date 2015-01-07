@@ -907,26 +907,26 @@ static NSCalendar *_currentCalendar;
     switch (step)
     {
         case REMEnergyStepRaw:
-            time = [REMTimeHelper add:15 * count onPart:REMDateTimePartMinute ofDate:time]; //time.AddMinutes(15 * count);
+            date2 = [REMTimeHelper add:15 * count onPart:REMDateTimePartMinute ofDate:time]; //time.AddMinutes(15 * count);
             break;
         case REMEnergyStepHour:
-            time = [REMTimeHelper add:1 * count onPart:REMDateTimePartHour ofDate:time];//time.AddHours(1 * count);
+            date2 = [REMTimeHelper add:1 * count onPart:REMDateTimePartHour ofDate:time];//time.AddHours(1 * count);
             break;
         case REMEnergyStepDay:
-            time = [REMTimeHelper add:1 * count onPart:REMDateTimePartDay ofDate:time];//time.AddDays(1 * count);
+            date2 = [REMTimeHelper add:1 * count onPart:REMDateTimePartDay ofDate:time];//time.AddDays(1 * count);
             break;
         case REMEnergyStepWeek: //asume the input time is already the first day of week
-            time = [REMTimeHelper add:7 * count onPart:REMDateTimePartDay ofDate:time];//time.AddDays(7 * count);
+            date2 = [REMTimeHelper add:7 * count onPart:REMDateTimePartDay ofDate:time];//time.AddDays(7 * count);
             break;
         case REMEnergyStepMonth:
-            time = [REMTimeHelper add:7 * count onPart:REMDateTimePartMonth ofDate:time];//time.AddMonths(1 * count);
+            date2 = [REMTimeHelper add:1 * count onPart:REMDateTimePartMonth ofDate:time];//time.AddMonths(1 * count);
             break;
         case REMEnergyStepYear:
-            time = [REMTimeHelper add:7 * count onPart:REMDateTimePartYear ofDate:time];//time.AddYears(1 * count);
+            date2 = [REMTimeHelper add:1 * count onPart:REMDateTimePartYear ofDate:time];//time.AddYears(1 * count);
             break;
         case REMEnergyStepNone:
         default:
-            time = [REMTimeHelper add:15 * count onPart:REMDateTimePartMinute ofDate:time]; //time.AddMinutes(15 * count);
+            date2 = [REMTimeHelper add:15 * count onPart:REMDateTimePartMinute ofDate:time]; //time.AddMinutes(15 * count);
             break;
     }
     

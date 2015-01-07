@@ -75,7 +75,7 @@
 }
 
 -(void)customizeView:(DCXYChartView *)view {
-    view.graphContext.pointHorizentalOffset = 0.5;
+    view.graphContext.pointHorizentalOffset = -0.5;
     view.graphContext.xLabelHorizentalOffset = 0.5;
 //    view.graphContext.pointAlignToTick = NO;
 //    view.graphContext.xLabelAlignToTick = NO;

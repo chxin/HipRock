@@ -112,11 +112,11 @@
     view.delegate = self;
     self.graphContext = view.graphContext;
     if (step == REMEnergyStepHour || step == REMEnergyStepWeek || step == REMEnergyStepRaw) {
-        view.graphContext.pointHorizentalOffset = 0.5;
-        view.graphContext.xLabelHorizentalOffset = 1;
+        view.graphContext.pointHorizentalOffset = -0.5;
+        view.graphContext.xLabelHorizentalOffset = 0;
     } else {
-        view.graphContext.pointHorizentalOffset = 0.5;
-        view.graphContext.xLabelHorizentalOffset = 1.5;
+        view.graphContext.pointHorizentalOffset = -0.5;
+        view.graphContext.xLabelHorizentalOffset = 0.5;
     }
     
     [self customizeView:view];
