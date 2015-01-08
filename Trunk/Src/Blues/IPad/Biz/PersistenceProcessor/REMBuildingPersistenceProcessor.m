@@ -238,7 +238,7 @@
             widget.sharedInfo.widget=widget;
         }
         
-        if([widget getSyntax].contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeGrid){
+        if([widget getSyntax].contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeGrid || [widget getSyntax].contentSyntaxWidgetType == REMWidgetContentSyntaxWidgetTypeOriginal){
             continue;
         }
         

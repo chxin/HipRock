@@ -89,6 +89,8 @@
         _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypePie;
     } else if ([typeCode isEqualToString:@"grid"]) {
         _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeGrid;
+    }else if ([typeCode isEqualToString:@"original"]) {
+        _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeOriginal;
     }
     
     NSArray *origTimeRanges = viewOption[@"TimeRanges"];

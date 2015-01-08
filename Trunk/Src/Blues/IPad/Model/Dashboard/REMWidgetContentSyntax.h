@@ -18,7 +18,8 @@ typedef enum _REMWidgetContentSyntaxWidgetType {
     REMWidgetContentSyntaxWidgetTypeColumn = 2,
     REMWidgetContentSyntaxWidgetTypeStack = 3,
     REMWidgetContentSyntaxWidgetTypePie = 4,
-    REMWidgetContentSyntaxWidgetTypeGrid = 5
+    REMWidgetContentSyntaxWidgetTypeGrid = 5,
+    REMWidgetContentSyntaxWidgetTypeOriginal = 6
 }REMWidgetContentSyntaxWidgetType;
 
 @interface REMWidgetContentSyntax : REMJSONObject
