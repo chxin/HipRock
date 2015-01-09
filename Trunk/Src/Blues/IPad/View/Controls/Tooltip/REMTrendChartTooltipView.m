@@ -180,6 +180,9 @@
         
         NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
         
+        //TODO:move time forward
+        realtime = [REMTimeHelper add:-1 steps:step onTime:realtime];
+        
         return [REMTimeHelper formatTooltipTime:realtime byStep:step inRange:nil];
         
         
