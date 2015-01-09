@@ -9,6 +9,7 @@
 #import "DCLabelingLabel.h"
 #import "REMChartTooltipItem.h"
 #import "REMCommonHeaders.h"
+#import "REMWidgetStepEnergyModel.h"
 
 @interface REMLabelingTooltipView ()
 
@@ -51,6 +52,19 @@
     }
     
     return itemModels;
+}
+
+-(NSString *)formatTimeText:(NSDate *)time
+{
+    if([self.parameters isKindOfClass:[REMWidgetStepEnergyModel class]]){
+        REMWidgetStepEnergyModel *stepModel = (REMWidgetStepEnergyModel *)self.parameters;
+        
+        REMEnergyStep step = stepModel.step;
+        
+        return [REMTimeHelper formatTooltipTime:time byStep:step inRange:nil];
+    }
+    
+    return [REMTimeHelper formatTimeFullHour:time isChangeTo24Hour:YES];
 }
 
 
