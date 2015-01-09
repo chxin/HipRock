@@ -49,7 +49,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.navigationController=(UINavigationController *)self.parentViewController;
+    //self.navigationController=(UINavigationxController *)self.parentViewController;
     self.isLoggingOut=NO;
     
     self.title = REMIPadLocalizedString(@"Setting_SettingViewTitle");

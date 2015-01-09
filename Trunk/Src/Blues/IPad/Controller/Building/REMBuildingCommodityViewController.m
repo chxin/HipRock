@@ -58,13 +58,6 @@
 
 -(NSArray *)dashboards
 {
-//    if(_dashboards == nil){
-//        _dashboards = [self.buildingInfo.dashboards.allObjects sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//            return [[obj2 id] compare:[obj1 id]];
-//        }];
-//    }
-//    
-//    return  _dashboards;
     return self.buildingInfo.dashboards.array;
 }
 
