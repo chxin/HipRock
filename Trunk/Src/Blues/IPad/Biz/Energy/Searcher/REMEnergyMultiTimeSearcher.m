@@ -125,20 +125,36 @@
         return ;
     }
     REMWidgetTagSearchModel *model=[self tagModel];
-    
-    NSDate* baseDate1stSeries = [self firstValidDateFromDate:[model.timeRangeArray[0] startTime] forStep:model.step];
+    REMEnergyStep step = model.step;
+    BOOL isFixedDifferenceTime = (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek || step == REMEnergyStepRaw);
+    NSDate* baseDate1stSeries = [self firstValidDateFromDate:[[data.targetEnergyData[0] energyData][0] localTime] forStep:step];
     for (int i = 1; i < data.targetEnergyData.count; i++) {
-        NSDate* baseDateSeries = [self firstValidDateFromDate:[model.timeRangeArray[i] startTime] forStep:model.step];
-        NSTimeInterval interval = [baseDate1stSeries timeIntervalSinceDate:baseDateSeries];
+        NSDate* baseDateSeries = [self firstValidDateFromDate:[[data.targetEnergyData[i] energyData][0] localTime] forStep:step];
         NSMutableArray* seriesData = [[NSMutableArray alloc]initWithCapacity:[data.targetEnergyData[0] energyData].count];
+        NSTimeInterval interval;
+        int monthInterval = 0;
+        
+        if (isFixedDifferenceTime) {
+            interval = [baseDate1stSeries timeIntervalSinceDate:baseDateSeries];
+        } else {
+            double year = ((double)[REMTimeHelper getYear:baseDateSeries] - (double)[REMTimeHelper getYear:baseDate1stSeries]);
+            double month =(double)[REMTimeHelper getMonth:baseDateSeries] - (double)[REMTimeHelper getMonth:baseDate1stSeries];
+            monthInterval = year * 12.0 + month;
+        }
+        
         for (int j = 0; j < [data.targetEnergyData[0] energyData].count; j++) {
             REMEnergyData* oldEnergyData = [data.targetEnergyData[0] energyData][j];
             REMEnergyData *newEnergyData = [[REMEnergyData alloc]init];
-            newEnergyData.localTime=[oldEnergyData.localTime dateByAddingTimeInterval:interval];
+            if (isFixedDifferenceTime) {
+                newEnergyData.localTime=[oldEnergyData.localTime dateByAddingTimeInterval:interval];
+                newEnergyData.offset = -interval;
+            } else {
+                newEnergyData.localTime=[REMTimeHelper addMonthToDate:oldEnergyData.localTime month:-monthInterval];
+                newEnergyData.offset=[oldEnergyData.localTime timeIntervalSinceDate:newEnergyData.localTime];
+            }
             newEnergyData.dataValue=oldEnergyData.dataValue;
             newEnergyData.quality = oldEnergyData.quality;
             [seriesData addObject:newEnergyData];
-            newEnergyData.offset = -interval;
         }
         [data.targetEnergyData[i] setEnergyData:seriesData];
     }
