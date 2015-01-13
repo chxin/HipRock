@@ -9,7 +9,6 @@
 
 #import "WeiboDialog.h"
 #import "WeiboDialogClosePNG.h"
-#import "REMFont.h"
 
 static CGFloat kBorderGray[4] = {0.3, 0.3, 0.3, 0.8};
 static CGFloat kBorderBlack[4] = {0.3, 0.3, 0.3, 1};
@@ -261,7 +260,7 @@ static BOOL IsDeviceIPad() {
         [_closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [_closeButton addTarget:self action:@selector(cancel)
                forControlEvents:UIControlEventTouchUpInside];
-        _closeButton.titleLabel.font = [REMFont defaultFontOfSize:12];
+        _closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
         _closeButton.showsTouchWhenHighlighted = YES;
         _closeButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin
         | UIViewAutoresizingFlexibleBottomMargin;
@@ -305,9 +304,7 @@ static BOOL IsDeviceIPad() {
             }
         }
     }
-    //modified by Aries on 2013-08-19
-    //_modalBackgroundView.backgroundColor = [UIColor redColor];
-    _modalBackgroundView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
+    _modalBackgroundView.backgroundColor = [UIColor clearColor];
     _modalBackgroundView.frame = window.frame;
     [_modalBackgroundView addSubview:self];
     [window addSubview:_modalBackgroundView];
@@ -368,7 +365,6 @@ static BOOL IsDeviceIPad() {
     // for differences in application needs
     if (!(([error.domain isEqualToString:@"NSURLErrorDomain"] && error.code == -999) ||
           ([error.domain isEqualToString:@"WebKitErrorDomain"] && error.code == 102))) {
-        
         [self dismissWithError:error animated:YES];
     }
 }

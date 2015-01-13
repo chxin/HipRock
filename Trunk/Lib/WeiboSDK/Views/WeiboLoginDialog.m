@@ -51,4 +51,12 @@
     
 }
 
++ (void)clearCookie
+{
+    for(NSHTTPCookie *cookie in  [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]){
+        if([cookie.domain isEqualToString:@".weibo.com"])
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+}
+
 @end

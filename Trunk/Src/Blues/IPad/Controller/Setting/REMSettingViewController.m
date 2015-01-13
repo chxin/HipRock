@@ -12,6 +12,7 @@
 #import "REMAlertHelper.h"
 #import "REMSettingCustomerSelectionViewController.h"
 #import "REMUpdateAllManager.h"
+#import "WeiboLoginDialog.h"
 
 @interface REMSettingViewController ()
 
@@ -209,6 +210,7 @@
             self.weiboAccoutSwitcher.on = YES;
         } else if (buttonIndex == 1) {
             [[WeiboAccounts shared]signOut];
+            [WeiboLoginDialog clearCookie];
         }
     } else {
         if(buttonIndex==1){

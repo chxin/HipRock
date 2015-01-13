@@ -12,7 +12,10 @@ NSString *const WeiboAPIErrorDomain = @"com.openlab.weibosdk.api";
 NSString *const WeiboAuthErrorNotification = @"WeiboAuthErrorNotification";
 static const int kGeneralErrorCode = 10000;
 
-@interface WeiboRequestOperation ()
+@interface WeiboRequestOperation () {
+    BOOL _executing;
+    BOOL _finished;
+}
 
 @property (nonatomic, copy) WeiboRequestCompletedBlock completedBlock;
 @property (nonatomic, copy) void (^cancelBlock)();
@@ -27,6 +30,9 @@ static const int kGeneralErrorCode = 10000;
 
 @implementation WeiboRequestOperation
 
+@synthesize executing=_executing;
+@synthesize finished=_finished;
+
 - (id)initWithRequest:(NSURLRequest *)request
                 queue:(dispatch_queue_t)queue
             completed:(WeiboRequestCompletedBlock)completedBlock
@@ -38,8 +44,8 @@ static const int kGeneralErrorCode = 10000;
         _request = request;
         _completedBlock = [completedBlock copy];
         _cancelBlock = [cancelBlock copy];
-        self.executing = NO;
-        self.finished = NO;
+        _executing = NO;
+        _finished = NO;
     }
     return self;
 }
@@ -107,14 +113,14 @@ static const int kGeneralErrorCode = 10000;
 - (void)setFinished:(BOOL)finished
 {
     [self willChangeValueForKey:@"isFinished"];
-    self.finished = finished;
+    _finished = finished;
     [self didChangeValueForKey:@"isFinished"];
 }
 
 - (void)setExecuting:(BOOL)executing
 {
     [self willChangeValueForKey:@"isExecuting"];
-    self.executing = executing;
+    _executing = executing;
     [self didChangeValueForKey:@"isExecuting"];
 }
 
