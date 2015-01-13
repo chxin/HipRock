@@ -48,9 +48,9 @@
 			<key>timeout</key>
 			<string>70</string>
 			<key>logRequest</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>debug-logmode</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>CurrentDataSource</key>
