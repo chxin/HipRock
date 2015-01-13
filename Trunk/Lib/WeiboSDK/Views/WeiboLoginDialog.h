@@ -17,6 +17,9 @@
 -(id) initWithURL:(NSURL *) loginURL
          delegate:(id <WeiboLoginDialogDelegate>) delegate;
 
+
++ (void)clearCookie;
+
 @end
 
 @protocol WeiboLoginDialogDelegate <NSObject>
