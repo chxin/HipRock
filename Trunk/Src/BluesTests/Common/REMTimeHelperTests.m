@@ -7,6 +7,7 @@
 --------------------------------------------------------------------------*/
 #import <XCTest/XCTest.h>
 #import "REMCommonHeaders.h"
+#import "REMEnergyMultiTimeSearcher.h"
 
 @interface REMTimeHelperTests : XCTestCase
 
@@ -72,6 +73,32 @@
     int year =  [REMTimeHelper getYear:date];
     
 //    NSAssert(year == 2010, @"go");
+}
+
+-(void)test_REMEnergyMultiTimeSearcher
+{
+    REMEnergyMultiTimeSearcher *searcher = [[REMEnergyMultiTimeSearcher alloc] init];
+    
+    NSDate *date1 = [REMTimeHelper dateFromYear:2014 Month:8 Day:10];
+    NSDate *date2 = [REMTimeHelper dateFromYear:2014 Month:8 Day:11];
+    NSDate *date3 = [REMTimeHelper dateFromYear:2014 Month:8 Day:12];
+    NSDate *date4 = [REMTimeHelper dateFromYear:2014 Month:8 Day:13];
+    NSDate *date5 = [REMTimeHelper dateFromYear:2014 Month:8 Day:14];
+    NSDate *date6 = [REMTimeHelper dateFromYear:2014 Month:8 Day:15];
+    NSDate *date7 = [REMTimeHelper dateFromYear:2014 Month:8 Day:16];
+    NSDate *date8 = [REMTimeHelper dateFromYear:2014 Month:8 Day:17];
+
+
+    
+    NSDate *result1 = [searcher firstValidDateFromDate:date1 forStep:REMEnergyStepWeek];
+    NSDate *result2 = [searcher firstValidDateFromDate:date2 forStep:REMEnergyStepWeek];
+        NSDate *result3 = [searcher firstValidDateFromDate:date3 forStep:REMEnergyStepWeek];
+        NSDate *result4 = [searcher firstValidDateFromDate:date4 forStep:REMEnergyStepWeek];
+        NSDate *result5 = [searcher firstValidDateFromDate:date5 forStep:REMEnergyStepWeek];
+        NSDate *result6 = [searcher firstValidDateFromDate:date6 forStep:REMEnergyStepWeek];
+        NSDate *result7 = [searcher firstValidDateFromDate:date7 forStep:REMEnergyStepWeek];
+        NSDate *result8 = [searcher firstValidDateFromDate:date8 forStep:REMEnergyStepWeek];
+    
 }
 
 @end

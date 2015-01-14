@@ -10,5 +10,6 @@
 
 @interface REMEnergyMultiTimeSearcher : REMEnergySeacherBase
 
+- (NSDate *)firstValidDateFromDate:(NSDate *)date forStep:(REMEnergyStep)step;
 
 @end

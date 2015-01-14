@@ -72,25 +72,28 @@
         if(comp.weekday == 2 && hour == 0){
             return date;
         }
-        else{
-            [comp setDay:([comp day] - [comp weekday] + 2+7)];
+        if(comp.weekday == 1){
+            [comp setDay:([comp day] - [comp weekday] + 2)];
             [comp setHour:0];
             return [calendar dateFromComponents:comp];
         }
         
+        [comp setDay:([comp day] - [comp weekday] + 2+7)];
+        [comp setHour:0];
+        return [calendar dateFromComponents:comp];
     }
     else if(step == REMEnergyStepMonth){
         int day = [REMTimeHelper getDay:date];
         int hour = [REMTimeHelper getHour:date];
         if (hour == 0 && day == 1) {
-            return date;
+            return [REMTimeHelper addMonthToDate:date month:-1];
         }
         else{
             NSDate *newDate = [REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:date];
             comp = [calendar components:unit fromDate:newDate];
             [comp setHour:0];
             [comp setDay:1];
-            return [calendar dateFromComponents:comp];
+            return [REMTimeHelper addMonthToDate:[calendar dateFromComponents:comp] month:-1];
         }
     }
     else if(step == REMEnergyStepYear){
@@ -98,7 +101,7 @@
         int hour = [REMTimeHelper getHour:date];
         int month = [REMTimeHelper getMonth:date];
         if (hour == 0 && day == 1 && month ==1) {
-            return date;
+            return [REMTimeHelper addMonthToDate:date month:-12];
         }
         else{
             NSDate *newDate = [REMTimeHelper add:1 onPart:REMDateTimePartYear ofDate:date];
@@ -106,7 +109,7 @@
             [comp setHour:0];
             [comp setDay:1];
             [comp setMonth:1];
-            return [calendar dateFromComponents:comp];
+            return [REMTimeHelper addMonthToDate:[calendar dateFromComponents:comp] month:-12];
         }
     }
     else{
@@ -127,9 +130,9 @@
     REMWidgetTagSearchModel *model=[self tagModel];
     REMEnergyStep step = model.step;
     BOOL isFixedDifferenceTime = (step == REMEnergyStepHour || step == REMEnergyStepDay || step == REMEnergyStepWeek || step == REMEnergyStepRaw);
-    NSDate* baseDate1stSeries = [self firstValidDateFromDate:[[data.targetEnergyData[0] energyData][0] localTime] forStep:step];
+    NSDate* baseDate1stSeries = [self firstValidDateFromDate:[model.timeRangeArray[0] startTime] forStep:model.step];
     for (int i = 1; i < data.targetEnergyData.count; i++) {
-        NSDate* baseDateSeries = [self firstValidDateFromDate:[[data.targetEnergyData[i] energyData][0] localTime] forStep:step];
+        NSDate* baseDateSeries = [self firstValidDateFromDate:[model.timeRangeArray[i] startTime] forStep:model.step];
         NSMutableArray* seriesData = [[NSMutableArray alloc]initWithCapacity:[data.targetEnergyData[0] energyData].count];
         NSTimeInterval interval;
         int monthInterval = 0;
