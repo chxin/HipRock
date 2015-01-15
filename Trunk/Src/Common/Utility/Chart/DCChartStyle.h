@@ -23,55 +23,71 @@
 /****** XYChart Style Start *******/
 @property (nonatomic, assign) BOOL useTextLayer;    // YES=文本使用CATextLayer绘制，NO=文本使用[NSString drawInRect]绘制
 // x轴格式
-@property (nonatomic, strong) UIColor* xLineColor;
-@property (nonatomic, assign) CGFloat xLineWidth;
-@property (nonatomic, strong) UIColor* xGridlineColor;
-@property (nonatomic, assign) CGFloat xGridlineWidth;
-@property (nonatomic, assign) DCLineType xGridlineStyle;
-@property (nonatomic, strong) UIColor* xTextColor;
-@property (nonatomic, strong) UIFont* xTextFont;
-@property (nonatomic, assign) CGFloat xLabelToLine;
+@property (nonatomic, strong) UIColor* xLineColor;  // x轴轴线颜色
+@property (nonatomic, assign) CGFloat xLineWidth;   // x轴轴线宽度
+@property (nonatomic, strong) UIColor* xGridlineColor;  // x轴分割线颜色
+@property (nonatomic, assign) CGFloat xGridlineWidth;   // x轴分割线宽度
+@property (nonatomic, assign) DCLineType xGridlineStyle;    // x轴分割线类型
+@property (nonatomic, strong) UIColor* xTextColor;  // x轴文本颜色
+@property (nonatomic, strong) UIFont* xTextFont;    // x轴文本字体
+@property (nonatomic, assign) CGFloat xLabelToLine; // x轴文本离x轴轴线的距离
 // y轴格式
-@property (nonatomic, strong) UIColor* yLineColor;
-@property (nonatomic, assign) CGFloat yLineWidth;
-@property (nonatomic, strong) UIColor* yGridlineColor;
-@property (nonatomic, assign) CGFloat yGridlineWidth;
-@property (nonatomic, assign) DCLineType yGridlineStyle;
-@property (nonatomic, strong) UIColor* yTextColor;
-@property (nonatomic, strong) UIFont* yTextFont;
-@property (nonatomic, assign) CGFloat yLabelToLine;
-// UOM文本格式
-@property (nonatomic, strong) UIColor* yAxisTitleColor;
-@property (nonatomic, assign) CGFloat yAxisTitleToTopLabel; // UOM到最后一节YLabel的距离
-@property (nonatomic, assign) CGFloat yAxisTitleFontSize;
+@property (nonatomic, strong) UIColor* yLineColor;  // y轴轴线颜色
+@property (nonatomic, assign) CGFloat yLineWidth;   // y轴轴线宽度
+@property (nonatomic, strong) UIColor* yGridlineColor;  // y轴分割线颜色
+@property (nonatomic, assign) CGFloat yGridlineWidth;   // y轴分割线宽度
+@property (nonatomic, assign) DCLineType yGridlineStyle;    // y轴分割线类型
+@property (nonatomic, strong) UIColor* yTextColor;  // y轴文本颜色
+@property (nonatomic, strong) UIFont* yTextFont;    // y轴文本字体
+@property (nonatomic, assign) CGFloat yLabelToLine; // y轴文本离x轴轴线的距离
+// y轴标题格式
+@property (nonatomic, strong) UIColor* yAxisTitleColor; // y轴标题文本颜色
+@property (nonatomic, assign) CGFloat yAxisTitleToTopLabel; // y轴标题文本到最后一节YLabel的距离
+@property (nonatomic, assign) CGFloat yAxisTitleFontSize;   // y轴标题文本的字体大小
 
-@property (nonatomic, assign) NSUInteger horizentalGridLineAmount;
-@property (nonatomic, assign) NSUInteger symbolSize;
+@property (nonatomic, assign) NSUInteger horizentalGridLineAmount;  // 横向分割线的数量（不包含轴线）
+@property (nonatomic, assign) NSUInteger symbolSize;    // 线图的点的半径
 
+/*
+ ---------------------ChartView-----------------------------
+ |padding                                                  |
+ |   |------  -DrawArea(Axes, column/line, etc.)---  ---|  |
+ |   |                                                  |  |
+ |   |    ---------------PlotRect-------------          |  |
+ |   |    |                                  |          |  |
+ |   |    |{draw line/column inside PlotRect}|          |  |
+ |   |    |                                  |          |  |
+ |   |    ------------------------------------          |  |
+ |   |                                                  |  |
+ |   |--------------------------------------------------|  |
+ |                                                         |
+ -----------------------------------------------------------
+ */
 @property (nonatomic, assign) CGFloat plotPaddingTop;
 @property (nonatomic, assign) CGFloat plotPaddingLeft;
 @property (nonatomic, assign) CGFloat plotPaddingRight;
 @property (nonatomic, assign) CGFloat plotPaddingBottom;
 
-@property (nonatomic, strong) UIColor* benchmarkColor;
+@property (nonatomic, strong) UIColor* benchmarkColor;  // benchmark的序列颜色
 // 背景色文本格式
-@property (nonatomic, strong) UIFont* backgroundBandFont;
-@property (nonatomic, strong) UIColor* backgroundBandFontColor;
+@property (nonatomic, strong) UIFont* backgroundBandFont;   // 背景文本的字体（用于绘制冷暖季、工休日）
+@property (nonatomic, strong) UIColor* backgroundBandFontColor; // 背景文本的文本颜色（用于绘制冷暖季、工休日）
+
+@property (nonatomic, assign) CGFloat focusSymbolLineWidth; // highlight某个x位置时，指示线的宽度
+@property (nonatomic, assign) DCLineType focusSymbolLineStyle;// highlight某个x位置时，指示线的类型
+@property (nonatomic, assign) CGFloat focusSymbolIndicatorSize; // highlight某个x位置时，Line图上被高亮的点的半径
 /****** XYChart Style End *******/
 
 
 /****** PieChart Style Start *******/
-@property (nonatomic, assign) CGFloat focusSymbolLineWidth;
-@property (nonatomic, assign) DCLineType focusSymbolLineStyle;
-@property (nonatomic, assign) CGFloat focusSymbolIndicatorSize;
 
-@property (nonatomic, strong) UIFont* piePercentageTextFont;
-@property (nonatomic, assign) BOOL piePercentageTextHidden;
+@property (nonatomic, strong) UIFont* piePercentageTextFont;    // 百分比文本的字体
+@property (nonatomic, assign) BOOL piePercentageTextHidden;     // 是否隐藏百分比文本
 @property (nonatomic, assign) CGFloat piePercentageTextRadius;  // 百分比文本距离Pie圆心的距离
-@property (nonatomic, strong) UIColor* piePercentageTextColor;
+@property (nonatomic, strong) UIColor* piePercentageTextColor;  // 百分比文本的颜色
 
-@property (nonatomic, assign) CGFloat pieRadius;
-@property (nonatomic, assign) CGFloat pieShadowRadius;
+@property (nonatomic, assign) CGFloat pieRadius;                // pie的半径
+@property (nonatomic, assign) CGFloat pieShadowRadius;          // pie阴影的半径（大于pieRadius才能显示出）
 /****** PieChart Style End *******/
 
 /****** Labeling Style Start *******/
@@ -105,22 +121,21 @@
 @property (nonatomic,assign) CGFloat labelingLabelValueFontTopMarginToLabel; // Label Value文本的顶边距离Label顶边的距离
 @property (nonatomic,assign) CGFloat labelingLabelTagNameTopMargin; // Label Tag名称顶边距
 @property (nonatomic,assign) CGFloat labelingLabelTagNameFontSize;  // Tag名称文本字号
-@property (nonatomic,assign) CGFloat labelingStageHeightFor3Levels;
-@property (nonatomic,assign) CGFloat labelingStageHeightFor4Levels;
-@property (nonatomic,assign) CGFloat labelingStageHeightFor5Levels;
-@property (nonatomic,assign) CGFloat labelingStageHeightFor6Levels;
-@property (nonatomic,assign) CGFloat labelingStageHeightFor7Levels;
-@property (nonatomic,assign) CGFloat labelingStageHeightFor8Levels;
-@property (nonatomic,assign) CGFloat labelingRadius;
-@property (nonatomic,assign) CGFloat labelingTooltipViewFontSize;
-@property (nonatomic,strong) UIColor* labelingTooltipViewFontColor;
-@property (nonatomic,assign) CGFloat labelingTooltipViewHeight;
-@property (nonatomic,assign) CGFloat labelingTooltipViewHPadding;
-@property (nonatomic,assign) CGFloat labelingTooltipViewVPadding;
-@property (nonatomic,assign) CGFloat labelingTooltipViewCornerRadius;
-@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleWidth;
-@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleHeight;
-@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleMinPaddingToEdge;
+@property (nonatomic,assign) CGFloat labelingStageHeightFor3Levels; // 当Level分为3级时，每个Level的高度
+@property (nonatomic,assign) CGFloat labelingStageHeightFor4Levels; // 当Level分为4级时，每个Level的高度
+@property (nonatomic,assign) CGFloat labelingStageHeightFor5Levels; // 当Level分为5级时，每个Level的高度
+@property (nonatomic,assign) CGFloat labelingStageHeightFor6Levels; // 当Level分为6级时，每个Level的高度
+@property (nonatomic,assign) CGFloat labelingStageHeightFor7Levels; // 当Level分为7级时，每个Level的高度
+@property (nonatomic,assign) CGFloat labelingStageHeightFor8Levels; // 当Level分为8级时，每个Level的高度
+@property (nonatomic,assign) CGFloat labelingRadius;                // 绘制Label和Level时的圆角半径
+@property (nonatomic,assign) CGFloat labelingTooltipViewFontSize;   // tooltip的文本尺寸
+@property (nonatomic,strong) UIColor* labelingTooltipViewFontColor; // tooltip的文本颜色
+@property (nonatomic,assign) CGFloat labelingTooltipViewHPadding;   // tooltip文本距离TooltipView浮层上沿和下沿的距离
+@property (nonatomic,assign) CGFloat labelingTooltipViewVPadding;   // tooltip文本距离TooltipView浮层左沿和右沿的距离
+@property (nonatomic,assign) CGFloat labelingTooltipViewCornerRadius;// TooltipView浮层的圆角半径
+@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleWidth;// TooltipView浮层的指示箭头的宽度
+@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleHeight;// TooltipView浮层的指示箭头的高度
+@property (nonatomic,assign) CGFloat labelingTooltipViewTriangleMinPaddingToEdge;// TooltipView浮层距离ChartView边缘的最近的距离阀值。超过此值时
 
 @property (nonatomic,assign) CGFloat labelingArrowVMargin;
 @property (nonatomic,assign) CGFloat labelingArrowLineWidth;
@@ -131,7 +146,7 @@
 
 /****** Labeling Style End *******/
 
-+(DCChartStyle*)getMaximizedStyle;
-+(DCChartStyle*)getMinimunStyle;
-+(DCChartStyle*)getCoverStyle;
++(DCChartStyle*)getMaximizedStyle;  // 获取Widget最大化时的Style设置
++(DCChartStyle*)getMinimunStyle;    // 获取Widget最小化时得Style设置
++(DCChartStyle*)getCoverStyle;      // 获取Widget被Pin在Cover上时，Style的设置
 @end

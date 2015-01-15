@@ -140,7 +140,6 @@
     style.labelingRadius = 2;
     style.labelingTooltipViewFontSize = 14;
     style.labelingTooltipViewFontColor = [REMColor colorByHexString:@"#373737"];
-    style.labelingTooltipViewHeight = 57;
     style.labelingTooltipViewCornerRadius = 5;
     style.labelingTooltipViewHPadding = 48;
     style.labelingTooltipViewVPadding = 4;
