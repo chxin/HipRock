@@ -37,6 +37,7 @@
         NSMutableDictionary* timeRange0 = [timeRanges[0] mutableCopy];
         NSString *relativeDate = params[@"relativeDate"];
         if (!REMIsNilOrNull(relativeDate)) {
+            [timeRange0 removeAllObjects];
             [params removeObjectForKey:@"relativeDate"];
             [timeRange0 setObject:relativeDate forKey:@"relativeDate"];
             [timeRanges replaceObjectAtIndex:0 withObject:timeRange0];
