@@ -36,15 +36,21 @@ const double kDCPiePercentageTextThreshold = 0.05; // 百分比低于这个值�
         for (int i = 0; i < self.view.series.datas.count; i++) {
             DCPieDataPoint* point = self.view.series.datas[i];
             if (point.pointType != DCDataPointTypeNormal) continue;
+            // 计算扇形区域的角度
             CGFloat pointValue = [self.animationManager getVisableValueOfPoint:point];
             CGFloat pieSlicePI = pointValue / sum * M_PI * self.view.fullAngle;
+            // 绘制扇型区域
             CGContextSetFillColorWithColor(ctx, point.color.CGColor);
             CGContextMoveToPoint(ctx, center.x, center.y);
             CGContextAddArc(ctx, center.x, center.y, self.view.radius, startAnglePI, pieSlicePI+startAnglePI, 0);
             CGContextDrawPath(ctx, kCGPathFill);
             
+            /*
+             * 当ChartStyle要求百分比文本需要显示，且扇区所占的百分比大于kDCPiePercentageTextThreshold（5%）时，绘制百分比文本
+             */
             if (!self.view.chartStyle.piePercentageTextHidden && !self.percentageTextHidden && pointValue / sum > kDCPiePercentageTextThreshold) {
                 CGContextSaveGState(ctx);
+                // 绘制在扇形的中间角度区域
                 CGFloat centerAngle = startAnglePI + pieSlicePI / 2;
                 CGPoint textCenter;
                 textCenter.x = center.x + sin(centerAngle) * self.view.chartStyle.piePercentageTextRadius;
