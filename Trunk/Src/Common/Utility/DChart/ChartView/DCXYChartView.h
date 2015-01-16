@@ -27,19 +27,15 @@
 @property (nonatomic, strong) NSArray* seriesList;
 @property (nonatomic, assign) NSUInteger visableYAxisAmount;
 
-//-(DCRange*)getRangeOfAxis:(DCAxis*)axis;
-
 - (id)initWithFrame:(CGRect)frame beginHRange:(DCRange*)beginHRange;
 
-- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;
+- (void)setSeries:(DCXYSeries*)series hidden:(BOOL)hidden;  // Hide or show a series
 
--(void)setXLabelFormatter:(NSFormatter*)formatter;
-//@property (nonatomic) NSArray* axis;
-//@property (nonatomic, readonly) DCContext* graphContext;
+-(void)setXLabelFormatter:(NSFormatter*)formatter;  // Set xLabel formatter. Will affect x-axis label in next draw
 -(double)getXLocationForPoint:(CGPoint)point;
--(void)focusAroundX:(double)x;
--(void)defocus;
--(void)setBackgoundBands:(NSArray*)bands;
+-(void)focusAroundX:(double)x;  // Highlight all points around specificied x
+-(void)defocus; // de-highlight
+-(void)setBackgoundBands:(NSArray*)bands;   // Set background band. Will be drawn immedietely.
 -(void)reloadData;
 -(void)subLayerGrowthAnimationDone;
 -(_DCCoordinateSystem*)findCoordinateByYAxis:(DCAxis *)yAxis;
