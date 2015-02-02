@@ -16,9 +16,9 @@ typedef void (^DCPieAnimationCallback)();
 
 -(id)initWithPieView:(UIView*)view;
 -(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame callback:(DCPieAnimationCallback)callback;
--(void)rotateWithInitialSpeed:(double)speed;
--(void)playFrames:(NSArray*)frames callback:(DCPieAnimationCallback)callback;
--(void)stopTimer;
+-(void)rotateWithInitialSpeed:(double)speed;    // play a rotate animation
+-(void)playFrames:(NSArray*)frames callback:(DCPieAnimationCallback)callback;   // start a timer to play frames one by one
+-(void)stopTimer;   // stop current animation and clear the timer.
 
 -(NSArray*)getAngleTurningFramesFrom:(double)from to:(double)to;
 -(void)setPoint:(DCPieDataPoint*)point hidden:(BOOL)hidden;

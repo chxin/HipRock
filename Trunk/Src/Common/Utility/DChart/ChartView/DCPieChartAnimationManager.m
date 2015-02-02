@@ -18,9 +18,27 @@ typedef struct _DCPieSlice {
 
 @interface DCPieChartAnimationManager()
 @property (nonatomic, weak) DCPieChartView* view;
-@property (nonatomic,strong) NSTimer* animationTimer;
+@property (nonatomic,strong) NSTimer* animationTimer;   // 播放旋转、增长等动画的Timer(不包含隐藏/显示扇区）
+
+/*
+ * 包含显隐扇区时的Timer。每个Timer播放结束后都会从数组中移除并销毁。
+ * 播放显隐动画时，实际上是修改self.pointValueDics的中，单个点得valueKey并重绘。
+ */
 @property (nonatomic,strong) NSMutableArray* hiddenShowTimers;
+
+/***
+ * 一个字典数组。为方便饼图的显示/隐藏扇区动画，为序列中的每个点建立了如下数据结构
+ * { 
+ *     @"point": DCPoint, 每个点的索引
+ *     @"valueKey": NSNumber或者Null。每个点的值，当点的Type不为DCDataPointTypeNormal时，为Null。当点隐藏时为0。
+ *     @"step": 显隐动画时，Timer给扇区加值时的步长。
+ * }
+ ***/
 @property (nonatomic,strong) NSMutableArray* pointValueDics;
+
+/*
+ * 一个数组，存储数个_DCPieSlice结构，表示每个点对应扇区的起始角度、终结角度以及中线角度。
+ */
 @property (nonatomic, strong) NSArray* pieSlices;
 @property (nonatomic,assign) double sumVisableValue;
 @end
@@ -60,7 +78,7 @@ const NSString* stepKey = @"step";
     [self updateSumValueAndSlices];
 }
 
-/**计算等差数列**/
+// 计算从a到b的所有整数的等差数列的和值
 -(int)sumFrom:(NSUInteger)a to:(NSUInteger)b {
     if (a > b) {
         NSUInteger c = a;
@@ -382,10 +400,16 @@ const NSString* stepKey = @"step";
     }
 }
 
+/*
+ * 获取所有可见点的角度值之和。
+ */
 -(double)getVisableSliceSum {
     return self.sumVisableValue;
 }
 
+/*
+ * 用一个Point查找该点当前应绘制的角度大小。
+ */
 -(double)getVisableValueOfPoint:(DCPieDataPoint*)point {
     double angle = 0;
     if (point.pointType == DCDataPointTypeNormal) {
@@ -398,6 +422,9 @@ const NSString* stepKey = @"step";
     return angle;
 }
 
+/*
+ * 用一个角度值，获取最近扇区的Index
+ */
 -(NSUInteger)findIndexOfSlide:(CGFloat)angle {
     if (angle != 0) {
         angle = 2 - angle;
@@ -414,7 +441,9 @@ const NSString* stepKey = @"step";
     }
     return index;
 }
-
+/*
+ * 用一个角度值，获取最近的扇区的中轴角度。
+ */
 -(CGFloat)findNearbySliceCenter:(CGFloat)angle {
     DCPieSlice slice;
     NSUInteger index = [self findIndexOfSlide:angle];
