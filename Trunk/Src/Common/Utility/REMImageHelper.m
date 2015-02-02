@@ -327,16 +327,55 @@
     return inflatedImage;
 }
 
++ (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
+{
+    if([fullPath isEqual:[NSNull null]])
+        return;
+    
+    NSURL * url = [NSURL URLWithString:fullPath];
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    [imageData writeToURL:url atomically:YES];
+    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
+    
+    imageData = nil;
+}
+
+
 + (void)writeImageFile:(UIImage *)image withFileName:(NSString *)fileName{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    NSURL * url = [NSURL URLWithString:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]]];
     
     NSData * binaryImageData = UIImagePNGRepresentation(image);
     
-    [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]] atomically:YES];
+    [binaryImageData writeToURL:url atomically:YES];
+    
+    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
 }
 
-+ (UIImage *)readImageFile:(NSString *)fileName{
++ (void)writeImageData:(NSData *)data toFile:(NSString *)fileName {
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    NSURL * url = [NSURL URLWithString:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]]];
+    
+    [data writeToURL:url atomically:YES];
+    
+    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
+}
+
++ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES] forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
+}
+
++ (UIImage *)readImageFile:(NSString *)fileName {
     return  nil;
 }
 
@@ -377,17 +416,6 @@
     NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
 	return [NSString stringWithFormat:@"%@/building-%@-%d-%d.png",documents,currentUserName,[imageId intValue],type];
-}
-
-+ (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
-{
-    if([fullPath isEqual:[NSNull null]])
-        return;
-    
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    [imageData writeToFile:fullPath atomically:YES];
-    
-    imageData = nil;
 }
 
 
