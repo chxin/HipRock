@@ -335,7 +335,7 @@
     NSURL * url = [NSURL URLWithString:fullPath];
     NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
     [imageData writeToURL:url atomically:YES];
-    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
+//    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
     
     imageData = nil;
 }
@@ -350,7 +350,7 @@
     
     [binaryImageData writeToURL:url atomically:YES];
     
-    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
+//    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
 }
 
 + (void)writeImageData:(NSData *)data toFile:(NSString *)fileName {
@@ -360,20 +360,9 @@
     
     [data writeToURL:url atomically:YES];
     
-    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
+//    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
 }
 
-+ (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
-{
-    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
-    
-    NSError *error = nil;
-    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES] forKey: NSURLIsExcludedFromBackupKey error: &error];
-    if(!success){
-        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
-    }
-    return success;
-}
 
 + (UIImage *)readImageFile:(NSString *)fileName {
     return  nil;

@@ -43,6 +43,10 @@
     Weibo *weibo = [[Weibo alloc] initWithAppKey:kWeiboAppKey withAppSecret:kWeiboAppSecret];
     [Weibo setWeibo:weibo];
     
+    
+    //skip backup document directory
+    [self addSkipBackupAttributeToItemAtURL:[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject]];
+    
     return YES;
 }
 
@@ -97,6 +101,17 @@
 
 
 
+- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES] forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
+}
 
 
 @end
