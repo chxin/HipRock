@@ -344,24 +344,12 @@
 + (void)writeImageFile:(UIImage *)image withFileName:(NSString *)fileName{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSURL * url = [NSURL URLWithString:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]]];
     
     NSData * binaryImageData = UIImagePNGRepresentation(image);
     
-    [binaryImageData writeToURL:url atomically:YES];
-    
-//    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
+    [binaryImageData writeToFile:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]] atomically:YES];
 }
 
-+ (void)writeImageData:(NSData *)data toFile:(NSString *)fileName {
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    NSURL * url = [NSURL URLWithString:[basePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]]];
-    
-    [data writeToURL:url atomically:YES];
-    
-//    [REMImageHelper addSkipBackupAttributeToItemAtURL:url];
-}
 
 
 + (UIImage *)readImageFile:(NSString *)fileName {

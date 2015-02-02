@@ -147,8 +147,8 @@
                 else{
                     blurredSmallImage=[REMImageHelper blurImage:smallImage];
                     NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(blurredSmallImage)];
-//                    [data1 writeToFile:smallBlurPicPath atomically:YES];
-                    [REMImageHelper writeImageData:data1 toFile:smallBlurPicPath];
+                    [data1 writeToFile:smallBlurPicPath atomically:YES];
+//                    [REMImageHelper writeImageData:data1 toFile:smallBlurPicPath];
                 }
                 blurImageView.image=blurredSmallImage;
             }
@@ -367,8 +367,8 @@
         
         NSString *pngFilePath = [self buildingPictureFileName];
         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-//        [data1 writeToFile:pngFilePath atomically:YES];
-        [REMImageHelper writeImageData:data1 toFile:pngFilePath];
+        [data1 writeToFile:pngFilePath atomically:YES];
+//        [REMImageHelper writeImageData:data1 toFile:pngFilePath];
         
         CGSize newSize=CGSizeMake(174, 110);
         
@@ -382,8 +382,8 @@
         BOOL hasExist= [[NSFileManager defaultManager] fileExistsAtPath:smallPicPath];
         if (hasExist==NO) {
             data1 = [NSData dataWithData:UIImagePNGRepresentation(newImage)];
-//            [data1 writeToFile:smallPicPath atomically:YES];
-            [REMImageHelper writeImageData:data1 toFile:smallPicPath];
+            [data1 writeToFile:smallPicPath atomically:YES];
+//            [REMImageHelper writeImageData:data1 toFile:smallPicPath];
         }
         
         
@@ -496,8 +496,8 @@
         if(view!=nil){
             blurred.image=view;
             NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(view)];
-//            [data1 writeToFile:blurImagePath atomically:YES];
-            [REMImageHelper writeImageData:data1 toFile:blurImagePath];
+            [data1 writeToFile:blurImagePath atomically:YES];
+//            [REMImageHelper writeImageData:data1 toFile:blurImagePath];
         }
         
         return blurred;

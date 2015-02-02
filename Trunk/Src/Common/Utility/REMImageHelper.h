@@ -35,8 +35,6 @@
 
 + (void)writeImageFile:(UIImage *)image withFullPath:(NSString *)fullPath;
 
-+ (void)writeImageData:(NSData *)data toFile:(NSString *)fileName;
-
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledWithFactor:(CGFloat)factor;
 
