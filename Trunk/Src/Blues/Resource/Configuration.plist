@@ -33,7 +33,7 @@
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://42.121.254.106/v1.8.0.9/Mobile/</string>
+			<string>http://121.199.24.158/v1.8.0.9/mobile/MobileApiHost/</string>
 			<key>timeout</key>
 			<string>70</string>
 			<key>debug-logmode</key>
@@ -56,7 +56,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>production</string>
+		<string>test</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>
