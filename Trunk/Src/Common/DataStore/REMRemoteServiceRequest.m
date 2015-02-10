@@ -110,7 +110,8 @@
     
     NSString *userAgent = [NSString stringWithFormat:@"Blues/%@(ESS;%@;%@;%@;%@;%@;)", fullVersion, [[REMCurrentDevice identifierForVendor] UUIDString],[REMCurrentDevice localizedModel],[REMCurrentDevice systemName],[REMCurrentDevice systemVersion],[REMCurrentDevice model]];
     REMManagedUserModel *user = REMAppContext.currentUser;
-    NSString *info = [NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue]];
+    NSString *info = [NSString stringWithFormat:@"%lld|%@|%lld",[user.id longLongValue],user.name, [user.spId longLongValue] == 0 ? -1 : [user.spId longLongValue]];
+    NSLog(info);
     NSString *token = [REMEncryptHelper base64AES256EncryptString:info withKey:REMSecurityTokenKey];
     
     NSString *accept = self.dataStore.responseType == REMServiceResponseJson ? @"*/*":@"image/webp,*/*;";
