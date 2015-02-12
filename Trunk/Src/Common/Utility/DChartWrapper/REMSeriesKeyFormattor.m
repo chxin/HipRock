@@ -124,7 +124,7 @@
     
     NSNumber *hierarchyId = @(-1);
     NSString *targetPath = @"%";
-    if(target.type == REMEnergyTargetBenchmarkValue){
+    if(target.type == REMEnergyTargetBenchmarkValue || !syntax){
         return targetPath;
     }
     
