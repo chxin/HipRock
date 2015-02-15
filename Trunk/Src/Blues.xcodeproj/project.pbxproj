@@ -553,7 +553,6 @@
 		7AAA24B918B5AC9C002069EA /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		7AAA24BA18B5AC9C002069EA /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
 		7AAA24BB18B5AC9C002069EA /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
-		7AAB85311A902C48009CC201 /* NSStringExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85301A902C48009CC201 /* NSStringExtension.m */; };
 		7AAB854F1A9031FC009CC201 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85351A9031FC009CC201 /* CLIColor.m */; };
 		7AAB85511A9031FC009CC201 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85391A9031FC009CC201 /* DDAbstractDatabaseLogger.m */; };
 		7AAB85521A9031FC009CC201 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB853B1A9031FC009CC201 /* DDASLLogCapture.m */; };
@@ -1340,8 +1339,6 @@
 		7AA24ABF196E4090004A6CA8 /* MailTemplate_Commodity.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MailTemplate_Commodity.html; sourceTree = "<group>"; };
 		7AA6464818C056050081E96E /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
-		7AAB852F1A902C48009CC201 /* NSStringExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringExtension.h; path = Common/Utility/NSStringExtension.h; sourceTree = "<group>"; };
-		7AAB85301A902C48009CC201 /* NSStringExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringExtension.m; path = Common/Utility/NSStringExtension.m; sourceTree = "<group>"; };
 		7AAB85341A9031FC009CC201 /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
 		7AAB85351A9031FC009CC201 /* CLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIColor.m; sourceTree = "<group>"; };
 		7AAB85361A9031FC009CC201 /* CocoaLumberjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaLumberjack.h; sourceTree = "<group>"; };
@@ -2161,8 +2158,6 @@
 				7A9BBF911952E0E0000A45F5 /* REMFont.m */,
 				7A1A6B89198205FE00D62153 /* REMGISHelper.h */,
 				7A1A6B8A198205FE00D62153 /* REMGISHelper.m */,
-				7AAB852F1A902C48009CC201 /* NSStringExtension.h */,
-				7AAB85301A902C48009CC201 /* NSStringExtension.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -4275,7 +4270,6 @@
 				7A3290EE18D83CBF00B3AE8A /* REMApplicationContext.m in Sources */,
 				7A9EAA9E18D2946300EF1B85 /* WeiboLoginDialog.m in Sources */,
 				7A3290ED18D83CBF00B3AE8A /* REMAppConfiguration.m in Sources */,
-				7AAB85311A902C48009CC201 /* NSStringExtension.m in Sources */,
 				7A63E23F18B44CBD00A13464 /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				7A3290E018D823EF00B3AE8A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				7A63E21818B44CBD00A13464 /* REMRelativeDateViewController.m in Sources */,
