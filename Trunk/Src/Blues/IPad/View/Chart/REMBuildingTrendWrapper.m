@@ -47,7 +47,7 @@
             baseDateOfX = thisMonth;
             break;
         case REMRelativeTimeRangeTypeLastMonth:
-            length = [REMTimeHelper getDaysOfDate:[REMTimeHelper addMonthToDate:[NSDate date] month:-1]];
+            length = (int)[REMTimeHelper getDaysOfDate:[REMTimeHelper addMonthToDate:[NSDate date] month:-1]];
             baseDateOfX = [REMTimeHelper addMonthToDate:thisMonth month:-1];
             break;
         case REMRelativeTimeRangeTypeThisYear:
@@ -91,7 +91,7 @@
     state.seriesKey = [self getSeriesKeyByTarget:target seriesIndex:index];
     state.seriesType = DCSeriesTypeStatusLine;
     state.avilableTypes = DCSeriesTypeStatusLine;
-    state.forcedColor = [self getSeriesColorByIndex:index];
+    state.forcedColor = [self getSeriesColorByIndex:(int)index];
     state.visible = YES;
     return state;
 }

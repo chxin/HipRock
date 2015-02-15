@@ -553,6 +553,17 @@
 		7AAA24B918B5AC9C002069EA /* DCPieWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFDCC97D18472AD400955560 /* DCPieWrapper.m */; };
 		7AAA24BA18B5AC9C002069EA /* DCLabelingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE86980185EC3EB00DC0007 /* DCLabelingWrapper.m */; };
 		7AAA24BB18B5AC9C002069EA /* DWrapperConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE3F61018851582009AD4A7 /* DWrapperConfig.m */; };
+		7AAB85311A902C48009CC201 /* NSStringExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85301A902C48009CC201 /* NSStringExtension.m */; };
+		7AAB854F1A9031FC009CC201 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85351A9031FC009CC201 /* CLIColor.m */; };
+		7AAB85511A9031FC009CC201 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85391A9031FC009CC201 /* DDAbstractDatabaseLogger.m */; };
+		7AAB85521A9031FC009CC201 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB853B1A9031FC009CC201 /* DDASLLogCapture.m */; };
+		7AAB85531A9031FC009CC201 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB853D1A9031FC009CC201 /* DDASLLogger.m */; };
+		7AAB85541A9031FC009CC201 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85401A9031FC009CC201 /* DDFileLogger.m */; };
+		7AAB85551A9031FC009CC201 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85441A9031FC009CC201 /* DDLog.m */; };
+		7AAB85561A9031FC009CC201 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB85471A9031FC009CC201 /* DDTTYLogger.m */; };
+		7AAB85571A9031FC009CC201 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB854A1A9031FC009CC201 /* DDContextFilterLogFormatter.m */; };
+		7AAB85581A9031FC009CC201 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB854C1A9031FC009CC201 /* DDDispatchQueueLogFormatter.m */; };
+		7AAB85591A9031FC009CC201 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB854E1A9031FC009CC201 /* DDMultiFormatter.m */; };
 		7AAF60D01997678E00053204 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AAF60CF1997678E00053204 /* UIImage+ImageEffects.m */; };
 		7AB71688187F859B00EA7544 /* MapBlur.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71686187F859B00EA7544 /* MapBlur.png */; };
 		7AB71689187F859B00EA7544 /* MapBlur@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71687187F859B00EA7544 /* MapBlur@2x.png */; };
@@ -568,16 +579,6 @@
 		7AC40254196BDF780028B3CA /* REMSettingContactInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC40253196BDF780028B3CA /* REMSettingContactInformationViewController.m */; };
 		7AD046551993507E00AE1134 /* WeiboBana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AD046531993507E00AE1134 /* WeiboBana.jpg */; };
 		7ADCFA63191B50820038A2A1 /* REMCustomerLogoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */; };
-		7AE89198195A6393004F4E2E /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89182195A6393004F4E2E /* CLIColor.m */; };
-		7AE89199195A6393004F4E2E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89184195A6393004F4E2E /* DDAbstractDatabaseLogger.m */; };
-		7AE8919A195A6393004F4E2E /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89186195A6393004F4E2E /* DDASLLogCapture.m */; };
-		7AE8919B195A6393004F4E2E /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89188195A6393004F4E2E /* DDASLLogger.m */; };
-		7AE8919C195A6393004F4E2E /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8918A195A6393004F4E2E /* DDFileLogger.m */; };
-		7AE8919D195A6393004F4E2E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8918D195A6393004F4E2E /* DDLog.m */; };
-		7AE8919E195A6393004F4E2E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE8918F195A6393004F4E2E /* DDTTYLogger.m */; };
-		7AE8919F195A6393004F4E2E /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89192195A6393004F4E2E /* DDContextFilterLogFormatter.m */; };
-		7AE891A0195A6393004F4E2E /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89194195A6393004F4E2E /* DDDispatchQueueLogFormatter.m */; };
-		7AE891A1195A6393004F4E2E /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE89196195A6393004F4E2E /* DDMultiFormatter.m */; };
 		7AEFD8681966864B00316D76 /* REMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD8671966864B00316D76 /* REMButton.m */; };
 		7AEFD86B19668F7000316D76 /* REMSettingQRCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD86A19668F7000316D76 /* REMSettingQRCodeController.m */; };
 		7AEFD86E19668FA400316D76 /* REMSettingContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AEFD86D19668FA400316D76 /* REMSettingContactViewController.m */; };
@@ -1339,6 +1340,33 @@
 		7AA24ABF196E4090004A6CA8 /* MailTemplate_Commodity.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = MailTemplate_Commodity.html; sourceTree = "<group>"; };
 		7AA6464818C056050081E96E /* REMSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingViewController.h; sourceTree = "<group>"; };
 		7AA6464918C056050081E96E /* REMSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMSettingViewController.m; sourceTree = "<group>"; };
+		7AAB852F1A902C48009CC201 /* NSStringExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSStringExtension.h; path = Common/Utility/NSStringExtension.h; sourceTree = "<group>"; };
+		7AAB85301A902C48009CC201 /* NSStringExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSStringExtension.m; path = Common/Utility/NSStringExtension.m; sourceTree = "<group>"; };
+		7AAB85341A9031FC009CC201 /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
+		7AAB85351A9031FC009CC201 /* CLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIColor.m; sourceTree = "<group>"; };
+		7AAB85361A9031FC009CC201 /* CocoaLumberjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaLumberjack.h; sourceTree = "<group>"; };
+		7AAB85381A9031FC009CC201 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		7AAB85391A9031FC009CC201 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		7AAB853A1A9031FC009CC201 /* DDASLLogCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogCapture.h; sourceTree = "<group>"; };
+		7AAB853B1A9031FC009CC201 /* DDASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogCapture.m; sourceTree = "<group>"; };
+		7AAB853C1A9031FC009CC201 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		7AAB853D1A9031FC009CC201 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		7AAB853E1A9031FC009CC201 /* DDAssertMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAssertMacros.h; sourceTree = "<group>"; };
+		7AAB853F1A9031FC009CC201 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		7AAB85401A9031FC009CC201 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		7AAB85411A9031FC009CC201 /* DDLegacyMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLegacyMacros.h; sourceTree = "<group>"; };
+		7AAB85421A9031FC009CC201 /* DDLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDLog+LOGV.h"; sourceTree = "<group>"; };
+		7AAB85431A9031FC009CC201 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		7AAB85441A9031FC009CC201 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		7AAB85451A9031FC009CC201 /* DDLogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogMacros.h; sourceTree = "<group>"; };
+		7AAB85461A9031FC009CC201 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		7AAB85471A9031FC009CC201 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		7AAB85491A9031FC009CC201 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		7AAB854A1A9031FC009CC201 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		7AAB854B1A9031FC009CC201 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		7AAB854C1A9031FC009CC201 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		7AAB854D1A9031FC009CC201 /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
+		7AAB854E1A9031FC009CC201 /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
 		7AAF60CE1997678E00053204 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		7AAF60CF1997678E00053204 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		7AB37B1D18D845B4007D4212 /* REMVendorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = REMVendorMacro.h; path = Common/Application/REMVendorMacro.h; sourceTree = "<group>"; };
@@ -1362,27 +1390,6 @@
 		7AD046561993508700AE1134 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = en; path = en.lproj/WeiboBana.jpg; sourceTree = "<group>"; };
 		7ADCFA61191B50820038A2A1 /* REMCustomerLogoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMCustomerLogoButton.h; sourceTree = "<group>"; };
 		7ADCFA62191B50820038A2A1 /* REMCustomerLogoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMCustomerLogoButton.m; sourceTree = "<group>"; };
-		7AE89181195A6393004F4E2E /* CLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLIColor.h; sourceTree = "<group>"; };
-		7AE89182195A6393004F4E2E /* CLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLIColor.m; sourceTree = "<group>"; };
-		7AE89183195A6393004F4E2E /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		7AE89184195A6393004F4E2E /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		7AE89185195A6393004F4E2E /* DDASLLogCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogCapture.h; sourceTree = "<group>"; };
-		7AE89186195A6393004F4E2E /* DDASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogCapture.m; sourceTree = "<group>"; };
-		7AE89187195A6393004F4E2E /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
-		7AE89188195A6393004F4E2E /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
-		7AE89189195A6393004F4E2E /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
-		7AE8918A195A6393004F4E2E /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
-		7AE8918B195A6393004F4E2E /* DDLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDLog+LOGV.h"; sourceTree = "<group>"; };
-		7AE8918C195A6393004F4E2E /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
-		7AE8918D195A6393004F4E2E /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
-		7AE8918E195A6393004F4E2E /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
-		7AE8918F195A6393004F4E2E /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
-		7AE89191195A6393004F4E2E /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		7AE89192195A6393004F4E2E /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		7AE89193195A6393004F4E2E /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		7AE89194195A6393004F4E2E /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		7AE89195195A6393004F4E2E /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
-		7AE89196195A6393004F4E2E /* DDMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDMultiFormatter.m; sourceTree = "<group>"; };
 		7AEFD8661966864B00316D76 /* REMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMButton.h; sourceTree = "<group>"; };
 		7AEFD8671966864B00316D76 /* REMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REMButton.m; sourceTree = "<group>"; };
 		7AEFD86919668F7000316D76 /* REMSettingQRCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REMSettingQRCodeController.h; sourceTree = "<group>"; };
@@ -2154,6 +2161,8 @@
 				7A9BBF911952E0E0000A45F5 /* REMFont.m */,
 				7A1A6B89198205FE00D62153 /* REMGISHelper.h */,
 				7A1A6B8A198205FE00D62153 /* REMGISHelper.m */,
+				7AAB852F1A902C48009CC201 /* NSStringExtension.h */,
+				7AAB85301A902C48009CC201 /* NSStringExtension.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -2884,6 +2893,7 @@
 		7A9B1E1E177B3A8B00C282A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7AAB85321A9031FC009CC201 /* Lumberjack */,
 				7A9D36F01A036792003BAF72 /* GPUImage.framework */,
 				7A12C2F7196D31B100272609 /* AudioToolbox.framework */,
 				7A50EC3B1957F377007A945A /* Accelerate.framework */,
@@ -2910,7 +2920,6 @@
 				7A217E5418E51FA100383BED /* Reachability */,
 				7A9EAA5818D2946300EF1B85 /* WeiboSDK */,
 				7A3290CD18D823EF00B3AE8A /* UIKit+AFNetworking */,
-				7AE8917F195A6393004F4E2E /* Lumberjack */,
 				7A399E82177D238F00F0EB9F /* AFNetworking */,
 			);
 			name = Frameworks;
@@ -3043,6 +3052,55 @@
 			path = Resource/Templates;
 			sourceTree = "<group>";
 		};
+		7AAB85321A9031FC009CC201 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB85331A9031FC009CC201 /* CLI */,
+				7AAB85361A9031FC009CC201 /* CocoaLumberjack.h */,
+				7AAB85381A9031FC009CC201 /* DDAbstractDatabaseLogger.h */,
+				7AAB85391A9031FC009CC201 /* DDAbstractDatabaseLogger.m */,
+				7AAB853A1A9031FC009CC201 /* DDASLLogCapture.h */,
+				7AAB853B1A9031FC009CC201 /* DDASLLogCapture.m */,
+				7AAB853C1A9031FC009CC201 /* DDASLLogger.h */,
+				7AAB853D1A9031FC009CC201 /* DDASLLogger.m */,
+				7AAB853E1A9031FC009CC201 /* DDAssertMacros.h */,
+				7AAB853F1A9031FC009CC201 /* DDFileLogger.h */,
+				7AAB85401A9031FC009CC201 /* DDFileLogger.m */,
+				7AAB85411A9031FC009CC201 /* DDLegacyMacros.h */,
+				7AAB85421A9031FC009CC201 /* DDLog+LOGV.h */,
+				7AAB85431A9031FC009CC201 /* DDLog.h */,
+				7AAB85441A9031FC009CC201 /* DDLog.m */,
+				7AAB85451A9031FC009CC201 /* DDLogMacros.h */,
+				7AAB85461A9031FC009CC201 /* DDTTYLogger.h */,
+				7AAB85471A9031FC009CC201 /* DDTTYLogger.m */,
+				7AAB85481A9031FC009CC201 /* Extensions */,
+			);
+			name = Lumberjack;
+			path = ../Lib/Lumberjack;
+			sourceTree = "<group>";
+		};
+		7AAB85331A9031FC009CC201 /* CLI */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB85341A9031FC009CC201 /* CLIColor.h */,
+				7AAB85351A9031FC009CC201 /* CLIColor.m */,
+			);
+			path = CLI;
+			sourceTree = "<group>";
+		};
+		7AAB85481A9031FC009CC201 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB85491A9031FC009CC201 /* DDContextFilterLogFormatter.h */,
+				7AAB854A1A9031FC009CC201 /* DDContextFilterLogFormatter.m */,
+				7AAB854B1A9031FC009CC201 /* DDDispatchQueueLogFormatter.h */,
+				7AAB854C1A9031FC009CC201 /* DDDispatchQueueLogFormatter.m */,
+				7AAB854D1A9031FC009CC201 /* DDMultiFormatter.h */,
+				7AAB854E1A9031FC009CC201 /* DDMultiFormatter.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7AAF60CD1997678E00053204 /* UIImage+ImageEffects */ = {
 			isa = PBXGroup;
 			children = (
@@ -3060,51 +3118,6 @@
 				7ABA161018DAB255001624F8 /* REMDataStoreTests.m */,
 			);
 			name = DataStore;
-			sourceTree = "<group>";
-		};
-		7AE8917F195A6393004F4E2E /* Lumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				7AE89180195A6393004F4E2E /* CLI */,
-				7AE89183195A6393004F4E2E /* DDAbstractDatabaseLogger.h */,
-				7AE89184195A6393004F4E2E /* DDAbstractDatabaseLogger.m */,
-				7AE89185195A6393004F4E2E /* DDASLLogCapture.h */,
-				7AE89186195A6393004F4E2E /* DDASLLogCapture.m */,
-				7AE89187195A6393004F4E2E /* DDASLLogger.h */,
-				7AE89188195A6393004F4E2E /* DDASLLogger.m */,
-				7AE89189195A6393004F4E2E /* DDFileLogger.h */,
-				7AE8918A195A6393004F4E2E /* DDFileLogger.m */,
-				7AE8918B195A6393004F4E2E /* DDLog+LOGV.h */,
-				7AE8918C195A6393004F4E2E /* DDLog.h */,
-				7AE8918D195A6393004F4E2E /* DDLog.m */,
-				7AE8918E195A6393004F4E2E /* DDTTYLogger.h */,
-				7AE8918F195A6393004F4E2E /* DDTTYLogger.m */,
-				7AE89190195A6393004F4E2E /* Extensions */,
-			);
-			name = Lumberjack;
-			path = ../Lib/Lumberjack;
-			sourceTree = "<group>";
-		};
-		7AE89180195A6393004F4E2E /* CLI */ = {
-			isa = PBXGroup;
-			children = (
-				7AE89181195A6393004F4E2E /* CLIColor.h */,
-				7AE89182195A6393004F4E2E /* CLIColor.m */,
-			);
-			path = CLI;
-			sourceTree = "<group>";
-		};
-		7AE89190195A6393004F4E2E /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				7AE89191195A6393004F4E2E /* DDContextFilterLogFormatter.h */,
-				7AE89192195A6393004F4E2E /* DDContextFilterLogFormatter.m */,
-				7AE89193195A6393004F4E2E /* DDDispatchQueueLogFormatter.h */,
-				7AE89194195A6393004F4E2E /* DDDispatchQueueLogFormatter.m */,
-				7AE89195195A6393004F4E2E /* DDMultiFormatter.h */,
-				7AE89196195A6393004F4E2E /* DDMultiFormatter.m */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7AE8EEA21835C9B4007D0020 /* Pictures */ = {
@@ -4090,7 +4103,6 @@
 				7A62E33618DC1DB10029E908 /* REMEnergyDataPersistenceProcessor.m in Sources */,
 				7AF9638218D6C63C005A8D12 /* AFURLConnectionOperation.m in Sources */,
 				7A63E28518B44F9B00A13464 /* REMIPhoneControllerBase.m in Sources */,
-				7AE89198195A6393004F4E2E /* CLIColor.m in Sources */,
 				7A3290E518D823EF00B3AE8A /* UIRefreshControl+AFNetworking.m in Sources */,
 				7A24E04D18E02877002F15E1 /* REMBuildingInfoUpdateModel.m in Sources */,
 				7A63E21218B44CBD00A13464 /* REMWidgetBizDelegatorBase.m in Sources */,
@@ -4098,8 +4110,8 @@
 				B4577EBF184C1886003C00CF /* REMNumberHelper.m in Sources */,
 				7A1AE2CA19371AE900A8BA48 /* REMSeriesKeyFormattor.m in Sources */,
 				7A63E26118B44CBD00A13464 /* REMScreenEdgetGestureRecognizer.m in Sources */,
-				7AE89199195A6393004F4E2E /* DDAbstractDatabaseLogger.m in Sources */,
 				7A9EAA9118D2946300EF1B85 /* StatusVisible.m in Sources */,
+				7AAB85511A9031FC009CC201 /* DDAbstractDatabaseLogger.m in Sources */,
 				EFCAF8531976201B00753587 /* REMSeriesAvalibleTypeColumnOnlyGen.m in Sources */,
 				7A9B1E2C177B3A8B00C282A8 /* main.m in Sources */,
 				7A9B1E30177B3A8B00C282A8 /* REMAppDelegate.m in Sources */,
@@ -4108,6 +4120,7 @@
 				7A9EAA9918D2946300EF1B85 /* PathHelper.m in Sources */,
 				EFD946FC1839DCBB00E9EC50 /* _DCLayer.m in Sources */,
 				EF0BFEA41844A5A60026C47D /* DCPieChartAnimationManager.m in Sources */,
+				7AAB85581A9031FC009CC201 /* DDDispatchQueueLogFormatter.m in Sources */,
 				7A63E23718B44CBD00A13464 /* REMTargetEnergyData.m in Sources */,
 				7A63E1E918B44CBD00A13464 /* REMEnergySeacherBase.m in Sources */,
 				EFE86981185EC3EB00DC0007 /* DCLabelingWrapper.m in Sources */,
@@ -4143,6 +4156,7 @@
 				7A62E33418DC1DB10029E908 /* REMBuildingPersistenceProcessor.m in Sources */,
 				7A9EAA8C18D2946300EF1B85 /* WeiboRequestOperation.m in Sources */,
 				7A63E25118B44CBD00A13464 /* REMBuildingTrendWrapper.m in Sources */,
+				7AAB85521A9031FC009CC201 /* DDASLLogCapture.m in Sources */,
 				7A0CCD72192A01D900C35C2F /* REMManagedUserModel.m in Sources */,
 				7A0CCD51192A01D800C35C2F /* REMManagedCustomerModel.m in Sources */,
 				7A63E27518B44CBD00A13464 /* REMBuildingEntranceSegue.m in Sources */,
@@ -4150,7 +4164,6 @@
 				7A63E26F18B44CBD00A13464 /* REMDashboardView.m in Sources */,
 				7A63E27318B44CBD00A13464 /* REMGalleryTableView.m in Sources */,
 				7A63E23E18B44CBD00A13464 /* REMWidgetLabellingSearchModel.m in Sources */,
-				7AE8919B195A6393004F4E2E /* DDASLLogger.m in Sources */,
 				7A63E23318B44CBD00A13464 /* REMEnergyError.m in Sources */,
 				7AA6464A18C056050081E96E /* REMSettingViewController.m in Sources */,
 				7A63E25D18B44CBD00A13464 /* REMInsetsTextField.m in Sources */,
@@ -4186,7 +4199,6 @@
 				7A63E20818B44CBD00A13464 /* REMGalleryViewController.m in Sources */,
 				7AEFD87719668FF500316D76 /* REMSettingContactWeSiteViewController.m in Sources */,
 				7A0CCD5D192A01D800C35C2F /* REMManagedBuildingCommodityUsageModel.m in Sources */,
-				7AE8919A195A6393004F4E2E /* DDASLLogCapture.m in Sources */,
 				7A9EAA8E18D2946300EF1B85 /* GeoInfo.m in Sources */,
 				7A63E26918B44CBD00A13464 /* REMRankingTooltipView.m in Sources */,
 				7A63E22818B44CBD00A13464 /* REMCommodityModel.m in Sources */,
@@ -4197,7 +4209,6 @@
 				7A63E22118B44CBD00A13464 /* REMBuildingCoverWidgetRelationModel.m in Sources */,
 				7A45E9FA193DAB07007C7933 /* REMTargetAssociationModel.m in Sources */,
 				EF0346B3183B520100DE186A /* _DCSeriesLayer.m in Sources */,
-				7AE891A0195A6393004F4E2E /* DDDispatchQueueLogFormatter.m in Sources */,
 				7AF9638018D6C63C005A8D12 /* AFNetworkReachabilityManager.m in Sources */,
 				EFD947001839DCBB00E9EC50 /* _DCXAxisLabelLayer.m in Sources */,
 				7A1D142C1785211000CC2922 /* REMAlertHelper.m in Sources */,
@@ -4223,6 +4234,7 @@
 				7A63E1FF18B44CBD00A13464 /* REMDashboardController.m in Sources */,
 				7A9EAA8F18D2946300EF1B85 /* Status.m in Sources */,
 				7AF9637F18D6C63C005A8D12 /* AFHTTPSessionManager.m in Sources */,
+				7AAB85541A9031FC009CC201 /* DDFileLogger.m in Sources */,
 				EFD947031839DCBB00E9EC50 /* DCDataPoint.m in Sources */,
 				7A63E1F818B44CBD00A13464 /* REMBuildingTrendChartViewController.m in Sources */,
 				7A63E24118B44CBD00A13464 /* REMWidgetSearchModelBase.m in Sources */,
@@ -4233,6 +4245,7 @@
 				7A63E1E618B44CBD00A13464 /* REMTextIndicatorFormator.m in Sources */,
 				7A63E24918B44CBD00A13464 /* REMBuildingDataView.m in Sources */,
 				7AF9637D18D6C63C005A8D12 /* AFHTTPRequestOperation.m in Sources */,
+				7AAB85531A9031FC009CC201 /* DDASLLogger.m in Sources */,
 				7A9EAA9018D2946300EF1B85 /* StatusImage.m in Sources */,
 				7A63E21A18B44CBD00A13464 /* REMWidgetDetailViewController.m in Sources */,
 				EFF75151183FC7AA00C8BBE9 /* _DCVerticalBackgroundLayer.m in Sources */,
@@ -4248,7 +4261,6 @@
 				7A9EAA9718D2946300EF1B85 /* ImageResourceLoader.m in Sources */,
 				EF03DC261841FA2F004B9EFD /* DCPieSeries.m in Sources */,
 				7A63E1F718B44CBD00A13464 /* REMBuildingShareViewController.m in Sources */,
-				7AE8919C195A6393004F4E2E /* DDFileLogger.m in Sources */,
 				7A63E20F18B44CBD00A13464 /* REMSettingCustomerDetailViewController.m in Sources */,
 				7A63E1FD18B44CBD00A13464 /* REMWidgetLabellingCellDelegator.m in Sources */,
 				7A63E21618B44CBD00A13464 /* REMWidgetRankingDelegator.m in Sources */,
@@ -4263,6 +4275,7 @@
 				7A3290EE18D83CBF00B3AE8A /* REMApplicationContext.m in Sources */,
 				7A9EAA9E18D2946300EF1B85 /* WeiboLoginDialog.m in Sources */,
 				7A3290ED18D83CBF00B3AE8A /* REMAppConfiguration.m in Sources */,
+				7AAB85311A902C48009CC201 /* NSStringExtension.m in Sources */,
 				7A63E23F18B44CBD00A13464 /* REMWidgetMultiTimespanSearchModel.m in Sources */,
 				7A3290E018D823EF00B3AE8A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				7A63E21818B44CBD00A13464 /* REMRelativeDateViewController.m in Sources */,
@@ -4297,14 +4310,11 @@
 				7A63E25518B44CBD00A13464 /* REMPieChartLegendView.m in Sources */,
 				EFD946FF1839DCBB00E9EC50 /* DCAxis.m in Sources */,
 				7A9EAA9218D2946300EF1B85 /* User.m in Sources */,
-				7AE8919F195A6393004F4E2E /* DDContextFilterLogFormatter.m in Sources */,
 				7A63E22B18B44CBD00A13464 /* REMUomModel.m in Sources */,
 				7A63E1F518B44CBD00A13464 /* REMBuildingDataViewController.m in Sources */,
-				7AE8919E195A6393004F4E2E /* DDTTYLogger.m in Sources */,
 				7A9EAA9818D2946300EF1B85 /* NSDictionary+Json.m in Sources */,
 				7A63E21D18B44CBD00A13464 /* REMWidgetMonthPickerViewController.m in Sources */,
 				7A0CCD60192A01D800C35C2F /* REMManagedPinnedWidgetModel.m in Sources */,
-				7AE8919D195A6393004F4E2E /* DDLog.m in Sources */,
 				7A63E21118B44CBD00A13464 /* REMSplashScreenController.m in Sources */,
 				7A63E25218B44CBD00A13464 /* REMChartLegendBase.m in Sources */,
 				EF1C5AD4183DB3A2002A9AAD /* DAbstractChartWrapper.m in Sources */,
@@ -4325,8 +4335,8 @@
 				7AEFD8681966864B00316D76 /* REMButton.m in Sources */,
 				7A63E24718B44CBD00A13464 /* REMBuildingCommodityView.m in Sources */,
 				7AF9638318D6C63C005A8D12 /* AFURLRequestSerialization.m in Sources */,
-				7AE891A1195A6393004F4E2E /* DDMultiFormatter.m in Sources */,
 				7A9EAA9B18D2946300EF1B85 /* URLRequestHelper.m in Sources */,
+				7AAB854F1A9031FC009CC201 /* CLIColor.m in Sources */,
 				7AC40254196BDF780028B3CA /* REMSettingContactInformationViewController.m in Sources */,
 				7A63E24F18B44CBD00A13464 /* REMBuildingAverageWrapper.m in Sources */,
 				7A63E23B18B44CBD00A13464 /* REMManagedModel.m in Sources */,
@@ -4342,7 +4352,9 @@
 				EFCAF8581976201B00753587 /* REMSeriesTargetBaselineVisableGen.m in Sources */,
 				EFCAF8591976201B00753587 /* REMSeriesGroupingCommodityGen.m in Sources */,
 				7A63E22618B44CBD00A13464 /* REMEnergyUsageDataModel.m in Sources */,
+				7AAB85571A9031FC009CC201 /* DDContextFilterLogFormatter.m in Sources */,
 				7A62E33718DC1DB10029E908 /* REMLoginPersistenceProcessor.m in Sources */,
+				7AAB85561A9031FC009CC201 /* DDTTYLogger.m in Sources */,
 				7A63E21018B44CBD00A13464 /* REMSettingCustomerSelectionViewController.m in Sources */,
 				7A63E20218B44CBD00A13464 /* REMLoginCardController.m in Sources */,
 				7AF9638418D6C63C005A8D12 /* AFURLResponseSerialization.m in Sources */,
@@ -4371,6 +4383,7 @@
 				7A63E26318B44CBD00A13464 /* REMToggleButton.m in Sources */,
 				7A63E1F618B44CBD00A13464 /* REMBuildingImageViewController.m in Sources */,
 				EF1CD12C18D29EBD008F8F5E /* DCChartDataProcessor.m in Sources */,
+				7AAB85551A9031FC009CC201 /* DDLog.m in Sources */,
 				EFCAF8511976201B00753587 /* REMChartStrategy.m in Sources */,
 				7A63E21918B44CBD00A13464 /* REMWidgetBuildingCoverViewController.m in Sources */,
 				7A63E21518B44CBD00A13464 /* REMWidgetMultiTimespanDelegator.m in Sources */,
@@ -4387,6 +4400,7 @@
 				7AEFD87119668FC800316D76 /* REMSettingContactSendMailController.m in Sources */,
 				7A0CCD6F192A01D800C35C2F /* REMManagedSharedModel.m in Sources */,
 				7A2BA42217D877C3003B18E1 /* REMError.m in Sources */,
+				7AAB85591A9031FC009CC201 /* DDMultiFormatter.m in Sources */,
 				7A1A6B8B198205FE00D62153 /* REMGISHelper.m in Sources */,
 				7A63E24618B44CBD00A13464 /* REMBuildingChartContainerView2.m in Sources */,
 				7A63E26218B44CBD00A13464 /* REMStatusBar.m in Sources */,

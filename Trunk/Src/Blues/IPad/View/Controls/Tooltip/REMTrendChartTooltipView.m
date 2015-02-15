@@ -79,7 +79,7 @@
 //    view.layer.borderColor = [UIColor blackColor].CGColor;
 //    view.layer.borderWidth = 1.0;
     
-    int itemCount = self.itemModels.count;
+    int itemCount = (int)self.itemModels.count;
     
     CGFloat itemOffset = kDMChart_TooltipItemOffset;
     CGFloat itemWidth = REMSeriesIsMultiTime ? 300 : kDMChart_TooltipItemWidth;
@@ -221,7 +221,7 @@
 
 -(NSDate *)alignDataPointTime:(NSDate *)date withStep:(REMEnergyStep)step
 {
-    int hour = [REMTimeHelper getHour:date], day=[REMTimeHelper getDay:date], month=[REMTimeHelper getMonth:date], year=[REMTimeHelper getYear:date];
+    NSUInteger hour = [REMTimeHelper getHour:date], day=[REMTimeHelper getDay:date], month=[REMTimeHelper getMonth:date], year=[REMTimeHelper getYear:date];
     
     switch (step) {
         case REMEnergyStepHour:{
@@ -233,7 +233,7 @@
             if(hour == 0)
                 return date;
             
-            NSDate *cut = [REMTimeHelper dateFromYear:year Month:month Day:day Hour:0];
+            NSDate *cut = [REMTimeHelper dateFromYear:(int)year Month:(int)month Day:(int)day Hour:0];
             return [REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:cut];
         }
         case REMEnergyStepWeek:{
@@ -245,7 +245,7 @@
             if(day==1 && hour==0)
                 return date;
             
-            NSDate *cut = [REMTimeHelper dateFromYear:year Month:month Day:1 Hour:0];
+            NSDate *cut = [REMTimeHelper dateFromYear:(int)year Month:(int)month Day:1 Hour:0];
             return [REMTimeHelper add:1 onPart:REMDateTimePartMonth ofDate:cut];
         }
         case REMEnergyStepYear:{
@@ -253,7 +253,7 @@
             if(month==1 && day==1 && hour==0)
                 return date;
             
-            NSDate *cut = [REMTimeHelper dateFromYear:year Month:1 Day:1 Hour:0];
+            NSDate *cut = [REMTimeHelper dateFromYear:(int)year Month:1 Day:1 Hour:0];
             return [REMTimeHelper add:1 onPart:REMDateTimePartYear ofDate:cut];
         }
         default:{

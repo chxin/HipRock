@@ -60,7 +60,7 @@
     self.step = viewOption[@"Step"];
     
     if([self.step isEqualToNumber:@(0)]==YES){
-        self.stepType = REMEnergyStepRaw;
+        self.stepType = REMEnergyStepMinute;
     }
     else if ([self.step isEqualToNumber:@(1)]==YES) {
         self.stepType = REMEnergyStepHour;
@@ -76,6 +76,12 @@
     }
     else if([self.step isEqualToNumber:@(5)]==YES){
         self.stepType = REMEnergyStepWeek;
+    }
+    if([self.step isEqualToNumber:@(6)]==YES){
+        self.stepType = REMEnergyStepMin15;
+    }
+    if([self.step isEqualToNumber:@(7)]==YES){
+        self.stepType = REMEnergyStepMin30;
     }
     _contentSyntaxWidgetType = REMWidgetContentSyntaxWidgetTypeNone;
     NSString* typeCode = self.config[@"type"];

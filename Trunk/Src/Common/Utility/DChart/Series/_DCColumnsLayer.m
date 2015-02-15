@@ -66,7 +66,7 @@
                     stackedHeights[i] = 0;
                 }
                 NSArray* groupSeriesList = group.allSeries;
-                for (int i = groupSeriesList.count - 1; i >= 0; i--) {
+                for (int i = (int)groupSeriesList.count - 1; i >= 0; i--) {
                     DCXYSeries* s = groupSeriesList[i];
                     if (s.hidden || ![self isValidSeriesForMe:s]) continue;
                     for (int j = start; j<=end; j++) {

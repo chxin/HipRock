@@ -85,7 +85,7 @@ const NSString* stepKey = @"step";
         a = b;
         b = c;
     }
-    return (b + a) * (b - a + 1) / 2;
+    return (int)((b + a) * (b - a + 1) / 2);
 }
 
 -(void)animateToFrame:(DCPieChartAnimationFrame*)targetFrame callback:(DCPieAnimationCallback)callback {

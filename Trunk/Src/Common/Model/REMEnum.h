@@ -96,12 +96,14 @@ REMDiagramType;
 typedef enum _REMEnergyStep:NSUInteger
 {
     REMEnergyStepNone=-1,
-    REMEnergyStepRaw=0,
+    REMEnergyStepMinute=0,
     REMEnergyStepHour=1,
     REMEnergyStepDay=2,
     REMEnergyStepWeek=5,
     REMEnergyStepMonth=3,
-    REMEnergyStepYear=4
+    REMEnergyStepYear=4,
+    REMEnergyStepMin15 = 6,
+    REMEnergyStepMin30 = 7
 } REMEnergyStep;
 
 typedef enum _REMRelativeTimeRangeType : NSInteger

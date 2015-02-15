@@ -173,7 +173,7 @@ const static CGFloat buildingGap=20;
     self.defaultBlurImage=view;
     
     
-    int i=0,count=self.buildingInfoArray.count;
+    int i=0,count=(int)self.buildingInfoArray.count;
     //count=1;
     for (;i<count;++i) {
         REMManagedBuildingModel *model = self.buildingInfoArray[i];

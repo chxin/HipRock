@@ -39,7 +39,7 @@
         REMEnergyLabellingLevelData* d = self.energyViewData.labellingLevelArray[i];
         DCLabelingStage* stage = [[DCLabelingStage alloc]init];
         stage.stageText = textArray[i];
-        stage.color = [REMColor getLabelingColor:i stageCount:self.energyViewData.labellingLevelArray.count];
+        stage.color = [REMColor getLabelingColor:i stageCount:(int)self.energyViewData.labellingLevelArray.count];
         BOOL minValueNil = REMIsNilOrNull(d.minValue);
         BOOL maxValueNil = REMIsNilOrNull(d.maxValue);
         if (minValueNil && maxValueNil) {

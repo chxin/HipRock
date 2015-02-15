@@ -588,7 +588,7 @@
     //Ratio should have no raw & hour step
     if(self.contentSyntax.dataStoreType == REMDSEnergyRatio){
         list = [list filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return ![@[@(REMEnergyStepRaw), @(REMEnergyStepHour)] containsObject:evaluatedObject];
+            return ![@[@(REMEnergyStepMinute), @(REMEnergyStepHour)] containsObject:evaluatedObject];
         }]];
         
         titleList = [titleList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -924,7 +924,7 @@
     [self willRangeChange:start end:end];
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
 
-    if(tempModel.step == REMEnergyStepHour || tempModel.step == REMEnergyStepRaw){
+    if(tempModel.step == REMEnergyStepHour || tempModel.step == REMEnergyStepMinute){
         [self search];
     }
 }

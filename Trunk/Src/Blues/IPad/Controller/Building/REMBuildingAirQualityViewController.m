@@ -185,7 +185,7 @@
     
     
     
-    CAGradientLayer *layer2 = [CALayer layer];
+    CAGradientLayer *layer2 = (CAGradientLayer *)[CALayer layer];
     
     
     layer2.frame = frame2;

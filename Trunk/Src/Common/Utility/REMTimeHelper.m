@@ -180,16 +180,16 @@
     
     switch (timePart) {
         case REMDateTimePartHour:
-            return [components hour];
+            return (int)[components hour];
         case REMDateTimePartDay:
-            return [components day];
+            return (int)[components day];
         case REMDateTimePartMonth:
-            return [components month];
+            return (int)[components month];
         case REMDateTimePartYear:
-            return [components year];
+            return (int)[components year];
             
         default:
-            return [components hour];
+            return (int)[components hour];
             break;
     }
 }
@@ -622,7 +622,7 @@ static NSDateFormatter *_localFormatter;
 {
     NSInteger monthTicks = [REMTimeHelper getYear:date] * 12 + [REMTimeHelper getMonth:date] - 1;
     
-    return [NSNumber numberWithInt:monthTicks];
+    return [NSNumber numberWithInt:(int)monthTicks];
 }
 
 +(NSDate *)getDateFromMonthTicks:(NSNumber *)monthTicks
@@ -752,13 +752,28 @@ static NSCalendar *_currentCalendar;
     NSDateFormatter *f = [REMTimeHelper currentFormatter];
     
     switch (step) {
-        case REMEnergyStepRaw:{ // yyyy年MM月dd日 HH:00-HH:15    HH:00-HH:15 on dd/MM/yyyy
+        case REMEnergyStepMin15:{ // yyyy年MM月dd日 HH:00-HH:15    HH:00-HH:15 on dd/MM/yyyy
             f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeRaw");
             
             NSString *s1 = [f stringFromDate:time];
             
             f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_Hm");
             NSDate *newDate = [time dateByAddingTimeInterval:15*60];
+            
+            NSString *s2 = [f stringFromDate:newDate];
+            if([REMTimeHelper getHour:newDate] ==0 && [REMTimeHelper getMinute:newDate]==0){
+                s2 = REMIPadLocalizedString(@"Chart_Tooltip_24_OClock");
+            }
+            
+            return [NSString stringWithFormat:s1,s2];
+        }
+        case REMEnergyStepMin30:{ // yyyy年MM月dd日 HH:00-HH:30    HH:00-HH:30 on dd/MM/yyyy
+            f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_TimeRangeRaw");
+            
+            NSString *s1 = [f stringFromDate:time];
+            
+            f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_Hm");
+            NSDate *newDate = [time dateByAddingTimeInterval:30*60];
             
             NSString *s2 = [f stringFromDate:newDate];
             if([REMTimeHelper getHour:newDate] ==0 && [REMTimeHelper getMinute:newDate]==0){
@@ -906,8 +921,11 @@ static NSCalendar *_currentCalendar;
     
     switch (step)
     {
-        case REMEnergyStepRaw:
+        case REMEnergyStepMin15:
             date2 = [REMTimeHelper add:15 * count onPart:REMDateTimePartMinute ofDate:time]; //time.AddMinutes(15 * count);
+            break;
+        case REMEnergyStepMin30:
+            date2 = [REMTimeHelper add:30 * count onPart:REMDateTimePartMinute ofDate:time]; //time.AddMinutes(15 * count);
             break;
         case REMEnergyStepHour:
             date2 = [REMTimeHelper add:1 * count onPart:REMDateTimePartHour ofDate:time];//time.AddHours(1 * count);

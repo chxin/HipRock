@@ -22,7 +22,7 @@
     switch (target.type) {
         case REMEnergyTargetTag:
             if([parameters isKindOfClass:[REMWidgetMultiTimespanSearchModel class]]){
-                int index = [data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+                int index = (int)[data.targetEnergyData indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
                     if([((REMTargetEnergyData *)obj).target isEqual:target]){
                         *stop = YES;
                         return YES;

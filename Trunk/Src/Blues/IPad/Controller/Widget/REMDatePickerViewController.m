@@ -296,9 +296,9 @@
     self.relativeDateType=REMRelativeTimeRangeTypeNone;
     self.relativeDate=[REMTimeHelper relativeDateComponentFromType:self.relativeDateType];
     
-    int year=[REMTimeHelper getYear:picker.date];
-    int month=[REMTimeHelper getMonth:picker.date];
-    int day=[REMTimeHelper getDay:picker.date];
+    int year=(int)[REMTimeHelper getYear:picker.date];
+    int month=(int)[REMTimeHelper getMonth:picker.date];
+    int day=(int)[REMTimeHelper getDay:picker.date];
     
     UIPickerView *hourPicker;
     
@@ -322,11 +322,11 @@
     NSDate *newDate;
     if (hours==24) {
         hours=0;
-        newDate=[REMTimeHelper dateFromYear:year Month:month Day:day Hour:hours];
+        newDate=[REMTimeHelper dateFromYear:(int)year Month:(int)month Day:(int)day Hour:(int)hours];
         newDate=[REMTimeHelper add:1 onPart:REMDateTimePartDay ofDate:newDate];
     }
     else{
-        newDate=[REMTimeHelper dateFromYear:year Month:month Day:day Hour:hours];
+        newDate=[REMTimeHelper dateFromYear:(int)year Month:(int)month Day:(int)day Hour:(int)hours];
     }
     
     NSString *ret;

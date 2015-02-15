@@ -10,6 +10,7 @@
 #import "DCUtility.h"
 #import "REMColor.h"
 #import "DCXYChartBackgroundBand.h"
+#import "REMCommonHeaders.h"
 
 @interface _DCYAxisLabelLayer()
 @property NSNumberFormatter* numberFormatter;

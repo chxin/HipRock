@@ -45,7 +45,7 @@
             
             return bizError;
         }
-        if(stepModel.step == REMEnergyStepRaw){
+        if(stepModel.step == REMEnergyStepMinute){
             REMClientErrorInfo *bizError=[[REMClientErrorInfo alloc] init];
             bizError.code=@"";
             bizError.messageInfo=REMIPadLocalizedString(@"Chart_TouNotSupportRaw");

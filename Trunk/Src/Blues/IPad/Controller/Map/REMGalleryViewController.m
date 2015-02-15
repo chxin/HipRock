@@ -76,7 +76,7 @@
 -(void)groupBuildings
 {
     self.buildingGroups = [[NSMutableDictionary alloc] init];
-    int capacity = REMProvinceOrder.count+1;
+    int capacity = (int)REMProvinceOrder.count+1;
     NSMutableArray *tempKeys = [[NSMutableArray alloc] initWithCapacity:capacity];
     for(int i=0; i<capacity; i++)
         tempKeys[i] = @(0);
@@ -88,7 +88,7 @@
         int index = [self getProvinceIndex:buildingInfo.province];
         
         if(index == -1){
-            index = REMProvinceOrder.count-1;
+            index = (int)REMProvinceOrder.count-1;
         }
         
         NSString *provinceKey = REMProvinceKeys[index];

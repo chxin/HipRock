@@ -55,8 +55,8 @@
         model.value = point.value;
         model.color = point.series.color;
         model.index = i;
-        model.numerator = [[self.serieses[0] datas] indexOfObject:point] + 1;
-        model.denominator = [[self.serieses[0] datas] count];
+        model.numerator = (int)[[self.serieses[0] datas] indexOfObject:point] + 1;
+        model.denominator = (int)[[self.serieses[0] datas] count];
         model.uom = point.target.uomName;
         
         [itemModels addObject:model];

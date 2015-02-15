@@ -66,8 +66,8 @@
     
     NSDate* globalStartDate = [NSDate dateWithTimeInterval:-365*24*3600 sinceDate:today0H];
     if ([globalStartDate compare:minDateOfData] == NSOrderedAscending) globalStartDate = minDateOfData;
-    int globalStart = [self.sharedProcessor processX:globalStartDate].integerValue;
-    int globalEnd = [self.sharedProcessor processX:today0H].integerValue;
+    int globalStart = (int)[self.sharedProcessor processX:globalStartDate].integerValue;
+    int globalEnd = (int)[self.sharedProcessor processX:today0H].integerValue;
     
     DCRange* range = [[DCRange alloc]initWithLocation:globalStart length:globalEnd-globalStart+1];
     NSFormatter* formatter = [[_DCXLabelFormatter alloc]initWithStartDate:minDateOfData dataStep:step interval:1];

@@ -9,6 +9,7 @@
 #import "_DCXAxisLabelLayer.h"
 #import "DCUtility.h"
 #import "_DCXLabelFormatter.h"
+#import "REMCommonHeaders.h"
 
 @interface _DCXAxisLabelLayer()
 

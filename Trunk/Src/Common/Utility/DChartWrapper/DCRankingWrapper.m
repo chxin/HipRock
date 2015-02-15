@@ -32,7 +32,7 @@
         }
         [datas addObject:point];
     }
-    [self quickSort:datas left:0 right:datas.count-1];
+    [self quickSort:datas left:0 right:(int)datas.count-1];
     REMTargetEnergyData* t = nil;
     if (!REMIsNilOrNull(self.energyViewData) && self.energyViewData.targetEnergyData.count > 0) t = self.energyViewData.targetEnergyData[0];
     
@@ -85,7 +85,7 @@
 
 -(void)swapeAllDatas:(DCXYSeries*)rankingSeries {
     DCDataPoint* temp = nil;
-    int i = 0, j = rankingSeries.datas.count - 1;
+    int i = 0, j = (int)rankingSeries.datas.count - 1;
     NSMutableArray* datas = rankingSeries.datas.mutableCopy;
     while (i < j) {
         temp = datas[i];
@@ -99,7 +99,7 @@
 
 -(NSDictionary*)updateProcessorRangesFormatter:(REMEnergyStep)step {
     int rangeCode = self.wrapperConfig.rankingRangeCode;
-    int datasAmount = self.energyViewData.targetEnergyData.count;
+    int datasAmount = (int)self.energyViewData.targetEnergyData.count;
     
     return @{ @"globalRange": [[DCRange alloc]initWithLocation:0 length:datasAmount], @"beginRange": [[DCRange alloc]initWithLocation:0 length:MIN(rangeCode, datasAmount)], @"xformatter": [NSNull null] };
 }
@@ -146,7 +146,7 @@
 -(void)focusPointChanged:(NSArray *)dcpoints at:(int)x {
     BOOL refocus = NO;
     if (x >= ((DCXYSeries*)self.view.seriesList[0]).datas.count) {
-        x = ((DCXYSeries*)self.view.seriesList[0]).datas.count - 1;
+        x = (int)((DCXYSeries*)self.view.seriesList[0]).datas.count - 1;
         refocus = YES;
     }
     if (x < 0) {

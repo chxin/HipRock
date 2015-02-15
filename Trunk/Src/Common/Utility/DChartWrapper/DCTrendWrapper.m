@@ -111,7 +111,7 @@
     view.graphContext.useTextLayer = self.style.useTextLayer;
     view.delegate = self;
     self.graphContext = view.graphContext;
-    if (step == REMEnergyStepHour || step == REMEnergyStepWeek || step == REMEnergyStepRaw) {
+    if (step == REMEnergyStepHour || step == REMEnergyStepWeek || step == REMEnergyStepMinute) {
         view.graphContext.pointHorizentalOffset = -0.5;
         view.graphContext.xLabelHorizentalOffset = 0;
     } else {
@@ -149,7 +149,7 @@
 
 -(NSString*)getSeriesKeyByTarget:(REMEnergyTargetModel*)target seriesIndex:(NSUInteger)index {
     if ([self.wrapperConfig getIsMultiTimeEnergyAnalysisChart]) {
-        return [NSString stringWithFormat:@"%i", index];
+        return [NSString stringWithFormat:@"%i", (int)index];
     } else {
         return [super getSeriesKeyByTarget:target seriesIndex:index];
     }
@@ -160,7 +160,7 @@
     NSMutableArray* datas = [[NSMutableArray alloc]init];
     DCTrendChartDataProcessor* processor = [self.processors objectAtIndex:index];
     for (REMEnergyData* point in targetEnergy.energyData) {
-        int processedX = [processor processX:point.localTime].integerValue;
+        int processedX = (int)[processor processX:point.localTime].integerValue;
         if (processedX < 0) continue;
         while ((int)datas.count < processedX) {
             DCDataPoint* p = [[DCDataPoint alloc]init];
@@ -177,7 +177,7 @@
     DCXYSeries* s = [[DCXYSeries alloc]initWithEnergyData:datas];
     s.symbolType = [self getSymbolTypeByIndex:index];
     s.symbolSize = style.symbolSize;
-    s.color = [REMColor colorByIndex:index];
+    s.color = [REMColor colorByIndex:(int)index];
     s.target = targetEnergy.target;
     
     s.seriesKey = [self getSeriesKeyByTarget:s.target seriesIndex:index];
@@ -473,7 +473,7 @@
     self.view.acceptTap = NO;
 
     if (stopped) {
-        if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepRaw) {
+        if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepMinute) {
             self.myStableRange = self.view.graphContext.hRange;
         } else {
             [self.animationManager animateHRangeWithSpeed: self.panSpeed completion:^() {
@@ -514,7 +514,7 @@
 }
 -(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed {
     DCRange* updatedRange = nil;
-    if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepRaw) {
+    if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepMinute) {
         updatedRange = newRange;
     } else {
         double location = newRange.location;
@@ -544,7 +544,7 @@
         NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
         BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
         
-        if (myStep == REMEnergyStepHour || myStep == REMEnergyStepWeek || myStep == REMEnergyStepRaw) {
+        if (myStep == REMEnergyStepHour || myStep == REMEnergyStepWeek || myStep == REMEnergyStepMinute) {
             if ([self getTimeIntervalFrom:newRange.location to:newRange.end] > maxTimeInterval) {
                 updatedRange = currentRange;
             } else {

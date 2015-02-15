@@ -49,7 +49,7 @@
     int defaultStepIndex=0;
     switch (i) {
         case 0: //day
-            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepMinute)];
             [list addObject:@(REMEnergyStepHour)];
             
             [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
@@ -57,7 +57,7 @@
             defaultStepIndex=1;
             break;
         case 1: //week
-            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepMinute)];
             [list addObject:@(REMEnergyStepHour)];
             [list addObject:@(REMEnergyStepDay)];
             [titleList addObject:REMIPadLocalizedString(@"Widget_StepRaw")];
@@ -66,7 +66,7 @@
             defaultStepIndex=2;
             break;
         case 2: //1month
-            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepMinute)];
             [list addObject:@(REMEnergyStepHour)];
             [list addObject:@(REMEnergyStepDay)];
             [list addObject:@(REMEnergyStepWeek)];
@@ -77,7 +77,7 @@
             defaultStepIndex=2;
             break;
         case 3: //3month
-            [list addObject:@(REMEnergyStepRaw)];
+            [list addObject:@(REMEnergyStepMinute)];
             [list addObject:@(REMEnergyStepHour)];
             [list addObject:@(REMEnergyStepDay)];
             [list addObject:@(REMEnergyStepWeek)];

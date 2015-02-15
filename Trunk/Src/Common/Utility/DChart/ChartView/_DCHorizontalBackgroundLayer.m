@@ -36,7 +36,7 @@
             CGFloat yTop = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.end vRange:yRange];
             CGFloat yBottom = [DCUtility getScreenYIn:self.graphContext.plotRect yVal:band.range.location vRange:yRange];
             
-            NSString* key = [NSString stringWithFormat:@"%u", band.hash];
+            NSString* key = [NSString stringWithFormat:@"%lu", (unsigned long)band.hash];
             CALayer* layer = self.bandLayerDic[key];
             if (REMIsNilOrNull(layer)) {
                 layer = [[CALayer alloc]init];

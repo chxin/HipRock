@@ -42,3 +42,4 @@
 #import "REMTimeHelper.h"
 #import "REMViewHelper.h"
 #import "REMFont.h"
+#import "NSStringExtension.h"

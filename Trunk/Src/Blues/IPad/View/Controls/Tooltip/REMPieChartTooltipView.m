@@ -129,7 +129,7 @@
 //    view.layer.borderColor = [UIColor blackColor].CGColor;
 //    view.layer.borderWidth = 1.0;
     
-    int itemCount = self.itemModels.count;
+    int itemCount = (int)self.itemModels.count;
     
     CGFloat contentWidth = (kDMChart_TooltipItemWidth + kDMChart_TooltipItemOffset) * itemCount;
     
@@ -145,7 +145,7 @@
 
 - (void)updateHighlightedData:(NSArray *)data fromDirection:(REMDirection)direction;
 {
-    int itemCount = self.itemModels.count;
+    int itemCount = (int)self.itemModels.count;
     if(itemCount<=1) //2,3
         return;
     

@@ -201,7 +201,7 @@ static const int kTrialCardIndex = kCardCount - 2;
 
 - (void)pageChanged:(id)sender {
     UIPageControl *pager = (UIPageControl *)sender;
-    [self showPage:pager.currentPage withEaseAnimation:NO];
+    [self showPage:(int)pager.currentPage withEaseAnimation:NO];
 }
 
 - (void)jumpLoginButtonTouchDown:(id)sender {

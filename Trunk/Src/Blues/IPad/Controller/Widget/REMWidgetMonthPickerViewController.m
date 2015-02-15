@@ -16,8 +16,8 @@
 
 
 - (IBAction)okClicked:(UIBarButtonItem *)sender {
-    int year= [self.datePicker selectedRowInComponent:0];
-    int month=[self.datePicker selectedRowInComponent:1];
+    int year= (int)[self.datePicker selectedRowInComponent:0];
+    int month=(int)[self.datePicker selectedRowInComponent:1];
     NSDate *date;
     if (month==0) {
         NSDateComponents *comp=[[NSDateComponents alloc]init];
@@ -93,7 +93,7 @@
     NSUInteger year=[REMTimeHelper getYear:date withCalendar:[NSCalendar currentCalendar]];
     NSUInteger month=[REMTimeHelper getMonth:date withCalendar:[NSCalendar currentCalendar]];
     if (component==0) {
-        NSDate *date = [REMTimeHelper dateFromYear:row+1 Month:1 Day:1];
+        NSDate *date = [REMTimeHelper dateFromYear:(int)row+1 Month:1 Day:1];
         NSString *yearString = [REMTimeHelper formatTime:date withFormat:REMIPadLocalizedString(@"Chart_X_Axis_Format_Year")]; //[NSString stringWithFormat:@"%d%@",row+1,REMIPadLocalizedString(@"Common_Year")];
         NSMutableAttributedString *attrString=[[NSMutableAttributedString alloc]initWithString:yearString];
         if (row == (year-1)) {
@@ -108,7 +108,7 @@
             return [[NSAttributedString alloc]initWithString:wholeYear];
         }
         
-        NSDate *date = [REMTimeHelper dateFromYear:year Month:row Day:1];
+        NSDate *date = [REMTimeHelper dateFromYear:(int)year Month:(int)row Day:1];
         NSString *monthString = [REMTimeHelper formatTime:date withFormat:REMIPadLocalizedString(@"Chart_X_Axis_Format_Month")];//[NSString stringWithFormat:@"%d%@",row,REMIPadLocalizedString(@"Common_Month")];
         NSMutableAttributedString *attrString=[[NSMutableAttributedString alloc]initWithString:monthString];
         NSRange range=NSMakeRange(0, monthString.length);
