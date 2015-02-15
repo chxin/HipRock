@@ -183,7 +183,11 @@
         }
     }
     
-    NSAssert(hierarchyId!=nil, @"hierarchyid should not be nil");
+    if (!hierarchyId) {
+        NSLog(@"hierarchyid should not be nil");
+    }
+    
+//    NSAssert(hierarchyId!=nil, @"hierarchyid should not be nil");
     
     return targetPath;
 }
