@@ -758,7 +758,7 @@ static NSCalendar *_currentCalendar;
             NSString *s1 = [f stringFromDate:time];
             
             f.dateFormat = REMIPadLocalizedString(@"Chart_Tooltip_Hm");
-            NSDate *newDate = [time dateByAddingTimeInterval:30*60];
+            NSDate *newDate = [time dateByAddingTimeInterval:15*60];
             
             NSString *s2 = [f stringFromDate:newDate];
             if([REMTimeHelper getHour:newDate] ==0 && [REMTimeHelper getMinute:newDate]==0){

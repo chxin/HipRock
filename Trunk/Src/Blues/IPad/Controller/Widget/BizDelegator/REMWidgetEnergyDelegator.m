@@ -862,7 +862,7 @@
         return;
     }
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
-
+    
     if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
         DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
         [self processCalendar];
