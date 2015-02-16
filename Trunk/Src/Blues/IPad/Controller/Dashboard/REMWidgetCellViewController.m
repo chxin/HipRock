@@ -144,17 +144,25 @@
     
     DAbstractChartWrapper *widgetWrapper = nil;
     CGRect widgetRect = self.chartContainer.bounds;
-    REMEnergyViewData *data=self.chartData;
+    REMEnergyViewData *engerViewData=self.chartData;
     DCChartStyle* style = [DCChartStyle getMinimunStyle];
+    REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
+    
+    if (engerViewData.targetEnergyData && engerViewData.targetEnergyData.count > 0) {
+        REMTargetEnergyData *data = (REMTargetEnergyData *)engerViewData.targetEnergyData[0];
+        if (data && data.target.subStep != stepModel.step) {
+            stepModel.step = data.target.subStep;
+        }
+    }
+    
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
-        REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
         wrapperConfig.step=stepModel.step;
         wrapperConfig.benckmarkText=stepModel.benchmarkText;
         wrapperConfig.relativeDateType=stepModel.relativeDateType;
 //        wrapperConfig.multiTimeSpans=stepModel.timeRangeArray;
     }
-    widgetWrapper = [REMWrapperFactor constructorWrapper:widgetRect data:data wrapperConfig:wrapperConfig style:style];
+    widgetWrapper = [REMWrapperFactor constructorWrapper:widgetRect data:engerViewData wrapperConfig:wrapperConfig style:style];
     if (widgetWrapper != nil) {
         self.wrapper=widgetWrapper;
         widgetWrapper.delegate = self;

@@ -473,7 +473,7 @@
     self.view.acceptTap = NO;
 
     if (stopped) {
-        if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepMinute) {
+        if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepMinute || self.sharedProcessor.step == REMEnergyStepMin15 || self.sharedProcessor.step == REMEnergyStepMin30) {
             self.myStableRange = self.view.graphContext.hRange;
         } else {
             [self.animationManager animateHRangeWithSpeed: self.panSpeed completion:^() {
@@ -514,7 +514,7 @@
 }
 -(DCRange*)updatePanRange:(DCRange *)newRange withSpeed:(double)speed {
     DCRange* updatedRange = nil;
-    if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepMinute) {
+    if (self.sharedProcessor.step == REMEnergyStepHour || self.sharedProcessor.step == REMEnergyStepMinute || self.sharedProcessor.step == REMEnergyStepMin15 || self.sharedProcessor.step == REMEnergyStepMin30) {
         updatedRange = newRange;
     } else {
         double location = newRange.location;

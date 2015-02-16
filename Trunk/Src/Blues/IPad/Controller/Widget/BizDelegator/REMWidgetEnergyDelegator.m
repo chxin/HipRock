@@ -372,6 +372,17 @@
 
 - (void)showChart{
     [super showChart];
+    
+    if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
+        if (self.energyData && self.energyData.targetEnergyData.count > 0) {
+            REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.model;
+            REMTargetEnergyData *data = (REMTargetEnergyData *)self.energyData.targetEnergyData[0];
+            if (data && data.target.subStep != tempModel.step) {
+                tempModel.step = data.target.subStep;
+            }
+        }
+    }
+    
     if(self.energyData!=nil){
         [self showEnergyChart];
     }
@@ -862,11 +873,15 @@
         return;
     }
     REMWidgetStepEnergyModel *tempModel=(REMWidgetStepEnergyModel *)self.tempModel;
+    REMTargetEnergyData *data = (REMTargetEnergyData *)self.energyData.targetEnergyData[0];
+    if (data && data.target.subStep != tempModel.step) {
+        tempModel.step = data.target.subStep;
+    }
     
     if([self.chartWrapper isKindOfClass:[DCTrendWrapper class]]==YES){
         DCTrendWrapper *trend=(DCTrendWrapper *)self.chartWrapper;
         [self processCalendar];
-        [trend redraw:self.energyData step:tempModel.step];
+        [trend redraw:self.energyData step:data.target.subStep];
     }
     else{
         [self.chartWrapper redraw:self.energyData];

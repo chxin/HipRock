@@ -12,8 +12,6 @@
 
 - (void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
-   
-    
     if([dictionary[@"TargetEnergyData"] isEqual:[NSNull null]] == NO){
         NSArray *targetArray= dictionary[@"TargetEnergyData"];
         

@@ -1,0 +1,13 @@
+/* 
+  Localizable_Style.strings
+  Blues
+
+  Created by 张 锋 on 6/19/14.
+
+ */
+"Font_DefaultFontName"="MyriadSetPro-Thin";
+
+"Font_BuildingNumberLabelUltraLight"="HelveticaNeue-UltraLight";
+//"Font_BuildingNumberLabelLight"="MyriadSetPro-Thin";
+//"Font_BuildingNumberLabelTitle"="MyriadSetPro-Thin";
+//"Font_BuildingNumberLabelRegular"="MyriadSetPro-Thin";

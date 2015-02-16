@@ -50,6 +50,14 @@
         [self stopLoadingActivity];
         if (data!=nil) {
             if(self.isViewLoaded==NO)return ;
+            REMEnergyViewData *energyViewData = (REMEnergyViewData *)data;
+            REMTargetEnergyData *targetdata = (REMTargetEnergyData *)energyViewData.targetEnergyData[0];
+            if (targetdata) {
+                self.contentSyntax.stepType = targetdata.target.subStep;
+                self.contentSyntax.step = @(self.contentSyntax.stepType);
+                REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
+                stepModel.step = targetdata.target.subStep;
+            }
             self.energyViewData = data;
             loadCompleted(data,nil);
         }
@@ -72,7 +80,7 @@
 -(DCTrendWrapper*)constructWrapperWithFrame:(CGRect)frame {
     DCTrendWrapper *widgetWrapper = nil;
     DCChartStyle* style = [DCChartStyle getCoverStyle];
-    style.acceptPan = ([self getEnergyStep] != REMEnergyStepHour && [self getEnergyStep] != REMEnergyStepMinute);
+    style.acceptPan = ([self getEnergyStep] != REMEnergyStepHour && [self getEnergyStep] != REMEnergyStepMinute && [self getEnergyStep] != REMEnergyStepMin30 && [self getEnergyStep] != REMEnergyStepMin15);
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.model isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {
         REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;

@@ -131,7 +131,7 @@ static NSString *customerUpdateAll=@"customerupdateall";
         context.sharedUpdateManager=nil;
     }];
     
-    
+
 }
 
 - (void)accessStore:(REMDataStore *)store success:(void (^)(REMBuildingInfoUpdateModel *buildingInfo, UIImage *logoImage))success failure:(REMDataAccessFailureBlock)failure
