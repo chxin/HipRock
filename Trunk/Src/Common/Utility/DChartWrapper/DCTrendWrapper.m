@@ -222,6 +222,16 @@
     NSDate* beginningStart = nil;
     NSDate* beginningEnd = nil;
     _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
+    
+    //step min -> step 15min or step 30min
+    if (step == REMEnergyStepMinute) {
+        for (REMTargetEnergyData *targetData in self.energyViewData.targetEnergyData){
+            if ([REMTimeHelper compareStep:step toStep:targetData.target.subStep] == NSOrderedDescending) {
+                step = targetData.target.subStep;
+            }
+        }
+    }
+    
     self.sharedProcessor.step = step;
     
     beginningStart = self.energyViewData.visibleTimeRange.startTime;
@@ -544,7 +554,7 @@
         NSUInteger maxTimeInterval = lengthRange.location + lengthRange.length; // 步长允许的最长时间距离
         BOOL isZoomIn = newRange.length < currentRange.length;  // 正在放大视图，亦即可视的时间范围正在缩小
         
-        if (myStep == REMEnergyStepHour || myStep == REMEnergyStepWeek || myStep == REMEnergyStepMinute) {
+        if (myStep == REMEnergyStepHour || myStep == REMEnergyStepWeek || myStep == REMEnergyStepMinute ||  myStep == REMEnergyStepMin15 ||  myStep == REMEnergyStepMin30) {
             if ([self getTimeIntervalFrom:newRange.location to:newRange.end] > maxTimeInterval) {
                 updatedRange = currentRange;
             } else {

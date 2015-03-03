@@ -148,12 +148,12 @@
     DCChartStyle* style = [DCChartStyle getMinimunStyle];
     REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.searchModel;
     
-    if (engerViewData.targetEnergyData && engerViewData.targetEnergyData.count > 0) {
-        REMTargetEnergyData *data = (REMTargetEnergyData *)engerViewData.targetEnergyData[0];
-        if (data && data.target.subStep != stepModel.step) {
-            stepModel.step = data.target.subStep;
-        }
-    }
+//    if (engerViewData.targetEnergyData && engerViewData.targetEnergyData.count > 0) {
+//        REMTargetEnergyData *data = (REMTargetEnergyData *)engerViewData.targetEnergyData[0];
+//        if (data && data.target.subStep != stepModel.step) {
+//            stepModel.step = data.target.subStep;
+//        }
+//    }
     
     DWrapperConfig* wrapperConfig = [[DWrapperConfig alloc]initWith:self.contentSyntax];
     if ([self.searchModel isKindOfClass:[REMWidgetStepEnergyModel class]]==YES) {

@@ -50,14 +50,14 @@
         [self stopLoadingActivity];
         if (data!=nil) {
             if(self.isViewLoaded==NO)return ;
-            REMEnergyViewData *energyViewData = (REMEnergyViewData *)data;
-            REMTargetEnergyData *targetdata = (REMTargetEnergyData *)energyViewData.targetEnergyData[0];
-            if (targetdata) {
-                self.contentSyntax.stepType = targetdata.target.subStep;
-                self.contentSyntax.step = @(self.contentSyntax.stepType);
-                REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
-                stepModel.step = targetdata.target.subStep;
-            }
+//            REMEnergyViewData *energyViewData = (REMEnergyViewData *)data;
+//            REMTargetEnergyData *targetdata = (REMTargetEnergyData *)energyViewData.targetEnergyData[0];
+//            if (targetdata) {
+//                self.contentSyntax.stepType = targetdata.target.subStep;
+//                self.contentSyntax.step = @(self.contentSyntax.stepType);
+//                REMWidgetStepEnergyModel *stepModel=(REMWidgetStepEnergyModel *)self.model;
+//                stepModel.step = targetdata.target.subStep;
+//            }
             self.energyViewData = data;
             loadCompleted(data,nil);
         }
