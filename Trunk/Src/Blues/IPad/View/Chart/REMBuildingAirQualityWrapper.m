@@ -39,6 +39,16 @@
     _processors = [[NSMutableArray alloc]init];
     
     _sharedProcessor = [[DCTrendChartDataProcessor alloc]init];
+    
+    //step min -> step 15min or step 30min
+    if (step == REMEnergyStepMinute) {
+        for (REMTargetEnergyData *targetData in self.energyViewData.targetEnergyData){
+            if ([REMTimeHelper compareStep:step toStep:targetData.target.subStep] == NSOrderedDescending) {
+                step = targetData.target.subStep;
+            }
+        }
+    }
+    
     self.sharedProcessor.step = step;
     
     for (int i = 0; i < seriesAmount; i++) {
