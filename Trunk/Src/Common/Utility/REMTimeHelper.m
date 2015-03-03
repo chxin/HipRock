@@ -952,4 +952,31 @@ static NSCalendar *_currentCalendar;
 
 }
 
++(NSComparisonResult)compareStep:(REMEnergyStep)step1 toStep:(REMEnergyStep)step2
+{
+//    REMEnergyStepNone=-1,
+//    REMEnergyStepMinute=0,
+//    REMEnergyStepHour=1,
+//    REMEnergyStepDay=2,
+//    REMEnergyStepWeek=5,
+//    REMEnergyStepMonth=3,
+//    REMEnergyStepYear=4,
+//    REMEnergyStepMin15 = 6,
+//    REMEnergyStepMin30 = 7
+    NSArray *order = @[@(REMEnergyStepNone),@(REMEnergyStepMin15),@(REMEnergyStepMin30),@(REMEnergyStepMinute),@(REMEnergyStepHour),@(REMEnergyStepDay),@(REMEnergyStepWeek),@(REMEnergyStepMonth),@(REMEnergyStepYear)];
+    
+    NSUInteger index1 = [order indexOfObject:@(step1)];
+    NSUInteger index2 = [order indexOfObject:@(step2)];
+    
+    if (index1 > index2) {
+        return NSOrderedDescending;
+    }
+    else if (index1 < index2) {
+        return NSOrderedAscending;
+    }
+    else {
+        return NSOrderedSame;
+    }
+}
+
 @end

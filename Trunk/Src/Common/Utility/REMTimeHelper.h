@@ -98,4 +98,6 @@ typedef enum _REMDateTimePart : NSUInteger{
 
 +(NSDate *)add:(int)count steps:(REMEnergyStep)step onTime:(NSDate *)time;
 
++(NSComparisonResult)compareStep:(REMEnergyStep)step1 toStep:(REMEnergyStep)step2;
+
 @end

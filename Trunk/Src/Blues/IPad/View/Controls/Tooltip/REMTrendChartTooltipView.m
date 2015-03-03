@@ -269,6 +269,14 @@
         
         REMEnergyStep step = stepModel.step;
         
+        if (step == REMEnergyStepMinute) {
+            for (REMTargetEnergyData *targetData in self.data.targetEnergyData){
+                if ([REMTimeHelper compareStep:step toStep:targetData.target.subStep] == NSOrderedDescending) {
+                    step = targetData.target.subStep;
+                }
+            }
+        }
+        
         //TODO:move time point forward
         time = [REMTimeHelper add:-1 steps:step onTime:time];
         
