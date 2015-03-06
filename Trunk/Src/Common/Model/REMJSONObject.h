@@ -11,6 +11,7 @@
 
 @interface REMJSONObject : NSObject
 
+@property (nonatomic,assign) BOOL dataError;
 @property (nonatomic,strong) NSDictionary *innerDictionary;
 
 - (id) initWithJSONString:(NSString *)jsonString;

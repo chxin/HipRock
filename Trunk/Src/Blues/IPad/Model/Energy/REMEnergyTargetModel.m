@@ -14,6 +14,10 @@
 
 -(void)assembleCustomizedObjectByDictionary:(NSDictionary *)dictionary
 {
+    if ([dictionary[@"TargetId"] isEqual: [NSNull null]]) {
+        self.dataError = YES;
+        return;
+    }
     self.targetId = dictionary[@"TargetId"];
     self.name = dictionary[@"Name"];
     self.code = dictionary[@"Code"];

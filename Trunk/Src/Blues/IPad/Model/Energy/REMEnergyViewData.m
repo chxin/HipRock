@@ -19,7 +19,11 @@
         
         for(NSDictionary *targetDic in targetArray)
         {
-            [targetMArray addObject:[[REMTargetEnergyData alloc]initWithDictionary:targetDic]];
+            REMTargetEnergyData *energyData = [[REMTargetEnergyData alloc]initWithDictionary:targetDic];
+            if (!energyData.dataError) {
+                [targetMArray addObject:energyData];
+            }
+            
         }
         self.targetEnergyData=targetMArray;
     }

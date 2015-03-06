@@ -15,6 +15,8 @@
 
 @implementation REMJSONObject
 
+@synthesize dataError;
+
 - (id)initWithJSONString:(NSString *)jsonString
 {
     
@@ -29,6 +31,7 @@
     if ((self = [super init])) {
         
         self.innerDictionary=dictionary;
+        self.dataError = NO;
         
         if(dictionary == nil || [dictionary isEqual:[NSNull null]])
         {
