@@ -16,7 +16,7 @@
     
     self.target = [[REMEnergyTargetModel alloc]initWithDictionary:targetDic];
     
-    self.dataError = self.target.dataError;
+//    self.dataError = self.target.dataError;
     
     NSArray *dataArray=dictionary[@"EnergyDataArray"];
     

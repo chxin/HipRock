@@ -31,7 +31,7 @@
     if ((self = [super init])) {
         
         self.innerDictionary=dictionary;
-        self.dataError = NO;
+//        self.dataError = NO;
         
         if(dictionary == nil || [dictionary isEqual:[NSNull null]])
         {

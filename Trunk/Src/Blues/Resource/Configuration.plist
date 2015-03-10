@@ -15,7 +15,7 @@
 			<key>url</key>
 			<string>http://10.177.201.75/mobile/</string>
 			<key>timeout</key>
-			<string>900</string>
+			<string>90</string>
 			<key>debug-logmode</key>
 			<integer>2</integer>
 			<key>debug-user</key>
@@ -33,9 +33,9 @@
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://test.energymost.com/v1.9.0.0/mobile/</string>
+			<string>http://121.199.24.158/v1.9.0.0/mobile/</string>
 			<key>timeout</key>
-			<string>70</string>
+			<string>100</string>
 			<key>debug-logmode</key>
 			<integer>2</integer>
 			<key>debug-user</key>
@@ -56,7 +56,7 @@
 	<key>CurrentDataSource</key>
 	<dict>
 		<key>Debug</key>
-		<string>test</string>
+		<string>local</string>
 		<key>DailyBuild</key>
 		<string>test</string>
 		<key>Release</key>

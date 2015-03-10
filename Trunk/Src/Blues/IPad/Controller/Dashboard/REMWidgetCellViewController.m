@@ -197,12 +197,12 @@
             }
         }
         else{
-            if (data.dataError) {
-                [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerError")];//bug 7071:data is null
-            }else
-            {
+//            if (data.dataError) {
+//                [self generateServerErrorLabel:REMIPadLocalizedString(@"Common_ServerError")];//bug 7071:data is null
+//            }else
+//            {
                 self.chartData = data;
-            }
+//            }
         }
         if(self.isViewLoaded==YES){
             [self generateChart];
