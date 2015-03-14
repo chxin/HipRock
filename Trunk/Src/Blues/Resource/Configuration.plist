@@ -33,7 +33,7 @@
 		<key>test</key>
 		<dict>
 			<key>url</key>
-			<string>http://121.199.24.158/v1.9.0.0/mobile/</string>
+			<string>http://121.199.24.158/v1.9.0.31/mobile/</string>
 			<key>timeout</key>
 			<string>100</string>
 			<key>debug-logmode</key>
