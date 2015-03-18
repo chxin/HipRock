@@ -105,7 +105,6 @@ static NSString *cellId=@"widgetcell";
         REMManagedWidgetModel *widget=self.widgets[indexPath.row];
         
         controller.widgetInfo=widget;
-        
         controller.currentIndex=indexPath.row;
         controller.groupName=self.groupName;
         [self addChildViewController:controller];

@@ -111,7 +111,6 @@
     self.xTime = [x isKindOfClass:[NSDate class]] ? x : nil;
     self.itemModels = [self convertItemModels];
     
-    
     for(int i=0;i<self.itemModels.count;i++)
         [[self.tooltipItems objectAtIndex:i] updateModel:self.itemModels[i]];
     
@@ -176,6 +175,14 @@
         //add time difference according to its index
         if(point.energyData.localTime == nil){
             return nil;
+        }
+        
+        if (step == REMEnergyStepMinute) {
+            for (REMTargetEnergyData *targetData in self.data.targetEnergyData){
+                if ([REMTimeHelper compareStep:step toStep:targetData.target.subStep] == NSOrderedDescending) {
+                    step = targetData.target.subStep;
+                }
+            }
         }
         
         NSDate *realtime = [point.energyData.localTime dateByAddingTimeInterval: point.energyData.offset];
