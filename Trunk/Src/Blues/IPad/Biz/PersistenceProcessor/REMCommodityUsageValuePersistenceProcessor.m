@@ -11,6 +11,9 @@
 
 
 - (id)persist:(NSDictionary *)dictionary{
+    if (!dictionary || [dictionary isEqual:[NSNull null]]) {
+        return nil;
+    }
     NSDictionary *totalDic = dictionary[@"EnergyUsage"];
     self.commodityInfo.totalValue = NULL_TO_NIL(totalDic[@"DataValue"]);
     self.commodityInfo.totalUom = NULL_TO_NIL(totalDic[@"Uom"][@"Code"]);
