@@ -50,7 +50,7 @@
     
     userObject.id=user[@"Id"];
     userObject.name=user[@"Name"];
-    userObject.comment=user[@"Comment"];
+    userObject.comment=NULL_TO_NIL(user[@"Comment"]);
     userObject.email=user[@"Email"];
     userObject.password=user[@"Password"];
     userObject.realname=user[@"RealName"];
