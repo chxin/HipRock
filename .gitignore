@@ -9,3 +9,4 @@ xcuserdata/
 *.pyc
 *.sqlite
 buildIOSTemp
+buildTemp
