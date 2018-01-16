@@ -15,5 +15,5 @@ before_script:
 script:
   - xcodebuild -project "./ios/learnRN.xcodeproj" -scheme "learnRN" archive -archivePath "./buildIOSTemp/learnRN_0.0.1.xcarchive" 
   - xcodebuild -exportArchive -archivePath "./buildIOSTemp/learnRN_0.0.1.xcarchive" -exportPath "./buildIOSTemp/learnRN_0.0.1" -exportOptionsPlist "exportTestOptions.plist" 
-  - cd ./buildIOSTemp && ls -R | grep ipa
-  - curl -F 'file=@learnRN_0.0.1/Apps/learnRN.ipa' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+  - cd ./buildIOSTemp && ls -R | grep ipa -A 4
+  - curl -F 'file=@learnRN_0.0.1/learnRN.ipa' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
