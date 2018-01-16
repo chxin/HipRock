@@ -1,0 +1,37 @@
+language: objective-c
+before_install: # if you would like to encrypt certificates, "travis encrypt-file ./***.cer  --add"   in your cml
+# - openssl aes-256-cbc -K $encrypted_19987b880ea5_key -iv $encrypted_19987b880ea5_iv -in ./ios/RockCertificate/dist.p12.enc -out ./ios/RockCertificate/dist.p12 -d
+# - openssl aes-256-cbc -K $encrypted_19987b880ea5_key -iv $encrypted_19987b880ea5_iv -in ./ios/RockCertificate/ios_distribution.cer.enc -out ./ios/RockCertificate/ios_distribution.cer -d
+install:
+- npm install
+before_script:
+- security create-keychain -p travis ios-build.keychain # add keychain ios-build
+- security default-keychain -s ios-build.keychain
+- security unlock-keychain -p travis ios-build.keychain
+- security set-key-partition-list -S apple-tool:,apple: -s -k travis ios-build.keychain
+
+- security import ./ios/RockCertificate/ios_distribution.cer -A -k ~/Library/Keychains/ios-build.keychain # cer p12 & provision
+- security import ./ios/RockCertificate/dist.p12 -A -k ~/Library/Keychains/ios-build.keychain -P 123456 
+- mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+- cp ./profile/hocEDisco.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+- security find-identity -p codesigning ~/Library/Keychains/ios-build.keychain #to confirm weither add keychain success
+- security list-keychains 
+script:
+- xcodebuild -project "./ios/learnRN.xcodeproj" -scheme "learnRN" archive -archivePath "./buildIOSTemp/learnRN_0.0.1.xcarchive" -quiet
+- xcodebuild -exportArchive -archivePath "./buildIOSTemp/learnRN_0.0.1.xcarchive" -exportPath "./buildIOSTemp/learnRN_0.0.1" -exportOptionsPlist "exportTestOptions.plist" -quiet
+- cd ./buildIOSTemp && ls -R | grep ipa
+- curl -F 'file=@learnRN_0.0.1/Apps/learnRN.ipa' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+after_script: 
+- security delete-keychain ios-build.keychain #delete keychain
+- rm -f ~/Library/MobileDevice/Provisioning\ Profiles/hocEDisco.mobileprovision
+deploy:
+  provider: releases
+  api_key:
+    secure: aNqSDxJGeHYXt01UQ4gExd4PgP5l3cd2mFzfyXpTTipQTVi0SmNr3tjxE6zIf2chU0zc2PrSrGoIG6YcUshFkEN4baKOkVRXzq19CIz5DHjAO4O5tDY9A21Rs4S5b5ofdKNyxCrJDgH4gP2jIzfytelcaXLhF3MGmyhT5HM2eS6CXeqjX/+Nne16IwJhz6m1QqaKdQefv18b33fLvzKgM6oD11R9S0JTX6y/nAU/ceFjEf2RcLRBmRvJMyq7VXWgVLNtg3YjsyWpDMykXwlLzVm6LsAFFyP/VbEuoYOIEvKDyYWYtJEIcEjwqGsuX14cScH5p0ZrXGrHeGFmj4sT8BuqAlmCO2vuzjg62pEFecvwkb8Jmciqy0qXjDIkETrCsTt310Klp1JmwHFx2AB8GU8d+xWFQiH3Z9MGnU2q3CHKgqi4+iSi4agukf3d6PeT2PDedJaLVQwMwOyFYd3YF2DlR/Qx4I32LyME9UCdqm1OFFD33ArlGfx6ssZM1INatsNfx/dwC4wlkICIHN1jt2HmdaIwXjvmRwRXRLcxOOtYMax65902liH1n9XAe/izAkqXQo4pZG67j+sQYBu5uwof5XCIDor20BI9S0pZ1JFLXPqZPeAot50w8YGwKrDJ0RWRAE2CkU6g+DF6uiDyv8KXhDBVRPJ8mO7BpAUkTas=
+  file: learnRN_0.0.1/Apps/learnRN.ipa
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: chxin/learnRN
+    

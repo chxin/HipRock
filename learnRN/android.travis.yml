@@ -1,0 +1,34 @@
+language: android
+sudo: false
+before_install:
+- nvm install 6
+- node --version
+install:
+- npm install
+android:
+  components:
+  - build-tools-23.0.1
+  - android-23
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-26
+cache:
+  directories:
+  - node_modules
+script:
+- cd android
+- "./gradlew assembleRelease"
+- cd ./app/build/outputs/apk
+- ls
+- curl -F 'file=@app-release-unsigned.apk' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a'
+  -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+deploy:
+  provider: releases
+  api_key:
+    secure: aNqSDxJGeHYXt01UQ4gExd4PgP5l3cd2mFzfyXpTTipQTVi0SmNr3tjxE6zIf2chU0zc2PrSrGoIG6YcUshFkEN4baKOkVRXzq19CIz5DHjAO4O5tDY9A21Rs4S5b5ofdKNyxCrJDgH4gP2jIzfytelcaXLhF3MGmyhT5HM2eS6CXeqjX/+Nne16IwJhz6m1QqaKdQefv18b33fLvzKgM6oD11R9S0JTX6y/nAU/ceFjEf2RcLRBmRvJMyq7VXWgVLNtg3YjsyWpDMykXwlLzVm6LsAFFyP/VbEuoYOIEvKDyYWYtJEIcEjwqGsuX14cScH5p0ZrXGrHeGFmj4sT8BuqAlmCO2vuzjg62pEFecvwkb8Jmciqy0qXjDIkETrCsTt310Klp1JmwHFx2AB8GU8d+xWFQiH3Z9MGnU2q3CHKgqi4+iSi4agukf3d6PeT2PDedJaLVQwMwOyFYd3YF2DlR/Qx4I32LyME9UCdqm1OFFD33ArlGfx6ssZM1INatsNfx/dwC4wlkICIHN1jt2HmdaIwXjvmRwRXRLcxOOtYMax65902liH1n9XAe/izAkqXQo4pZG67j+sQYBu5uwof5XCIDor20BI9S0pZ1JFLXPqZPeAot50w8YGwKrDJ0RWRAE2CkU6g+DF6uiDyv8KXhDBVRPJ8mO7BpAUkTas=
+  file: app-release-unsigned.apk
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: chxin/learnRN
