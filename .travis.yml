@@ -5,9 +5,9 @@ before_install:
   - DevToolsSecurity -status
   - DevToolsSecurity -enable
 install: 
-  npm install 
-before_script:
   - cd learnRN
+  - npm install 
+before_script:
   - chmod +x ./ios/RockCer/add-key.sh
   - cd ./ios/RockCer
   - ./add-key.sh
