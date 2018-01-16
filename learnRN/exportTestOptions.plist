@@ -20,6 +20,6 @@
 	<key>teamID</key>
 	<string>F3A8R3FAA7</string>
 	<key>thinning</key>
-	<string>&lt;thin-for-all-variants&gt;</string>
+	<string>&lt;none&gt;</string>
 </dict>
 </plist>
