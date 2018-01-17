@@ -5,7 +5,7 @@ before_install:
   - DevToolsSecurity -status
   - DevToolsSecurity -enable
 install: 
-  - cd FunkRock
+  - cd HipRock
   - npm install 
 before_script:
   - chmod +x ./ios/RockCer/add-key.sh
@@ -13,7 +13,10 @@ before_script:
   - ./add-key.sh
   - cd -
 script:
-  - xcodebuild -project "./ios/FunkRock.xcodeproj" -scheme "FunkRock_Test" archive -archivePath "./buildIOSTemp/FunkRock_Test.xcarchive" -quiet
-  - xcodebuild -exportArchive -archivePath "./buildIOSTemp/FunkRock_Test.xcarchive" -exportPath "./buildIOSTemp/FunkRock_Test" -exportOptionsPlist "exportTestOptions.plist" -quiet
-  - cd ./buildIOSTemp && ls -R | grep ipa
-  - curl -F 'file=@learnRN_0.0.1/Apps/learnRN.ipa' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+  - chmod +x ./buildTestIpa.sh
+  - ./buildTestIpa.sh
+  - cd -
+  # - xcodebuild -project "./ios/HipRock.xcodeproj" -scheme "HipRock_Test" archive -archivePath "./buildIOSTemp/HipRock_Test.xcarchive" -quiet
+  # - xcodebuild -exportArchive -archivePath "./buildIOSTemp/HipRock_Test.xcarchive" -exportPath "./buildIOSTemp/HipRock_Test" -exportOptionsPlist "exportTestOptions.plist" -quiet
+  # - cd ./buildIOSTemp && ls -R | grep ipa -A 4
+  # - curl -F 'file=@HipRock_Test/learnRN.ipa' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
