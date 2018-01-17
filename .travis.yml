@@ -17,6 +17,10 @@ install:
   - npm install
 android:
   components:
+  - tools
+  - platform-tools
+  - tools
+
   - build-tools-23.0.1
   - build-tools-23.0.2
   - build-tools-26.0.1
@@ -26,12 +30,14 @@ android:
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
-  - addon-google_apis-google-16
+  - addon-google_apis-google-26
 cache:
   directories:
   - node_modules
 script:
+  - cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
   - cd android 
   - ./gradlew assembleRelease
-  - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
-  - curl -F "file=@app-internal-release-$ROCK_VERSION.apk" -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+  - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' gradle.properties |tail -n 1`
+  - curl -F "file=@./app/build/outputs/apk/app-internal-release-${ROCK_VERSION}.apk" -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+  
