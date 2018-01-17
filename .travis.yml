@@ -15,7 +15,4 @@ before_script:
 script:
   - chmod +x ./buildTestIpa.sh
   - ./buildTestIpa.sh
-  # - xcodebuild -project "./ios/HipRock.xcodeproj" -scheme "HipRock_Test" archive -archivePath "./buildIOSTemp/HipRock_Test.xcarchive" -quiet
-  # - xcodebuild -exportArchive -archivePath "./buildIOSTemp/HipRock_Test.xcarchive" -exportPath "./buildIOSTemp/HipRock_Test" -exportOptionsPlist "exportTestOptions.plist" -quiet
-  # - cd ./buildIOSTemp && ls -R | grep ipa -A 4
-  # - curl -F 'file=@HipRock_Test/learnRN.ipa' -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+ 
