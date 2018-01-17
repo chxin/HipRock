@@ -31,6 +31,6 @@ cache:
   - node_modules
 script:
   - cd HipRock/android 
-  - ./gradlew assembleRelease | grep android
+  - ./gradlew assembleRelease
   - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
   - curl -F "file=@app-internal-release-$ROCK_VERSION.apk" -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
