@@ -31,13 +31,13 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-26
-cache:
-  directories:
-  - node_modules
+# cache:
+#   directories:
+#   - node_modules
 script:
   - cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
+  - rm -rf ./node_modules/react-native-svg/android/build
   - cd android 
   - ./gradlew assembleRelease
   - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' gradle.properties |tail -n 1`
-  - curl -F "file=@./app/build/outputs/apk/app-internal-release-${ROCK_VERSION}.apk" -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
-  
+  - curl -F "file=@app/build/outputs/apk/app-internal-release-${ROCK_VERSION}.apk" -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
