@@ -1,7 +1,7 @@
 function setFileName()
 {
 	file=(react-native-image-picker react-native-permissions react-native-file-opener react-native-fs react-native-svg react-native-detect-new-photo)
-	parentDir=../node_modules
+	parentDir=./node_modules
 }
 
 function getFileAndChangeJcenter()
@@ -43,14 +43,14 @@ function changeJcenterContent()
 }
 
 function changeJSCHeader() {
-	JscPath=../node_modules/react-native/ReactAndroid/build.gradle
+	JscPath=./node_modules/react-native/ReactAndroid/build.gradle
 	pattern1='https:\/\/svn.webkit.org'
 	pattern2='http:\/\/svn.webkit.org'
 	sed -ig "s/$pattern1/$pattern2/g" $JscPath 
 }
 
 function changeBuildVersion() {
-	verPath=../node_modules/rn-camera-roll/android/build.gradle
+	verPath=./node_modules/rn-camera-roll/android/build.gradle
 	pattern1='23.0.2'
 	pattern2='23.0.1'
 	sed -ig "s/$pattern1/$pattern2/g" $verPath 
