@@ -3,12 +3,12 @@ function getParamAndPlusone()
 	arg1="rockBuildNum"
 	ifglobal=0
 
-	if [ ! -f ~/Documents/.profile ]
+	if [ ! -f .buildNumber_Profile ]
 	then
-		touch -f ~/Documents/.profile
+		touch -f .buildNumber_Profile
 	fi
 
-	for member in `cat ~/Documents/.profile`
+	for member in `cat .buildNumber_Profile`
 	do
 	key1=${member%=*}
 	value1=${member#*=}
@@ -38,7 +38,7 @@ function getParamAndPlusone()
 
 setParam()
 {
-	echo "rockBuildNum=$1">~/Documents/.profile
+	echo "rockBuildNum=$1">.buildNumber_Profile
 }
 
 # initParam()

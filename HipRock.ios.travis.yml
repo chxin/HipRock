@@ -8,13 +8,15 @@ install:
   - cd HipRock
   - npm install 
 before_script:
-  - chmod +x ./ios/RockCer/add-key.sh
-  - cd ./ios/RockCer
-  - ./add-key.sh
-  - cd -
+  # - chmod +x ./ios/RockCer/add-key.sh
+  # - cd ./ios/RockCer
+  # - ./add-key.sh
+  # - cd -
+  - source ios/RockCer/add-key.sh
 script:
-  - chmod +x ./buildTestIpa.sh
-  - ./buildTestIpa.sh
+  # - chmod +x ./buildTestIpa.sh
+  # - ./buildTestIpa.sh
+  - source ./buildTestIpa.sh
   # - xcodebuild -project "./ios/HipRock.xcodeproj" -scheme "HipRock_Test" archive -archivePath "./buildIOSTemp/HipRock_Test.xcarchive" -quiet
   # - xcodebuild -exportArchive -archivePath "./buildIOSTemp/HipRock_Test.xcarchive" -exportPath "./buildIOSTemp/HipRock_Test" -exportOptionsPlist "exportTestOptions.plist" -quiet
   # - cd ./buildIOSTemp && ls -R | grep ipa -A 4

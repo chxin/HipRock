@@ -1,46 +1,12 @@
-language: android
-# - tools
-# - platform-tools
+language: objective-c
 sudo: required
-
 before_install:
-  - nvm install 6
-  - node --version
-
-  - wget http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
-  - chmod +x android-ndk-r10e-linux-x86_64.bin
-  - ./android-ndk-r10e-linux-x86_64.bin | grep ndk-build.cmd
-  - export ANDROID_NDK=`pwd`/android-ndk-r10e
-  - echo $ANDROID_NDK
+  - DevToolsSecurity -status
+  - DevToolsSecurity -enable
 install: 
   - cd HipRock
-  - npm install
-android:
-  components:
-  - tools
-  - platform-tools
-  # - tools
-
-  - build-tools-23.0.1
-  - build-tools-23.0.2
-  - build-tools-25.0.0
-  - build-tools-25.0.1
-  - build-tools-26.0.1
-  - build-tools-26.0.2
-  - android-23
-  - android-25
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google-26
-# cache:
-#   directories:
-#   - node_modules
+  - npm install 
+before_script:
+  - source ios/RockCer/add-key.sh
 script:
-  - cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
-  - rm -rf ./node_modules/react-native-svg/android/build
-  - cd configEnvScripts && source findAndReplace.sh && getFileAndChangeJcenter && cd -
-  - cd android 
-  - ./gradlew assembleRelease
-  - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' gradle.properties |tail -n 1`
-  - curl -F "file=@app/build/outputs/apk/app-internal-release-${ROCK_VERSION}.apk" -F 'uKey=7d42c69844b88157360fe2dc141fdf1a' -F '_api_key=be1290e71bb2fab7a9547cda2ee37d7b' 'https://www.pgyer.com/apiv1/app/upload'
+  - source ./buildTestIpa.sh
