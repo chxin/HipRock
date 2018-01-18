@@ -25,6 +25,7 @@ android:
   - build-tools-23.0.2
   - build-tools-25.0.1
   - build-tools-26.0.1
+  - build-tools-26.0.2
   - android-23
   - android-25
   - extra-google-google_play_services
@@ -37,6 +38,7 @@ android:
 script:
   - cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
   - rm -rf ./node_modules/react-native-svg/android/build
+  - cd configEnvScripts && source findAndReplace.sh && getFileAndChangeJcenter
   - cd android 
   - ./gradlew assembleRelease
   - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' gradle.properties |tail -n 1`

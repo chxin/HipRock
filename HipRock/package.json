@@ -42,7 +42,7 @@
     "react-native-permissions": "git+https://github.com/samuelltk/react-native-permissions",
     "react-native-root-toast": "^2.2.1",
     "react-native-screenshot-detector": "git+https://github.com/samuelltk/react-native-screenshot-detector",
-    "react-native-svg": "5.5.1",
+    "react-native-svg": "6.0.1-rc.2",
     "react-native-svg-mock": "^2.0.0",
     "react-native-swipe-list-view": "^0.4.7",
     "react-native-transformable-image": "0.0.18",
