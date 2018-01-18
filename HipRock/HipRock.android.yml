@@ -19,7 +19,6 @@ android:
   components:
   - tools
   - platform-tools
-  # - tools
 
   - build-tools-23.0.1
   - build-tools-23.0.2
