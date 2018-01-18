@@ -1,6 +1,6 @@
 oldVer=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
 currCommit=$(git rev-parse --short HEAD)
-filePath="./android/app/build/outputs/apk/app-internal-release-$version.apk"
+
 
 # echo "Please input the new version?The old version is:$oldVer"
 # read version
@@ -10,6 +10,7 @@ filePath="./android/app/build/outputs/apk/app-internal-release-$version.apk"
 # read version
 # done
 version=1.0.0
+filePath="./android/app/build/outputs/apk/app-internal-release-$version.apk"
 # sed -i '' 's/$oldVer/$version/g' android/gradle.properties
 # sed -i "s/0.5.2/0.5.3/g" android/gradle\.properties
 # sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
