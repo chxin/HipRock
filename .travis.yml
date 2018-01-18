@@ -38,7 +38,7 @@ android:
 script:
   - cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
   - rm -rf ./node_modules/react-native-svg/android/build
-  - cd configEnvScripts && source findAndReplace.sh && getFileAndChangeJcenter
+  - cd configEnvScripts && source findAndReplace.sh && getFileAndChangeJcenter && cd -
   - cd android 
   - ./gradlew assembleRelease
   - ROCK_VERSION=`awk -F= '/ROCK_VERSION/{print $2}' gradle.properties |tail -n 1`
