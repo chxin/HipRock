@@ -26,4 +26,3 @@ filePath="./android/app/build/outputs/apk/app-internal-release-$version.apk"
 currCommit=$(git rev-parse --short HEAD)
 
 curl -F "file=@$filePath" -F "uKey= 7d42c69844b88157360fe2dc141fdf1a" -F "_api_key= be1290e71bb2fab7a9547cda2ee37d7b" -F "installType=2" -F "password=123456" -F "updateDescription=$currCommit" http://qiniu-storage.pgyer.com/apiv1/app/upload
-
