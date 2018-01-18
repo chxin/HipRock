@@ -12,7 +12,7 @@ filePath="./android/app/build/outputs/apk/app-internal-release-$version.apk"
 version=1.0.0
 # sed -i '' 's/$oldVer/$version/g' android/gradle.properties
 # sed -i "s/0.5.2/0.5.3/g" android/gradle\.properties
-sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
+# sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
 
 cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
 rm -rf ./node_modules/react-native-svg/android/build
