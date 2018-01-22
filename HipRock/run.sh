@@ -6,7 +6,6 @@ pgyerLog=`curl -d "_api_key=$_api_key" -d "appKey=$appKey" https://www.pgyer.com
 buildNumber=$(echo $pgyerLog | tr ',' '\n' | awk -F : '/buildUpdateDescription/{print $2}'| sed 's/"//g' | head -1 | awk -F _ '{print $2}')
 buildNumber=$(($buildNumber+1))
 currCommit=$(git rev-parse --short HEAD)
-<<<<<<< HEAD
 description="$currCommit"_"$buildNumber"
 
 oldVer=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
@@ -19,7 +18,7 @@ then
 fi
 sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
 
-filePath="./android/app/build/outputs/apk/app-internal-release-$version.apk"
+filePath="android/app/build/outputs/apk/app-internal-release-$version.apk"
 
 cp ./android/customModules/ShareModule.java ./node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/share/ShareModule.java
 rm -rf ./node_modules/react-native-svg/android/build
@@ -28,9 +27,9 @@ source configEnvScripts/findAndReplace.sh && getFileAndChangeJcenter
 cd android && ./gradlew assembleRelease
 cd ..
 
-cp ./android/app/build/outputs/apk/*.apk ../build_file
-rm ../build_file/*unaligned.apk
-
+# cp ./android/app/build/outputs/apk/*.apk ../build_file
+# rm ../build_file/*unaligned.apk
+cd ./android/app/build/outputs/apk && ls && cd -
 curl -F "file=@$filePath" -F "uKey=$uKey" -F "_api_key=$_api_key" -F "installType=2" -F "password=123456" -F "updateDescription=$description" http://qiniu-storage.pgyer.com/apiv1/app/upload
 
 # echo "Please input the new version?The old version is:$oldVer"
