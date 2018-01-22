@@ -6,6 +6,7 @@ pgyerLog=`curl -d "_api_key=$_api_key" -d "appKey=$appKey" https://www.pgyer.com
 buildNumber=$(echo $pgyerLog | tr ',' '\n' | awk -F : '/buildUpdateDescription/{print $2}'| sed 's/"//g' | head -1 | awk -F _ '{print $2}')
 buildNumber=$(($buildNumber+1))
 currCommit=$(git rev-parse --short HEAD)
+<<<<<<< HEAD
 description="$currCommit"_"$buildNumber"
 
 oldVer=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
