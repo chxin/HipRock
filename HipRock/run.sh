@@ -25,7 +25,7 @@ rm -rf ./node_modules/react-native-svg/android/build
 source configEnvScripts/findAndReplace.sh && getFileAndChangeJcenter
 
 cd android && ./gradlew assembleRelease
-cd ..
+cd -
 
 # cp ./android/app/build/outputs/apk/*.apk ../build_file
 # rm ../build_file/*unaligned.apk
