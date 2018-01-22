@@ -17,6 +17,8 @@ then
 # 	version=$oldVer
 fi
 sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
+oldVer=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
+echo oldVer:$oldVer  version:$version
 
 filePath="android/app/build/outputs/apk/app-internal-release-$version.apk"
 
