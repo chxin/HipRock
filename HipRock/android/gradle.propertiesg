@@ -1,0 +1,39 @@
+## Project-wide Gradle settings.
+#
+# For more details on how to configure your build environment visit
+# http://www.gradle.org/docs/current/userguide/build_environment.html
+#
+# Specifies the JVM arguments used for the daemon process.
+# The setting is particularly useful for tweaking memory settings.
+# Default value: -Xmx10248m -XX:MaxPermSize=256m
+# org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+#
+# When configured, Gradle will run in incubating parallel mode.
+# This option should only be used with decoupled projects. More details, visit
+# http://www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects
+# org.gradle.parallel=true
+#Wed Jan 17 16:54:54 CST 2018
+#systemProp.https.proxyUser=apa\\SESA368550
+#systemProp.http.proxyHost=127.0.0.1
+prod_codepushKey=yuIKlXBaERJdl71vVGiFFwXgWKClVkAYAKQfl
+#systemProp.http.proxyPassword=\!1234567w
+prod_uri=https\://mobile.mm.energymost.com/api/
+#systemProp.https.proxyPassword=\!1234567w
+# systemProp.https.proxyUser=apa\\SESA368550
+# systemProp.http.proxyHost=127.0.0.1
+codepushKey=rf0ka0ZGEfpL9sY9HTt_iaxY4Pr4VkAYAKQfl
+notificationKey=23358217
+upgradeUri=https\://sp1.mm.energymost.com/download-app
+android.useDeprecatedNdk=true
+prod_oss_bucket=energymost-upload.images.energymost.com
+# systemProp.https.proxyPort=8888
+# systemProp.http.proxyUser=apa\\SESA368550
+ROCK_VERSIONCODE=3
+# systemProp.https.proxyHost=127.0.0.1
+ROCK_VERSION=1.0.7
+prod_notificationSecret=
+prod_notificationKey=
+notificationSecret=7d45fb7e6ccfbb4337ad88e42f0f5077
+# systemProp.http.proxyPort=8888
+prod_upgradeUri=https\://www.mm.energymost.com/download-app
+oss_bucket=sejazz-test.images.energymost.com

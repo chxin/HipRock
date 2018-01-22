@@ -16,7 +16,8 @@ then
 # else 
 # 	version=$oldVer
 fi
-sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
+# sed -i '' "s/$oldVer/$version/g" `grep $oldVer -rl  android/gradle.properties`
+sed -ig "s/$oldVer/$version/g" android/gradle.properties
 oldVer=`awk -F= '/ROCK_VERSION/{print $2}' android/gradle.properties |tail -n 1`
 echo oldVer:$oldVer  version:$version
 
