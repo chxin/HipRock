@@ -4,7 +4,8 @@ sudo: required
 before_install:
   - nvm install 6
   - node --version
-
+  - openssl aes-256-cbc -K $encrypted_409b4e2a3551_key -iv $encrypted_409b4e2a3551_iv
+    -in hiprock.jks.enc -out HipRock/android/app/hiprock.jks -d
   - wget http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
   - chmod +x android-ndk-r10e-linux-x86_64.bin
   - ./android-ndk-r10e-linux-x86_64.bin | grep ndk-build.cmd
